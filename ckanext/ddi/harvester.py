@@ -86,6 +86,7 @@ class DDIHarvester(SingletonPlugin):
         pkg.name = title
         producer = citation['prodStmt']['producer']
         author = producer[0] if isinstance(producer,list) else producer
+        author = author if not isinstance(author, dict) else author['#text']
         pkg.author = author
         pkg.author_email = author
         for kw in study_info['subject']['keyword']:
