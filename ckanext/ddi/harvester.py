@@ -89,10 +89,12 @@ class DDIHarvester(SingletonPlugin):
         author = author if not isinstance(author, dict) else author['#text']
         pkg.author = author
         pkg.author_email = author
-        for kw in study_info['subject']['keyword']:
-            pkg.add_tag_by_name(kw['#text'])
-        for kw in study_info['subject']['topcClas']:
-            pkg.add_tag_by_name(kw['#text'])
+        keywords = study_info['subject']['keyword'] if isinstance(study_info['subject']['keyword'], list) else [study_info['subject']['keyword']]
+        for kw in keywords:
+            pkg.add_tag_by_name(kw['#text'] if '#text' in kw else kw)
+        keywords = study_info['subject']['topcClas'] if isinstance(study_info['subject']['topcClas'], list) else [study_info['subject']['topcClas']]
+        for kw in keywords:
+            pkg.add_tag_by_name(kw['#text'] if '#text' in kw else kw)
         descr = citation['serStmt']['serInfo']['p'] 
         description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
