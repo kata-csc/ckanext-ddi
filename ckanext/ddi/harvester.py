@@ -83,7 +83,7 @@ class DDIHarvester(SingletonPlugin):
         citation = data_dict["stdyDscr"]["citation"]
         study_info = data_dict["stdyDscr"]["stdyInfo"]
         title = citation['titlStmt']['titl']
-        pkg.name = title
+        pkg.name = title[:100]
         producer = citation['prodStmt']['producer']
         author = producer[0] if isinstance(producer,list) else producer
         author = author if not isinstance(author, dict) else author['#text']
@@ -101,11 +101,10 @@ class DDIHarvester(SingletonPlugin):
         pkg.extras = flatten_dict(dict(citation, **study_info))
         pkg.url = unicodedata.normalize('NFKD', unicode(title))\
                                   .encode('ASCII', 'ignore')\
-                                  .lower().replace(' ','_')
+                                  .lower().replace(' ','_')[:30]
         pkg.save()
         producer = producer if isinstance(producer,list) else [producer] 
         for producer in producer:
-            log.debug(producer)
             prod_text = producer if not isinstance(producer, dict) else producer['#text']
             group = Group.by_name(prod_text)
             if not group:
@@ -114,5 +113,4 @@ class DDIHarvester(SingletonPlugin):
             group.save()
         res_url = code_dict['codeBook']['docDscr']['citation']['holdings']['@URI'] if '@URI' in code_dict['codeBook']['docDscr']['citation']['holdings'] else ''
         pkg.add_resource(res_url, description=''.join(description_arr), name=title)
-        log.debug(pprint.pprint(pkg.as_dict()))
         return True
