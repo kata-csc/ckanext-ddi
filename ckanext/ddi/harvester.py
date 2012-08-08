@@ -103,7 +103,7 @@ class DDIHarvester(SingletonPlugin):
         producer = producer if isinstance(producer,list) else [producer] 
         for producer in producer:
             log.debug(producer)
-            prod_text = producer
+            prod_text = producer if not isinstance(producer, dict) else producer['#text']
             group = Group.by_name(prod_text)
             if not group:
                 group = Group(name=prod_text, description=prod_text)
