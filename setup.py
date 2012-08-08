@@ -21,13 +21,22 @@ setup(
 	zip_safe=False,
 	install_requires=[
 		# -*- Extra requirements: -*-
-		'lxml'
+		'lxml',
+		'xmltodict'
 	],
+	tests_require=[
+				'nose',
+				'mock'
+	],
+	setup_requires=[
+				'nose',
+				'coverage'
+				],
 	entry_points=\
 	"""
         [ckan.plugins]
 	# Add plugins here, eg
-	# myplugin=ckanext.ddi:PluginClass
+	ddi_harvester=ckanext.ddi.harvester:DDIHarvester
 	[paste.paster_command]
 	ddi_import = ckanext.ddi.commands.ddi_import:DDIImporter
 	""",
