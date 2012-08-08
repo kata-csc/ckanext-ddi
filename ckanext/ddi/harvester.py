@@ -70,7 +70,8 @@ class DDIHarvester(SingletonPlugin):
                                                                   )
                                                             )
                                                 )
-        except:
+        except Exception, e:
+            print e
             return False
         return True
 
@@ -83,24 +84,29 @@ class DDIHarvester(SingletonPlugin):
         study_info = data_dict["stdyDscr"]["stdyInfo"]
         title = citation['titlStmt']['titl']
         pkg.name = title
-        author = citation['prodStmt']['producer'][0]
+        producer = citation['prodStmt']['producer']
+        author = producer[0] if isinstance(producer,list) else producer
         pkg.author = author
         pkg.author_email = author
         for kw in study_info['subject']['keyword']:
             pkg.add_tag_by_name(kw['#text'])
         for kw in study_info['subject']['topcClas']:
             pkg.add_tag_by_name(kw['#text'])
-        description_arr = citation['serStmt']['serInfo']['p']
+        descr = citation['serStmt']['serInfo']['p'] 
+        description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
         pkg.extras = flatten_dict(dict(citation, **study_info))
         pkg.url = unicodedata.normalize('NFKD', unicode(title))\
                                   .encode('ASCII', 'ignore')\
                                   .lower().replace(' ','_')
         pkg.save()
-        for producer in citation['prodStmt']['producer']:
-            group = Group.get(producer)
+        producer = producer if isinstance(producer,list) else [producer] 
+        for producer in producer:
+            log.debug(producer)
+            prod_text = producer
+            group = Group.by_name(prod_text)
             if not group:
-                group = Group(name=producer, description=producer)
+                group = Group(name=prod_text, description=prod_text)
             group.add_package_by_name(pkg.name)
             group.save()
         res_url = code_dict['codeBook']['docDscr']['citation']['holdings']['@URI'] if '@URI' in code_dict['codeBook']['docDscr']['citation']['holdings'] else ''

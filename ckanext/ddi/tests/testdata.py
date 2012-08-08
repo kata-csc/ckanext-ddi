@@ -8979,3 +8979,9430 @@ nr1 = """<?xml version="1.0"?>
 """
 foobar= """
 """
+nr2 = """<?xml version="1.0"?>
+<!DOCTYPE codeBook  SYSTEM "http://www.icpsr.umich.edu/DDI/Version2-0.dtd">
+<codeBook xml:lang="fi">
+  <docDscr>
+    <citation>
+      <titlStmt>
+        <titl>DDI-kuvailu: Ammatti, sukupuoli ja työmarkkinat: aineistot 1983-1991</titl>
+        <parTitl xml:lang="en">DDI description: Gender, Education and Career Choice: Data 1983 - 1991</parTitl>
+        <IDNo agency="FSD">1217</IDNo>
+      </titlStmt>
+      <prodStmt>
+        <producer abbr="FSD">Yhteiskuntatieteellinen tietoarkisto</producer>
+        <copyright>Yhteiskuntatieteellinen tietoarkisto</copyright>
+        <prodDate date="2003-01-23"/>
+        <prodPlac>Yhteiskuntatieteellinen tietoarkisto</prodPlac>
+      </prodStmt>
+      <biblCit format="MRDF">Ammatti, sukupuoli ja työmarkkinat : aineistot 1983-1991 [koodikirja]. Tampere : Yhteiskuntatieteellinen tietoarkisto [tuottaja ja jakaja], 2010.</biblCit>
+      <holdings location="Yhteiskuntatieteellinen tietoarkisto FSD" URI="http://www.fsd.uta.fi/aineistot/luettelo/FSD1217/">Yhteiskuntatieteellinen tietoarkisto FSD</holdings>
+    </citation>
+    <notes xml:lang="fi">FSD:n aineistokuvailut (FSD metadata records), jonka tekijä on Suomen yhteiskuntatieteellinen tietoarkisto (Finnish Social Science Data Archive), on lisensoitu Creative Commons Nimeä-Epäkaupallinen 1.0 Suomi lisenssillä.</notes>
+    <notes xml:lang="sv">FSD:n aineistokuvailut (FSD metadata records) av Suomen yhteiskuntatieteellinen tietoarkisto (Finlands samhällsvetenskapliga dataarkiv) är licensierad under a Creative Commons Erkännande-IckeKommersiell 1.0 Finland License.</notes>
+    <notes xml:lang="en">FSD:n aineistokuvailut (FSD metadata records) by Suomen yhteiskuntatieteellinen tietoarkisto (Finnish Social Science Data Archive) is licensed under a Creative Commons Attribution-NonCommercial 1.0 Finland License.</notes>
+  </docDscr>
+  <stdyDscr>
+    <citation>
+      <titlStmt>
+        <titl>Ammatti, sukupuoli ja työmarkkinat: aineistot 1983-1991</titl>
+        <parTitl xml:lang="en">Gender, Education and Career Choice: Data 1983-1991</parTitl>
+        <IDNo agency="FSD">1217</IDNo>
+      </titlStmt>
+      <rspStmt>
+        <AuthEnty affiliation="Joensuun yliopisto. Kasvatustieteiden tiedekunta">Nummenmaa, Anna Raija</AuthEnty>
+      </rspStmt>
+      <prodStmt>
+        <producer>Työministeriö</producer>
+        <copyright>FSD:n ja aineiston luovuttajan tekemän sopimuksen mukaisesti.</copyright>
+      </prodStmt>
+      <distStmt>
+        <distrbtr abbr="FSD" URI="http://www.fsd.uta.fi/">Yhteiskuntatieteellinen tietoarkisto</distrbtr>
+        <depositr affiliation="Tampereen yliopisto. Opettajankoulutuslaitos. Varhaiskasvatuksen yksikkö">Nummenmaa, Anna Raija</depositr>
+        <depDate date="2002-09-24"/>
+      </distStmt>
+      <serStmt URI="http://www.fsd.uta.fi/aineistot/luettelo/sarjat.html#yks">
+        <serName abbr="yks">Yksittäiset aineistot</serName>
+        <serInfo>
+          <p>Yksittäisiin aineistoihin on luokiteltu ne aineistot, jotka eivät kuulu mihinkään sarjaan.</p>
+        </serInfo>
+      </serStmt>
+      <verStmt>
+        <version date="2003-04-17">1.0</version>
+      </verStmt>
+      <biblCit>Nummenmaa, Anna Raija: Ammatti, sukupuoli ja työmarkkinat: aineistot 1983-1991 [elektroninen aineisto]. FSD1217, versio 1.0 (2003-04-17). Työministeriö [tuottaja]. Tampere: Yhteiskuntatieteellinen tietoarkisto [jakaja], 2003.</biblCit>
+    </citation>
+    <stdyInfo>
+      <subject>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">aikuistuminen</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">ammatit</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">arvot</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">elämänkaari</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">ihmissuhteet</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">koulutus</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">koulutussuunnittelu</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">perhe</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">sukupuoli</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">tyytyväisyys</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työhönsijoittuminen</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työmarkkinat</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">urasuunnittelu</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">vanhemmat</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">yhteiskunnallinen muutos</keyword>
+        <topcClas vocab="FSD" vocabURI="http://www.fsd.uta.fi/aineistot/arkistointi/FSD_topcClas.html">kasvatustiede</topcClas>
+        <topcClas vocab="FSD" vocabURI="http://www.fsd.uta.fi/aineistot/arkistointi/FSD_topcClas.html">psykologia</topcClas>
+        <topcClas vocab="FSD" vocabURI="http://www.fsd.uta.fi/aineistot/arkistointi/FSD_topcClas.html">sosiologia</topcClas>
+        <topcClas vocab="CESSDA">koulutuspolitiikka</topcClas>
+        <topcClas vocab="CESSDA">nuoret</topcClas>
+        <topcClas vocab="CESSDA">sukupuoli ja sukupuoliroolit</topcClas>
+      </subject>
+      <abstract>
+        <p>Tutkimus on osa työministeriön rahoittamaa Ammatti, sukupuoli ja työmarkkinat -projektia, joka käynnistettiin vuonna 1983 perusselvityksellä. Seurantatutkimuksia on tehty postikyselyinä 1987, 1991 ja 1994.</p>
+        <p>Tämä aineisto sisältää pääosin projektin tutkimukset vuosilta 1983, 1987 ja 1991 niiden vastaajien osalta, jotka ovat osallistuneet vähintään kahteen projektin tutkimukseen. Muuttujat q1-q42 ovat syksyn 1983 peruskyselystä, q43-q59 syksyn 1987 seurantakyselystä ja q60-q108 syksyn 1991 seurantakyselystä. Näissä tutkimuksissa tarkasteltiin aikuistuvien nuorten koulutus- ja urasuunnittelua sekä koulutukseen ja työelämään siirtymistä. Vuoden 1983 perusselvityksen keskeisenä tavoitteena oli kartoittaa sitä, miten yleisesti tytöt ja pojat suunnittelivat toisen sukupuolen perinteisiä ammatteja ja mitkä kehitykselliset ja rakenteelliset tekijät ammatinvalintaa selittivät. Selvityksessä tarkasteltiin erityisesti vastaajien koulutus- ja ammattisuunnitelmia, perherakenteita sekä vanhempien ja isovanhempien koulutus-, ammatti- ja työtaustoja. Lisäksi tutkittiin ammatinvalintaan liittyviä arvoja.</p>
+        <p>Vuosien 1987 ja 1991 seurantakyselyissä kartoitettiin nuorten tekemisiä vuoden 1984 jälkeen. Vastaajia pyydettiin spesifioimaan peruskoulutuksen jälkeistä koulutus-, työ- ja perhehistoriaansa sekä pääasiallista toimintaansa puolivuosittain. Heidän piti niin ikään eritellä sitä, kuinka tyytyväisiä he ovat elämäänsä ja sen eri osa-alueisiin tutkimushetkellä. Aineistojen taustamuuttujina olivat muun muassa sukupuoli, peruskoulutus, siviilisääty ja lasten lukumäärä.</p>
+      </abstract>
+      <sumDscr>
+        <timePrd date="1983-00-00" event="start"/>
+        <timePrd date="1991-00-00" event="end"/>
+        <collDate date="1983-10-00" event="start"/>
+        <collDate date="1991-12-00" event="end"/>
+        <nation abbr="FI">Suomi</nation>
+        <geogCover>Suomi</geogCover>
+        <geogCover>Tampere</geogCover>
+        <geogCover>Imatra</geogCover>
+        <geogCover>Satakunta</geogCover>
+        <geogCover>Kainuu</geogCover>
+        <geogCover>Kokemäki</geogCover>
+        <geogCover>Huittinen</geogCover>
+        <geogCover>Äetsä</geogCover>
+        <geogCover>Punkalaidun</geogCover>
+        <geogCover>Alastaro</geogCover>
+        <geogCover>Kuusamo</geogCover>
+        <geogCover>Suomussalmi</geogCover>
+        <geogCover>Kuhmo</geogCover>
+        <anlyUnit>Henkilö</anlyUnit>
+        <universe clusion="I">Lukuvuoden 1983-1984 peruskoulun yhdeksäsluokkalaiset ja lukion kolmasluokkalaiset tutkimuskuntien 35 koulusta</universe>
+      </sumDscr>
+    </stdyInfo>
+    <method>
+      <dataColl>
+        <timeMeth>Paneeliaineisto</timeMeth>
+        <dataCollector affiliation="Joensuun yliopisto. Kasvatustieteiden tiedekunta">Nummenmaa, Anna Raija</dataCollector>
+        <sampProc>
+          <p>Tutkimuskohteet poimittiin alun perin vuonna 1983 harkinnanvaraisena näytteenä lukuvuoden 1983-1984 peruskoulun yhdeksäsluokkalaisista ja lukion kolmasluokkalaisista neljältä tutkimusalueelta. Tutkimusalueiksi valittiin neljä elinkeinorakenteeltaan, muutosnopeudeltaan, työllisyystilanteeltaan ja koulutusmahdollisuuksiltaan erilaista aluetta. Tampere edusti vakaan kehityksen kaupunkialuetta, Imatra epävakaan muutoksen kaupunkialuetta, Satakunta (Kokemäki, Huittinen, Äetsä, Punkalaidun, Alastaro) vakaan kehityksen maatalousvaltaista aluetta ja Koillismaa-Kainuu (Kuusamo, Suomussalmi, Kuhmo) epävakaan kehityksen maatalousvaltaista aluetta. Perusjoukon koko oli 3210 ja lopullisen näytteen koko 2546. Vuoden 1987 seurantakyselyyn näistä 2546 henkilöstä vastasi 1800 ja heistä identifioitiin 1784. Vuoden 1991 seurantakyselyyn puolestaan vastasi 1666 henkilöä.</p>
+          <p>Tutkimuksiin vastasi vuonna 1983 79 %, 1987 70 % ja 1991 65 %. Tyttöjen osuus vastanneista kasvoi verrattaessa vuosien 1987 ja 1991 seurantakyselyjä perusselvitykseen.</p>
+        </sampProc>
+        <collMode>Kirjekysely</collMode>
+        <resInstru>Puolistrukturoitu kyselylomake</resInstru>
+        <weight>Aineisto ei sisällä painomuuttujia.</weight>
+      </dataColl>
+      <anlyInfo>
+        <respRate>vuonna 1983 79 %, 1987 70 % ja 1991 65 %</respRate>
+        <dataAppr>Vuoden 1983 lukiolaisten kyselylomaketta ja vuoden 1991 kyselylomaketta ei ole arkistoitu. Vuoden 1983 lomakkeet eroavat toisistaan koulutusosioiltaan.</dataAppr>
+        <dataAppr>Muuttujassa Q2 on ilmeisesti koodausvirhe. FSD_ID:n mukaisten havaintoyksiköiden 2049-2064 pitäisi saada kyseisessä muuttujassa arvo 3 arvon 2 sijaan. Lisäksi havaintotunnus-muuttujassa Q1 esiintyy viisi havaintotunnusta kaksi kertaa. Nämä lähes identtisiä arvoja saavat "tuplatapaukset" on jätetty dataan, sillä aineistosta ei ollut mahdollista päätellä, kumpi tapauksista on oikea. Muuttujassa Q1 kyseiset havaintoyksiköt ovat: 86, 373, 2095, 2366 ja 2375.</dataAppr>
+      </anlyInfo>
+      <stdyClas type="A">Aineisto on kuvailtu mahdollisimman yksityiskohtaisesti suomeksi ja englanniksi. Datatiedostosta on tarkistettu muun muassa muuttujien jakaumat, filtterimuuttujat, puuttuvat tiedot, muuttujien selitteet ja arvojen selitteet. Tarvittaessa datatiedosto on anonymisoitu.</stdyClas>
+    </method>
+    <dataAccs>
+      <setAvail>
+        <accsPlac URI="http://www.fsd.uta.fi/">Yhteiskuntatieteellinen tietoarkisto</accsPlac>
+        <collSize>Data: suomenkielinen SPSS portable -tiedosto. Data saatavilla myös muissa tiedostoformaateissa.</collSize>
+        <complete>Arkistoitu aineisto ei sisällä kyseisten tutkimusten kaikkien kysymysten vastauksia, koska luovutettuun aineistoon oli koodattu tutkimuksista vain tietyt muuttujat. Projektin aiemmat aineistot eivät ole yksittäisinä saatavissa.</complete>
+      </setAvail>
+      <useStmt>
+        <restrctn>Aineistoa luovutetaan tieteelliseen tutkimus- ja opetuskäyttöön; FSD:n lupamenettely.</restrctn>
+        <citReq>Tutkimusaineisto on merkittävä lähdeviitteisiin kaikissa julkaisuissa, joissa aineistoa tai sen osaa käytetään. Tietoarkiston antaman malliviittaustiedon voi merkitä lähdeluetteloon sellaisenaan tai sitä voi muokata julkaisun käytäntöjen mukaisesti.</citReq>
+        <deposReq>Arkistolle tulee lähettää tiedot julkaisuista, joissa aineiston kopiota tai siitä luvallisesti otettuja kopioita on hyödynnetty.</deposReq>
+        <disclaimer>Aineiston arkistoon luovuttajilla ja arkistolla ei ole vastuuta aineiston uudiskäytössä tuotetuista tuloksista ja tulkinnoista.</disclaimer>
+      </useStmt>
+    </dataAccs>
+    <othrStdyMat>
+      <relMat>Aineistossa käytetty suomalainen ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</relMat>
+      <relMat>Aineistossa käytetty suomalainen ammattiluokitus: Ammattiluokitus 1986. Työvoimaministeriö. Helsinki : Valtion painatuskeskus, 1986.</relMat>
+      <relMat>Nummenmaa, Anna Raija (1992). Toisen sukupuolen ammatti nuoren koulutusvalintana. Helsinki : Työministeriö. - (Työpoliittinen tutkimus; 31)</relMat>
+      <relMat>Nummenmaa, Anna Raija (1996). Koulutus, sukupuoli ja elämänkulku : nuoruudesta aikuisuuteen yhteiskunnallisessa muutoksessa. Helsinki : Työministeriö. - (Työpoliittinen tutkimus; 149)</relMat>
+      <relMat>Nummenmaa, Anna Raija &amp; Vanhalakka-Ruoho, Marjatta &amp; Lahtinen, Marjaana (1984). Ammatti, sukupuoli ja työmarkkinat : projektin esittely ja perusselvitys tyttöjen ja poikien koulutus- ja ammattisuunnitelmista. Tampere : Tampereen yliopisto. - (Tampereen yliopiston psykologian laitoksen tutkimuksia; 135)</relMat>
+      <relMat>Nummenmaa, Anna Raija &amp; Vanhalakka-Ruoho, Marjatta &amp; Lahtinen, Marjaana (1985). Ammatti, sukupuoli ja työmarkkinat : ennakkoluulottomat ja tavanomaiset ammattisuunnitelmat. Tampere : Tampereen yliopisto.  (Tampereen yliopiston psykologian laitoksen tutkimuksia; 138)</relMat>
+      <relStdy>FSD1218 Ammatti, sukupuoli ja työmarkkinat : seurantakysely 1994</relStdy>
+      <relPubl>Nummenmaa, Anna Raija (1989). Toisen sukupuolen ammatti nuoren koulutusvalintana. Kasvatus, 20(6), 494-503.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija (1990). Miesten ammatti tytön koulutusvalintana. Naistutkimus, 3(1), 20-34.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija (1991). Nuorten suuntautuminen toisen sukupuolen ammatteihin. Teoksessa: Nuoret ja muutos (toim. J. Lähteenmaa &amp; L. Siurala), 35-45. Helsinki: Tilastokeskus. Tutkimuksia; 177.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija (1992). Toisen sukupuolen ammatti nuoren koulutusvalintana. Helsinki: Työministeriö. Työpoliittinen tutkimus; 31.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija (1992). Nuorten ammattisuunnitelmien toteutuminen. AVO 37(1), 28-36.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Nummenmaa, Tapio &amp; Vanhalakka-Ruoho, Marjatta (1987). Nuorten koulutus- ja ammattisuunnitelmien yhteydet vanhempien koulutustasoihin. Kasvatus 18(6), 446-553.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Vanhalakka-Ruoho, Marjatta &amp; Lahtinen, Marjaana (1984). Ammatti, sukupuoli ja työmarkkinat: projektin esittely ja perusselvitys tyttöjen ja poikien koulutus- ja ammattisuunnitelmista. Tampere: Tampereen yliopisto. Tampereen yliopiston psykologian laitoksen tutkimuksia; 135.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Vanhalakka-Ruoho, Marjatta &amp; Lahtinen, Marjaana (1985). Ammatti, sukupuoli ja työmarkkinat: ennakkoluulottomat ja tavanomaiset ammattisuunnitelmat. Tampere: Tampereen yliopisto. Tampereen yliopiston psykologian laitoksen tutkimuksia; 138.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Vanhalakka-Ruoho, Marjatta &amp; Lahtinen, Marjaana (1985). Ammatti, sukupuoli ja työmarkkinat: tyttöjen ja poikien ammattisuunnitelmien taustaehdoista. Tampere: Tampereen yliopisto. Tampereen yliopiston psykologian laitoksen tutkimuksia; 140.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Vanhalakka-Ruoho, Marjatta (1985). Toisen sukupuolen ammattiin suuntautuminen. Helsinki: Työvoimaministeriön suunnitteluosasto. Työpoliittisia tutkimuksia; 55.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Vanhalakka-Ruoho, Marjatta (1987). Nuorten suunnitelmat ja mahdollisuuksien rakenne: ammattisuunnitelmien selkiintyneisyys, pysyvyys ja toteutuminen. Helsinki: Suomen psykologinen seura. Acta Psychologica Fennica. Soveltavan psykologian monografioita; 2.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Tarkiainen, Ari (1993). Koulutuksen ulkopuolella oleva nuori. Helsinki: Työministeriö. Työpoliittinen tutkimus; 44.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Tarkiainen, Ari (1993). Nuoret koulutuksen ulkopuolella. Nuorisotutkimus 11(2), 28-40.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Kasurinen, Helena (1994). Perhe ja nuoren uravalinta: katsaus. Nuorisotutkimus 12(1), 38-41.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Kasurinen, Helena (1995). Ammatti, sukupuoli ja elämänkulun muotoutuminen. Kasvatus 26(2), 128-139.</relPubl>
+      <relPubl>Nummenmaa, Anna Raija &amp; Nummenmaa, Tapio (1994). Ammattisuuntautumisen pysyvyys sukupolvesta toiseen: ylioppilastyttöjen suuntautuminen toisen sukupuolen ammattiin. Teoksessa: Näkökulmia elämänkulun ja ammattiurien tutkimukseen (toim. Hannu Perho &amp; Pentti Sinisalo), 95-108. Helsinki: Suomen psykologinen seura. Acta Psychologica Fennica. Soveltavan psykologian monografioita; 7.</relPubl>
+      <relPubl>Puhakka, Helena (1997). Sukupuoli, pystyvyysodotukset ja ammatillinen suuntautuminen. Kasvatus 28(2), 166-179.</relPubl>
+      <relPubl>Puhakka, Helena (1998). Naisten elämänkulku nuoruudesta aikuisuuteen: koulutuksen merkitys elämän kulussa. Joensuu: Joensuun yliopisto. Joensuun yliopiston kasvatustieteellisiä julkaisuja; 42.</relPubl>
+    </othrStdyMat>
+  </stdyDscr>
+  <fileDscr>
+    <fileTxt>
+      <fileName ID="F1">daf1217.nsf</fileName>
+      <dimensns>
+        <caseQnty>2069</caseQnty>
+        <varQnty>112</varQnty>
+      </dimensns>
+      <fileType>NSDstat 9900</fileType>
+    </fileTxt>
+  </fileDscr>
+  <dataDscr>
+    <varGrp var="Q45 Q46">
+      <txt>Mikä oli viimeisen päästötodistuksesi (peruskoulu/lukio) keskiarvo?</txt>
+    </varGrp>
+    <varGrp var="Q47 Q48 Q49 Q50 Q51 Q52 Q53">
+      <txt>Seuraavaksi yritetään saada mahdollisimman tarkka kuvaus siitä, mitä olet tehnyt kevään 1984 jälkeen, siis peruskoulun/lukion viimeisen luokan jälkeen. Ympyröi kunkin vuosipuoliskon kohdalla se vaihtoehto, joka parhaiten kuvaa pääasiallista toimintaasi kyseisenä ajankohtana. Lue ensin vaihtoehdot ja ympyröi sitten jokaisesta pylväästä (joka kuvaa vuosipuoliskoa) aina yksi vaihtoehto. Jokaiseen pylvääseen tulisi pääsääntöisesti merkitä vain yksi rengas.</txt>
+    </varGrp>
+    <varGrp var="Q54 Q55 Q56 Q57 Q58 Q59 Q95 Q96 Q97 Q98 Q99 Q100">
+      <txt>Kuinka tyytyväinen olet elämääsi - sen eri alueisiin tällä hetkellä? Ympyröi kultakin riviltä mielestäsi sopivin vaihtoehto.</txt>
+    </varGrp>
+    <varGrp var="Q80 Q81 Q82 Q83 Q84 Q85 Q86">
+      <txt>Pääasiallisen toiminnan kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</txt>
+    </varGrp>
+    <varGrp var="Q87 Q88 Q89 Q90 Q91 Q92 Q93 Q94">
+      <txt>Pääasiallinen toiminta puolivuosittain vuoden 1988 alusta vuoden 1991 loppuun</txt>
+    </varGrp>
+    <var files="F1" name="FSD_NO" intrvl="contin" dcml="0" ID="FSD_NO">
+      <labl level="variable">[fsd_no] Aineistonumero (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineistonumero (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="1217" min="1217"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1217</sumStat>
+      <sumStat type="max">1217</sumStat>
+      <sumStat type="mean">1217</sumStat>
+      <sumStat type="stdev">0</sumStat>
+      <catgry>
+        <catValu>1217</catValu>
+        <catStat>2069</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="FSD_VR" intrvl="contin" dcml="1" ID="FSD_VR">
+      <labl level="variable">[fsd_vr] Aineistoversio (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineistoversio (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range UNITS="REAL" max="1" min="1"/>
+      </valrng>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">1</sumStat>
+      <sumStat type="mean">1</sumStat>
+      <sumStat type="stdev">0</sumStat>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="FSD_PRO" name="FSD_PRO">
+      <labl level="variable">[fsd_pro] Käsittelytaso (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineisto on kuvailtu mahdollisimman yksityiskohtaisesti suomeksi ja englanniksi. Datatiedostosta on tarkistettu muun muassa muuttujien jakaumat, filtterimuuttujat, puuttuvat tiedot, muuttujien selitteet ja arvojen selitteet. Tarvittaessa datatiedosto on anonymisoitu.</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">1</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">A (ks. koodikirja)</labl>
+        <catStat>2069</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">B (ks. koodikirja)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">C (dataa ei ole tarkastettu FSD:ssä)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="FSD_ID" intrvl="contin" dcml="0" ID="FSD_ID">
+      <labl level="variable">[fsd_id] Havaintotunnus (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Havaintotunnus (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2069" min="1"/>
+      </valrng>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2069</sumStat>
+      <sumStat type="mean">1035</sumStat>
+      <sumStat type="stdev">597.413</sumStat>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q1" intrvl="contin" dcml="0" ID="Q1">
+      <labl level="variable">[q1] Havaintotunnus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Havaintotunnus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2564" min="2"/>
+      </valrng>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">2564</sumStat>
+      <sumStat type="mean">1286.76</sumStat>
+      <sumStat type="stdev">738.238</sumStat>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Huom! Muuttujassa on viisi havaintoyksikön arvoa kahteen kertaan (arvot 86, 373, 2095, 2366 ja 2375), mutta arkistolla ei ole tietoa siitä, kumpi "tuplatapauksista" on oikea.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q2" name="Q2">
+      <labl level="variable">[q2] Osallistuminen tutkimuksiin 1983, 1987 ja 1991</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Osallistuminen tutkimuksiin 1983, 1987 ja 1991</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Osallistunut syksyllä 1983, 1987 ja 1991</labl>
+        <catStat>1374</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Osallistunut syksyllä 1983 ja 1987</labl>
+        <catStat>419</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Osallistunut syksyllä 1983 ja 1991</labl>
+        <catStat>276</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujassa on ilmeisesti koodausvirhe. FSD_ID:n mukaisten havaintoyksiköiden 2049-2064 pitäisi saada kyseisessä muuttujassa arvo 3 arvon 2 sijaan.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q3" name="Q3">
+      <labl level="variable">[q3] Vastaajan sukupuoli</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vastaajan sukupuoli</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tyttö</labl>
+        <catStat>1213</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Poika</labl>
+        <catStat>856</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q4" name="Q4">
+      <labl level="variable">[q4] Vastaajan asuinalue</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vastaajan asuinalue</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">4</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tampere</labl>
+        <catStat>676</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Imatra</labl>
+        <catStat>535</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Satakunta</labl>
+        <catStat>411</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Kainuu</labl>
+        <catStat>447</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q5" name="Q5">
+      <labl level="variable">[q5] Paikkakunnan kaupunkimaisuus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Paikkakunnan kaupunkimaisuus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kaupunki</labl>
+        <catStat>1431</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Maalaiskunta</labl>
+        <catStat>638</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q6" name="Q6">
+      <labl level="variable">[q6] Koulutussuunnitelma</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutussuunnitelma</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="9" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2022</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Pyrkiä lukioon</labl>
+        <catStat>766</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Pyrkiä ammattikouluun</labl>
+        <catStat>356</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Pyrkiä ammattioppilaitokseen</labl>
+        <catStat>253</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Pyrkiä kansanopistoon</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Pyrkiä yliopistoon tai korkeakouluun</labl>
+        <catStat>279</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Mennä töihin</labl>
+        <catStat>150</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Jäädä kotiin toistaiseksi</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Hankkia elämänkokemuksia</labl>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muu ratkaisu (10. luokka)</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>47</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q7" name="Q7">
+      <labl level="variable">[q7] Koulutustavoite</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutustavoite</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2052</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">4</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei tavoitetta/ylioppilastutkinto</labl>
+        <catStat>894</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lyhyt kurssi tai työn kautta</labl>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Koulutasoinen tutkinto</labl>
+        <catStat>341</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Opistotasoinen tutkinto</labl>
+        <catStat>219</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Yliopisto- tai korkeakoulutasoinen tutkinto</labl>
+        <catStat>551</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>17</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q8" name="Q8">
+      <labl level="variable">[q8] Ammattisuunnitelman pääala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattisuunnitelman pääala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2067</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei suunnitelmaa</labl>
+        <catStat>344</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>1000</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>88</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>81</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>198</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>217</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" name="Q9" intrvl="contin" dcml="0" ID="Q9">
+      <labl level="variable">[q9] Ammattisuunnitelman tarkka ala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattisuunnitelman tarkka ala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="86" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2066</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">70</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei suunnitelmaa</labl>
+        <catStat>407</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekniikan alaan kuuluva suunnittelu-, johto- ja tutkimustyö</labl>
+        <catStat>157</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työnjohto- ja suoritustyö</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kemian, fysiikan ja biologian alaan kuuluva työ</labl>
+        <catStat>83</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Lääketieteellinen ja sairaanhoitotyö</labl>
+        <catStat>147</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Muu terveyden- ja sairaanhoitotyö</labl>
+        <catStat>67</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>203</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Taiteellinen, viihteellinen ja kirjallinen työ</labl>
+        <catStat>99</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Muu tekn., luonnontiet., yhteiskuntatiet., sos. ja hum. työ</labl>
+        <catStat>179</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Yhteiskunnallis-hallinnollinen työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen hallinnollinen työ</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Kirjanpito- ja kassanhoitotyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Sihteeri- ja konekirjoitustyö</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Tietokoneiden käsittelytyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Muu tilinpidollinen ja konttoritekninen työ</labl>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Tukku- ja vähittäiskauppiaat</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopapereiden myynti</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Kauppaedustustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Maa-, metsä- ja puutarhatalouden johtotyö</labl>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Maatalous- ja puutarhatyö, eläintenhoito</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Syväkairaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>28</catValu>
+        <labl level="category">Rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kansi- ja konemiehistö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Lentotyö</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Veturin- ja moottorivaununkuljetustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>35</catValu>
+        <labl level="category">Liikennepalvelutyö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <labl level="category">Liikenteen johto ja työnjohto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>37</catValu>
+        <labl level="category">Posti-, lennätin-, puhelin- ja radioliikennetyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>38</catValu>
+        <labl level="category">Posti- ja lähettityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Leikkaus-, ompelu- ja verhoilutyö ym.</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Rautatehdas-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>45</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>73</catStat>
+      </catgry>
+      <catgry>
+        <catValu>46</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>47</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <labl level="category">Maalaus- ja lakkaustyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Rakennusalan muut työt</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Elintarviketyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Kemianprosessityö, massa-, paperi- ja kartonkityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tupakkateollisuustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Pakkaus- ja paketoimistyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Työkoneiden ja kiinteiden moottorien käyttö ja hoito</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>58</catValu>
+        <labl level="category">Ahtaus-, kuormaus- ja varastotyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Vartiointi- ja suojelutehtävät</labl>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Koti- ja suurtaloustyö</labl>
+        <catStat>43</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Hygienia- ja kauneudenhoitotyö</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>65</catValu>
+        <labl level="category">Pesu- ja silitystyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <labl level="category">Urheilu</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>67</catValu>
+        <labl level="category">Valokuvaustyö</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>68</catValu>
+        <labl level="category">Matkustajien palvelutyö</labl>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>69</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ammatti tuntematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Kotityö + hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Kotityö + opetusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Kotityö + kaupallisen alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Kotityö + taiteellisen ym. alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Kotityö + tekstiilityöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Kotityö + elintarviketeol. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Kotityö + hallinnollinen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Kotityö + työkoneiden käyttöön&amp;hoitoon liit. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Kotityö + liikenteen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Kotityö + hygienian ja kaun.hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Kotityö + kemian, biologian jne. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kotityö + rakennusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Kotityö + tarjoilutyöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>3</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokituksen numerointia on muutettu ja luokkia on lisätty (luokat 72-86).</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q10" name="Q10">
+      <labl level="variable">[q10] Ammattisuunnitelman pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattisuunnitelman pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1725</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, lainopillinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>637</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Terveydenhuolto, sosiaalialan työ</labl>
+        <catStat>340</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinto- ja toimistotyö</labl>
+        <catStat>133</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>76</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>86</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>157</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>231</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Luokittelematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>344</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1986. Työvoimaministeriö. Helsinki : Valtion painatuskeskus, 1986.</notes>
+    </var>
+    <var files="F1" name="Q11" intrvl="contin" dcml="0" ID="Q11">
+      <labl level="variable">[q11] Ammattisuunnitelman tarkka pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattisuunnitelman tarkka pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="99" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1671</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">99</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työ</labl>
+        <catStat>171</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kemian ja fysiikan alaan kuuluva työ</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Biologian alaan kuuluva työ</labl>
+        <catStat>44</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>198</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Toimittajan työ ja joukkoviestintä</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Taide- ja viihdealan työ</labl>
+        <catStat>66</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Kirjasto-, arkisto- ja museoalan työ sekä informaatikot</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muu luonnontiet., yhteiskuntatiet. ja humanistinen työ</labl>
+        <catStat>58</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Terveyden- ja sairaanhoitotyö</labl>
+        <catStat>144</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Terveydenhuollon kuntouttava työ</labl>
+        <catStat>64</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Hammashoitoalan työ</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Apteekkialan työ</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Eläinlääkintähuolto, ympäristön- ja terveydensuojelutyö</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Sosiaalialan työ</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Lasten päivähoidon työ</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Psykologinen työ</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Harrastus- ja vapaa-ajan toiminnan ohjaus</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Muu pääryhmään 1 kuuluva työ</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Julkisen hallinnon johtotyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen johtotyö</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Henkilöstö- ja työvoima-asiain hoito</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Taloushallinnon suunnittelu- ja tilinpitotyö ym.</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Sihteeri- ja toimistotyö</labl>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Atk-alan työ</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Pankki- ja vakuutusalan työ</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Matkailualan työ</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu hallinto- ja toimistotyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Mainos- ja markkinointityö</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopap. myynti ja välitys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Ostotyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Kauppaedustus- ja konttorimyyntityö</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tavaroiden myyntityö</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Maatilatalous, eläintenhoito</labl>
+        <catStat>64</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Puutarha- ja puistotyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Muu maa- ja metsätaloustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Kansi- ja konemiehistön työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Lentokuljetustyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Veturin- ja moottorinvaununkuljetustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Liikenteen johto ja liikennepalvelutyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Posti- ja tietoliikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Postinkantajan työ</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Öljynporaustyö, turpeennosto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Talonrakennustyö</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Maa- ja vesirakennustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Työkoneiden käyttö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ompelutyö ym.</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Teräs-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>66</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>43</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Maalaustyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Radio-, tv-, elokuva- ja videotekninen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Elintarviketeollisuustyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>83</catValu>
+        <labl level="category">Kemian prosessityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Massa- ja paperityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kumi- ja muovituotetyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>87</catValu>
+        <labl level="category">Kiinteiden koneiden käyttö energiantuotannossa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>88</catValu>
+        <labl level="category">Pakkaus-, varasto- ja ahtaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>89</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <labl level="category">Vartiointi- ja suojelutyö</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>91</catValu>
+        <labl level="category">Majoitusliike- ja suurtaloustyö</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>92</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>93</catValu>
+        <labl level="category">Kotitaloustyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>94</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>95</catValu>
+        <labl level="category">Hygienia ja kauneudenhoitotyö</labl>
+        <catStat>44</catStat>
+      </catgry>
+      <catgry>
+        <catValu>96</catValu>
+        <labl level="category">Pesula- ja silitystyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>97</catValu>
+        <labl level="category">Ammattimainen urheilu- ja liikuntatyö</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>98</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>99</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>398</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1986. Työvoimaministeriö. Helsinki : Valtion painatuskeskus, 1986.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q12" name="Q12">
+      <labl level="variable">[q12] Ammattisuunnitelman ennakkoluulottomuus (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattisuunnitelman ennakkoluulottomuus (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1865</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei ammattisuunnitelmaa</labl>
+        <catStat>198</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Oman sukupuolen ammatti (oman sukup. osuus 91-100%)</labl>
+        <catStat>690</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Oman sukupuolen hallitsema ammatti (61-90%)</labl>
+        <catStat>544</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (41-60%)</labl>
+        <catStat>156</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Toisen sukupuolen hallitsema ammatti (11-40%)</labl>
+        <catStat>233</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Toisen sukupuolen ammatti (0-10%)</labl>
+        <catStat>44</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>204</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q13" name="Q13">
+      <labl level="variable">[q13] Koulutussuunnitelmatyyppi</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutussuunnitelmatyyppi</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2065</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">4</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Molemmat suunnitelmansa ilmaisseet</labl>
+        <catStat>1430</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ammattisuunnitelman pohtijat</labl>
+        <catStat>245</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Koulutussuunnitelman pohtijat</labl>
+        <catStat>301</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Suunnitelmistaan epätietoiset</labl>
+        <catStat>89</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>4</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokitus on tehty muuttujien q6 ja q8 luokkien pohjalta.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q14" name="Q14">
+      <labl level="variable">[q14] Ammatinvalinnan vaihe</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammatinvalinnan vaihe</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2045</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei suunnitelmaa</labl>
+        <catStat>188</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Kiinnostunut vielä eri aloista</labl>
+        <catStat>844</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olen päätynyt valintaani tänä syksynä</labl>
+        <catStat>325</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olen päätynyt valintaani viime lukuvuoden aikana</labl>
+        <catStat>327</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olen useita vuosia tiennyt minne aion</labl>
+        <catStat>361</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>24</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q15" name="Q15">
+      <labl level="variable">[q15] Työn ulkoisten arvojen summapistemäärä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työn ulkoisten arvojen summapistemäärä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Minimi</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <catStat>56</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <catStat>147</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <catStat>258</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <catStat>521</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>532</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <catStat>320</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <catStat>160</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Maksimi</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Summamuuttujan osatekijöiden (varmuus työpaikan saannista, työllisyys; työn helppous ja siihen vaadittavan koulutuksen lyhyys; suuret tulot, palkka, taloudelliset edut; varmuus työsuhteen jatkumisesta; ammatti antaa arvostetun aseman) pisteytys: 0=ei tärkeä, 1=jossain määrin tärkeä, 2=erittäin tärkeä. (Kysely 1983: kysymys 11)</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q16" name="Q16">
+      <labl level="variable">[q16] Työn sisäisten arvojen summapistemäärä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työn sisäisten arvojen summapistemäärä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2069</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Minimi</labl>
+        <catStat>43</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <catStat>81</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <catStat>179</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>322</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <catStat>479</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <catStat>449</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <catStat>328</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Maksimi</labl>
+        <catStat>140</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Summamuuttujan osatekijöiden (työn itsenäisyys, vapaus; mahdollisuus oppia jatkuvasti uutta; ammatin sisältö, se, että työ vastaa omia kiinnostuksia; mahdollisuus auttaa muita; hyvät työtoverit ja ihmissuhteet työssä) pisteytys: 0=ei tärkeä, 1=jossain määrin tärkeä, 2=erittäin tärkeä. (Kysely 1983: kysymys 11)</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q17" name="Q17">
+      <labl level="variable">[q17] Työ osana muuta elämää -summapistemäärä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työ osana muuta elämää -summapistemäärä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2067</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Minimi</labl>
+        <catStat>64</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <catStat>63</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <catStat>127</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <catStat>205</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <catStat>253</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <catStat>332</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>377</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <catStat>320</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <catStat>214</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <catStat>92</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Maksimi</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Summamuuttujan osatekijöiden (työ mahdollistaa monipuoliset harrastukset; työ mahdollistaa lasten kasvatuksen ja yhdessäolon lasten kanssa; työ mahdollistaa yhteiskunnallisen osallistumisen; työ mahdollistaa vapaa-ajan vieton perheen kanssa; se, ettei tarvitse tehdä vuorotyötä) pisteytys: 0=ei tärkeä, 1=jossain määrin tärkeä, 2=erittäin tärkeä. (Kysely 1983: kysymys 11)</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q18" name="Q18">
+      <labl level="variable">[q18] Valmius naisvaltaisille aloille</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Valmius naisvaltaisille aloille</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2067</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei valmiutta millekään alalle</labl>
+        <catStat>619</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Valmius yhdelle alalle</labl>
+        <catStat>675</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Valmius kahdelle alalle</labl>
+        <catStat>546</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Valmius kolmelle alalle</labl>
+        <catStat>227</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan naisvaltaiset alat: lastenhoito ja kasvatus; konttori- tai toimistotyö; vaatetus- ja tekstiiliala (kysely 1983: kysymys 12).</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q19" name="Q19">
+      <labl level="variable">[q19] Valmius miesvaltaisille aloille</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Valmius miesvaltaisille aloille</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2067</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei valmiutta millekään alalle</labl>
+        <catStat>997</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Valmius yhdelle alalle</labl>
+        <catStat>474</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Valmius kahdelle alalle</labl>
+        <catStat>365</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Valmius kolmelle alalle</labl>
+        <catStat>231</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan miesvaltaiset alat: tekniset tai teolliset työtehtävät; rakennusalan työtehtävät; liikenteen työtehtävät (kysely 1983: kysymys 12).</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q20" name="Q20">
+      <labl level="variable">[q20] Matematiikan tasokurssi</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Matematiikan tasokurssi</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2010</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Peruskoululaisten ja lukiolaisten yleiskurssi</labl>
+        <catStat>523</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Peruskoululaisten keskikurssi</labl>
+        <catStat>559</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Peruskoululaisten ja lukiolaisten laaja kurssi</labl>
+        <catStat>928</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>59</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q21" name="Q21">
+      <labl level="variable">[q21] Perherakenne</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Perherakenne</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2056</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Molemmat vanhemmat</labl>
+        <catStat>1680</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Yksinhuoltajaäiti</labl>
+        <catStat>246</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Yksinhuoltajaisä</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Äiti tai isä uudessa avo- tai avioliitossa</labl>
+        <catStat>102</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Muu</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>13</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q22" name="Q22">
+      <labl level="variable">[q22] Lasten lukumäärä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Lasten lukumäärä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="9" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2066</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <catStat>312</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <catStat>775</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <catStat>552</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <catStat>208</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <catStat>115</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">9 tai enemmän</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>3</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q23" name="Q23">
+      <labl level="variable">[q23] Isän ammattiala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isän ammattiala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1967</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>328</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>107</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>124</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>319</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>214</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>763</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>68</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>102</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" name="Q24" intrvl="contin" dcml="0" ID="Q24">
+      <labl level="variable">[q24] Isän ammatin tarkka ala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isän ammatin tarkka ala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="86" min="0"/>
+      </valrng>
+      <invalrng>
+        <item VALUE="0"/>
+      </invalrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1924</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">84</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekniikan alaan kuuluva suunnittelu-, johto- ja tutkimustyö</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työnjohto- ja suoritustyö</labl>
+        <catStat>82</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kemian, fysiikan ja biologian alaan kuuluva työ</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Lääketieteellinen ja sairaanhoitotyö</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Muu terveyden- ja sairaanhoitotyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>91</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Taiteellinen, viihteellinen ja kirjallinen työ</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Muu tekn., luonnontiet., yhteiskuntatiet., sos. ja hum. työ</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Yhteiskunnallis-hallinnollinen työ</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen hallinnollinen työ</labl>
+        <catStat>77</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Kirjanpito- ja kassanhoitotyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Sihteeri- ja konekirjoitustyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Tietokoneiden käsittelytyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Muu tilinpidollinen ja konttoritekninen työ</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Tukku- ja vähittäiskauppiaat</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopapereiden myynti</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Kauppaedustustyö</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Maa-, metsä- ja puutarhatalouden johtotyö</labl>
+        <catStat>258</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Maatalous- ja puutarhatyö, eläintenhoito</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Syväkairaustyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>28</catValu>
+        <labl level="category">Rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu kaivos- ja louhintatyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kansi- ja konemiehistö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Lentotyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Veturin- ja moottorivaununkuljetustyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>162</catStat>
+      </catgry>
+      <catgry>
+        <catValu>35</catValu>
+        <labl level="category">Liikennepalvelutyö</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <labl level="category">Liikenteen johto ja työnjohto</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>37</catValu>
+        <labl level="category">Posti-, lennätin-, puhelin- ja radioliikennetyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>38</catValu>
+        <labl level="category">Posti- ja lähettityö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Leikkaus-, ompelu- ja verhoilutyö ym.</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Rautatehdas-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>45</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>157</catStat>
+      </catgry>
+      <catgry>
+        <catValu>46</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>91</catStat>
+      </catgry>
+      <catgry>
+        <catValu>47</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>91</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <labl level="category">Maalaus- ja lakkaustyö</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Rakennusalan muut työt</labl>
+        <catStat>81</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Elintarviketyö</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Kemianprosessityö, massa-, paperi- ja kartonkityö</labl>
+        <catStat>52</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tupakkateollisuustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Pakkaus- ja paketoimistyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Työkoneiden ja kiinteiden moottorien käyttö ja hoito</labl>
+        <catStat>97</catStat>
+      </catgry>
+      <catgry>
+        <catValu>58</catValu>
+        <labl level="category">Ahtaus-, kuormaus- ja varastotyö</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Vartiointi- ja suojelutehtävät</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Koti- ja suurtaloustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Hygienia- ja kauneudenhoitotyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>65</catValu>
+        <labl level="category">Pesu- ja silitystyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <labl level="category">Urheilu</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>67</catValu>
+        <labl level="category">Valokuvaustyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>68</catValu>
+        <labl level="category">Matkustajien palvelutyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>69</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ammatti tuntematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Kotityö + hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Kotityö + opetusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Kotityö + kaupallisen alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Kotityö + taiteellisen ym. alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Kotityö + tekstiilityöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Kotityö + elintarviketeol. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Kotityö + hallinnollinen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Kotityö + työkoneiden käyttöön&amp;hoitoon liit. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Kotityö + liikenteen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Kotityö + hygienian ja kaun.hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Kotityö + kemian, biologian jne. ammatti</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kotityö + rakennusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Kotityö + tarjoilutyöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category">Tieto puuttuu</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>71</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokituksen numerointia on muutettu ja luokkia on lisätty (luokat 72-86).</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q25" name="Q25">
+      <labl level="variable">[q25] Isän ammatin eriytyneisyys 1980-luvulla (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isän ammatin eriytyneisyys 1980-luvulla (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1963</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Miesten ammatti (miesten osuus 91-100%)</labl>
+        <catStat>863</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Miesvaltainen ammatti (miesten osuus 61-90%)</labl>
+        <catStat>843</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (miesten osuus 41-60%)</labl>
+        <catStat>115</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Naisvaltainen ammatti (miesten osuus 11-40%)</labl>
+        <catStat>130</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Naisten ammatti (miesten osuus 0-10%)</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>106</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q26" name="Q26">
+      <labl level="variable">[q26] Äidin ammattiala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidin ammattiala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1982</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>370</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>277</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>211</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>244</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>71</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>262</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>348</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>198</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>87</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" name="Q27" intrvl="contin" dcml="0" ID="Q27">
+      <labl level="variable">[q27] Äidin ammatin tarkka ala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidin ammatin tarkka ala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="86" min="0"/>
+      </valrng>
+      <invalrng>
+        <item VALUE="0"/>
+      </invalrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1947</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">86</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekniikan alaan kuuluva suunnittelu-, johto- ja tutkimustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työnjohto- ja suoritustyö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kemian, fysiikan ja biologian alaan kuuluva työ</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Lääketieteellinen ja sairaanhoitotyö</labl>
+        <catStat>136</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Muu terveyden- ja sairaanhoitotyö</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>97</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Taiteellinen, viihteellinen ja kirjallinen työ</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Muu tekn., luonnontiet., yhteiskuntatiet., sos. ja hum. työ</labl>
+        <catStat>57</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Yhteiskunnallis-hallinnollinen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen hallinnollinen työ</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Kirjanpito- ja kassanhoitotyö</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Sihteeri- ja konekirjoitustyö</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Tietokoneiden käsittelytyö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Muu tilinpidollinen ja konttoritekninen työ</labl>
+        <catStat>180</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Tukku- ja vähittäiskauppiaat</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopapereiden myynti</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Kauppaedustustyö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>171</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Maa-, metsä- ja puutarhatalouden johtotyö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Maatalous- ja puutarhatyö, eläintenhoito</labl>
+        <catStat>236</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Syväkairaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>28</catValu>
+        <labl level="category">Rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kansi- ja konemiehistö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Lentotyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Veturin- ja moottorivaununkuljetustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>35</catValu>
+        <labl level="category">Liikennepalvelutyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <labl level="category">Liikenteen johto ja työnjohto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>37</catValu>
+        <labl level="category">Posti-, lennätin-, puhelin- ja radioliikennetyö</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>38</catValu>
+        <labl level="category">Posti- ja lähettityö</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Leikkaus-, ompelu- ja verhoilutyö ym.</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Rautatehdas-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>45</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>46</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>47</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <labl level="category">Maalaus- ja lakkaustyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Rakennusalan muut työt</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Elintarviketyö</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Kemianprosessityö, massa-, paperi- ja kartonkityö</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tupakkateollisuustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Pakkaus- ja paketoimistyö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Työkoneiden ja kiinteiden moottorien käyttö ja hoito</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>58</catValu>
+        <labl level="category">Ahtaus-, kuormaus- ja varastotyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Vartiointi- ja suojelutehtävät</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Koti- ja suurtaloustyö</labl>
+        <catStat>136</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>145</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Hygienia- ja kauneudenhoitotyö</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>65</catValu>
+        <labl level="category">Pesu- ja silitystyö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <labl level="category">Urheilu</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>67</catValu>
+        <labl level="category">Valokuvaustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>68</catValu>
+        <labl level="category">Matkustajien palvelutyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>69</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ammatti tuntematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>197</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Kotityö + hoitoalan ammatti</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Kotityö + opetusalan ammatti</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Kotityö + kaupallisen alan ammatti</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Kotityö + taiteellisen ym. alan ammatti</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Kotityö + tekstiilityöammatti</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Kotityö + elintarviketeol. ammatti</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Kotityö + hallinnollinen ammatti</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Kotityö + työkoneiden käyttöön&amp;hoitoon liit. ammatti</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Kotityö + liikenteen ammatti</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Kotityö + hygienian ja kaun.hoitoalan ammatti</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Kotityö + kemian, biologian jne. ammatti</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kotityö + rakennusalan ammatti</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Kotityö + tarjoilutyöammatti</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category">Tieto puuttuu</labl>
+        <catStat>68</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>54</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokituksen numerointia on muutettu ja luokkia on lisätty (luokat 72-86).</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q28" name="Q28">
+      <labl level="variable">[q28] Äidin ammatin eriytyneisyys 1980-luvulla (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidin ammatin eriytyneisyys 1980-luvulla (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1974</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Miesten ammatti (naisten osuus 0-10%)</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Miesvaltainen ammatti (naisten osuus 11-40%)</labl>
+        <catStat>156</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (naisten osuus 41-60%)</labl>
+        <catStat>109</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Naisvaltainen ammatti (naisten osuus 61-90%)</labl>
+        <catStat>1113</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Naisten ammatti (naisten osuus 91-100%)</labl>
+        <catStat>558</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>95</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q29" name="Q29">
+      <labl level="variable">[q29] Äidin työssäkäynti kodin ulkopuolella</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidin työssäkäynti kodin ulkopuolella</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">2037</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">4</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei työssä</labl>
+        <catStat>340</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Emäntä</labl>
+        <catStat>200</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ansiotyössä kodin ulkopuolella</labl>
+        <catStat>1414</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ansiotyössä kotona</labl>
+        <catStat>83</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>32</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q30" name="Q30">
+      <labl level="variable">[q30] Perheen työttömyyskokemukset viimeksi kuluneiden viiden vuoden aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Perheen työttömyyskokemukset viimeksi kuluneiden viiden vuoden aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1814</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">4</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Jatkuvia kokemuksia</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Useita kokemuksia</labl>
+        <catStat>109</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kerran tai kaksi</labl>
+        <catStat>209</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei työttömyyttä</labl>
+        <catStat>1470</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>255</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q31" name="Q31">
+      <labl level="variable">[q31] Isän koulutus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isän koulutus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="8" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1879</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">8</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Vähemmän kuin kansakoulu</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Kansakoulu</labl>
+        <catStat>960</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kansakoulu + ammattikoulu</labl>
+        <catStat>376</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Keskikoulu</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Keskikoulu + ammattikoulu/opisto</labl>
+        <catStat>223</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Yo-tutkinto</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Ylioppilaspohjainen ammattitutkinto</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Akateeminen väli- tai loppututkinto</labl>
+        <catStat>144</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>190</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q32" name="Q32">
+      <labl level="variable">[q32] Äidin koulutus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidin koulutus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="8" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1961</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">8</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Vähemmän kuin kansakoulu</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Kansakoulu</labl>
+        <catStat>965</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kansakoulu + ammattikoulu</labl>
+        <catStat>313</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Keskikoulu</labl>
+        <catStat>187</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Keskikoulu + ammattikoulu/opisto</labl>
+        <catStat>250</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Yo-tutkinto</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Ylioppilaspohjainen ammattitutkinto</labl>
+        <catStat>79</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Akateeminen väli- tai loppututkinto</labl>
+        <catStat>84</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>108</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q33" name="Q33">
+      <labl level="variable">[q33] Isänisän ammattiala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isänisän ammattiala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1877</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>60</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>999</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>113</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>520</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>192</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q34" name="Q34">
+      <labl level="variable">[q34] Isänisän ammatin eriytyneisyys 1980-luvulla (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isänisän ammatin eriytyneisyys 1980-luvulla (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1875</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Miesten ammatti (miesten osuus 91-100%)</labl>
+        <catStat>246</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Miesvaltainen ammatti (miesten osuus 61-90%)</labl>
+        <catStat>1471</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (miesten osuus 41-60%)</labl>
+        <catStat>85</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Naisvaltainen ammatti (miesten osuus 11-40%)</labl>
+        <catStat>61</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Naisten ammatti (miesten osuus 0-10%)</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>194</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q35" name="Q35">
+      <labl level="variable">[q35] Isänäidin työssäkäynti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isänäidin työssäkäynti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1854</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>443</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Emäntä</labl>
+        <catStat>933</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Työssä kodin ulkopuolella</labl>
+        <catStat>478</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>215</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q36" name="Q36">
+      <labl level="variable">[q36] Isänäidin ammattiala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isänäidin ammattiala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1855</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>58</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>71</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>952</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>150</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>137</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>443</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>214</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q37" name="Q37">
+      <labl level="variable">[q37] Isänäidin ammatin eriytyneisyys 1980-luvulla (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Isänäidin ammatin eriytyneisyys 1980-luvulla (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1855</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Miesten ammatti (naisten osuus 0-10%)</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Miesvaltainen ammatti (naisten osuus 11-40%)</labl>
+        <catStat>110</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (naisten osuus 41-60%)</labl>
+        <catStat>71</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Naisvaltainen ammatti (naisten osuus 61-90%)</labl>
+        <catStat>1293</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Naisten ammatti (naisten osuus 91-100%)</labl>
+        <catStat>376</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>214</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q38" name="Q38">
+      <labl level="variable">[q38] Äidinisän ammattiala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidinisän ammattiala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1933</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>70</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>1003</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>124</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>559</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>136</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q39" name="Q39">
+      <labl level="variable">[q39] Äidinisän ammatin eriytyneisyys 1980-luvulla (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidinisän ammatin eriytyneisyys 1980-luvulla (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1932</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Miesten ammatti (miesten osuus 91-100%)</labl>
+        <catStat>276</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Miesvaltainen ammatti (miesten osuus 61-90%)</labl>
+        <catStat>1500</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (miesten osuus 41-60%)</labl>
+        <catStat>76</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Naisvaltainen ammatti (miesten osuus 11-40%)</labl>
+        <catStat>71</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Naisten ammatti (miesten osuus 0-10%)</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>137</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q40" name="Q40">
+      <labl level="variable">[q40] Äidinäidin työssäkäynti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidinäidin työssäkäynti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1906</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>461</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Emäntä</labl>
+        <catStat>930</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Työssä kodin ulkopuolella</labl>
+        <catStat>515</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>163</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q41" name="Q41">
+      <labl level="variable">[q41] Äidinäidin ammattiala (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidinäidin ammattiala (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1904</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>50</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>957</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>198</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>152</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>459</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>165</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q42" name="Q42">
+      <labl level="variable">[q42] Äidinäidin ammatin eriytyneisyys 1980-luvulla (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äidinäidin ammatin eriytyneisyys 1980-luvulla (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1901</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Miesten ammatti (naisten osuus 0-10%)</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Miesvaltainen ammatti (naisten osuus 11-40%)</labl>
+        <catStat>146</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (naisten osuus 41-60%)</labl>
+        <catStat>57</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Naisvaltainen ammatti (naisten osuus 61-90%)</labl>
+        <catStat>1286</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Naisten ammatti (naisten osuus 91-100%)</labl>
+        <catStat>408</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>168</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q43" name="Q43">
+      <labl level="variable">[q43] Tutkimusryhmät</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Tutkimusryhmät</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1777</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Peruskoulusta 1984 ammatilliseen koulutukseen siirtyneet</labl>
+        <catStat>505</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Peruskoulusta 1984 lukioon siirtyneet (lukiossa vielä olevat sekä sen keskeyttäneet)</labl>
+        <catStat>647</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Lukionsa 1984 päättäneet</labl>
+        <catStat>625</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>292</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q44" name="Q44">
+      <labl level="variable">[q44] Nuoren koulutus- ja ammattitoiminnallisuutta kuvaava tyyppi (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Nuoren koulutus- ja ammattitoiminnallisuutta kuvaava tyyppi (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1777</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">On lukiossa</labl>
+        <catStat>86</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Koulutuksen ulkopuolelle jättäytyneet (ei hakeneet lainkaan koulutukseen/työn kautta)</labl>
+        <catStat>181</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Koulutuksen ulkopuolelle jääneet (hakeneet/ei päässeet)</labl>
+        <catStat>191</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Valmistavassa koulutuksessa (kansanopistot, kurssit ym.)</labl>
+        <catStat>82</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ammattiin valmistavassa koulutuksessa olevat (jos koulutuspaikka, mutta on armeijassa)</labl>
+        <catStat>660</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Ammattiin valmistuneet</labl>
+        <catStat>476</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Ammattiin valmistuneet, uudessa koulutuksessa olevat</labl>
+        <catStat>101</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>292</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q45" intrvl="contin" dcml="1" ID="Q45">
+      <labl level="variable">[q45] Päästötodistuksen kaikkien aineiden keskiarvo</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Päästötodistuksen kaikkien aineiden keskiarvo</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range UNITS="REAL" max="9.9" min="4.9"/>
+      </valrng>
+      <sumStat type="vald">1672</sumStat>
+      <sumStat type="min">4.9</sumStat>
+      <sumStat type="max">9.9</sumStat>
+      <sumStat type="mean">7.87159</sumStat>
+      <sumStat type="stdev">0.799918</sumStat>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q46" intrvl="contin" dcml="1" ID="Q46">
+      <labl level="variable">[q46] Päästötodistuksen lukuaineiden keskiarvo</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Päästötodistuksen lukuaineiden keskiarvo</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range UNITS="REAL" max="10" min="4.9"/>
+      </valrng>
+      <sumStat type="vald">1383</sumStat>
+      <sumStat type="min">4.9</sumStat>
+      <sumStat type="max">10</sumStat>
+      <sumStat type="mean">7.74309</sumStat>
+      <sumStat type="stdev">0.891864</sumStat>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q47" name="Q47">
+      <labl level="variable">[q47] Pääasiallinen toiminta vuoden 1984 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1984 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1766</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>657</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>627</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>207</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>80</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>303</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q48" name="Q48">
+      <labl level="variable">[q48] Pääasiallinen toiminta vuoden 1985 alussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1985 alku</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1771</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>631</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>621</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>193</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>129</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>298</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q49" name="Q49">
+      <labl level="variable">[q49] Pääasiallinen toiminta vuoden 1985 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1985 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1772</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>618</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>43</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>788</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>155</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>84</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>297</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q50" name="Q50">
+      <labl level="variable">[q50] Pääasiallinen toiminta vuoden 1986 alussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1986 alku</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1774</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>610</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>793</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>187</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>295</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q51" name="Q51">
+      <labl level="variable">[q51] Pääasiallinen toiminta vuoden 1986 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1986 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1771</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>602</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>672</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>186</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>173</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>298</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q52" name="Q52">
+      <labl level="variable">[q52] Pääasiallinen toiminta vuoden 1987 alussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1987 alku</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1768</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>594</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>666</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>179</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>194</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>39</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>301</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q53" name="Q53">
+      <labl level="variable">[q53] Pääasiallinen toiminta vuoden 1987 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1987 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1767</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">10</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>93</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>90</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>755</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>287</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>339</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>87</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>302</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q54" name="Q54">
+      <labl level="variable">[q54] Tyytyväisyys elämän eri alueisiin: Koulutus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1738</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>109</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>215</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>270</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>751</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>393</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>331</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q55" name="Q55">
+      <labl level="variable">[q55] Tyytyväisyys elämän eri alueisiin: Työelämä/ammatti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työelämä/ammatti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1475</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>159</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>280</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>636</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>304</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>594</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q56" name="Q56">
+      <labl level="variable">[q56] Tyytyväisyys elämän eri alueisiin: Perhe-elämä/koti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Perhe-elämä/koti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1758</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>191</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>722</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>766</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>311</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q57" name="Q57">
+      <labl level="variable">[q57] Tyytyväisyys elämän eri alueisiin: Vapaa-aika/harrastukset</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vapaa-aika/harrasteet</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1764</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>119</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>279</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>779</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>564</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>305</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q58" name="Q58">
+      <labl level="variable">[q58] Tyytyväisyys elämän eri alueisiin: Ihmissuhteet</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ihmissuhteet</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1767</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>63</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>139</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>758</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>786</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>302</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q59" name="Q59">
+      <labl level="variable">[q59] Tyytyväisyys elämän eri alueisiin: Elämä kokonaisuutena</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Elämä kokonaisuutena</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1766</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>169</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>949</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>584</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>303</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q60" name="Q60">
+      <labl level="variable">[q60] Vastaajan siviilisääty</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vastaajan siviilisääty</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1660</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Naimaton</labl>
+        <catStat>870</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Naimisissa</labl>
+        <catStat>780</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eronnut</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Leski</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>409</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q61" name="Q61">
+      <labl level="variable">[q61] Onko sinulla lapsia?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko sinulla lapsia?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1656</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>1424</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Kyllä</labl>
+        <catStat>232</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>413</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q62" name="Q62">
+      <labl level="variable">[q62] Lasten lukumäärä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Lasten lukumäärä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1657</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">4</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei yhtään</labl>
+        <catStat>1426</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Yksi lapsi</labl>
+        <catStat>162</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Kaksi lasta</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kolme lasta</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Neljä lasta</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>412</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q63" name="Q63">
+      <labl level="variable">[q63] Vastaajan peruskoulutus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vastaajan peruskoulutus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1666</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Peruskoulu</labl>
+        <catStat>486</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Lukio</labl>
+        <catStat>1180</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>403</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q64" name="Q64">
+      <labl level="variable">[q64] Minä vuonna päätit koulusi (peruskoulun tai lukion)?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Minä vuonna päätit koulusi (peruskoulun tai lukion)?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1664</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">1990</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">1989</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">1988</labl>
+        <catStat>66</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">1987</labl>
+        <catStat>514</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">1986</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">1985</labl>
+        <catStat>52</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">1984</labl>
+        <catStat>1015</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>405</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q65" name="Q65">
+      <labl level="variable">[q65] Tutkimusryhmät</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Tutkimusryhmät</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1666</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Peruskoulusta 1984 ammatilliseen koulutukseen siirtyneet</labl>
+        <catStat>459</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Peruskoulusta 1984 lukioon siirtyneet</labl>
+        <catStat>625</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Lukionsa 1984 päättäneet</labl>
+        <catStat>582</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>403</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q66" name="Q66">
+      <labl level="variable">[q66] Oletko peruskoulun/lukion jälkeen valmistunut johonkin ammattiin?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletko peruskoulun/lukion jälkeen valmistunut johonkin ammattiin?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1664</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">4</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En</labl>
+        <catStat>510</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Kyllä, yksi ammattitutkinto</labl>
+        <catStat>973</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kyllä, kaksi ammattitutkintoa</labl>
+        <catStat>176</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Enemmän kuin kaksi ammattitutkintoa</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>405</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q67" name="Q67">
+      <labl level="variable">[q67] Kuinka paljon kului kuukausina aikaa peruskoulun/lukion päättymisen ja ammattiin valmistumisen välillä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kuinka paljon kului kuukausina aikaa peruskoulun/lukion päättymisen ja ammattiin valmistumisen välillä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="90" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1602</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">90</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">En ole vielä valmistunut</labl>
+        <catStat>449</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>316</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>244</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>59</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <catStat>172</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <catStat>70</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <catStat>76</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>467</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q68" name="Q68">
+      <labl level="variable">[q68] Jos olet valmistunut ammattiin, millaisen koulutuksen olet saanut?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jos olet valmistunut ammattiin, millaisen koulutuksen olet saanut?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1170</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Oppisopimuskoulutus</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ammattikurssi tms. lyhyt vuoden koulutus</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ammattikoulu</labl>
+        <catStat>266</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ammatillinen oppilaitos</labl>
+        <catStat>704</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Yliopisto tai korkeakoulu</labl>
+        <catStat>132</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>899</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q69" name="Q69">
+      <labl level="variable">[q69] Jos olet parhaillaan koulutuksessa, millaisessa koulutuksessa?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jos olet parhaillaan koulutuksessa, millaisessa koulutuksessa?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">621</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Oppisopimuskoulutus</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ammattikurssi tms. lyhyt vuoden koulutus</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ammattikoulu</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ammatillinen oppilaitos</labl>
+        <catStat>247</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Yliopisto tai korkeakoulu</labl>
+        <catStat>339</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>1448</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q70" name="Q70">
+      <labl level="variable">[q70] Nykyisen ammatin pääala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Nykyisen ammatin pääala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1663</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei ollut koulutuksessa/valm. ammattiin</labl>
+        <catStat>401</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>411</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>243</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>123</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>216</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>156</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>406</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" name="Q71" intrvl="contin" dcml="0" ID="Q71">
+      <labl level="variable">[q71] Ammatin tarkka ala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammatin tarkka ala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="86" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1663</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">70</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei ammattia, ei koulutusta</labl>
+        <catStat>401</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekniikan alaan kuuluva suunnittelu-, johto- ja tutkimustyö</labl>
+        <catStat>68</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työnjohto- ja suoritustyö</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kemian, fysiikan ja biologian alaan kuuluva työ</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Lääketieteellinen ja sairaanhoitotyö</labl>
+        <catStat>99</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Muu terveyden- ja sairaanhoitotyö</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>83</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Taiteellinen, viihteellinen ja kirjallinen työ</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Muu tekn., luonnontiet., yhteiskuntatiet., sos. ja hum. työ</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Yhteiskunnallis-hallinnollinen työ</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen hallinnollinen työ</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Kirjanpito- ja kassanhoitotyö</labl>
+        <catStat>70</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Sihteeri- ja konekirjoitustyö</labl>
+        <catStat>83</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Tietokoneiden käsittelytyö</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Muu tilinpidollinen ja konttoritekninen työ</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Tukku- ja vähittäiskauppiaat</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopapereiden myynti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Kauppaedustustyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>103</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Maa-, metsä- ja puutarhatalouden johtotyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Maatalous- ja puutarhatyö, eläintenhoito</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Syväkairaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>28</catValu>
+        <labl level="category">Rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kansi- ja konemiehistö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Lentotyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Veturin- ja moottorivaununkuljetustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>35</catValu>
+        <labl level="category">Liikennepalvelutyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <labl level="category">Liikenteen johto ja työnjohto</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>37</catValu>
+        <labl level="category">Posti-, lennätin-, puhelin- ja radioliikennetyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>38</catValu>
+        <labl level="category">Posti- ja lähettityö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Leikkaus-, ompelu- ja verhoilutyö ym.</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Rautatehdas-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>45</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry>
+        <catValu>46</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>47</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <labl level="category">Maalaus- ja lakkaustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Rakennusalan muut työt</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Elintarviketyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Kemianprosessityö, massa-, paperi- ja kartonkityö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tupakkateollisuustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Pakkaus- ja paketoimistyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Työkoneiden ja kiinteiden moottorien käyttö ja hoito</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>58</catValu>
+        <labl level="category">Ahtaus-, kuormaus- ja varastotyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Vartiointi- ja suojelutehtävät</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Koti- ja suurtaloustyö</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Hygienia- ja kauneudenhoitotyö</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>65</catValu>
+        <labl level="category">Pesu- ja silitystyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <labl level="category">Urheilu</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>67</catValu>
+        <labl level="category">Valokuvaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>68</catValu>
+        <labl level="category">Matkustajien palvelutyö</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>69</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ammatti tuntematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Kotityö + hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Kotityö + opetusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Kotityö + kaupallisen alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Kotityö + taiteellisen ym. alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Kotityö + tekstiilityöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Kotityö + elintarviketeol. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Kotityö + hallinnollinen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Kotityö + työkoneiden käyttöön&amp;hoitoon liit. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Kotityö + liikenteen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Kotityö + hygienian ja kaun.hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Kotityö + kemian, biologian jne. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kotityö + rakennusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Kotityö + tarjoilutyöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>406</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokituksen numerointia on muutettu ja luokkia on lisätty (luokat 72-86).</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q72" name="Q72">
+      <labl level="variable">[q72] Nykyisen ammatin pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Nykyisen ammatin pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1262</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, lainopillinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>239</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Terveydenhuolto, sosiaalialan työ</labl>
+        <catStat>174</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinto- ja toimistotyö</labl>
+        <catStat>247</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>123</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>52</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>48</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>151</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>44</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>160</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Luokittelematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>807</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1986. Työvoimaministeriö. Helsinki : Valtion painatuskeskus, 1986.</notes>
+    </var>
+    <var files="F1" name="Q73" intrvl="contin" dcml="0" ID="Q73">
+      <labl level="variable">[q73] Ammatin tarkka pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammatin tarkka pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="99" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1260</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">99</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työ</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kemian ja fysiikan alaan kuuluva työ</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Biologian alaan kuuluva työ</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>82</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Toimittajan työ ja joukkoviestintä</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Taide- ja viihdealan työ</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Kirjasto-, arkisto- ja museoalan työ sekä informaatikot</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muu luonnontiet., yhteiskuntatiet. ja humanistinen työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Terveyden- ja sairaanhoitotyö</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Terveydenhuollon kuntouttava työ</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Hammashoitoalan työ</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Apteekkialan työ</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Eläinlääkintähuolto, ympäristön- ja terveydensuojelutyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Sosiaalialan työ</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Lasten päivähoidon työ</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Psykologinen työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Harrastus- ja vapaa-ajan toiminnan ohjaus</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Muu pääryhmään 1 kuuluva työ</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Julkisen hallinnon johtotyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen johtotyö</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Henkilöstö- ja työvoima-asiain hoito</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Taloushallinnon suunnittelu- ja tilinpitotyö ym.</labl>
+        <catStat>50</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Sihteeri- ja toimistotyö</labl>
+        <catStat>97</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Atk-alan työ</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Pankki- ja vakuutusalan työ</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Matkailualan työ</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu hallinto- ja toimistotyö</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Mainos- ja markkinointityö</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopap. myynti ja välitys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Ostotyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Kauppaedustus- ja konttorimyyntityö</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tavaroiden myyntityö</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Maatilatalous, eläintenhoito</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Puutarha- ja puistotyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Muu maa- ja metsätaloustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Kansi- ja konemiehistön työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Lentokuljetustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Veturin- ja moottorinvaununkuljetustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Liikenteen johto ja liikennepalvelutyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Posti- ja tietoliikennetyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Postinkantajan työ</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Öljynporaustyö, turpeennosto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Talonrakennustyö</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Maa- ja vesirakennustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Työkoneiden käyttö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ompelutyö ym.</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Teräs-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>60</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Maalaustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Radio-, tv-, elokuva- ja videotekninen työ</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Elintarviketeollisuustyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>83</catValu>
+        <labl level="category">Kemian prosessityö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Massa- ja paperityö</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kumi- ja muovituotetyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>87</catValu>
+        <labl level="category">Kiinteiden koneiden käyttö energiantuotannossa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>88</catValu>
+        <labl level="category">Pakkaus-, varasto- ja ahtaustyö</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>89</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <labl level="category">Vartiointi- ja suojelutyö</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>91</catValu>
+        <labl level="category">Majoitusliike- ja suurtaloustyö</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>92</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>93</catValu>
+        <labl level="category">Kotitaloustyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>94</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>95</catValu>
+        <labl level="category">Hygienia ja kauneudenhoitotyö</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>96</catValu>
+        <labl level="category">Pesula- ja silitystyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>97</catValu>
+        <labl level="category">Ammattimainen urheilu- ja liikuntatyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>98</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>99</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>809</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1986. Työvoimaministeriö. Helsinki : Valtion painatuskeskus, 1986.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q74" name="Q74">
+      <labl level="variable">[q74] Nykyisen ammatin ennakkoluulottomuus (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Nykyisen ammatin ennakkoluulottomuus (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1659</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei ammattia/ei koulutusta</labl>
+        <catStat>397</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Oman sukupuolen ammatti (oman sukup. osuus 91-100%)</labl>
+        <catStat>612</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Oman sukupuolen hallitsema ammatti (oman sukupuolen osuus 61-90 %)</labl>
+        <catStat>385</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (41-60%)</labl>
+        <catStat>124</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Toisen sukupuolen hallitsema ammatti (oman sukupuolen osuus 11-40 %)</labl>
+        <catStat>104</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Toisen sukupuolen ammatti (0-10%)</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>410</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q75" name="Q75">
+      <labl level="variable">[q75] Suoritetun tai nykyisen koulutuksen ennakkoluulottomuus (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Suoritetun tai nykyisen koulutuksen ennakkoluulottomuus (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1654</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei koulutusta</labl>
+        <catStat>84</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Oman sukupuolen ammatti (oman sukup. osuus 91-100%)</labl>
+        <catStat>497</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Oman sukupuolen hallitsema ammatti (oman sukupuolen osuus 61-90 %)</labl>
+        <catStat>612</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (41-60%)</labl>
+        <catStat>270</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Toisen sukupuolen hallitsema ammatti (11-40%)</labl>
+        <catStat>169</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Toisen sukupuolen ammatti (0-10%)</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>415</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT:n tilastot koulutusalojen eriytyneisyydestä vuosilta 1984 ja 1987.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q76" name="Q76">
+      <labl level="variable">[q76] Vastaajan työmarkkinastatus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vastaajan työmarkkinastatus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1664</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Vakituisessa työssä</labl>
+        <catStat>674</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Tilapäisessä työssä</labl>
+        <catStat>260</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Harjoittelemassa</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Työtön</labl>
+        <catStat>136</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En ole työelämässä</labl>
+        <catStat>583</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>405</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q77" name="Q77">
+      <labl level="variable">[q77] Nuoren koulutustoiminnallisuutta kuvaava tyyppi</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Nuoren koulutustoiminnallisuutta kuvaava tyyppi</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="6" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1664</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">6</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Koulutuksen ulkopuolelle jääneet (ei mitään ammatillista koulutusta)</labl>
+        <catStat>88</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Oppisopimusteitse kouluttautunut</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Lyhyt korkeintaan vuoden kestävä koulutus</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ammattiin valmistavassa koulutuksessa (jos koulutuspaikka, mutta on armeijassa)</labl>
+        <catStat>408</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ammattiin valmistunut</labl>
+        <catStat>768</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Ammattiin valmistuneet, uudessa koulutuksessa olevat sekä uuteen valmistuneet</labl>
+        <catStat>378</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>405</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q78" name="Q78">
+      <labl level="variable">[q78] Kuinka pian peruskoulun/lukion päättymisen jälkeen aloitit koulutuksen (aika kuukausina)?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kuinka pian peruskoulun/lukion päättymisen jälkeen aloitit koulutuksen (aika kuukausina)?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="84" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1310</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">84</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Välittömästi</labl>
+        <catStat>595</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>254</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>56</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>187</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>48</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>759</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q79" intrvl="contin" dcml="0" ID="Q79">
+      <labl level="variable">[q79] Kuinka kauan peruskoulun/lukion päättymisen jälkeen ollut koulutuksessa (aika kuukausina)?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kuinka kauan peruskoulun/lukion päättymisen jälkeen ollut koulutuksessa (aika kuukausina)?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="90" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1363</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">90</sumStat>
+      <sumStat type="mean">38.19</sumStat>
+      <sumStat type="stdev">18.7104</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>230</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>168</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>203</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>167</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <catStat>112</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>91</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <catStat>59</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>706</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q80" intrvl="contin" dcml="0" ID="Q80">
+      <labl level="variable">[q80] Työjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="90" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1351</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">90</sumStat>
+      <sumStat type="mean">28.9282</sumStat>
+      <sumStat type="stdev">19.9453</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>155</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>99</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>150</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>129</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>130</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>138</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>110</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>118</catStat>
+      </catgry>
+      <catgry>
+        <catValu>46</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <catStat>87</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>125</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>718</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q81" intrvl="contin" dcml="0" ID="Q81">
+      <labl level="variable">[q81] Koulutusta vastaavien työjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutusta vastaavien työjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="90" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1349</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">90</sumStat>
+      <sumStat type="mean">16.0563</sumStat>
+      <sumStat type="stdev">17.7696</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>504</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>141</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>117</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>141</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>93</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>113</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>61</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>59</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>720</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q82" intrvl="contin" dcml="0" ID="Q82">
+      <labl level="variable">[q82] Koulutusta vastaamattomien työjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutusta vastaamattomien työjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="90" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1346</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">90</sumStat>
+      <sumStat type="mean">12.9316</sumStat>
+      <sumStat type="stdev">15.6192</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>507</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>166</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>250</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>112</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>101</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>723</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q83" intrvl="contin" dcml="0" ID="Q83">
+      <labl level="variable">[q83] Työttömyys- ja lomautusjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työttömyys- ja lomautusjaksojen kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="60" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1340</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">60</sumStat>
+      <sumStat type="mean">1.91642</sumStat>
+      <sumStat type="stdev">4.95526</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>1081</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>165</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>729</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q84" intrvl="contin" dcml="0" ID="Q84">
+      <labl level="variable">[q84] Kotitaloustyön kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kotitaloustyön kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="54" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1348</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">54</sumStat>
+      <sumStat type="mean">0.347181</sumStat>
+      <sumStat type="stdev">2.60283</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>1306</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>721</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q85" intrvl="contin" dcml="0" ID="Q85">
+      <labl level="variable">[q85] Varusmiespalvelun kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Varusmiespalvelun kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="18" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1359</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">18</sumStat>
+      <sumStat type="mean">4.08315</sumStat>
+      <sumStat type="stdev">5.68384</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>879</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>410</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>710</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" name="Q86" intrvl="contin" dcml="0" ID="Q86">
+      <labl level="variable">[q86] Äitiys-/sairauslomien tai muun toiminnan kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Äitiys-/sairauslomien tai muun toiminnan kokonaisaika kuukausina seurantavuosien 1984-1991 välisenä aikana</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="54" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1356</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">54</sumStat>
+      <sumStat type="mean">2.05752</sumStat>
+      <sumStat type="stdev">6.04091</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <catStat>1163</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <catStat>61</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <catStat>60</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>713</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q87" name="Q87">
+      <labl level="variable">[q87] Pääasiallinen toiminta vuoden 1988 alussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1988 alku</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1635</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>75</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>61</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>670</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>240</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>322</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>183</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>48</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>434</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q88" name="Q88">
+      <labl level="variable">[q88] Pääasiallinen toiminta vuoden 1988 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1988 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1633</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>722</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>286</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>239</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>250</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>39</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>436</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q89" name="Q89">
+      <labl level="variable">[q89] Pääasiallinen toiminta vuoden 1989 alussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1989 alku</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1633</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>738</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>332</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>278</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>164</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>436</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q90" name="Q90">
+      <labl level="variable">[q90] Pääasiallinen toiminta vuoden 1989 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1989 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1633</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>791</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>445</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>251</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>44</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>436</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q91" name="Q91">
+      <labl level="variable">[q91] Pääasiallinen toiminta vuoden 1990 alussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1990 alku</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1625</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>763</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>494</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>249</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>444</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q92" name="Q92">
+      <labl level="variable">[q92] Pääasiallinen toiminta vuoden 1990 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1990 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1623</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>663</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>585</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>230</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>446</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q93" name="Q93">
+      <labl level="variable">[q93] Pääasiallinen toiminta vuoden 1991 alussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1991 alku</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1625</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>635</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>601</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>209</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>92</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>444</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q94" name="Q94">
+      <labl level="variable">[q94] Pääasiallinen toiminta vuoden 1991 lopussa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>1991 loppu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1642</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Olin 10. luokalla</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Olin lukiossa</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Olin harjoittelemassa</labl>
+        <catStat>563</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Olin koulutuksessa</labl>
+        <catStat>626</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Olin koulutustani vastaavassa ansiotyössä</labl>
+        <catStat>192</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Olin ansiotyössä, joka ei vastannut koulutustani</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Tein kotitaloustöitä</labl>
+        <catStat>118</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Olin työtön tai lomautettu</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Olin varusmiespalveluksessa</labl>
+        <catStat>113</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Tein jotain muuta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>427</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q95" name="Q95">
+      <labl level="variable">[q95] Tyytyväisyys elämän eri alueisiin: Koulutus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1644</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>99</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>251</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>788</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>473</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>425</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q96" name="Q96">
+      <labl level="variable">[q96] Tyytyväisyys elämän eri alueisiin: Työelämä/ammatti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työelämä/ammatti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1475</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>60</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>208</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>640</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>445</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>594</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q97" name="Q97">
+      <labl level="variable">[q97] Tyytyväisyys elämän eri alueisiin: Perhe-elämä/koti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Perhe-elämä/koti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1610</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>147</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>633</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>765</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>459</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q98" name="Q98">
+      <labl level="variable">[q98] Tyytyväisyys elämän eri alueisiin: Vapaa-aika/harrasteet</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vapaa-aika/harrastukset</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1632</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>105</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>235</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>752</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>527</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>437</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q99" name="Q99">
+      <labl level="variable">[q99] Tyytyväisyys elämän eri alueisiin: Ihmissuhteet</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ihmissuhteet</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1634</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>140</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>727</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>705</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>435</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q100" name="Q100">
+      <labl level="variable">[q100] Tyytyväisyys elämän eri alueisiin: Elämä kokonaisuutena</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Elämä kokonaisuutena</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1648</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin tyytymätön</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko tyytymätön</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Siltä väliltä</labl>
+        <catStat>137</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Melko tyytyväinen</labl>
+        <catStat>919</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Hyvin tyytyväinen</labl>
+        <catStat>554</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>421</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q101" name="Q101">
+      <labl level="variable">[q101] Koulutusura</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutusura</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1662</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei mitään koulutusta (vain valmistava, ei valmistunut, ei ammattia)</labl>
+        <catStat>94</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Parhaillaan koulutuksessa (ensimmäisessä)</labl>
+        <catStat>393</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Yksi ammatillinen koulutus</labl>
+        <catStat>754</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Kaksi tai useampi saman alan koulutus (myös valmistava/parhaillaan koulutuksessa)</labl>
+        <catStat>257</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">2 tai useampi eri alan koulutus</labl>
+        <catStat>164</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>407</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q102" name="Q102">
+      <labl level="variable">[q102] Työura</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työura</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="6" min="1"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1617</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">6</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei ammattia, koulussa olevat tai ei työelämässä koulutuksen välillä olleet</labl>
+        <catStat>462</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Valmistumisen jälkeen jatkuvasti koulutustaan vastaavassa työssä, ei työttömyyttä, vakaa työura</labl>
+        <catStat>712</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Sijoittuneet koulutustaan vastaavaan työhön, työttömyyttä ja/tai toisen alan töitä</labl>
+        <catStat>146</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Eivät sijoittuneet koulutustaan vastaavaan työhön, ei työttömyyttä, myös ilman ammatillista koulutusta</labl>
+        <catStat>221</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Eivät sijoittuneet koulutustaan vastaavaan työhön, työttömyyttä</labl>
+        <catStat>59</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Ei koulutusta, työttömyyttä</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>452</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q103" name="Q103">
+      <labl level="variable">[q103] Työelämään siirtymisen mallit</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työelämään siirtymisen mallit</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="6" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1606</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">6</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Koulutuksessa</labl>
+        <catStat>484</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Putkimainen siirtymä (yksi/kaksi saman alan koulutustapahtumaa; koulutuksen jälkeen oman alan töihin)</labl>
+        <catStat>631</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Suppilomainen siirtymä (useamman alan koulutusta; suhteellisen nopea siirtyminen oman alan töihin)</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">'Työn etsijät' (keskiasteen tutkinto; työtehtävien hajoaminen monelle alalle)</labl>
+        <catStat>254</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">'Alansa etsijät' (useita eri alojen koulutustapahtumia; hajautuva työhistoria)</labl>
+        <catStat>100</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">'Ajelehtijat' (ei koulutusta, valmistava kurssi, työttömyyskoulutus; lyhyet työjaksot)</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Työelämään ilman koulutusta suoraan peruskoulusta siirtyneet, vakaa työhistoria</labl>
+        <catStat>68</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>463</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+    </var>
+    <var files="F1" dcml="0" ID="Q104" name="Q104">
+      <labl level="variable">[q104] Koulutuksen pääala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutuksen pääala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1659</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei ollut koulutuksessa/valm. ammattiin</labl>
+        <catStat>93</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, yhteiskuntatieteellinen, humanistinen ja taiteellinen työ</labl>
+        <catStat>783</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinnollinen, tilinpidollinen ja konttorityö</labl>
+        <catStat>256</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kaivos-, syväkairaus- ja rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ ja koneenhoito</labl>
+        <catStat>191</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>135</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muualla luokittamaton</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>410</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokitukseen on lisätty luokka 10: kotityö.</notes>
+    </var>
+    <var files="F1" name="Q105" intrvl="contin" dcml="0" ID="Q105">
+      <labl level="variable">[q105] Koulutuksen tarkka ala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutuksen tarkka ala vuoden 1980 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="86" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1659</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">70</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei ammattia, ei koulutusta</labl>
+        <catStat>94</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tekniikan alaan kuuluva suunnittelu-, johto- ja tutkimustyö</labl>
+        <catStat>169</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työnjohto- ja suoritustyö</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kemian, fysiikan ja biologian alaan kuuluva työ</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Lääketieteellinen ja sairaanhoitotyö</labl>
+        <catStat>148</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Muu terveyden- ja sairaanhoitotyö</labl>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>114</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Taiteellinen, viihteellinen ja kirjallinen työ</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Muu tekn., luonnontiet., yhteiskuntatiet., sos. ja hum. työ</labl>
+        <catStat>133</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Yhteiskunnallis-hallinnollinen työ</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen hallinnollinen työ</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Kirjanpito- ja kassanhoitotyö</labl>
+        <catStat>86</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Sihteeri- ja konekirjoitustyö</labl>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Tietokoneiden käsittelytyö</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Muu tilinpidollinen ja konttoritekninen työ</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Tukku- ja vähittäiskauppiaat</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopapereiden myynti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Kauppaedustustyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>114</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Maa-, metsä- ja puutarhatalouden johtotyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Maatalous- ja puutarhatyö, eläintenhoito</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Syväkairaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>28</catValu>
+        <labl level="category">Rikastustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kansi- ja konemiehistö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Lentotyö</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Veturin- ja moottorivaununkuljetustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>35</catValu>
+        <labl level="category">Liikennepalvelutyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>36</catValu>
+        <labl level="category">Liikenteen johto ja työnjohto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>37</catValu>
+        <labl level="category">Posti-, lennätin-, puhelin- ja radioliikennetyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>38</catValu>
+        <labl level="category">Posti- ja lähettityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Leikkaus-, ompelu- ja verhoilutyö ym.</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Rautatehdas-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>45</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>84</catStat>
+      </catgry>
+      <catgry>
+        <catValu>46</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>47</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>48</catValu>
+        <labl level="category">Maalaus- ja lakkaustyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Rakennusalan muut työt</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Elintarviketyö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Kemianprosessityö, massa-, paperi- ja kartonkityö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tupakkateollisuustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Pakkaus- ja paketoimistyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Työkoneiden ja kiinteiden moottorien käyttö ja hoito</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>58</catValu>
+        <labl level="category">Ahtaus-, kuormaus- ja varastotyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Vartiointi- ja suojelutehtävät</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Koti- ja suurtaloustyö</labl>
+        <catStat>63</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Hygienia- ja kauneudenhoitotyö</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>65</catValu>
+        <labl level="category">Pesu- ja silitystyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>66</catValu>
+        <labl level="category">Urheilu</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>67</catValu>
+        <labl level="category">Valokuvaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>68</catValu>
+        <labl level="category">Matkustajien palvelutyö</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>69</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ammatti tuntematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Kotityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Kotityö + hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Kotityö + opetusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Kotityö + kaupallisen alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Kotityö + taiteellisen ym. alan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Kotityö + tekstiilityöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Kotityö + elintarviketeol. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Kotityö + hallinnollinen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Kotityö + työkoneiden käyttöön&amp;hoitoon liit. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Kotityö + liikenteen ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Kotityö + hygienian ja kaun.hoitoalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Kotityö + kemian, biologian jne. ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kotityö + rakennusalan ammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Kotityö + tarjoilutyöammatti</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>410</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1980, Käsikirjoja N:o 14. Helsinki : Tilastokeskus, 1981. Luokituksen numerointia on muutettu ja luokkia on lisätty (luokat 72-86).</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q106" name="Q106">
+      <labl level="variable">[q106] Koulutuksen pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutuksen pääala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1566</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">9</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Tekninen, luonnontieteellinen, lainopillinen, humanistinen ja taiteellinen</labl>
+        <catStat>528</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Terveydenhuolto, sosiaalialan työ</labl>
+        <catStat>253</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hallinto- ja toimistotyö</labl>
+        <catStat>262</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Kaupallinen työ</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Maa- ja metsätaloustyö, kalastusala</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Kuljetus- ja liikennetyö</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>160</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Teollinen työ, koneenhoito, kaivos- ja louhintatyö sekä rakennustyö</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Palvelutyö</labl>
+        <catStat>140</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Luokittelematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>503</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1986. Työvoimaministeriö. Helsinki : Valtion painatuskeskus, 1986.</notes>
+    </var>
+    <var files="F1" name="Q107" intrvl="contin" dcml="0" ID="Q107">
+      <labl level="variable">[q107] Koulutuksen tarkka ala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutuksen tarkka ala vuoden 1986 ammattiluokituksen mukaan (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="99" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1566</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">99</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Tekniikan alaan kuuluva työ</labl>
+        <catStat>210</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kemian ja fysiikan alaan kuuluva työ</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Biologian alaan kuuluva työ</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Opetusalaan kuuluva työ</labl>
+        <catStat>112</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Uskonnon alaan kuuluva työ</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Lainopillinen työ</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Toimittajan työ ja joukkoviestintä</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Taide- ja viihdealan työ</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Kirjasto-, arkisto- ja museoalan työ sekä informaatikot</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Muu luonnontiet., yhteiskuntatiet. ja humanistinen työ</labl>
+        <catStat>83</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Terveyden- ja sairaanhoitotyö</labl>
+        <catStat>139</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Terveydenhuollon kuntouttava työ</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Hammashoitoalan työ</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Apteekkialan työ</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Eläinlääkintähuolto, ympäristön- ja terveydensuojelutyö</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Sosiaalialan työ</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Lasten päivähoidon työ</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Psykologinen työ</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Harrastus- ja vapaa-ajan toiminnan ohjaus</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Muu pääryhmään 1 kuuluva työ</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Julkisen hallinnon johtotyö</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>21</catValu>
+        <labl level="category">Liikeyritysten ja järjestöjen johtotyö</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>22</catValu>
+        <labl level="category">Henkilöstö- ja työvoima-asiain hoito</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>23</catValu>
+        <labl level="category">Taloushallinnon suunnittelu- ja tilinpitotyö ym.</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry>
+        <catValu>24</catValu>
+        <labl level="category">Sihteeri- ja toimistotyö</labl>
+        <catStat>69</catStat>
+      </catgry>
+      <catgry>
+        <catValu>25</catValu>
+        <labl level="category">Atk-alan työ</labl>
+        <catStat>57</catStat>
+      </catgry>
+      <catgry>
+        <catValu>26</catValu>
+        <labl level="category">Pankki- ja vakuutusalan työ</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>27</catValu>
+        <labl level="category">Matkailualan työ</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>29</catValu>
+        <labl level="category">Muu hallinto- ja toimistotyö</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>30</catValu>
+        <labl level="category">Mainos- ja markkinointityö</labl>
+        <catStat>73</catStat>
+      </catgry>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Kiinteistöjen, palvelusten ja arvopap. myynti ja välitys</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Ostotyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Kauppaedustus- ja konttorimyyntityö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Tavaroiden myyntityö</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Muu kaupallinen työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>40</catValu>
+        <labl level="category">Maatilatalous, eläintenhoito</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Puutarha- ja puistotyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Riistanhoito ja metsästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Kalastus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Metsätyö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Muu maa- ja metsätaloustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Meripäällystötyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Kansi- ja konemiehistön työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Lentokuljetustyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Veturin- ja moottorinvaununkuljetustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Tieliikennetyö</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>55</catValu>
+        <labl level="category">Liikenteen johto ja liikennepalvelutyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>56</catValu>
+        <labl level="category">Posti- ja tietoliikennetyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>57</catValu>
+        <labl level="category">Postinkantajan työ</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Muu kuljetus- ja liikennetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>60</catValu>
+        <labl level="category">Kaivos- ja louhintatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>61</catValu>
+        <labl level="category">Öljynporaustyö, turpeennosto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>62</catValu>
+        <labl level="category">Talonrakennustyö</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>63</catValu>
+        <labl level="category">Maa- ja vesirakennustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>64</catValu>
+        <labl level="category">Työkoneiden käyttö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>70</catValu>
+        <labl level="category">Tekstiilityö</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>71</catValu>
+        <labl level="category">Ompelutyö ym.</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>72</catValu>
+        <labl level="category">Jalkine- ja nahkatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>73</catValu>
+        <labl level="category">Teräs-, metallitehdas-, takomo- ja valimotyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>74</catValu>
+        <labl level="category">Hienomekaaninen työ</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>75</catValu>
+        <labl level="category">Konepaja- ja rakennusmetallityö</labl>
+        <catStat>80</catStat>
+      </catgry>
+      <catgry>
+        <catValu>76</catValu>
+        <labl level="category">Sähkötyö</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>77</catValu>
+        <labl level="category">Puutyö</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>78</catValu>
+        <labl level="category">Maalaustyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>79</catValu>
+        <labl level="category">Radio-, tv-, elokuva- ja videotekninen työ</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>80</catValu>
+        <labl level="category">Graafinen työ</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>81</catValu>
+        <labl level="category">Lasi-, keraaminen ja tiilityö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>82</catValu>
+        <labl level="category">Elintarviketeollisuustyö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>83</catValu>
+        <labl level="category">Kemian prosessityö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>84</catValu>
+        <labl level="category">Massa- ja paperityö</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>85</catValu>
+        <labl level="category">Kumi- ja muovituotetyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>86</catValu>
+        <labl level="category">Muu teollinen työ</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>87</catValu>
+        <labl level="category">Kiinteiden koneiden käyttö energiantuotannossa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>88</catValu>
+        <labl level="category">Pakkaus-, varasto- ja ahtaustyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>89</catValu>
+        <labl level="category">Sekatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>90</catValu>
+        <labl level="category">Vartiointi- ja suojelutyö</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>91</catValu>
+        <labl level="category">Majoitusliike- ja suurtaloustyö</labl>
+        <catStat>67</catStat>
+      </catgry>
+      <catgry>
+        <catValu>92</catValu>
+        <labl level="category">Tarjoilutyö</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>93</catValu>
+        <labl level="category">Kotitaloustyö</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>94</catValu>
+        <labl level="category">Kiinteistönhoito- ja siivoustyö</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>95</catValu>
+        <labl level="category">Hygienia ja kauneudenhoitotyö</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>96</catValu>
+        <labl level="category">Pesula- ja silitystyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>97</catValu>
+        <labl level="category">Ammattimainen urheilu- ja liikuntatyö</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>98</catValu>
+        <labl level="category">Sotilastyö</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>99</catValu>
+        <labl level="category">Muu palvelutyö</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>503</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan ammattiluokitus: Ammattiluokitus 1986. Työvoimaministeriö. Helsinki : Valtion painatuskeskus, 1986.</notes>
+    </var>
+    <var files="F1" dcml="0" ID="Q108" name="Q108">
+      <labl level="variable">[q108] Koulutusammatin ennakkoluulottomuus (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Koulutusammatin ennakkoluulottomuus (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="0"/>
+      </valrng>
+      <TotlResp>Summation of listed categories: 2069</TotlResp>
+      <sumStat type="vald">1577</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">5</sumStat>
+      <catgry>
+        <catValu>0</catValu>
+        <labl level="category">Ei koulutusta</labl>
+        <catStat>92</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Oman sukupuolen ammatti (oman sukup. osuus 91-100%)</labl>
+        <catStat>695</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Oman sukupuolen hallitsema ammatti (oman sukupuolen osuus 61-90 %)</labl>
+        <catStat>398</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Eriytymätön ammatti (41-60%)</labl>
+        <catStat>192</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Toisen sukupuolen hallitsema ammatti (11-40%)</labl>
+        <catStat>149</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Toisen sukupuolen ammatti (0-10%)</labl>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <catStat>492</catStat>
+      </catgry>
+      <varFormat type="numeric" schema="other"/>
+      <notes>Muuttujan luokituksen lähde: SVT = Suomen virallinen tilasto VI C: 106, osa I B. Väestö- ja asuntolaskenta 1980. Ammatti ja elinkeino ; ammatissa toimiva väestö. Helsinki : Tilastokeskus, 1980.</notes>
+    </var>
+  </dataDscr>
+  <otherMat level="study">
+    <labl>Kyselylomakkeet: pdf-tiedostot suomeksi</labl>
+  </otherMat>
+</codeBook>
+"""
