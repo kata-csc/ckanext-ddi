@@ -22,6 +22,7 @@ from ckan.tests.functional.base import FunctionalTestCase
 from ckanext.ddi.harvester import DDIHarvester
 from ckanext.harvest.model import HarvestJob, HarvestSource, HarvestObject,\
                                   setup
+from sqlalchemy.ext.associationproxy import _AssociationDict
 log = logging.getLogger(__file__)
 class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
 
@@ -79,7 +80,7 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(isinstance(json.loads(harvest_obj.content), dict))
         result = json.loads(harvest_obj.content)
-        self.assert_("stdyDscr" in result['codeBook'])
+        self.assert_("stdyDscr" in result['xml']['codeBook'])
         urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.foobar))
         harvest_obj = HarvestObject.get(gathered[0])
         self.assert_(not harv.fetch_stage(harvest_obj))
@@ -103,6 +104,11 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(pkg.name == "Puolueiden ajankohtaistutkimus 1981")
         self.assert_(len(pkg.get_groups()) == 2)
         self.assert_(len(pkg.resources) == 1)
+        self.assert_(len(pkg.get_tags()) == 9)
+        pprint.pprint(pkg.extras)
+        self.assert_(isinstance(pkg.extras, _AssociationDict))
+        self.assert_(len(pkg.extras.items()) > 1)
+        
 
         urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.nr2))
         harvest_obj = HarvestObject.get(gathered[0])

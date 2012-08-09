@@ -11,6 +11,7 @@ import pprint
 import urllib2
 from lxml import etree
 import xmltodict
+import re
 
 from ckan.model import Session, Package, Resource, Group, Member
 from ckan.plugins.core import SingletonPlugin, implements
@@ -63,21 +64,38 @@ class DDIHarvester(SingletonPlugin):
     def fetch_stage(self, harvest_object):
         xml = urllib2.urlopen(harvest_object.content).read()
         try:
-            harvest_object.content = json.dumps(
-                                            xmltodict.parse(
-                                                            etree.tostring(
-                                                                  etree.fromstring(xml).xpath('/codeBook')[0]
-                                                                  )
-                                                            )
+            retdict = {}
+            retdict['xml'] = xmltodict.parse(
+                                                etree.tostring(
+                                                      etree.fromstring(xml).xpath('/codeBook')[0]
+                                                      )
                                                 )
+            retdict['xmlstr'] = etree.tostring(etree.fromstring(xml).xpath('/codeBook')[0])
+            harvest_object.content = json.dumps(retdict)
         except Exception, e:
             print e
             return False
         return True
 
+    def _collect_attribs(self, el):
+        str = ""
+        for k,v in el.attrib.items():
+            str += "(%s,%s)" % (k, v)
+        return str
+
+    def _combine_and_flatten(self, xml_dict):
+        res = {}
+        for els in etree.fromstring(xml_dict).xpath('//*[not(child::*)]'):
+            if not els.tag in res:
+                res[els.tag] = els.text if els.text else self._collect_attribs(els)
+            else:
+                res[els.tag] += " " + els.text if els.text else self._collect_attribs(els)
+        return res
+
     def import_stage(self, harvest_object):
         model.repo.new_revision()
-        code_dict = json.loads(harvest_object.content)
+        xml_dict = json.loads(harvest_object.content)
+        code_dict = xml_dict['xml']
         pkg = Package()
         data_dict = code_dict['codeBook']
         citation = data_dict["stdyDscr"]["citation"]
@@ -104,8 +122,8 @@ class DDIHarvester(SingletonPlugin):
         descr = citation['serStmt']['serInfo']['p'] 
         description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
-        pkg.extras = flatten_dict(dict(citation, **study_info))
-        pkg.url = unicodedata.normalize('NFKD', unicode(title))\
+        pkg.extras = self._combine_and_flatten(xml_dict['xmlstr'])
+        pkg.url = unicodedata.normalize('NFKD', unicode(re.sub('\W+', '', title)))\
                                   .encode('ASCII', 'ignore')\
                                   .lower().replace(' ','_')[:30]
         pkg.save()
@@ -122,4 +140,5 @@ class DDIHarvester(SingletonPlugin):
             if '@URI' in code_dict['codeBook']['docDscr']['citation']['holdings'] \
             else ''
         pkg.add_resource(res_url, description=''.join(description_arr), name=title)
+        log.debug("Saved pkg %s" % (pkg.url))
         return True
