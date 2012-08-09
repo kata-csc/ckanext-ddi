@@ -85,7 +85,7 @@ class DDIHarvester(SingletonPlugin):
 
     def _combine_and_flatten(self, xml_dict):
         res = {}
-        for els in etree.fromstring(xml_dict).xpath('//*[not(child::*)]'):
+        for els in etree.fromstring(xml_dict).xpath('//stdyDscr//*[not(child::*)]|//docDscr//*[not(child::*)]'):
             if not els.tag in res:
                 res[els.tag] = els.text if els.text else self._collect_attribs(els)
             else:
