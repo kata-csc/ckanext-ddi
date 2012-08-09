@@ -105,7 +105,6 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(len(pkg.get_groups()) == 2)
         self.assert_(len(pkg.resources) == 1)
         self.assert_(len(pkg.get_tags()) == 9)
-        pprint.pprint(pkg.extras)
         self.assert_(isinstance(pkg.extras, _AssociationDict))
         self.assert_(len(pkg.extras.items()) > 1)
         

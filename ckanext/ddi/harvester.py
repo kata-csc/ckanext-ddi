@@ -73,7 +73,6 @@ class DDIHarvester(SingletonPlugin):
             retdict['xmlstr'] = etree.tostring(etree.fromstring(xml).xpath('/codeBook')[0])
             harvest_object.content = json.dumps(retdict)
         except Exception, e:
-            print e
             return False
         return True
 
