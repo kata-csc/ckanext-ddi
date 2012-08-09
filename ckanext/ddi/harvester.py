@@ -89,12 +89,18 @@ class DDIHarvester(SingletonPlugin):
         author = author if not isinstance(author, dict) else author['#text']
         pkg.author = author
         pkg.author_email = author
-        keywords = study_info['subject']['keyword'] if isinstance(study_info['subject']['keyword'], list) else [study_info['subject']['keyword']]
+
+        keywords = study_info['subject']['keyword'] \
+            if isinstance(study_info['subject']['keyword'], list) else \
+            [study_info['subject']['keyword']]
         for kw in keywords:
             pkg.add_tag_by_name(kw['#text'] if '#text' in kw else kw)
-        keywords = study_info['subject']['topcClas'] if isinstance(study_info['subject']['topcClas'], list) else [study_info['subject']['topcClas']]
+        keywords = study_info['subject']['topcClas'] \
+            if isinstance(study_info['subject']['topcClas'], list) else \
+            [study_info['subject']['topcClas']]
         for kw in keywords:
             pkg.add_tag_by_name(kw['#text'] if '#text' in kw else kw)
+
         descr = citation['serStmt']['serInfo']['p'] 
         description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
@@ -103,6 +109,7 @@ class DDIHarvester(SingletonPlugin):
                                   .encode('ASCII', 'ignore')\
                                   .lower().replace(' ','_')[:30]
         pkg.save()
+
         producer = producer if isinstance(producer,list) else [producer] 
         for producer in producer:
             prod_text = producer if not isinstance(producer, dict) else producer['#text']
@@ -111,6 +118,8 @@ class DDIHarvester(SingletonPlugin):
                 group = Group(name=prod_text, description=prod_text)
             group.add_package_by_name(pkg.name)
             group.save()
-        res_url = code_dict['codeBook']['docDscr']['citation']['holdings']['@URI'] if '@URI' in code_dict['codeBook']['docDscr']['citation']['holdings'] else ''
+        res_url = code_dict['codeBook']['docDscr']['citation']['holdings']['@URI'] \
+            if '@URI' in code_dict['codeBook']['docDscr']['citation']['holdings'] \
+            else ''
         pkg.add_resource(res_url, description=''.join(description_arr), name=title)
         return True

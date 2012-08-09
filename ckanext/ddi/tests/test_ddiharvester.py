@@ -95,11 +95,18 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         harvest_obj = HarvestObject.get(gathered[0])
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(isinstance(json.loads(harvest_obj.content), dict))
-        harv.import_stage(harvest_obj)
+        self.assert_(harv.import_stage(harvest_obj))
         self.assert_(len(Session.query(Package).all()) == 1)
+
+        # Lets see if the package is ok, according to test data
+        pkg = Session.query(Package).all()[0]
+        self.assert_(pkg.name == "Puolueiden ajankohtaistutkimus 1981")
+        self.assert_(len(pkg.get_groups()) == 2)
+        self.assert_(len(pkg.resources) == 1)
+
         urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.nr2))
         harvest_obj = HarvestObject.get(gathered[0])
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(isinstance(json.loads(harvest_obj.content), dict))
-        harv.import_stage(harvest_obj)
+        self.assert_(harv.import_stage(harvest_obj))
         self.assert_(len(Session.query(Package).all()) == 2)
