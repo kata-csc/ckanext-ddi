@@ -13,10 +13,11 @@ from lxml import etree
 import xmltodict
 import re
 
-from ckan.model import Session, Package, Resource, Group, Member
+from ckan.model import Package, Group, User
 from ckan.plugins.core import SingletonPlugin, implements
 from ckan.lib.navl.dictization_functions import flatten_dict
 from ckan import model
+from ckan.model.authz import setup_default_user_roles
 
 from ckanext.harvest.interfaces import IHarvester
 from ckanext.harvest.model import HarvestObject, HarvestJob
@@ -140,4 +141,5 @@ class DDIHarvester(SingletonPlugin):
             else ''
         pkg.add_resource(res_url, description=''.join(description_arr), name=title)
         log.debug("Saved pkg %s" % (pkg.url))
+        setup_default_user_roles(pkg)
         return True

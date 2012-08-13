@@ -15,9 +15,13 @@ import testdata
 
 from lxml import etree
 
-from ckan.model import Session, Package, Resource, Group
-
+from ckan.model import Session, Package, User
+from ckan.lib.helpers import url_for
 from ckan.tests.functional.base import FunctionalTestCase
+from ckan.tests import CreateTestData
+from ckan.logic.auth.get import package_show
+from ckan import model
+
 
 from ckanext.ddi.harvester import DDIHarvester
 from ckanext.harvest.model import HarvestJob, HarvestSource, HarvestObject,\
@@ -28,6 +32,20 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
 
     @classmethod
     def setup_class(self):
+        username = u'testlogin2'
+        password = u'letmein'
+        CreateTestData.create_user(name=username,
+                                   password=password)
+        user = model.User.by_name(username)
+
+        # do the login
+        offset = url_for(controller='user', action='login')
+        res = self.app.get(offset)
+        fv = res.forms['login']
+        fv['login'] = str(username)
+        fv['password'] = str(password)
+        fv['remember'] = True
+        res = fv.submit()
         setup()
     @classmethod
     def teardown_class(self):
@@ -115,3 +133,12 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(isinstance(json.loads(harvest_obj.content), dict))
         self.assert_(harv.import_stage(harvest_obj))
         self.assert_(len(Session.query(Package).all()) == 2)
+
+        # Test user access
+        user = User.get('testlogin2')
+        context = {'user': user.name, 'model': model}
+        data_dict = {'id': pkg.id}
+        auth_dict = package_show(context,data_dict)
+        log.debug(auth_dict)
+        self.assert_(auth_dict['success'])
+
