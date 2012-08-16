@@ -136,6 +136,7 @@ class DDIHarvester(SingletonPlugin):
                 group = Group(name=prod_text, description=prod_text)
             group.add_package_by_name(pkg.name)
             group.save()
+            setup_default_user_roles(group)
         res_url = code_dict['codeBook']['docDscr']['citation']['holdings']['@URI'] \
             if '@URI' in code_dict['codeBook']['docDscr']['citation']['holdings'] \
             else ''
