@@ -22,7 +22,8 @@ setup(
 	install_requires=[
 		# -*- Extra requirements: -*-
 		'lxml',
-		'xmltodict'
+		'xmltodict',
+		'ckanclient',
 	],
 	tests_require=[
 				'nose',
