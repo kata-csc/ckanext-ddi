@@ -122,6 +122,7 @@ class DDIHarvester(SingletonPlugin):
         description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
         pkg.extras = self._combine_and_flatten(xml_dict['xmlstr'])
+        pkg.title = title[:100]
         pkg.name = unicodedata.normalize('NFKD', unicode(re.sub('\W+', '', title)))\
                                   .encode('ASCII', 'ignore')\
                                   .lower().replace(' ','_')[:30]
