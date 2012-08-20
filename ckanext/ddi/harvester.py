@@ -87,7 +87,7 @@ class DDIHarvester(SingletonPlugin):
         res = {}
         for els in etree.fromstring(xml_dict).xpath('//stdyDscr//*[not(child::*)]|//docDscr//*[not(child::*)]'):
             if els.tag == 'p':
-                els.tag = els.parent.tag
+                els.tag = els.getparent().tag
             if not els.tag in res:
                 res[els.tag] = els.text if els.text else self._collect_attribs(els)
             else:
