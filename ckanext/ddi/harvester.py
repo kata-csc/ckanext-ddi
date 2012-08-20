@@ -101,7 +101,6 @@ class DDIHarvester(SingletonPlugin):
         citation = data_dict["stdyDscr"]["citation"]
         study_info = data_dict["stdyDscr"]["stdyInfo"]
         title = citation['titlStmt']['titl']
-        pkg.name = title[:100]
         producer = citation['prodStmt']['producer']
         author = producer[0] if isinstance(producer,list) else producer
         author = author if not isinstance(author, dict) else author['#text']
@@ -123,7 +122,7 @@ class DDIHarvester(SingletonPlugin):
         description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
         pkg.extras = self._combine_and_flatten(xml_dict['xmlstr'])
-        pkg.url = unicodedata.normalize('NFKD', unicode(re.sub('\W+', '', title)))\
+        pkg.title = unicodedata.normalize('NFKD', unicode(re.sub('\W+', '', title)))\
                                   .encode('ASCII', 'ignore')\
                                   .lower().replace(' ','_')[:30]
         pkg.save()
