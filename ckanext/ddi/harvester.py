@@ -20,17 +20,16 @@ from ckan import model
 from ckan.model.authz import setup_default_user_roles
 
 from ckanext.harvest.interfaces import IHarvester
+from ckanext.harvest.harvesters.base import HarvesterBase, munge_tag
 from ckanext.harvest.model import HarvestObject, HarvestJob
 
 log = logging.getLogger(__name__)
 
 
-class DDIHarvester(SingletonPlugin):
+class DDIHarvester(HarvesterBase):
     '''
     DDI Harvester for ckanext-harvester.
     '''
-    implements(IHarvester)
-
     config = None
 
     def _set_config(self, config_str):
@@ -113,21 +112,19 @@ class DDIHarvester(SingletonPlugin):
             if isinstance(study_info['subject']['keyword'], list) else \
             [study_info['subject']['keyword']]
         for kw in keywords:
-            pkg.add_tag_by_name(kw['#text'] if '#text' in kw else kw)
+            pkg.add_tag_by_name(munge_tag(kw['#text']) if '#text' in kw else munge_tag(kw))
         keywords = study_info['subject']['topcClas'] \
             if isinstance(study_info['subject']['topcClas'], list) else \
             [study_info['subject']['topcClas']]
         for kw in keywords:
-            pkg.add_tag_by_name(kw['#text'] if '#text' in kw else kw)
+            pkg.add_tag_by_name(munge_tag(kw['#text']) if '#text' in kw else munge_tag(kw))
 
         descr = citation['serStmt']['serInfo']['p'] 
         description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
         pkg.extras = self._combine_and_flatten(xml_dict['xmlstr'])
         pkg.title = title[:100]
-        pkg.name = unicodedata.normalize('NFKD', unicode(re.sub('\W+', '', title)))\
-                                  .encode('ASCII', 'ignore')\
-                                  .lower().replace(' ','_')[:30]
+        pkg.name = self._gen_new_name(self._check_name(title))
         pkg.save()
 
         producer = producer if isinstance(producer,list) else [producer] 

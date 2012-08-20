@@ -19,7 +19,7 @@ from ckan.model import Session, Package, User
 from ckan.lib.helpers import url_for
 from ckan.tests.functional.base import FunctionalTestCase
 from ckan.tests import CreateTestData
-from ckan.logic.auth.get import package_show
+from ckan.logic.auth.get import package_show, group_show
 from ckan import model
 
 
@@ -36,8 +36,6 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         password = u'letmein'
         CreateTestData.create_user(name=username,
                                    password=password)
-        user = model.User.by_name(username)
-
         # do the login
         offset = url_for(controller='user', action='login')
         res = self.app.get(offset)
@@ -119,13 +117,12 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
 
         # Lets see if the package is ok, according to test data
         pkg = Session.query(Package).all()[0]
-        self.assert_(pkg.name == "Puolueiden ajankohtaistutkimus 1981")
+        self.assert_(pkg.title == "Puolueiden ajankohtaistutkimus 1981")
         self.assert_(len(pkg.get_groups()) == 2)
         self.assert_(len(pkg.resources) == 1)
         self.assert_(len(pkg.get_tags()) == 9)
         self.assert_(isinstance(pkg.extras, _AssociationDict))
         self.assert_(len(pkg.extras.items()) > 1)
-        
 
         urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.nr2))
         harvest_obj = HarvestObject.get(gathered[0])
@@ -136,9 +133,15 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
 
         # Test user access
         user = User.get('testlogin2')
+        grp = pkg.get_groups()[0]
         context = {'user': user.name, 'model': model}
         data_dict = {'id': pkg.id}
         auth_dict = package_show(context,data_dict)
+        log.debug(auth_dict)
+        self.assert_(auth_dict['success'])
+        data_dict = {'id': grp.id}
+        context = {'user': '', 'model': model}
+        auth_dict = group_show(context, data_dict)
         log.debug(auth_dict)
         self.assert_(auth_dict['success'])
 
