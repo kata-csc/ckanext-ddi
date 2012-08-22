@@ -71,6 +71,7 @@ class DDIHarvester(HarvesterBase):
                                                       )
                                                 )
             retdict['xmlstr'] = etree.tostring(etree.fromstring(xml).xpath('/codeBook')[0])
+            retdict['source'] = harvest_object.content
             harvest_object.content = json.dumps(retdict)
         except Exception, e:
             return False
@@ -125,6 +126,7 @@ class DDIHarvester(HarvesterBase):
         pkg.extras = self._combine_and_flatten(xml_dict['xmlstr'])
         pkg.title = title[:100]
         pkg.name = self._gen_new_name(self._check_name(title))
+        pkg.url = xml_dict['source']
         pkg.save()
 
         producer = producer if isinstance(producer,list) else [producer] 
