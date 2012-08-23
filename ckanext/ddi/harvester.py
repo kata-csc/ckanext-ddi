@@ -1,3 +1,4 @@
+# coding: utf-8
 '''
 Harvester for DDI2 formats
 '''
@@ -35,8 +36,6 @@ class DDIHarvester(HarvesterBase):
     def _set_config(self, config_str):
         if config_str:
             self.config = json.loads(config_str)
-        else:
-            self.config = {}
 
     def info(self):
         return {
@@ -85,13 +84,29 @@ class DDIHarvester(HarvesterBase):
 
     def _combine_and_flatten(self, xml_dict):
         res = {}
-        for els in etree.fromstring(xml_dict).xpath('//stdyDscr//*[not(child::*)]|//docDscr//*[not(child::*)]'):
+        tree = etree.fromstring(xml_dict).xpath('//stdyDscr//*[not(child::*)]|//docDscr//*[not(child::*)]')
+        for els in tree:
             if els.tag == 'p':
                 els.tag = els.getparent().tag
             if not els.tag in res:
                 res[els.tag] = els.text if els.text else self._collect_attribs(els)
             else:
                 res[els.tag] += " " + els.text if els.text else self._collect_attribs(els)
+        return res
+
+    def _collect_vars(self, xml_dict):
+        res = {}
+        tree = etree.fromstring(xml_dict).xpath('//dataDscr//var')
+        log.debug("Foo.")
+        for var in tree:
+            stats = var.xpath(".//sumStat[(@type='min' or @type='max' or @type='stdev' or @type='mean') and ..//sumStat[@type='stdev']]")
+            question = var.xpath('./qstn/qstnLit')[0]
+            for stat in stats:
+                statstr = "%s:%s" % (stat.attrib['type'], stat.text)
+                if not var.attrib['ID'] in res:
+                    res[var.attrib['ID']] = "%s %s" % (question.text, statstr)
+                else:
+                    res[var.attrib['ID']] += " " + statstr
         return res
 
     def import_stage(self, harvest_object):
@@ -123,7 +138,7 @@ class DDIHarvester(HarvesterBase):
         descr = citation['serStmt']['serInfo']['p'] 
         description_arr = descr if isinstance(descr, list) else [descr] 
         pkg.notes = '<br />'.join(description_arr)
-        pkg.extras = self._combine_and_flatten(xml_dict['xmlstr'])
+        pkg.extras = dict(self._combine_and_flatten(xml_dict['xmlstr']),**self._collect_vars(xml_dict['xmlstr']))
         pkg.title = title[:100]
         pkg.name = self._gen_new_name(self._check_name(title))
         pkg.url = xml_dict['source']
