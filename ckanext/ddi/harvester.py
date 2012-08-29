@@ -50,19 +50,23 @@ class DDIHarvester(HarvesterBase):
     def gather_stage(self, harvest_job):
         self._set_config(self.config)
         gather_url = harvest_job.source.url
-        urls = urllib2.urlopen(gather_url)
-        harvest_objs = []
-        for url in urls.readlines():
-            harvest_obj = HarvestObject()
-            harvest_obj.content = url
-            harvest_obj.job = harvest_job
-            harvest_obj.save()
-            harvest_objs.append(harvest_obj.id)
+        try:
+            urls = urllib2.urlopen(gather_url)
+            harvest_objs = []
+            for url in urls.readlines():
+                harvest_obj = HarvestObject()
+                harvest_obj.content = url
+                harvest_obj.job = harvest_job
+                harvest_obj.save()
+                harvest_objs.append(harvest_obj.id)
+        except urllib2.URLError:
+            self._save_gather_error('Could not gather XML files from URL!', harvest_job)
+            return None
         return harvest_objs
 
     def fetch_stage(self, harvest_object):
-        xml = urllib2.urlopen(harvest_object.content).read()
         try:
+            xml = urllib2.urlopen(harvest_object.content).read()
             retdict = {}
             retdict['xml'] = xmltodict.parse(
                                                 etree.tostring(
@@ -72,7 +76,11 @@ class DDIHarvester(HarvesterBase):
             retdict['xmlstr'] = etree.tostring(etree.fromstring(xml).xpath('/codeBook')[0])
             retdict['source'] = harvest_object.content
             harvest_object.content = json.dumps(retdict)
-        except Exception, e:
+        except urllib2.URLError:
+            self._save_object_error('Could not fetch from url!', harvest_object)
+            return False
+        except etree.XMLSyntaxError:
+            self._save_object_error('Unable to parse XML!', harvest_object)
             return False
         return True
 
@@ -97,7 +105,6 @@ class DDIHarvester(HarvesterBase):
     def _collect_vars(self, xml_dict):
         res = {}
         tree = etree.fromstring(xml_dict).xpath('//dataDscr//var')
-        log.debug("Foo.")
         for var in tree:
             stats = var.xpath(".//sumStat[(@type='min' or @type='max' or @type='stdev' or @type='mean') and ..//sumStat[@type='stdev']]")
             question = var.xpath('./qstn/qstnLit')[0]

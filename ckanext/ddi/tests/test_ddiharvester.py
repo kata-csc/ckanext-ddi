@@ -25,9 +25,13 @@ from ckan import model
 
 from ckanext.ddi.harvester import DDIHarvester
 from ckanext.harvest.model import HarvestJob, HarvestSource, HarvestObject,\
-                                  setup
+                                  HarvestObjectError, HarvestGatherError, setup
 from sqlalchemy.ext.associationproxy import _AssociationDict
+
 log = logging.getLogger(__file__)
+realopen = urllib2.urlopen
+
+
 class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
 
     @classmethod
@@ -45,6 +49,7 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         fv['remember'] = True
         res = fv.submit()
         setup()
+
     @classmethod
     def teardown_class(self):
         Session.remove()
@@ -70,13 +75,26 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(harv.validate_config(harv.config))
         harv, job = self._create_harvester(config=False)
 
-
     def test_harvester_create(self):
         harv, job = self._create_harvester()
         self.assert_(harv)
         self.assert_(job)
         self.assert_(job.source)
         self.assert_(job.source.title == "Test")
+
+    def test_harvester_urlerror(self):
+        harv, job = self._create_harvester()
+        urllib2.urlopen = realopen
+        self.assert_(harv.gather_stage(job) == None)
+        errs = Session.query(HarvestGatherError).all()
+        self.assert_(len(errs) == 1)
+        harv_obj = HarvestObject()
+        harv_obj.job = job
+        harv_obj.content = "http://foo"
+        self.assert_(harv.fetch_stage(harv_obj) == False)
+        errs = Session.query(HarvestObjectError).all()
+        # XML error and URL error
+        self.assert_(len(errs) == 2)
 
     def test_harvester_gather(self):
         harv, job = self._create_harvester()
