@@ -1,8 +1,8 @@
 '''
 Tests for DDI harvester
 '''
+# pylint: disable=E1101,C1101,C0111
 import logging
-import os
 import unittest
 import mock
 import urllib2
@@ -24,7 +24,7 @@ from ckan import model
 
 
 from ckanext.ddi.harvester import DDIHarvester
-from ckanext.harvest.model import HarvestJob, HarvestSource, HarvestObject,\
+from ckanext.harvest.model import HarvestJob, HarvestSource, HarvestObject, \
                                   HarvestObjectError, HarvestGatherError, setup
 from sqlalchemy.ext.associationproxy import _AssociationDict
 
@@ -70,10 +70,10 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         return harv, harvest_job
 
     def test_harvester_info(self):
-        harv, job = self._create_harvester()
-        self.assert_(isinstance(harv.info(),dict))
+        harv, _ = self._create_harvester()
+        self.assert_(isinstance(harv.info(), dict))
         self.assert_(harv.validate_config(harv.config))
-        harv, job = self._create_harvester(config=False)
+        harv, _ = self._create_harvester(config=False)
 
     def test_harvester_create(self):
         harv, job = self._create_harvester()
@@ -90,10 +90,10 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(len(errs) == 1)
         harv_obj = HarvestObject()
         harv_obj.job = job
-        harv_obj.content = "http://foo"
+        harv_obj.content = json.dumps({'url': "http://foo"})
         self.assert_(harv.fetch_stage(harv_obj) == False)
         errs = Session.query(HarvestObjectError).all()
-        # XML error and URL error
+        # XML error and URL error, also the lack of url in content
         self.assert_(len(errs) == 2)
 
     def test_harvester_gather(self):
@@ -139,6 +139,7 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(len(Session.query(Package).all()) == 1)
 
         # Lets see if the package is ok, according to test data
+        log.debug(Session.query(Package).all())
         pkg = Session.query(Package).filter(Package.title == "Puolueiden ajankohtaistutkimus 1981").one()
         self.assert_(pkg.title == "Puolueiden ajankohtaistutkimus 1981")
         self.assert_(len(pkg.get_groups()) == 2)
@@ -153,6 +154,7 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
 
         urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.nr2))
         harvest_obj = HarvestObject.get(gathered[0])
+        harvest_obj.content = json.dumps({'url': 'http://foo'})
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(isinstance(json.loads(harvest_obj.content), dict))
         self.assert_(harv.import_stage(harvest_obj))
@@ -163,7 +165,7 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         grp = pkg.get_groups()[0]
         context = {'user': user.name, 'model': model}
         data_dict = {'id': pkg.id}
-        auth_dict = package_show(context,data_dict)
+        auth_dict = package_show(context, data_dict)
         self.assert_(auth_dict['success'])
         data_dict = {'id': grp.id}
         context = {'user': '', 'model': model}
