@@ -183,7 +183,7 @@ class DDIHarvester(HarvesterBase):
         pkg.extras = dict(self._get_metadata_for_document(xml_dict['xmlstr']), \
                             **self._collect_vars(xml_dict['xmlstr']))
         pkg.title = title[:100]
-        pkg.name = self._gen_new_name(self._check_name(title))
+        pkg.name = self._gen_new_name(self._check_name(title[:100]))
         pkg.url = json.loads(xml_dict['source'])['url']
         pkg.save()
 
