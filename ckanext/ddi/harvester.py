@@ -158,7 +158,8 @@ class DDIHarvester(HarvesterBase):
         citation = data_dict["stdyDscr"]["citation"]
         study_info = data_dict["stdyDscr"]["stdyInfo"]
         title = citation['titlStmt']['titl']
-        producer = citation['prodStmt']['producer']
+        producer = citation['prodStmt']['producer'] if 'producer' in citation["prodStmt"]\
+                                                else data_dict["docDscr"]["citation"]["prodStmt"]["producer"]
         author = producer[0] if isinstance(producer, list) else producer
         author = author if not isinstance(author, dict) else author['#text']
         pkg.author = author

@@ -1,3 +1,4 @@
+# coding: utf-8
 '''
 Tests for DDI harvester
 '''
@@ -171,4 +172,24 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         context = {'user': '', 'model': model}
         auth_dict = group_show(context, data_dict)
         self.assert_(auth_dict['success'])
+
+    def test_zfaulty_xml_1088(self):
+        harv, job = self._create_harvester()
+        res = "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml"
+        urllib2.urlopen = mock.Mock(return_value=StringIO(res))
+        gathered = harv.gather_stage(job)
+        urllib2.urlopen = mock.Mock(return_value=open("FSD1088.xml"))
+        harvest_obj = HarvestObject.get(gathered[0])
+        self.assert_(harv.fetch_stage(harvest_obj))
+        self.assert_(harv.import_stage(harvest_obj))
+
+    def test_zfaulty_xml_1050(self):
+        harv, job = self._create_harvester()
+        res = "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml"
+        urllib2.urlopen = mock.Mock(return_value=StringIO(res))
+        gathered = harv.gather_stage(job)
+        urllib2.urlopen = mock.Mock(return_value=open("FSD1050.xml"))
+        harvest_obj = HarvestObject.get(gathered[0])
+        self.assert_(harv.fetch_stage(harvest_obj))
+        self.assert_(harv.import_stage(harvest_obj))
 
