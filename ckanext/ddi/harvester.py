@@ -136,7 +136,12 @@ class DDIHarvester(HarvesterBase):
         tree = etree.fromstring(xml_dict).xpath('//dataDscr//var')
         for var in tree:
             stats = var.xpath(".//sumStat[(@type='min' or @type='max' or @type='stdev' or @type='mean') and ..//sumStat[@type='stdev']]")
-            question = var.xpath('./qstn/qstnLit')[0]
+            qpath = var.xpath('./qstn/qstnLit')
+            if len(qpath) >= 1:
+                question = qpath[0]
+            else:
+                question = etree.Element('question')
+                question.text = ""
             for stat in stats:
                 statstr = "%s:%s" % (stat.attrib['type'], stat.text)
                 if not var.attrib['ID'] in res:
@@ -153,13 +158,17 @@ class DDIHarvester(HarvesterBase):
         model.repo.new_revision()
         xml_dict = json.loads(harvest_object.content)
         code_dict = xml_dict['xml']
-        pkg = Package()
+        
         data_dict = code_dict['codeBook']
         citation = data_dict["stdyDscr"]["citation"]
         study_info = data_dict["stdyDscr"]["stdyInfo"]
-        title = citation['titlStmt']['titl']
-        producer = citation['prodStmt']['producer'] if 'producer' in citation["prodStmt"]\
-                                                else data_dict["docDscr"]["citation"]["prodStmt"]["producer"]
+        title = citation['titlStmt']['titl'][:100]
+        pkg = Package.get(self._check_name(title))
+        if not pkg:
+            pkg = Package(name=self._check_name(title))
+        producer = citation['prodStmt']['producer']\
+                    if 'producer' in citation["prodStmt"]\
+                    else data_dict["docDscr"]["citation"]["prodStmt"]["producer"]
         author = producer[0] if isinstance(producer, list) else producer
         author = author if not isinstance(author, dict) else author['#text']
         pkg.author = author
@@ -184,7 +193,6 @@ class DDIHarvester(HarvesterBase):
         pkg.extras = dict(self._get_metadata_for_document(xml_dict['xmlstr']), \
                             **self._collect_vars(xml_dict['xmlstr']))
         pkg.title = title[:100]
-        pkg.name = self._gen_new_name(self._check_name(title[:100]))
         pkg.url = json.loads(xml_dict['source'])['url']
         pkg.save()
 
