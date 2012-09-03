@@ -91,7 +91,7 @@ class DDIHarvester(HarvesterBase):
                 self._save_object_error('No url in content!', harvest_object)
                 return False
         except urllib2.URLError:
-            self._save_object_error('Could not fetch from url!', 
+            self._save_object_error('Could not fetch from url %s!' % udict['url'], 
                                     harvest_object)
             return False
         except etree.XMLSyntaxError:
