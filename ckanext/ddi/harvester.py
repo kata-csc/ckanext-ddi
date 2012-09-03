@@ -158,14 +158,15 @@ class DDIHarvester(HarvesterBase):
         model.repo.new_revision()
         xml_dict = json.loads(harvest_object.content)
         code_dict = xml_dict['xml']
-        
+
         data_dict = code_dict['codeBook']
         citation = data_dict["stdyDscr"]["citation"]
         study_info = data_dict["stdyDscr"]["stdyInfo"]
-        title = citation['titlStmt']['titl'][:100]
-        pkg = Package.get(self._check_name(title))
+        title = citation['titlStmt']['titl']
+        name = self._gen_new_name(self._check_name(title[:100]))
+        pkg = Package.get(name)
         if not pkg:
-            pkg = Package(name=self._check_name(title))
+            pkg = Package(name=name)
         producer = citation['prodStmt']['producer']\
                     if 'producer' in citation["prodStmt"]\
                     else data_dict["docDscr"]["citation"]["prodStmt"]["producer"]
