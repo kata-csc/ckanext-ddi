@@ -14,8 +14,8 @@ from ckan.model import Package, Group
 
 from ckan import model
 from ckan.model.authz import setup_default_user_roles
-
-from ckanext.harvest.harvesters.base import HarvesterBase, munge_tag
+from ckan.lib.munge import munge_tag
+from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject
 
 log = logging.getLogger(__name__)
@@ -185,7 +185,7 @@ class DDIHarvester(HarvesterBase):
             [study_info['subject']['topcClas']]
         for kw in keywords:
             pkg.add_tag_by_name(munge_tag(kw['#text']) if '#text' in kw \
-                                            else munge_tag(kw))
+                                            else munge_tag(kw if not isinstance(kw,dict) else ''))
 
         descr = citation['serStmt']['serInfo']['p']
         description_arr = descr if isinstance(descr, list) else [descr]

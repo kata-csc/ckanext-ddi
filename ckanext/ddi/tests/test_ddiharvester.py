@@ -203,3 +203,14 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(harv.import_stage(harvest_obj))
         self.assert_(harv.import_stage(harvest_obj))
+
+    def test_zfaulty_xml_2323(self):
+        harv, job = self._create_harvester()
+        res = "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml"
+        urllib2.urlopen = mock.Mock(return_value=StringIO(res))
+        gathered = harv.gather_stage(job)
+        urllib2.urlopen = mock.Mock(return_value=open("FSD2323.xml"))
+        harvest_obj = HarvestObject.get(gathered[0])
+        self.assert_(harv.fetch_stage(harvest_obj))
+        self.assert_(harv.import_stage(harvest_obj))
+        self.assert_(harv.import_stage(harvest_obj))
