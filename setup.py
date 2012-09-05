@@ -21,8 +21,7 @@ setup(
 	zip_safe=False,
 	install_requires=[
 		# -*- Extra requirements: -*-
-		'lxml',
-		'xmltodict',
+		'beautifulsoup4',
 		'ckanclient',
 	],
 	tests_require=[

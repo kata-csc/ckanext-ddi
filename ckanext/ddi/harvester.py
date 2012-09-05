@@ -18,6 +18,8 @@ from ckan.lib.munge import munge_tag
 from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject
 
+from bs4 import BeautifulSoup, Tag
+
 log = logging.getLogger(__name__)
 
 
@@ -72,31 +74,6 @@ class DDIHarvester(HarvesterBase):
     def fetch_stage(self, harvest_object):
         '''Fetch and parse the DDI XML document.
         '''
-        try:
-            udict = json.loads(harvest_object.content)
-            if 'url' in udict:
-                xml = urllib2.urlopen(udict['url']).read()
-                retdict = {}
-                retdict['xml'] = xmltodict.parse(
-                                            etree.tostring(
-                                                  etree.fromstring(xml).\
-                                                  xpath('/codeBook')[0]
-                                                          )
-                                                )
-                retdict['xmlstr'] = etree.tostring(etree.fromstring(xml).\
-                                                   xpath('/codeBook')[0])
-                retdict['source'] = harvest_object.content
-                harvest_object.content = json.dumps(retdict)
-            else:
-                self._save_object_error('No url in content!', harvest_object)
-                return False
-        except urllib2.URLError:
-            self._save_object_error('Could not fetch from url %s!' % udict['url'], 
-                                    harvest_object)
-            return False
-        except etree.XMLSyntaxError:
-            self._save_object_error('Unable to parse XML!', harvest_object)
-            return False
         return True
 
     def _collect_attribs(self, el):
@@ -104,116 +81,104 @@ class DDIHarvester(HarvesterBase):
         name and v is the attribute value.
         '''
         astr = ""
-        for k, v in el.attrib.items():
-            astr += "(%s,%s)" % (k, v)
+        if el.attrs:
+            for k, v in el.attrs.items():
+                astr += "(%s,%s)" % (k, v)
         return astr
-
-    def _get_metadata_for_document(self, xml_dict):
-        '''Get metadata leaf elements from stdyDscr and docDscr elements from
-        DDI document. Get the text value of the leaf element, if it has one, if
-        it doesn't, get the attribute key and value pairs.
-        '''
-        res = {}
-        tree = etree.fromstring(xml_dict).\
-            xpath('//stdyDscr//*[not(child::*)]|//docDscr//*[not(child::*)]')
-        for els in tree:
-            if els.tag == 'p':
-                els.tag = els.getparent().tag
-            if not els.tag in res:
-                res[els.tag] = els.text if els.text else\
-                                        self._collect_attribs(els)
-            else:
-                res[els.tag] += " " + els.text if els.text else\
-                                                self._collect_attribs(els)
-        return res
-
-    def _collect_vars(self, xml_dict):
-        '''Collect all variables from the DDI documents, which have a meaningful
-        standard deviation and mean values. These have the most significance to
-        the metadata.
-        '''
-        res = {}
-        tree = etree.fromstring(xml_dict).xpath('//dataDscr//var')
-        for var in tree:
-            stats = var.xpath(".//sumStat[(@type='min' or @type='max' or @type='stdev' or @type='mean') and ..//sumStat[@type='stdev']]")
-            qpath = var.xpath('./qstn/qstnLit')
-            if len(qpath) >= 1:
-                question = qpath[0]
-            else:
-                question = etree.Element('question')
-                question.text = ""
-            for stat in stats:
-                statstr = "%s:%s" % (stat.attrib['type'], stat.text)
-                if not var.attrib['ID'] in res:
-                    res[var.attrib['ID']] = "%s %s" % (question.text, statstr)
-                else:
-                    res[var.attrib['ID']] += " " + statstr
-        return res
 
     def import_stage(self, harvest_object):
         '''Import the metadata received in the fetch stage to a dataset and
         create groups if ones are defined. Fill in metadata from study and
         document description.
         '''
+        try:
+            xml_dict = {}
+            xml_dict['source'] = harvest_object.content
+            udict = json.loads(harvest_object.content)
+            if 'url' in udict:
+                ddi_xml = BeautifulSoup(urllib2.urlopen(udict['url']).read(),
+                                        'xml')
+            else:
+                print "No url"
+                log.debug("No url in content")
+                self._save_object_error('No url in content!', harvest_object)
+                return False
+        except urllib2.URLError:
+            print "Fetch"
+            log.debug("Could not fetch %s" % udict['url'])
+            self._save_object_error('Could not fetch from url %s!' % udict['url'], 
+                                    harvest_object)
+            return False
+        except etree.XMLSyntaxError:
+            print "Parse"
+            log.debug("Unable to parse!")
+            self._save_object_error('Unable to parse XML!', harvest_object)
+            return False
         model.repo.new_revision()
-        xml_dict = json.loads(harvest_object.content)
-        code_dict = xml_dict['xml']
-
-        data_dict = code_dict['codeBook']
-        citation = data_dict["stdyDscr"]["citation"]
-        study_info = data_dict["stdyDscr"]["stdyInfo"]
-        title = citation['titlStmt']['titl']
+        study_descr = ddi_xml.codeBook.stdyDscr
+        document_info = ddi_xml.codeBook.docDscr.citation
+        title = study_descr.citation.titlStmt.titl.string
+        if not title:
+            title = document_info.titlStmt.titl.string
         name = self._gen_new_name(self._check_name(title[:100]))
         pkg = Package.get(name)
         if not pkg:
             pkg = Package(name=name)
-        producer = citation['prodStmt']['producer']\
-                    if 'producer' in citation["prodStmt"]\
-                    else data_dict["docDscr"]["citation"]["prodStmt"]["producer"]
-        author = producer[0] if isinstance(producer, list) else producer
-        author = author if not isinstance(author, dict) else author['#text']
-        pkg.author = author
-        pkg.author_email = author
-
-        keywords = study_info['subject']['keyword'] \
-            if isinstance(study_info['subject']['keyword'], list) else \
-            [study_info['subject']['keyword']]
+        producer = study_descr.citation.prodStmt.producer
+        if not producer:
+            producer = document_info.prodStmt.producer
+        pkg.author = producer.string
+        keywords = study_descr.stdyInfo.subject('keyword')
         for kw in keywords:
-            pkg.add_tag_by_name(munge_tag(kw['#text']) if '#text' in kw \
-                                                        else munge_tag(kw))
-        keywords = study_info['subject']['topcClas'] \
-            if isinstance(study_info['subject']['topcClas'], list) else \
-            [study_info['subject']['topcClas']]
+            kw = kw.string
+            if kw:
+                pkg.add_tag_by_name(munge_tag(kw))
+        keywords = study_descr.stdyInfo.subject('topcClas')
         for kw in keywords:
-            pkg.add_tag_by_name(munge_tag(kw['#text']) if '#text' in kw \
-                                            else munge_tag(kw if not isinstance(kw,dict) else ''))
-
-        descr = citation['serStmt']['serInfo']['p']
-        description_arr = descr if isinstance(descr, list) else [descr]
-        pkg.notes = '<br />'.join(description_arr)
-        pkg.extras = dict(self._get_metadata_for_document(xml_dict['xmlstr']), \
-                            **self._collect_vars(xml_dict['xmlstr']))
+            kw = kw.string
+            if kw:
+                pkg.add_tag_by_name(munge_tag(kw))
+        description_array = study_descr.stdyInfo.abstract('p')
+        if not len(description_array):
+            description_array = study_descr.citation.sertStmt('p')
+        pkg.notes = '<br />'.join([description.string
+                                   for description in description_array])
         pkg.title = title[:100]
-        pkg.url = json.loads(xml_dict['source'])['url']
+        pkg.url = udict['url']
+        pkg.add_resource(url=document_info.holdings['URI']\
+                         if 'URI' in document_info.holdings else '')
+        metas = {}
+        for docextra in document_info.descendants:
+            if isinstance(docextra, Tag):
+                if docextra:
+                    metas[docextra.name] = docextra.string\
+                                    if docextra.string\
+                                    else self._collect_attribs(docextra)
+        for stdyextra in study_descr.stdyInfo.descendants:
+            if isinstance(docextra, Tag):
+                if docextra:
+                    metas[docextra.name] = docextra.string\
+                                    if docextra.string\
+                                    else self._collect_attribs(docextra)
+        vars = {}
+        if ddi_xml.codeBook.dataDscr:
+            for var in ddi_xml.codeBook.dataDscr('var'):
+                if var.sumStat:
+                    if var('sumStat', type='mean'):
+                        if var.qstn:
+                            vars[var['name']] = var.qstn.qstnLit.string
+        pkg.extras = dict(metas, **vars)
         pkg.save()
-
-        producer = producer if isinstance(producer, list) else [producer]
-        for producer in producer:
-            prod_text = producer if not isinstance(producer, dict) else \
-                                            producer['#text']
-            group = Group.by_name(prod_text)
-            if not group:
-                group = Group(name=prod_text, description=prod_text)
-            group.add_package_by_name(pkg.name)
-            group.save()
-            setup_default_user_roles(group)
-        res_url = \
-            code_dict['codeBook']['docDscr']['citation']['holdings']['@URI'] \
-            if '@URI' in\
-            code_dict['codeBook']['docDscr']['citation']['holdings'] \
-            else ''
-        pkg.add_resource(res_url, description=''.join(description_arr),
-                         name=title)
+        producers = study_descr.citation.prodStmt.find_all('producer')
+        for producer in producers:
+            producer = producer.string
+            if producer:
+                group = Group.by_name(producer)
+                if not group:
+                    group = Group(name=producer, description=producer)
+                group.add_package_by_name(pkg.name)
+                group.save()
+                setup_default_user_roles(group)
         log.debug("Saved pkg %s" % (pkg.url))
         setup_default_user_roles(pkg)
         return True

@@ -1,0 +1,5518 @@
+<?xml version="1.0"?>
+<!DOCTYPE codeBook  SYSTEM "http://www.icpsr.umich.edu/DDI/Version2-0.dtd">
+<codeBook xml:lang="fi">
+  <docDscr>
+    <citation>
+      <titlStmt>
+        <titl>DDI-kuvailu: Energia-asennetutkimus 2006</titl>
+        <parTitl xml:lang="en">DDI description: Energy Attitudes of the Finns 2006</parTitl>
+        <IDNo agency="FSD">2358</IDNo>
+      </titlStmt>
+      <prodStmt>
+        <producer abbr="FSD">Yhteiskuntatieteellinen tietoarkisto</producer>
+        <copyright>Yhteiskuntatieteellinen tietoarkisto</copyright>
+        <prodDate date="2008-08-29"/>
+        <prodPlac>Yhteiskuntatieteellinen tietoarkisto</prodPlac>
+      </prodStmt>
+      <biblCit format="MRDF">Energia-asennetutkimus 2006 [koodikirja]. Tampere : Yhteiskuntatieteellinen tietoarkisto [tuottaja ja jakaja], 2011.</biblCit>
+      <holdings location="Yhteiskuntatieteellinen tietoarkisto FSD" URI="http://www.fsd.uta.fi/aineistot/luettelo/FSD2358/">Yhteiskuntatieteellinen tietoarkisto FSD</holdings>
+    </citation>
+    <notes xml:lang="fi">FSD:n aineistokuvailut (FSD metadata records), jonka tekijä on Suomen yhteiskuntatieteellinen tietoarkisto (Finnish Social Science Data Archive), on lisensoitu Creative Commons Nimeä-Epäkaupallinen 1.0 Suomi lisenssillä.</notes>
+    <notes xml:lang="sv">FSD:n aineistokuvailut (FSD metadata records) av Suomen yhteiskuntatieteellinen tietoarkisto (Finlands samhällsvetenskapliga dataarkiv) är licensierad under a Creative Commons Erkännande-IckeKommersiell 1.0 Finland License.</notes>
+    <notes xml:lang="en">FSD:n aineistokuvailut (FSD metadata records) by Suomen yhteiskuntatieteellinen tietoarkisto (Finnish Social Science Data Archive) is licensed under a Creative Commons Attribution-NonCommercial 1.0 Finland License.</notes>
+  </docDscr>
+  <stdyDscr>
+    <citation>
+      <titlStmt>
+        <titl>Energia-asennetutkimus 2006</titl>
+        <parTitl xml:lang="en">Energy Attitudes of the Finns 2006</parTitl>
+        <IDNo agency="FSD">2358</IDNo>
+      </titlStmt>
+      <rspStmt>
+        <AuthEnty affiliation="Yhdyskuntatutkimus">Kiljunen, Pentti</AuthEnty>
+      </rspStmt>
+      <prodStmt>
+        <producer affiliation="Teollisuuden Voima (TVO)"/>
+        <producer affiliation="Fortum"/>
+        <copyright>FSD:n ja aineiston luovuttajan tekemän sopimuksen mukaisesti.</copyright>
+      </prodStmt>
+      <distStmt>
+        <distrbtr abbr="FSD" URI="http://www.fsd.uta.fi/">Yhteiskuntatieteellinen tietoarkisto</distrbtr>
+        <depositr affiliation="Yhdyskuntatutkimus">Kiljunen, Pentti</depositr>
+        <depDate date="2008-06-09"/>
+      </distStmt>
+      <serStmt URI="http://www.fsd.uta.fi/aineistot/luettelo/sarjat.html#energia">
+        <serName abbr="energia">Energia-asennetutkimukset</serName>
+        <serInfo>
+          <p>Suomalaisten energia-asenteita kartoittava tutkimussarja käynnistyi Tampereen yliopistossa Imatran Voima Oy:n rahoituksella vuonna 1983. Tutkimussarjan kerran vuodessa tehdyillä kirjekyselyillä on selvitetty ja seurattu suomalaisten suhtautumista energiapoliittisiin kysymyksiin. Vertailukelpoiset aineistot mahdollistavat suomalaisten energia-asioita koskevien käsitysten, kannanottojen, mielipiteiden, uskomusten, arvostusten, asenteiden ja tietojen yksityiskohtaisen empiirisen analyysin ja systemaattisen seurannan.</p>
+          <p>Energia-asennetutkimukset on toteuttanut vuodesta 1994 alkaen Yhdyskuntatutkimus Oy. Toimeksiantajina ovat olleet Fortum (vuoteen 1998 asti Imatran Voima Oy) ja Teollisuuden Voima Oy. Tutkimustuloksista tiedottamisen on hoitanut vuodesta 2004 alkaen Energiateollisuus Ry (ET).</p>
+        </serInfo>
+      </serStmt>
+      <verStmt>
+        <version date="2008-08-13">1.0</version>
+      </verStmt>
+      <biblCit>Energia-asennetutkimus 2006 [elektroninen aineisto]. FSD2358, versio 1.0 (2008-08-13). Lempäälä: Yhdyskuntatutkimus [aineistonkeruu], 2006. Fortum &amp; Teollisuuden Voima [tuottajat]. Tampere: Yhteiskuntatieteellinen tietoarkisto [jakaja], 2008.</biblCit>
+    </citation>
+    <stdyInfo>
+      <subject>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">asenteet</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">energia</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">kivihiili</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">maakaasu</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">ydinenergia</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">bioenergia</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">sähköntuotanto</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">vesivoima</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">öljy</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">ydinvoimalat</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">sähkömarkkinat</keyword>
+        <topcClas vocab="FSD" vocabURI="http://www.fsd.uta.fi/aineistot/arkistointi/FSD_topcClas.html">ympäristöntutkimus</topcClas>
+        <topcClas vocab="CESSDA">luonnonvarat ja energia</topcClas>
+        <topcClas vocab="CESSDA">ympäristön saastuminen ja ympäristönsuojelu</topcClas>
+      </subject>
+      <abstract>
+        <p>Tutkimuksessa selvitettiin väestön suhtautumista energiapoliittisiin kysymyksiin. Aineisto on osa laajaa 1983 aloitettua tutkimussarjaa. Vastaajien erilaisia energia-asioita koskevia käsityksiä, kannanottoja, mielipiteitä, uskomuksia, arvostuksia, asenteita ja tietoja kartoitettiin esittämällä useita energian tuotantoon liittyviä väitteitä. Vastaajat kertoivat myös, mihin suuntaan Suomen sähköntuotantoa tulisi kehittää. Lisäksi tiedusteltiin suhtautumista sähkömarkkinoihin ja onko markkinajärjestelmästä ollut etua vai haittaa muun muassa sähkön hintakehityksen, kilpailun tehostumisen, työllisyyden, sähköyhtiöiden, energiansäästön edistämisen, energiaomavaraisuuden tai tulevien sukupolvien kannalta. Taustamuuttujina ovat mm. sukupuoli, ikä, asuinpaikkakunnan koko, maakunta, koulutus, ammattiasema ja poliittinen suuntautuneisuus.</p>
+      </abstract>
+      <sumDscr>
+        <timePrd date="2006-00-00" event="single"/>
+        <collDate date="2006-10-24" event="start"/>
+        <collDate date="2007-01-08" event="end"/>
+        <nation abbr="FI">Suomi</nation>
+        <geogCover>Suomi</geogCover>
+        <anlyUnit>Henkilö</anlyUnit>
+        <universe clusion="I">18 - 70-vuotiaat suomalaiset</universe>
+        <universe clusion="E">Ahvenanmaa</universe>
+        <dataKind>Kvantitatiivinen</dataKind>
+      </sumDscr>
+    </stdyInfo>
+    <method>
+      <dataColl>
+        <timeMeth>Poikkileikkausaineisto</timeMeth>
+        <dataCollector affiliation="Yhdyskuntatutkimus"/>
+        <sampProc>
+          <p>Yksinkertainen satunnaisotanta. Kysely kohdistettiin yhteensä noin 1165:lle väestön keskusrekisteristä satunnaisesti poimitulle 18 - 70-vuotiaalle suomalaiselle henkilölle (pl. Ahvenanmaa). Kohdejoukko koostui kolmesta erillisestä otoksesta. Koko maan suomen- ja ruotsinkielistä väestöä edusti 866 hengen otos. Lisäksi aineistoon kuuluivat 120 hengen otos Loviisasta ja vajaan 175 hengen otos Eurajoelta. Kohdehenkilöt saivat oman äidinkielensä mukaisesti joko suomen- tai ruotsinkielisen kyselylomakkeen.</p>
+        </sampProc>
+        <collMode>Kirjekysely</collMode>
+        <resInstru>Strukturoitu kyselylomake</resInstru>
+        <weight>Aineisto ei sisällä painomuuttujia.</weight>
+      </dataColl>
+      <anlyInfo>
+        <dataAppr>Eurajokelaisten vastaajien kyselylomake ei sisältänyt tietolähteiden luotettavuutta mittaavaa kysymyspatteristoa (luot1 - luot15).</dataAppr>
+      </anlyInfo>
+      <stdyClas type="A">Aineisto on kuvailtu mahdollisimman yksityiskohtaisesti suomeksi ja englanniksi. Datatiedostosta on tarkistettu muun muassa muuttujien jakaumat, filtterimuuttujat, puuttuvat tiedot, muuttujien selitteet ja arvojen selitteet. Tarvittaessa datatiedosto on anonymisoitu.</stdyClas>
+    </method>
+    <dataAccs>
+      <setAvail>
+        <accsPlac URI="http://www.fsd.uta.fi/">Yhteiskuntatieteellinen tietoarkisto</accsPlac>
+        <collSize>Data: suomenkielinen SPSS portable -tiedosto. Data saatavilla myös muissa tiedostoformaateissa.</collSize>
+        <complete>Kyselylomakkeesta on poistettu yrityskysymykset, joihin liittyviä muuttujia datassa ei ole.</complete>
+      </setAvail>
+      <useStmt>
+        <restrctn>Aineistoa luovutetaan tieteelliseen tutkimus- ja opetuskäyttöön; FSD:n lupamenettely.</restrctn>
+        <citReq>Tutkimusaineisto on merkittävä lähdeviitteisiin kaikissa julkaisuissa, joissa aineistoa tai sen osaa käytetään. Tietoarkiston antaman malliviittaustiedon voi merkitä lähdeluetteloon sellaisenaan tai sitä voi muokata julkaisun käytäntöjen mukaisesti.</citReq>
+        <deposReq>Arkistolle tulee lähettää tiedot julkaisuista, joissa aineiston kopiota tai siitä luvallisesti otettuja kopioita on hyödynnetty.</deposReq>
+        <disclaimer>Aineiston arkistoon luovuttajilla ja arkistolla ei ole vastuuta aineiston jatkokäytössä tuotetuista tuloksista ja tulkinnoista.</disclaimer>
+      </useStmt>
+    </dataAccs>
+    <othrStdyMat>
+      <relPubl>Energia-asenteet 2006: seurantatutkimustietoa suomalaisten suhtautumisesta energiapoliittisiin kysymyksiin 1983-2006 (2008) [verkkodokumentti]. Energia-alan Keskusliitto (FINERGY) &amp; Yhdyskuntatutkimus. http://www.sci.fi/~yhdys/eas_06/eas-tied_06.htm [viitattu 04.09.2008].</relPubl>
+      <relPubl>Kari, Mika &amp; Kojo, Matti &amp; Litmanen, Tapio (2010). Community Divided. Adaptation and Aversion towards the Spent Nuclear Fuel Repository in Eurajoki and its Neighbouring Municipalities. Jyväskylä: University of Jyväskylä. Tampere: University of Tampere. URN:ISBN:978-951-39-4149-9</relPubl>
+    </othrStdyMat>
+  </stdyDscr>
+  <fileDscr>
+    <fileTxt>
+      <fileName ID="F1">daF2358.por</fileName>
+      <dimensns>
+        <caseQnty>1163</caseQnty>
+        <varQnty>102</varQnty>
+      </dimensns>
+      <fileType>SPSS Portable</fileType>
+    </fileTxt>
+  </fileDscr>
+  <dataDscr>
+    <varGrp var="Q1_1 Q1_2 Q1_3 Q1_4 Q1_5 Q1_6 Q1_7 Q1_8 Q1_9 Q1_10 Q1_11 Q1_12 Q1_13 Q1_14 Q1_15 Q1_16 Q1_17 Q1_18 Q1_19 Q1_20 Q1_21 Q1_22 Q1_23 Q1_24 Q1_25 Q1_26 Q1_27 Q1_28 Q1_29 Q1_30 Q1_31 Q1_32 Q1_33 Q1_34 Q1_35 Q1_36 Q1_37 Q1_38 Q1_39 Q1_40 Q1_41 Q1_42 Q1_43 Q1_44 Q1_45 Q1_46 Q1_47 Q1_48 Q1_49 Q1_50 Q1_51 Q1_52 Q1_53 Q1_54 Q1_55">
+<txt>1. Mitä mieltä olette seuraavista energia-asioita koskevista väittämistä?</txt>
+    </varGrp>
+    <varGrp var="Q2_1 Q2_2 Q2_3 Q2_4 Q2_5 Q2_6 Q2_7 Q2_8 Q2_9">
+      <txt>2. Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta?</txt>
+    </varGrp>
+    <varGrp var="Q3_1 Q3_2 Q3_3 Q3_4 Q3_5 Q3_6 Q3_7">
+      <txt>3. Viime aikoina on puhuttu enenevästi ilman mukana hengitettävien ns. pienhiukkasten aiheuttamasta terveysuhasta. Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat?</txt>
+    </varGrp>
+    <varGrp var="Q4_1 Q4_2 Q4_3 Q4_4 Q4_5 Q4_6 Q4_7 Q4_8 Q4_9 Q4_10 Q4_11 Q4_12 Q4_13 Q4_14 Q4_15">
+      <txt>4. Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään julkisuudessa erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa Te pidätte seuraavia tahoja?</txt>
+    </varGrp>
+    <varGrp var="BV1 BV2 BV3 BV4 BV5 BV6 BV7 BV8 BV9 BV10 BV11">
+      <txt>Taustatiedot aineiston tilastollista ryhmittelyä varten</txt>
+    </varGrp>
+    <var files="F1" name="FSD_NO" intrvl="contin" dcml="0" ID="FSD_NO">
+      <labl level="variable">[fsd_no] Aineistonumero (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineistonumero (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2358" min="2358"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">2358</sumStat>
+      <sumStat type="max">2358</sumStat>
+      <sumStat type="mean">2358.00</sumStat>
+      <sumStat type="stdev">.000</sumStat>
+      <notes/>
+    </var>
+    <var files="F1" name="FSD_VR" intrvl="contin" dcml="1" ID="FSD_VR">
+      <labl level="variable">[fsd_vr] Aineistoversio (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineistoversio (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="1.0" min="1.0"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">1.0</sumStat>
+      <sumStat type="max">1.0</sumStat>
+      <sumStat type="mean">1.000</sumStat>
+      <sumStat type="stdev">.0000</sumStat>
+      <notes/>
+    </var>
+    <var files="F1" name="FSD_PRO" intrvl="discrete" dcml="0" ID="FSD_PRO">
+      <labl level="variable">[fsd_pro] Käsittelytaso (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Käsittelytaso (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">1</sumStat>
+      <sumStat type="mean">1.00</sumStat>
+      <sumStat type="stdev">.000</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">A (ks. koodikirja)</labl>
+        <catStat>1163</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">B (ks. koodikirja)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">C (dataa ei ole tarkastettu FSD:ssä)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="FSD_ID" intrvl="contin" dcml="0" ID="FSD_ID">
+      <labl level="variable">[fsd_id] Havaintotunnus (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Havaintotunnus (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="1163" min="1"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">1163</sumStat>
+      <sumStat type="mean">582.00</sumStat>
+      <sumStat type="stdev">335.873</sumStat>
+      <notes/>
+    </var>
+    <var files="F1" name="NRO" intrvl="contin" dcml="0" ID="NRO">
+      <labl level="variable">numero</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>numero</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="866" min="1"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">866</sumStat>
+      <sumStat type="mean">342.53</sumStat>
+      <sumStat type="stdev">267.001</sumStat>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_1" intrvl="discrete" dcml="0" ID="Q1_1">
+      <labl level="variable">[q1_1] Mitä mieltä olette seuraavista energia-asioita koskevista väittämistä? Kansalaisten mielipiteitä ei ole riittävästi kuultu energiapoliittisissa ratkaisuissa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kansalaisten mielipiteitä ei ole riittävästi kuultu energiapoliittisissa ratkaisuissa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1156</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.23</sumStat>
+      <sumStat type="stdev">1.068</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>335</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>406</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>260</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_2" intrvl="discrete" dcml="0" ID="Q1_2">
+      <labl level="variable">[q1_2] Viime vuosien poikkeukselliset sääolot (kuivuus, kuumuus, myrskyt jne.) ovat osoitus ilmastonmuutoksesta, ts. siitä että saasteet ovat järkyttäneet luonnon tasapainoa </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Viime vuosien poikkeukselliset sääolot (kuivuus, kuumuus, myrskyt jne.) ovat osoitus ilmastonmuutoksesta, ts. siitä että saasteet ovat järkyttäneet luonnon tasapainoa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1155</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.03</sumStat>
+      <sumStat type="stdev">1.024</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>419</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>421</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>199</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>90</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_3" intrvl="discrete" dcml="0" ID="Q1_3">
+      <labl level="variable">[q1_3] Sähkön tulisi olla maassamme tavallinen kauppatavara, jonka tuottamisen, hinnoittelun ja myynnin pitäisi olla vapaasti markkinoiden määrättävissä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähkön tulisi olla maassamme tavallinen kauppatavara, jonka tuottamisen, hinnoittelun ja myynnin pitäisi olla vapaasti markkinoiden määrättävissä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1146</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.01</sumStat>
+      <sumStat type="stdev">1.379</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>215</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>244</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>196</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>297</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>194</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_4" intrvl="discrete" dcml="0" ID="Q1_4">
+      <labl level="variable">[q1_4 ]Suuria vahinkoja aiheuttavan ydinvoimalaonnettomuuden tapahtuminen onniin epätodennäköistä, ettei sellaisesta ole syytä huolestua</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Suuria vahinkoja aiheuttavan ydinvoimalaonnettomuuden tapahtuminen onniin epätodennäköistä, ettei sellaisesta ole syytä huolestua</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1154</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.06</sumStat>
+      <sumStat type="stdev">1.381</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>188</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>284</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>174</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>288</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>220</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_5" intrvl="discrete" dcml="0" ID="Q1_5">
+      <labl level="variable">[q1_] Vaikka auringon säteily tarjoaakin saasteettoman ja ehtymättömän energianlähteen, sen merkittävä hyödyntäminen ei ole mahdollista vielä vuosikymmeniin</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vaikka auringon säteily tarjoaakin saasteettoman ja ehtymättömän energianlähteen, sen merkittävä hyödyntäminen ei ole mahdollista vielä vuosikymmeniin</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1155</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.09</sumStat>
+      <sumStat type="stdev">1.194</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>114</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>292</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>262</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>347</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>140</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_6" intrvl="discrete" dcml="0" ID="Q1_6">
+      <labl level="variable">[q1_] Vaikka vapaa kilpailu liike-elämässä onkin sinänsä hyvä asia, se sopii huonosti energia-alalle, jonka tulisi pysyä selkeästi yhteiskunnan ohjauksessa ja valvonnassa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vaikka vapaa kilpailu liike-elämässä onkin sinänsä hyvä asia, se sopii huonosti energia-alalle, jonka tulisi pysyä selkeästi yhteiskunnan ohjauksessa ja valvonnassa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1147</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.35</sumStat>
+      <sumStat type="stdev">1.237</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>347</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>388</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>150</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>193</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>69</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_7" intrvl="discrete" dcml="0" ID="Q1_7">
+      <labl level="variable">[q1_] Ydinvoimalla tuotetaan halpaa sähköä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinvoimalla tuotetaan halpaa sähköä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1148</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.61</sumStat>
+      <sumStat type="stdev">1.152</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>212</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>347</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>353</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>148</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>88</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_8" intrvl="discrete" dcml="0" ID="Q1_8">
+      <labl level="variable">[q1_] Suomi ei tarvitse enää yhtään uutta suurvoimalaa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Suomi ei tarvitse enää yhtään uutta suurvoimalaa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1147</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.26</sumStat>
+      <sumStat type="stdev">1.416</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>194</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>160</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>240</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>257</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>296</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_9" intrvl="discrete" dcml="0" ID="Q1_9">
+      <labl level="variable">[q1_] Kasvihuoneilmiön pysäyttämiseksi kivihiilen ja muiden fossiilisten polttoaineiden käyttöä on rajoitettava tuntuvasti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kasvihuoneilmiön pysäyttämiseksi kivihiilen ja muiden fossiilisten polttoaineiden käyttöä on rajoitettava tuntuvasti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1152</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.14</sumStat>
+      <sumStat type="stdev">1.009</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>330</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>480</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>219</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>92</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_10" intrvl="discrete" dcml="0" ID="Q1_10">
+      <labl level="variable">[q1_10] Energiantuotannosta aiheutuvien ympäristöhaittojen ja riskien vähentämiseksi olen valmis tinkimään omasta elintasostani</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energiantuotannosta aiheutuvien ympäristöhaittojen ja riskien vähentämiseksi olen valmis tinkimään omasta elintasostani</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1155</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.59</sumStat>
+      <sumStat type="stdev">1.110</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>165</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>469</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>274</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>167</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>80</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_11" intrvl="discrete" dcml="0" ID="Q1_11">
+      <labl level="variable">[q1_11] Puhe kansainvälisten sähkömarkkinoiden tarjoamasta turvasta on pötyä, sillä tiukan paikan tullen jokainen maa haluaa turvata vain oman sähkönsaantinsa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Puhe kansainvälisten sähkömarkkinoiden tarjoamasta turvasta on pötyä, sillä tiukan paikan tullen jokainen maa haluaa turvata vain oman sähkönsaantinsa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1154</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.71</sumStat>
+      <sumStat type="stdev">.863</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>571</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>409</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>124</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_12" intrvl="discrete" dcml="0" ID="Q1_12">
+      <labl level="variable">[q1_12] Vaikka tuulivoima on saasteetonta, sen käytön lisääminen johtaisi huomattaviin ympäristöhaittoihin tuulivoimaloiden rumentaessa maiseman laajoilta alueilta</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vaikka tuulivoima on saasteetonta, sen käytön lisääminen johtaisi huomattaviin ympäristöhaittoihin tuulivoimaloiden rumentaessa maiseman laajoilta alueilta</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1156</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.61</sumStat>
+      <sumStat type="stdev">1.297</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>199</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>114</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>400</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>347</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_13" intrvl="discrete" dcml="0" ID="Q1_13">
+      <labl level="variable">[q1_13] Valtio ja kunnat ovat parempia omistajia energiayhtiöille kuin voittoa tavoittelevat sijoittajat</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Valtio ja kunnat ovat parempia omistajia energiayhtiöille kuin voittoa tavoittelevat sijoittajat</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1155</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.00</sumStat>
+      <sumStat type="stdev">1.065</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>474</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>361</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>197</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>94</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_14" intrvl="discrete" dcml="0" ID="Q1_14">
+      <labl level="variable">[q1_14] Ydinjätteet voidaan turvallisesti loppusijoittaa Suomen kallioperään</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinjätteet voidaan turvallisesti loppusijoittaa Suomen kallioperään</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1151</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.22</sumStat>
+      <sumStat type="stdev">1.367</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>157</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>219</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>271</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>219</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>285</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_15" intrvl="discrete" dcml="0" ID="Q1_15">
+      <labl level="variable">[q1_15] Energian säästämisellä ei energiaongelmia voida ratkaista</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energian säästämisellä ei energiaongelmia voida ratkaista</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1143</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.94</sumStat>
+      <sumStat type="stdev">1.290</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>163</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>353</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>156</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>328</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>143</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_16" intrvl="discrete" dcml="0" ID="Q1_16">
+      <labl level="variable">[q1_16] Biopolttoaineet olisi maassamme järkevämpää hyödyntää lämmön- ja sähköntuotannossa kuin jalostaa ne ajoneuvojen polttoaineiksi</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Biopolttoaineet olisi maassamme järkevämpää hyödyntää lämmön- ja sähköntuotannossa kuin jalostaa ne ajoneuvojen polttoaineiksi</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1156</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.54</sumStat>
+      <sumStat type="stdev">1.023</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>197</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>365</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>394</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>168</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_17" intrvl="discrete" dcml="0" ID="Q1_17">
+      <labl level="variable">[q1_17] Sähköä tulisi tuottaa mahdollisimman paljon vesivoimalla, koska se on kotimainen ja uusiutuva energialähde</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähköä tulisi tuottaa mahdollisimman paljon vesivoimalla, koska se on kotimainen ja uusiutuva energialähde</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1154</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.11</sumStat>
+      <sumStat type="stdev">1.074</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>382</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>455</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>148</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>141</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_18" intrvl="discrete" dcml="0" ID="Q1_18">
+      <labl level="variable">[q1_18] Suomessa on saatu hyviä kokemuksia ydinvoimasta</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Suomessa on saatu hyviä kokemuksia ydinvoimasta</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1150</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.16</sumStat>
+      <sumStat type="stdev">1.011</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>337</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>421</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>298</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>39</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_19" intrvl="discrete" dcml="0" ID="Q1_19">
+      <labl level="variable">[q1_19] Tulevaisuudessa sähkön tarve on paljon suurempi kuin nykyään</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Tulevaisuudessa sähkön tarve on paljon suurempi kuin nykyään</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1149</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.92</sumStat>
+      <sumStat type="stdev">.971</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>453</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>444</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>159</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_20" intrvl="discrete" dcml="0" ID="Q1_20">
+      <labl level="variable">[q1_20] Syöpään sairastumisen vaara on suuri ydinvoimaloiden ympäristössä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Syöpään sairastumisen vaara on suuri ydinvoimaloiden ympäristössä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1151</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.15</sumStat>
+      <sumStat type="stdev">1.245</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>154</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>148</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>423</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>219</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>207</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_21" intrvl="discrete" dcml="0" ID="Q1_21">
+      <labl level="variable">[q1_21] Jäljellä olevia vapaita koskia ei tulisi enää rakentaa siitä aiheutuvien maisemamuutosten, kalatalous- ja ympäristöhaittojen vuoksi</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jäljellä olevia vapaita koskia ei tulisi enää rakentaa siitä aiheutuvien maisemamuutosten, kalatalous- ja ympäristöhaittojen vuoksi</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1154</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.53</sumStat>
+      <sumStat type="stdev">1.231</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>290</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>328</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>244</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>218</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_22" intrvl="discrete" dcml="0" ID="Q1_22">
+      <labl level="variable">[q1_22] Mikäli ydinvoimalassa tapahtuisi onnettomuus, siitä aiheutuisi väistämättä korvaamattomia vahinkoja laajoille alueille ja suurille ihmisryhmille</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Mikäli ydinvoimalassa tapahtuisi onnettomuus, siitä aiheutuisi väistämättä korvaamattomia vahinkoja laajoille alueille ja suurille ihmisryhmille</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1156</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.71</sumStat>
+      <sumStat type="stdev">1.016</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>678</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>263</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>110</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>88</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_23" intrvl="discrete" dcml="0" ID="Q1_23">
+      <labl level="variable">[q1_23] Energia-asioista on nykyisin jokaisen saatavilla riittävästi luotettavaa tietoa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energia-asioista on nykyisin jokaisen saatavilla riittävästi luotettavaa tietoa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1156</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.84</sumStat>
+      <sumStat type="stdev">1.159</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>130</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>399</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>251</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>280</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_24" intrvl="discrete" dcml="0" ID="Q1_24">
+      <labl level="variable">[q1_24] Vaihtoehtoiset energianlähteet kuten tuuli- ja aurinkovoima voitaisiin ottaa maassamme laajaan käyttöön jo melko pian, jos vain niitä koskevaan tutkimus- ja kehitystoimintaan haluttaisiin panostaa varoja</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vaihtoehtoiset energianlähteet kuten tuuli- ja aurinkovoima voitaisiin ottaa maassamme laajaan käyttöön jo melko pian, jos vain niitä koskevaan tutkimus- ja kehitystoimintaan haluttaisiin panostaa varoja</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1155</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.18</sumStat>
+      <sumStat type="stdev">1.094</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>365</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>422</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>205</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>124</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>39</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_25" intrvl="discrete" dcml="0" ID="Q1_25">
+      <labl level="variable">[q1_25] Suomalaiset energiayhtiöt toimivat nykyisin ympäristöasioissa vastuullisesti</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Suomalaiset energiayhtiöt toimivat nykyisin ympäristöasioissa vastuullisesti</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1155</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.75</sumStat>
+      <sumStat type="stdev">.962</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>431</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>429</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>156</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_26" intrvl="discrete" dcml="0" ID="Q1_26">
+      <labl level="variable">[q1_26] Ydinjätteet muodostavat jatkuvan uhan tulevien sukupolvien elämälle</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinjätteet muodostavat jatkuvan uhan tulevien sukupolvien elämälle</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1139</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.17</sumStat>
+      <sumStat type="stdev">1.217</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>461</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>283</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>185</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>164</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_27" intrvl="discrete" dcml="0" ID="Q1_27">
+      <labl level="variable">[q1_27] Energian riittävyyden ja turvallisuuden takaamiseksi valtion tulisi säilyttää itsellään riittävän suuri omistus ja äänivalta energiayhtiöissä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energian riittävyyden ja turvallisuuden takaamiseksi valtion tulisi säilyttää itsellään riittävän suuri omistus ja äänivalta energiayhtiöissä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.84</sumStat>
+      <sumStat type="stdev">.902</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>469</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>469</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>130</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_28" intrvl="discrete" dcml="0" ID="Q1_28">
+      <labl level="variable">[q1_28] Jotta teollisuutemme voisi säilyttää kansainvälisen kilpailukykynsä, sen on ehdottomasti saatava edullista sähköä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jotta teollisuutemme voisi säilyttää kansainvälisen kilpailukykynsä, sen on ehdottomasti saatava edullista sähköä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.10</sumStat>
+      <sumStat type="stdev">1.021</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>363</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>452</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>201</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>93</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_29" intrvl="discrete" dcml="0" ID="Q1_29">
+      <labl level="variable">[q1_29] Sähkön korkean hinnan pääsyynä on energia-alan keskittyminen ja kilpailun puute, eivät kohonneet tuotantokustannukset</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähkön korkean hinnan pääsyynä on energia-alan keskittyminen ja kilpailun puute, eivät kohonneet tuotantokustannukset</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1135</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.13</sumStat>
+      <sumStat type="stdev">1.002</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>368</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>378</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>281</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>93</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_30" intrvl="discrete" dcml="0" ID="Q1_30">
+      <labl level="variable">[q1_30] Luonnonsuojelun nimissä rajoitetaan taloudellista ja teollista toimintaa liian paljon</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Luonnonsuojelun nimissä rajoitetaan taloudellista ja teollista toimintaa liian paljon</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1132</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.01</sumStat>
+      <sumStat type="stdev">1.236</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>151</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>260</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>301</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>272</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>148</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_31" intrvl="discrete" dcml="0" ID="Q1_31">
+      <labl level="variable">[q1_31] Ydinvoiman käyttöön sisältyy aivan liian paljon tuntemattomia vaaratekijöitä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinvoiman käyttöön sisältyy aivan liian paljon tuntemattomia vaaratekijöitä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1137</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.87</sumStat>
+      <sumStat type="stdev">1.283</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>215</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>256</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>241</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>309</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>116</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_32" intrvl="discrete" dcml="0" ID="Q1_32">
+      <labl level="variable">[q1_32] Ydinvoiman käyttö on perusteltua, koska se vähentää koko maailmanriippuvuutta öljystä ja muista fossiilisista polttoaineista</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinvoiman käyttö on perusteltua, koska se vähentää koko maailmanriippuvuutta öljystä ja muista fossiilisista polttoaineista</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1136</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.40</sumStat>
+      <sumStat type="stdev">1.151</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>262</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>443</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>225</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>132</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_33" intrvl="discrete" dcml="0" ID="Q1_33">
+      <labl level="variable">[q1_33] Ydinvoiman ja -jätteiden turvallisuutta koskevista säädöksistä pitäisi päättää yhteisesti EU-tasolla eikä jokaisessa jäsenmaassa erikseen</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinvoiman ja -jätteiden turvallisuutta koskevista säädöksistä pitäisi päättää yhteisesti EU-tasolla eikä jokaisessa jäsenmaassa erikseen</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.56</sumStat>
+      <sumStat type="stdev">1.310</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>285</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>358</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>196</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>173</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>126</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_34" intrvl="discrete" dcml="0" ID="Q1_34">
+      <labl level="variable">[q1_34] Mikäli EU säätää yhteiset ydinvoimaa koskevat turvallisuusnormit, ne parantaisivat ydinvoiman käytön turvallisuutta myös Suomessa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Mikäli EU säätää yhteiset ydinvoimaa koskevat turvallisuusnormit, ne parantaisivat ydinvoiman käytön turvallisuutta myös Suomessa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1133</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.08</sumStat>
+      <sumStat type="stdev">1.112</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>106</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>212</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>421</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>268</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>126</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_35" intrvl="discrete" dcml="0" ID="Q1_35">
+      <labl level="variable">[q1_35] Uusien voimaloiden rakentamisen sijasta pitäisi energian säästöä tehostaa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Uusien voimaloiden rakentamisen sijasta pitäisi energian säästöä tehostaa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.56</sumStat>
+      <sumStat type="stdev">1.192</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>247</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>367</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>220</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>246</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>58</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_36" intrvl="discrete" dcml="0" ID="Q1_36">
+      <labl level="variable">[q1_36] Ydinjätteet olisi parempi pitää nykyisissä välivarastoissaan ja odottaa uusia ratkaisuja kuin sijoittaa ne lopullisesti maamme kallioperään</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinjätteet olisi parempi pitää nykyisissä välivarastoissaan ja odottaa uusia ratkaisuja kuin sijoittaa ne lopullisesti maamme kallioperään</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.74</sumStat>
+      <sumStat type="stdev">1.154</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>181</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>312</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>347</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>213</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>85</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_37" intrvl="discrete" dcml="0" ID="Q1_37">
+      <labl level="variable">[q1_37] Bioenergian käytön lisäämistä sähköntuotannossa tulee edistää kaikin keinoin, tarvittaessa vaikka verovaroin tukemalla</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Bioenergian käytön lisäämistä sähköntuotannossa tulee edistää kaikin keinoin, tarvittaessa vaikka verovaroin tukemalla</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1137</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.34</sumStat>
+      <sumStat type="stdev">1.140</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>301</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>401</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>230</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>153</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>52</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_38" intrvl="discrete" dcml="0" ID="Q1_38">
+      <labl level="variable">[q1_38] Sähkö on Suomessa halvempaa kuin useimmissa muissa EU-maissa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähkö on Suomessa halvempaa kuin useimmissa muissa EU-maissa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1137</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.93</sumStat>
+      <sumStat type="stdev">.993</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>232</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>550</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>175</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>84</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_39" intrvl="discrete" dcml="0" ID="Q1_39">
+      <labl level="variable">[q1_39] Viidennen ydinvoimalan rakentaminen Suomeen on kannatettavaa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Viidennen ydinvoimalan rakentaminen Suomeen on kannatettavaa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1133</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.67</sumStat>
+      <sumStat type="stdev">1.396</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>313</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>244</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>251</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>155</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>170</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_40" intrvl="discrete" dcml="0" ID="Q1_40">
+      <labl level="variable">[q1_40] Ydinvoima on ympäristöystävällinen tapa tuottaa sähköä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinvoima on ympäristöystävällinen tapa tuottaa sähköä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1135</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.67</sumStat>
+      <sumStat type="stdev">1.331</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>253</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>335</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>230</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>162</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>155</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_41" intrvl="discrete" dcml="0" ID="Q1_41">
+      <labl level="variable">[q1_41] Markkinapohjaisen sähköntuotannon vastapainoksi Suomeen olisi saatava asiakkaiden omistamaa (esim. osuuskuntamuotoista) tuotantoa, joka myy sähkön omakustannusperiaatteella</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Markkinapohjaisen sähköntuotannon vastapainoksi Suomeen olisi saatava asiakkaiden omistamaa (esim. osuuskuntamuotoista) tuotantoa, joka myy sähkön omakustannusperiaatteella</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1135</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.17</sumStat>
+      <sumStat type="stdev">.994</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>334</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>393</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>305</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>82</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_42" intrvl="discrete" dcml="0" ID="Q1_42">
+      <labl level="variable">[q1_42] Päätös jättää Vuotoksen allas rakentamatta oli oikea</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Päätös jättää Vuotoksen allas rakentamatta oli oikea</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.60</sumStat>
+      <sumStat type="stdev">1.259</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>315</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>172</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>412</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>134</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>105</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_43" intrvl="discrete" dcml="0" ID="Q1_43">
+      <labl level="variable">[q1_43] Energiayhtiöiden tulisi itse saada päättää millä energianlähteillä ne sähköä tuottavat</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energiayhtiöiden tulisi itse saada päättää millä energianlähteillä ne sähköä tuottavat</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1134</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.30</sumStat>
+      <sumStat type="stdev">1.172</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>76</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>235</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>286</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>342</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>195</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_44" intrvl="discrete" dcml="0" ID="Q1_44">
+      <labl level="variable">[q1_44] Puun, turpeen ja muiden kotimaisten polttoaineiden käytön lisäämisellä olisi merkittävä työllisyyttä parantava vaikutus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Puun, turpeen ja muiden kotimaisten polttoaineiden käytön lisäämisellä olisi merkittävä työllisyyttä parantava vaikutus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1140</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.13</sumStat>
+      <sumStat type="stdev">1.008</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>343</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>450</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>221</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>104</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_45" intrvl="discrete" dcml="0" ID="Q1_45">
+      <labl level="variable">[q1_45] Maakaasun käytön lisääminen olisi riskialtista, koska kaasun saatavuuteen ja hintakehitykseen liittyy huomattavia epävarmuustekijöitä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Maakaasun käytön lisääminen olisi riskialtista, koska kaasun saatavuuteen ja hintakehitykseen liittyy huomattavia epävarmuustekijöitä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.26</sumStat>
+      <sumStat type="stdev">.981</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>266</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>468</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>271</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>113</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_46" intrvl="discrete" dcml="0" ID="Q1_46">
+      <labl level="variable">[q1_46] Kun viides ydinvoimala valmistuu, on se vielä turvallisempi kuin maamme nykyiset, sinänsä turvallisiksi osoittautuneet ydinvoimalat</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kun viides ydinvoimala valmistuu, on se vielä turvallisempi kuin maamme nykyiset, sinänsä turvallisiksi osoittautuneet ydinvoimalat</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1139</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.59</sumStat>
+      <sumStat type="stdev">1.076</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>191</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>337</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>437</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>78</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_47" intrvl="discrete" dcml="0" ID="Q1_47">
+      <labl level="variable">[q1_47] EU-maiden ei pitäisi jatkaa päästökauppaa, ellei siihen sitoudu tulevaisuudessa nykyistä enemmän maita (kuten Yhdysvallat ja suuret kehitysmaat)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>EU-maiden ei pitäisi jatkaa päästökauppaa, ellei siihen sitoudu tulevaisuudessa nykyistä enemmän maita (kuten Yhdysvallat ja suuret kehitysmaat)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1136</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.49</sumStat>
+      <sumStat type="stdev">1.193</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>293</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>296</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>322</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>151</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_48" intrvl="discrete" dcml="0" ID="Q1_48">
+      <labl level="variable">[q1_48] Viidennen ydinvoimalan lisäksi maahamme tulisi rakentaa kuudeskin ydinvoimala</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Viidennen ydinvoimalan lisäksi maahamme tulisi rakentaa kuudeskin ydinvoimala</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1137</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.13</sumStat>
+      <sumStat type="stdev">1.475</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>236</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>160</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>261</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>178</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>302</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_49" intrvl="discrete" dcml="0" ID="Q1_49">
+      <labl level="variable">[q1_49] Suomen tulisi olla sähköntuotannossaan omavarainen, vailla riippuvuutta kansainvälisen sähkökaupan suhdanteista</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Suomen tulisi olla sähköntuotannossaan omavarainen, vailla riippuvuutta kansainvälisen sähkökaupan suhdanteista</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1136</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.85</sumStat>
+      <sumStat type="stdev">.883</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>453</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>481</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>130</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>64</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_50" intrvl="discrete" dcml="0" ID="Q1_50">
+      <labl level="variable">[q1_50] Kilpailu sähkömarkkinoilla on alentanut käyttämäni sähkön hintaa</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kilpailu sähkömarkkinoilla on alentanut käyttämäni sähkön hintaa</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1137</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.67</sumStat>
+      <sumStat type="stdev">1.166</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>145</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>268</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>329</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>342</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_51" intrvl="discrete" dcml="0" ID="Q1_51">
+      <labl level="variable">[q1_51] Palava kotitalous- ja muut yhdyskuntajäte olisi parempi polttaa jätteenpolttolaitoksissa energiaksi kuin yrittää hyödyntää niitä muilla tavoin</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Palava kotitalous- ja muut yhdyskuntajäte olisi parempi polttaa jätteenpolttolaitoksissa energiaksi kuin yrittää hyödyntää niitä muilla tavoin</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1136</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.12</sumStat>
+      <sumStat type="stdev">1.033</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>366</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>417</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>240</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>79</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_52" intrvl="discrete" dcml="0" ID="Q1_52">
+      <labl level="variable">[q1_52] Viranomaiset ovat hoitaneet ydinvoimalaitosten turvallisuusvalvonnan Suomessa hyvin</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Viranomaiset ovat hoitaneet ydinvoimalaitosten turvallisuusvalvonnan Suomessa hyvin</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1138</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.09</sumStat>
+      <sumStat type="stdev">.955</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>348</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>444</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>274</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_53" intrvl="discrete" dcml="0" ID="Q1_53">
+      <labl level="variable">[q1_53] Merikaapeli sähkön tuomiseksi Venäjältä Suomeen olisi hyvä ratkaisu</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Merikaapeli sähkön tuomiseksi Venäjältä Suomeen olisi hyvä ratkaisu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1136</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.63</sumStat>
+      <sumStat type="stdev">1.126</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>50</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>114</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>361</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>287</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>324</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_54" intrvl="discrete" dcml="0" ID="Q1_54">
+      <labl level="variable">[q1_54] Ilmastonmuutos on todellinen ja äärimmäisen vakava uhka, jonka torjuntaan koko maailman tulisi ryhtyä välittömästi ja kaikin mahdollisin keinoin</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ilmastonmuutos on todellinen ja äärimmäisen vakava uhka, jonka torjuntaan koko maailman tulisi ryhtyä välittömästi ja kaikin mahdollisin keinoin</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1139</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.67</sumStat>
+      <sumStat type="stdev">.917</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>632</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>328</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>119</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q1_55" intrvl="discrete" dcml="0" ID="Q1_55">
+      <labl level="variable">[q1_55] Nyt kun sähkömarkkinoiden vapauttamisesta kilpailulle on saatu muutamanvuoden kokemus, ratkaisun voidaan todeta olleen onnistunut</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Nyt kun sähkömarkkinoiden vapauttamisesta kilpailulle on saatu muutamanvuoden kokemus, ratkaisun voidaan todeta olleen onnistunut</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1137</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.33</sumStat>
+      <sumStat type="stdev">.993</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Täysin samaa mieltä</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jokseenkin samaa mieltä</labl>
+        <catStat>172</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vaikea sanoa</labl>
+        <catStat>514</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jokseenkin eri mieltä</labl>
+        <catStat>244</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Täysin eri mieltä</labl>
+        <catStat>179</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_1" intrvl="discrete" dcml="0" ID="Q2_1">
+      <labl level="variable">[q2_1] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Kivihiili</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kivihiili</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1110</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">4.70</sumStat>
+      <sumStat type="stdev">1.404</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>53</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>199</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>191</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>367</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>164</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>134</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_2" intrvl="discrete" dcml="0" ID="Q2_2">
+      <labl level="variable">[q2_2] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Turve</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Turve</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1115</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">3.21</sumStat>
+      <sumStat type="stdev">1.751</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>48</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>160</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>306</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>281</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>119</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>100</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>94</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_3" intrvl="discrete" dcml="0" ID="Q2_3">
+      <labl level="variable">[q2_3] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Maakaasu</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Maakaasu</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1094</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">3.48</sumStat>
+      <sumStat type="stdev">1.755</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>69</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>93</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>246</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>374</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>112</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>97</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>136</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_4" intrvl="discrete" dcml="0" ID="Q2_4">
+      <labl level="variable">[q2_4] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Ydinvoima</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ydinvoima</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1116</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">2.96</sumStat>
+      <sumStat type="stdev">1.747</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>244</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>283</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>303</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>75</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>103</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_5" intrvl="discrete" dcml="0" ID="Q2_5">
+      <labl level="variable">[q2_5] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Vesivoima</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vesivoima</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1122</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">2.27</sumStat>
+      <sumStat type="stdev">1.291</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>312</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>428</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>291</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_6" intrvl="discrete" dcml="0" ID="Q2_6">
+      <labl level="variable">[q2_6] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Puu ja muu bioenergia </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Puu ja muu bioenergia</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1120</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">1.94</sumStat>
+      <sumStat type="stdev">1.341</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>43</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>502</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>421</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>114</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_7" intrvl="discrete" dcml="0" ID="Q2_7">
+      <labl level="variable">[q2_7] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Tuulivoima</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Tuulivoima</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1132</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">1.85</sumStat>
+      <sumStat type="stdev">1.334</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>582</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>378</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>95</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_8" intrvl="discrete" dcml="0" ID="Q2_8">
+      <labl level="variable">[q2_8] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Öljy</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Öljy</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1109</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">4.42</sumStat>
+      <sumStat type="stdev">1.210</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>237</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>293</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>377</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>103</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>67</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q2_9" intrvl="discrete" dcml="0" ID="Q2_9">
+      <labl level="variable">[q2_9] Mihin suuntaan sähköntuotantoamme pitäisi mielestänne kehittää seuraavien energiavaihtoehtojen osalta? Sähkön tuonti ulkomailta</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähkön tuonti ulkomailta</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="7" min="1"/>
+      </valrng>
+      <sumStat type="vald">1116</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">7</sumStat>
+      <sumStat type="mean">4.28</sumStat>
+      <sumStat type="stdev">1.581</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Tuntuvasti lisätä</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hieman lisätä</labl>
+        <catStat>99</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Nykyisin sopiva</labl>
+        <catStat>301</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hieman vähentää</labl>
+        <catStat>226</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Tuntuvasti vähentää</labl>
+        <catStat>206</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Luopua kokonaan</labl>
+        <catStat>117</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>145</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q3_1" intrvl="discrete" dcml="0" ID="Q3_1">
+      <labl level="variable">[q3_1] Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat? Liikenne, sen polttoaineet ja pakokaasut </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Liikenne, sen polttoaineet ja pakokaasut</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1142</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.62</sumStat>
+      <sumStat type="stdev">.769</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>577</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hyvin merkittävä</labl>
+        <catStat>458</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko merkittävä</labl>
+        <catStat>86</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei kovin merkittävä</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei lainkaan merkittävä</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q3_2" intrvl="discrete" dcml="0" ID="Q3_2">
+      <labl level="variable">[q3_2] Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat? Energiantuotanto, voimalaitokset </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energiantuotanto, voimalaitokset</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1128</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.53</sumStat>
+      <sumStat type="stdev">.957</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>116</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hyvin merkittävä</labl>
+        <catStat>484</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko merkittävä</labl>
+        <catStat>419</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei kovin merkittävä</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei lainkaan merkittävä</labl>
+        <catStat>75</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q3_3" intrvl="discrete" dcml="0" ID="Q3_3">
+      <labl level="variable">[q3_3] Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat? Muu teollisuus, sen polttoprosessit </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Muu teollisuus, sen polttoprosessit</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1129</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.19</sumStat>
+      <sumStat type="stdev">.995</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>236</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hyvin merkittävä</labl>
+        <catStat>605</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko merkittävä</labl>
+        <catStat>202</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei kovin merkittävä</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei lainkaan merkittävä</labl>
+        <catStat>75</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q3_4" intrvl="discrete" dcml="0" ID="Q3_4">
+      <labl level="variable">[q3_4] Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat? Pienpoltto kotitalouksissa (tulisijat, puukiukaat jne.) </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Pienpoltto kotitalouksissa (tulisijat, puukiukaat jne.)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1130</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.15</sumStat>
+      <sumStat type="stdev">.802</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hyvin merkittävä</labl>
+        <catStat>147</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko merkittävä</labl>
+        <catStat>583</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei kovin merkittävä</labl>
+        <catStat>332</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei lainkaan merkittävä</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q3_5" intrvl="discrete" dcml="0" ID="Q3_5">
+      <labl level="variable">[q3_5] Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat? Metsäpalot, tulipalot </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Metsäpalot, tulipalot</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1127</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.59</sumStat>
+      <sumStat type="stdev">.984</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>171</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hyvin merkittävä</labl>
+        <catStat>321</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko merkittävä</labl>
+        <catStat>465</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei kovin merkittävä</labl>
+        <catStat>136</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei lainkaan merkittävä</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q3_6" intrvl="discrete" dcml="0" ID="Q3_6">
+      <labl level="variable">[q3_6] Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat? Katupöly, tiepöly</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Katupöly, tiepöly</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1134</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">1.93</sumStat>
+      <sumStat type="stdev">.875</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>379</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hyvin merkittävä</labl>
+        <catStat>532</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko merkittävä</labl>
+        <catStat>174</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei kovin merkittävä</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei lainkaan merkittävä</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q3_7" intrvl="discrete" dcml="0" ID="Q3_7">
+      <labl level="variable">[q3_7] Kuinka merkittävinä (pahoina) pienhiukkaspäästöjen lähteinä näette seuraavat? Kaukokulkeutumana (ulkomailta) tulevat hiukkaset </labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kaukokulkeutumana (ulkomailta) tulevat hiukkaset</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1136</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.39</sumStat>
+      <sumStat type="stdev">1.007</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>194</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Hyvin merkittävä</labl>
+        <catStat>477</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko merkittävä</labl>
+        <catStat>361</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei kovin merkittävä</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei lainkaan merkittävä</labl>
+        <catStat>71</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_1" intrvl="discrete" dcml="0" ID="Q4_1">
+      <labl level="variable">[q4_1] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Ympäristöministeriö</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ympäristöministeriö</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">954</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.26</sumStat>
+      <sumStat type="stdev">1.073</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>175</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>550</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>114</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>83</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_2" intrvl="discrete" dcml="0" ID="Q4_2">
+      <labl level="variable">[q4_2] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Kauppa- ja teollisuusministeriö/KTMn energia-osasto</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kauppa- ja teollisuusministeriö/KTMn energia-osasto</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">950</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.55</sumStat>
+      <sumStat type="stdev">1.142</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>515</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>176</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>121</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_3" intrvl="discrete" dcml="0" ID="Q4_3">
+      <labl level="variable">[q4_3] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Maan hallitus/johtavat poliitikot</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Maan hallitus/johtavat poliitikot</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">954</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.97</sumStat>
+      <sumStat type="stdev">1.028</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>331</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>364</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>120</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>116</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_4" intrvl="discrete" dcml="0" ID="Q4_4">
+      <labl level="variable">[q4_4] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Sähkölaitokset (sähkön myyjät/jakelijat)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähkölaitokset (sähkön myyjät/jakelijat)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">957</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.99</sumStat>
+      <sumStat type="stdev">1.029</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>320</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>380</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>112</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>121</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_5" intrvl="discrete" dcml="0" ID="Q4_5">
+      <labl level="variable">[q4_5] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Energiayhtiöt (sähkön tuottajat) yleensä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energiayhtiöt (sähkön tuottajat) yleensä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">954</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.98</sumStat>
+      <sumStat type="stdev">1.024</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>326</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>369</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>121</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>116</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_6" intrvl="discrete" dcml="0" ID="Q4_6">
+      <labl level="variable">[q4_6] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Ydinvoimayhtiöt (yleisesti ottaen)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Ydinvoimayhtiöt (yleisesti ottaen)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">952</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.95</sumStat>
+      <sumStat type="stdev">1.139</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>59</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>335</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>289</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>137</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>132</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_7" intrvl="discrete" dcml="0" ID="Q4_7">
+      <labl level="variable">[q4_7] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Energiamarkkinavirasto</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Energiamarkkinavirasto</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">942</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.10</sumStat>
+      <sumStat type="stdev">1.412</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>76</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>373</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>166</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>294</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_8" intrvl="discrete" dcml="0" ID="Q4_8">
+      <labl level="variable">[q4_8] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Säteilyturvakeskus (STUK)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Säteilyturvakeskus (STUK)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">963</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.06</sumStat>
+      <sumStat type="stdev">1.200</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>356</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>410</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>77</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>95</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_9" intrvl="discrete" dcml="0" ID="Q4_9">
+      <labl level="variable">[q4_9] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Energia-alan järjestöt (Energiateollisuus ry ym.)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Energia-alan järjestöt (Energiateollisuus ry ym.)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">945</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.19</sumStat>
+      <sumStat type="stdev">1.299</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>349</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>238</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>52</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>271</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_10" intrvl="discrete" dcml="0" ID="Q4_10">
+      <labl level="variable">[q4_10] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Metsäteollisuus, vientiteollisuus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Metsäteollisuus, vientiteollisuus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">939</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.11</sumStat>
+      <sumStat type="stdev">1.172</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>48</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>318</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>317</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>78</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>198</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_11" intrvl="discrete" dcml="0" ID="Q4_11">
+      <labl level="variable">[q4_11] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Suomen Luonnonsuojeluliitto ry.</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Suomen Luonnonsuojeluliitto ry.</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">959</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.61</sumStat>
+      <sumStat type="stdev">1.190</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>141</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>407</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>201</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>103</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>107</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_12" intrvl="discrete" dcml="0" ID="Q4_12">
+      <labl level="variable">[q4_12] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Greenpeace</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Greenpeace</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">958</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.96</sumStat>
+      <sumStat type="stdev">1.232</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>104</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>293</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>234</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>188</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>139</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_13" intrvl="discrete" dcml="0" ID="Q4_13">
+      <labl level="variable">[q4_13] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä pidätte seuraavia tahoja? Ympäristö- ja luonnonsuojelujärjestöt yleensä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ympäristö- ja luonnonsuojelujärjestöt yleensä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">960</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.75</sumStat>
+      <sumStat type="stdev">1.183</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>111</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>367</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>257</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>103</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_14" intrvl="discrete" dcml="0" ID="Q4_14">
+      <labl level="variable">[q4_14] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? EUn ympäristöviranomaiset ja -elimet</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? EUn ympäristöviranomaiset ja -elimet</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">958</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.97</sumStat>
+      <sumStat type="stdev">1.191</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>362</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>295</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>69</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>181</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="Q4_15" intrvl="discrete" dcml="0" ID="Q4_15">
+      <labl level="variable">[q4_15] Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Energia-alan tutkijat/tutkimuslaitokset</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sähköntuotantovaihtoehtojen ympäristövaikutuksista, kustannuksista ja riskeistä esitetään erilaista, osin ristiriitaistakin tietoa. Kuinka luotettavina tietolähteinä näissä asioissa pidätte seuraavia tahoja? Energia-alan tutkijat/tutkimuslaitokset</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">962</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">2.25</sumStat>
+      <sumStat type="stdev">1.214</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Hyvin luotettava</labl>
+        <catStat>237</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Melko luotettava</labl>
+        <catStat>508</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Melko epäluotettava</labl>
+        <catStat>83</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Hyvin epäluotettava</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>124</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV1" intrvl="discrete" dcml="0" ID="BV1">
+      <labl level="variable">[bv1] Sukupuoli</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sukupuoli</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <sumStat type="vald">1144</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <sumStat type="mean">1.48</sumStat>
+      <sumStat type="stdev">.500</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Mies</labl>
+        <catStat>600</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Nainen</labl>
+        <catStat>544</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV2" intrvl="discrete" dcml="0" ID="BV2">
+      <labl level="variable">[bv2] Ikäryhmä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ikäryhmä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="6" min="1"/>
+      </valrng>
+      <sumStat type="vald">1145</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">6</sumStat>
+      <sumStat type="mean">3.85</sumStat>
+      <sumStat type="stdev">1.470</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">18 - 25 vuotta</labl>
+        <catStat>95</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">26 - 35 vuotta</labl>
+        <catStat>148</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">36 - 45 vuotta</labl>
+        <catStat>183</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">46 - 55 vuotta</labl>
+        <catStat>263</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">56 - 65 vuotta</labl>
+        <catStat>319</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Yli 65 vuotta</labl>
+        <catStat>137</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV3" intrvl="discrete" dcml="0" ID="BV3">
+      <labl level="variable">[bv3] Asuinkunnan koko</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Asuinkunnan koko</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1133</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.17</sumStat>
+      <sumStat type="stdev">1.271</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Alle 4 000 asukasta</labl>
+        <catStat>52</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">4 000 - 8 000 asukasta</labl>
+        <catStat>408</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">8 000 - 30 000 asukasta</labl>
+        <catStat>238</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">30 000 - 80 000 asukasta</labl>
+        <catStat>165</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Yli 80 000 asukasta</labl>
+        <catStat>270</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV4" intrvl="discrete" dcml="0" ID="BV4">
+      <labl level="variable">[bv4] Maakunta, jonka alueella asutte</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Maakunta, jonka alueella asutte</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="19" min="1"/>
+      </valrng>
+      <sumStat type="vald">1152</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">19</sumStat>
+      <sumStat type="mean">6.33</sumStat>
+      <sumStat type="stdev">5.478</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Uusimaa</labl>
+        <catStat>227</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Itä-Uusimaa</labl>
+        <catStat>135</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Varsinais-Suomi</labl>
+        <catStat>78</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Satakunta</labl>
+        <catStat>224</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Häme</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Pirkanmaa</labl>
+        <catStat>70</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Päijät-Häme</labl>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Kymenlaakso</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Etelä-Karjala</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Etelä-Savo</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Pohjois-Savo</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">Pohjois-Karjala</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>13</catValu>
+        <labl level="category">Keski-Suomi</labl>
+        <catStat>42</catStat>
+      </catgry>
+      <catgry>
+        <catValu>14</catValu>
+        <labl level="category">Etelä-Pohjanmaa</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>15</catValu>
+        <labl level="category">Vaasan rannikkoseutu (Pohjanmaa)</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>16</catValu>
+        <labl level="category">Keski-Pohjanmaa</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>17</catValu>
+        <labl level="category">Pohjois-Pohjanmaa</labl>
+        <catStat>58</catStat>
+      </catgry>
+      <catgry>
+        <catValu>18</catValu>
+        <labl level="category">Kainuu</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>19</catValu>
+        <labl level="category">Lappi</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV5" intrvl="discrete" dcml="0" ID="BV5">
+      <labl level="variable">[bv5] Millainen peruskoulutus teillä on?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Millainen peruskoulutus teillä on?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">1136</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <sumStat type="mean">2.12</sumStat>
+      <sumStat type="stdev">.792</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>27</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kansakoulu</labl>
+        <catStat>296</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Keski- tai peruskoulu</labl>
+        <catStat>408</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ylioppilastutkinto</labl>
+        <catStat>432</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV6" intrvl="discrete" dcml="0" ID="BV6">
+      <labl level="variable">[bv6] Millainen ammatillinen koulutus teillä on?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Millainen ammatillinen koulutus teillä on?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">1130</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">5</sumStat>
+      <sumStat type="mean">3.14</sumStat>
+      <sumStat type="stdev">1.251</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Ei ammatillista koulutusta</labl>
+        <catStat>162</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ammattikurssi, muu lyhyt ammattikoulutus</labl>
+        <catStat>168</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ammattikoulu, kouluasteen ammatill. tutkinto</labl>
+        <catStat>312</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Opistotutkinto, ammattikorkeakoulututkinto</labl>
+        <catStat>326</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Yliopisto- tai tiedekorkeakoulututkinto</labl>
+        <catStat>162</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV7" intrvl="discrete" dcml="0" ID="BV7">
+      <labl level="variable">[bv7] Ammattiryhmä, johon katsotte kuuluvanne</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattiryhmä, johon katsotte kuuluvanne</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="12" min="1"/>
+      </valrng>
+      <sumStat type="vald">1144</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">12</sumStat>
+      <sumStat type="mean">5.62</sumStat>
+      <sumStat type="stdev">2.889</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Johtavassa asemassa toisen palveluksessa</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ylempi toimihenkilö</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Alempi toimihenkilö</labl>
+        <catStat>164</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Työntekijä</labl>
+        <catStat>262</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Yrittäjä tai yksityinen ammatinharjoittaja</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">Maatalousyrittäjä</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Kotiäiti/koti-isä</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Opiskelija</labl>
+        <catStat>70</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Eläkeläinen</labl>
+        <catStat>272</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Työtön</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">Muu</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category"/>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV8" intrvl="discrete" dcml="0" ID="BV8">
+      <labl level="variable">[bv8] Jos eduskuntavaalit pidettäisiin nyt, minkä puolueen ehdokasta äänestäisitte?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jos eduskuntavaalit pidettäisiin nyt, minkä puolueen ehdokasta äänestäisitte?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="12" min="1"/>
+      </valrng>
+      <sumStat type="vald">1122</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">12</sumStat>
+      <sumStat type="mean">5.95</sumStat>
+      <sumStat type="stdev">4.095</sumStat>
+      <catgry missing="Y">
+        <catValu>0</catValu>
+        <labl level="category"/>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">KESK</labl>
+        <catStat>144</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">SDP</labl>
+        <catStat>192</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">KOK</labl>
+        <catStat>172</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Vasemmistoliitto</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Vihreät</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">RKP</labl>
+        <catStat>48</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">Kristillisdemokraatit</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">Perussuomalaiset</labl>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Jokin muu</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">En äänestäisi lainkaan</labl>
+        <catStat>86</catStat>
+      </catgry>
+      <catgry>
+        <catValu>11</catValu>
+        <labl level="category">En osaa sanoa</labl>
+        <catStat>177</catStat>
+      </catgry>
+      <catgry>
+        <catValu>12</catValu>
+        <labl level="category">En halua sanoa</labl>
+        <catStat>119</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV9" intrvl="contin" dcml="0" ID="BV9">
+      <labl level="variable">[bv9] KOMMENTTEJA? Kaikki mielipiteet energia-asioista tai tästä tutkimuksesta ovat tervetulleita ja arvokkaita.</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>KOMMENTTEJA? Kaikki mielipiteet energia-asioista tai tästä tutkimuksesta ovat tervetulleita ja arvokkaita.</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="1" min="0"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">1</sumStat>
+      <sumStat type="mean">.30</sumStat>
+      <sumStat type="stdev">.457</sumStat>
+      <notes/>
+    </var>
+    <var files="F1" name="BV10" intrvl="discrete" dcml="0" ID="BV10">
+      <labl level="variable">[bv12] Otos</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Otos</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <sumStat type="mean">1.41</sumStat>
+      <sumStat type="stdev">.738</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">KOKOM</labl>
+        <catStat>866</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">LOVIS</labl>
+        <catStat>121</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">EURAJ</labl>
+        <catStat>176</catStat>
+      </catgry>
+      <notes/>
+    </var>
+    <var files="F1" name="BV11" intrvl="contin" dcml="0" ID="BV11">
+      <labl level="variable">[bv11] Lomakkeen kieli</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Lomakkeen kieli</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <sumStat type="vald">1163</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <sumStat type="mean">1.06</sumStat>
+      <sumStat type="stdev">.238</sumStat>
+      <notes/>
+    </var>
+  </dataDscr>
+  <otherMat level="study">
+    <labl>Kyselylomake: pdf-tiedosto suomeksi</labl>
+  </otherMat>
+</codeBook>

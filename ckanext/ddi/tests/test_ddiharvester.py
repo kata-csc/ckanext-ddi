@@ -92,10 +92,11 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         harv_obj = HarvestObject()
         harv_obj.job = job
         harv_obj.content = json.dumps({'url': "http://foo"})
-        self.assert_(harv.fetch_stage(harv_obj) == False)
-        errs = Session.query(HarvestObjectError).all()
         # XML error and URL error, also the lack of url in content
-        self.assert_(len(errs) == 2)
+        self.assert_(harv.import_stage(harv_obj) == False)
+        errs = Session.query(HarvestObjectError).all()
+        print errs
+        self.assert_(len(errs) == 1)
 
     def test_harvester_gather(self):
         harv, job = self._create_harvester()
@@ -110,23 +111,6 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         harv, job = self._create_harvester(config=False)
         harv.gather_stage(job)
 
-    def test_harvester_fetch(self):
-        harv, job = self._create_harvester()
-        res = """
-        http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml
-        """
-        urllib2.urlopen = mock.Mock(return_value=StringIO(res))
-        gathered = harv.gather_stage(job)
-        urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.nr1))
-        harvest_obj = HarvestObject.get(gathered[0])
-        self.assert_(harv.fetch_stage(harvest_obj))
-        self.assert_(isinstance(json.loads(harvest_obj.content), dict))
-        result = json.loads(harvest_obj.content)
-        self.assert_("stdyDscr" in result['xml']['codeBook'])
-        urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.foobar))
-        harvest_obj = HarvestObject.get(gathered[0])
-        self.assert_(not harv.fetch_stage(harvest_obj))
-
     def test_harvester_import(self):
         harv, job = self._create_harvester()
         res = "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml"
@@ -140,9 +124,9 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(len(Session.query(Package).all()) == 1)
 
         # Lets see if the package is ok, according to test data
-        log.debug(Session.query(Package).all())
         pkg = Session.query(Package).filter(Package.title == "Puolueiden ajankohtaistutkimus 1981").one()
         self.assert_(pkg.title == "Puolueiden ajankohtaistutkimus 1981")
+        log.debug(pkg.extras)
         self.assert_(len(pkg.get_groups()) == 2)
         self.assert_(len(pkg.resources) == 1)
         self.assert_(len(pkg.get_tags()) == 9)
@@ -202,15 +186,33 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         harvest_obj = HarvestObject.get(gathered[0])
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(harv.import_stage(harvest_obj))
+        urllib2.urlopen = mock.Mock(return_value=open("FSD1216.xml"))
         self.assert_(harv.import_stage(harvest_obj))
 
-    def test_zfaulty_xml_2323(self):
+    def test_zfaulty_xml_unknown_errors(self):
         harv, job = self._create_harvester()
         res = "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml"
         urllib2.urlopen = mock.Mock(return_value=StringIO(res))
         gathered = harv.gather_stage(job)
-        urllib2.urlopen = mock.Mock(return_value=open("FSD2323.xml"))
+
+        urllib2.urlopen = mock.Mock(return_value=open("FSD2355.xml"))
         harvest_obj = HarvestObject.get(gathered[0])
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(harv.import_stage(harvest_obj))
+        print Package.text_search(\
+                            Session.query(Package),
+                            'Kansalaiskeskustelu ydinvoimasta 2006').all()
+        self.assert_(len(Package.text_search(\
+                            Session.query(Package),
+                            'Kansalaiskeskustelu ydinvoimasta 2006').all()) >= 1)
+
+        res = "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml"
+        urllib2.urlopen = mock.Mock(return_value=StringIO(res))
+        gathered = harv.gather_stage(job)
+        urllib2.urlopen = mock.Mock(return_value=open("FSD2362.xml"))
+        harvest_obj = HarvestObject.get(gathered[0])
+        self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(harv.import_stage(harvest_obj))
+        self.assert_(len(Package.text_search(\
+                                Session.query(Package),
+                                'Energia-asennetutkimus 2004').all()) >= 1)
