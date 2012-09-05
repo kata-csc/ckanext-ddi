@@ -186,8 +186,6 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         harvest_obj = HarvestObject.get(gathered[0])
         self.assert_(harv.fetch_stage(harvest_obj))
         self.assert_(harv.import_stage(harvest_obj))
-        urllib2.urlopen = mock.Mock(return_value=open("FSD1216.xml"))
-        self.assert_(harv.import_stage(harvest_obj))
 
     def test_zfaulty_xml_unknown_errors(self):
         harv, job = self._create_harvester()

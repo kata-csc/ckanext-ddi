@@ -138,9 +138,10 @@ class DDIHarvester(HarvesterBase):
             kw = kw.string
             if kw:
                 pkg.add_tag_by_name(munge_tag(kw))
-        description_array = study_descr.stdyInfo.abstract('p')
-        if not len(description_array):
-            description_array = study_descr.citation.sertStmt('p')
+        if study_descr.stdyInfo.abstract:
+            description_array = study_descr.stdyInfo.abstract('p')
+        else:
+            description_array = study_descr.citation.serStmt.serInfo('p')
         pkg.notes = '<br />'.join([description.string
                                    for description in description_array])
         pkg.title = title[:100]
@@ -155,18 +156,32 @@ class DDIHarvester(HarvesterBase):
                                     if docextra.string\
                                     else self._collect_attribs(docextra)
         for stdyextra in study_descr.stdyInfo.descendants:
-            if isinstance(docextra, Tag):
+            if isinstance(stdyextra, Tag):
                 if docextra:
-                    metas[docextra.name] = docextra.string\
-                                    if docextra.string\
-                                    else self._collect_attribs(docextra)
+                    if not stdyextra.name in metas:
+                        metas[stdyextra.name] = stdyextra.string\
+                                    if stdyextra.string\
+                                    else self._collect_attribs(stdyextra)
+                    else:
+                        metas[stdyextra.name] += " " + stdyextra.string\
+                                    if stdyextra.string\
+                                    else self._collect_attribs(stdyextra)
         vars = {}
         if ddi_xml.codeBook.dataDscr:
             for var in ddi_xml.codeBook.dataDscr('var'):
                 if var.sumStat:
                     if var('sumStat', type='mean'):
                         if var.qstn:
-                            vars[var['name']] = var.qstn.qstnLit.string
+                            statstr = ""
+                            for stats in [(stat['type'], stat.string) for stat in var('sumStat')]:
+                                    statstr += "%s:%s " % stats
+                            if not var['name'] in vars:
+                                vars[var['name']] = "%s %s" %\
+                                    (var.qstn.qstnLit.string,
+                                     statstr
+                                     )
+                            else:
+                                vars[var['name']] += " " + statstr
         pkg.extras = dict(metas, **vars)
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
