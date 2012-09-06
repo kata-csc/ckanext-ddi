@@ -136,6 +136,8 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         # Test if we have a variable with a standard deviation and mean, with min and max
         # All other variables might not make any sense.
         self.assert_('Q43_2' in pkg.extras)
+        print pkg.extras
+        self.assert_(pkg.extras['Q43_2'] == u'Kohdehenkil\xf6n syntym\xe4vuosi vald:1132 min:1893 max:1963 mean:1939.06 stdev:16.9446 ')
 
         urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.nr2))
         harvest_obj = HarvestObject.get(gathered[0])

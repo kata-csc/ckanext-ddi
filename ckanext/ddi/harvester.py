@@ -148,23 +148,21 @@ class DDIHarvester(HarvesterBase):
         pkg.add_resource(url=document_info.holdings['URI']\
                          if 'URI' in document_info.holdings else '')
         metas = {}
-        for docextra in document_info.descendants:
+        descendants = [desc for desc in document_info.descendants] +\
+                      [sdesc for sdesc in study_descr.stdyInfo.descendants]
+        for docextra in descendants:
             if isinstance(docextra, Tag):
                 if docextra:
-                    metas[docextra.name] = docextra.string\
+                    if docextra.name == 'p':
+                        docextra.name = docextra.parent.name
+                    if not docextra.name in metas:
+                        metas[docextra.name] = docextra.string\
                                     if docextra.string\
                                     else self._collect_attribs(docextra)
-        for stdyextra in study_descr.stdyInfo.descendants:
-            if isinstance(stdyextra, Tag):
-                if docextra:
-                    if not stdyextra.name in metas:
-                        metas[stdyextra.name] = stdyextra.string\
-                                    if stdyextra.string\
-                                    else self._collect_attribs(stdyextra)
                     else:
-                        metas[stdyextra.name] += " " + stdyextra.string\
-                                    if stdyextra.string\
-                                    else self._collect_attribs(stdyextra)
+                        metas[docextra.name] += " " + docextra.string\
+                                        if docextra.string\
+                                        else self._collect_attribs(docextra)
         vars = {}
         if ddi_xml.codeBook.dataDscr:
             for var in ddi_xml.codeBook.dataDscr('var'):
