@@ -98,19 +98,13 @@ class DDIHarvester(HarvesterBase):
                 ddi_xml = BeautifulSoup(urllib2.urlopen(udict['url']).read(),
                                         'xml')
             else:
-                print "No url"
-                log.debug("No url in content")
                 self._save_object_error('No url in content!', harvest_object)
                 return False
         except urllib2.URLError:
-            print "Fetch"
-            log.debug("Could not fetch %s" % udict['url'])
             self._save_object_error('Could not fetch from url %s!' % udict['url'], 
                                     harvest_object)
             return False
         except etree.XMLSyntaxError:
-            print "Parse"
-            log.debug("Unable to parse!")
             self._save_object_error('Unable to parse XML!', harvest_object)
             return False
         model.repo.new_revision()
@@ -127,6 +121,7 @@ class DDIHarvester(HarvesterBase):
         if not producer:
             producer = document_info.prodStmt.producer
         pkg.author = producer.string
+        pkg.author_email = producer.string
         keywords = study_descr.stdyInfo.subject('keyword')
         for kw in keywords:
             kw = kw.string
