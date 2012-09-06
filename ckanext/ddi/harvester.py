@@ -8,7 +8,6 @@ import logging
 import json
 import urllib2
 from lxml import etree
-import xmltodict
 
 from ckan.model import Package, Group
 
