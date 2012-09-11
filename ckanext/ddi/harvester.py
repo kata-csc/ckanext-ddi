@@ -141,7 +141,8 @@ class DDIHarvester(HarvesterBase):
         pkg.title = title[:100]
         pkg.url = udict['url']
         pkg.add_resource(url=document_info.holdings['URI']\
-                         if 'URI' in document_info.holdings else '')
+                         if 'URI' in document_info.holdings else '',
+                         description=title)
         metas = {}
         descendants = [desc for desc in document_info.descendants] +\
                       [sdesc for sdesc in study_descr.stdyInfo.descendants]
@@ -165,11 +166,14 @@ class DDIHarvester(HarvesterBase):
                     if var('sumStat', type='mean'):
                         if var.qstn:
                             statstr = ""
-                            for stats in [(stat['type'], stat.string) for stat in var('sumStat')]:
-                                    statstr += "%s:%s " % stats
+                            label = var.qstn.labl.string if var.qstn.labl else\
+                                    var.qstn.qstnLit.string
+                            for stats in [(stat['type'], stat.string)\
+                                          for stat in var('sumStat')]:
+                                statstr += "%s:%s " % stats
                             if not var['name'] in vars:
-                                vars[var['name']] = "%s %s" %\
-                                    (var.qstn.qstnLit.string,
+                                vars[var['name']] = "%s %s" % \
+                                    (label,
                                      statstr
                                      )
                             else:
