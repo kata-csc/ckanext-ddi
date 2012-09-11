@@ -128,16 +128,11 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(pkg.title == "Puolueiden ajankohtaistutkimus 1981")
         log.debug(pkg.extras)
         self.assert_(len(pkg.get_groups()) == 2)
-        self.assert_(len(pkg.resources) == 1)
+        self.assert_(len(pkg.resources) == 2)
         self.assert_(len(pkg.get_tags()) == 9)
         self.assert_(pkg.url == "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml")
         self.assert_(isinstance(pkg.extras, _AssociationDict))
         self.assert_(len(pkg.extras.items()) > 1)
-        # Test if we have a variable with a standard deviation and mean, with min and max
-        # All other variables might not make any sense.
-        self.assert_('Q43_2' in pkg.extras)
-        print pkg.extras
-        self.assert_(pkg.extras['Q43_2'] == u'Kohdehenkil\xf6n syntym\xe4vuosi vald:1132 min:1893 max:1963 mean:1939.06 stdev:16.9446 ')
 
         urllib2.urlopen = mock.Mock(return_value=StringIO(testdata.nr2))
         harvest_obj = HarvestObject.get(gathered[0])

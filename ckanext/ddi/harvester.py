@@ -7,9 +7,16 @@ Harvester for DDI2 formats
 import logging
 import json
 import urllib2
+import StringIO
+import re
+import csv
+import datetime
+
 from lxml import etree
 
 from ckan.model import Package, Group
+from ckan.lib.base import h
+from ckan.controllers.storage import BUCKET, get_ofs
 
 from ckan import model
 from ckan.model.authz import setup_default_user_roles
@@ -85,6 +92,46 @@ class DDIHarvester(HarvesterBase):
                 astr += "(%s,%s)" % (k, v)
         return astr
 
+    def _check_has_element(self, var, head):
+        origHead = head
+        if head in ['preQtxt', 'qstnLit', 'postQTxt', 'ivuInstr']:
+            var = var.qstn
+        if head.startswith('sumStat'):
+            head = head.split(' ')[0]
+        attr = getattr(var, head)
+        if hasattr(attr, 'string'):
+            attr = attr.string
+        if head == 'sumStat':
+            head = origHead
+        return (head, attr)
+
+    def _construct_csv(self, var, heads):
+        retdict = {}
+        for head in heads:
+            has_elems = self._check_has_element(var, head)
+            k, v = has_elems
+            retdict[k] = v
+        return retdict
+
+    def _get_headers(self, vars):
+        longest_els = []
+        for var in vars:
+            els = var(re.compile('^((?!catgry).)'), recursive=False)
+            tmpels = []
+            for el in els:
+                if el.name == 'qstn':
+                    tmpels.append('preQTxt')
+                    tmpels.append('qstnLit')
+                    tmpels.append('postQTxt')
+                    tmpels.append('ivuInstr')
+                if el.name == 'sumStat':
+                    tmpels.append('sumStat ' + el['type'])
+                if el.name not in ['qstn', 'sumStat']:
+                    tmpels.append(el.name)
+            if len(tmpels) > len(longest_els):
+                longest_els = tmpels
+        return longest_els
+
     def import_stage(self, harvest_object):
         '''Import the metadata received in the fetch stage to a dataset and
         create groups if ones are defined. Fill in metadata from study and
@@ -159,26 +206,26 @@ class DDIHarvester(HarvesterBase):
                         metas[docextra.name] += " " + docextra.string\
                                         if docextra.string\
                                         else self._collect_attribs(docextra)
-        vars = {}
+        csvs = ""
         if ddi_xml.codeBook.dataDscr:
-            for var in ddi_xml.codeBook.dataDscr('var'):
-                if var.sumStat:
-                    if var('sumStat', type='mean'):
-                        if var.qstn:
-                            statstr = ""
-                            label = var.qstn.labl.string if var.qstn.labl else\
-                                    var.qstn.qstnLit.string
-                            for stats in [(stat['type'], stat.string)\
-                                          for stat in var('sumStat')]:
-                                statstr += "%s:%s " % stats
-                            if not var['name'] in vars:
-                                vars[var['name']] = "%s %s" % \
-                                    (label,
-                                     statstr
-                                     )
-                            else:
-                                vars[var['name']] += " " + statstr
-        pkg.extras = dict(metas, **vars)
+            vars = ddi_xml.codeBook.dataDscr('var')
+            heads = self._get_headers(vars)
+            f = StringIO.StringIO()
+            writer = csv.DictWriter(f,
+                                heads)
+            writer.writeheader()
+            for var in vars:
+                writer.writerow(self._construct_csv(var, heads))
+            f.flush()
+            ofs = get_ofs()
+            label = "%s/%s.csv" % (\
+                    datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f'),
+                    name)
+            ofs.put_stream(BUCKET, label, f, {})
+            fileurl = h.url_for('storage_file', label=label)
+            pkg.add_resource(url=fileurl, description="Variable metadata",
+                             format="csv")
+        pkg.extras = metas
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
