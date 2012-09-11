@@ -97,8 +97,15 @@ class DDIHarvester(HarvesterBase):
         if head in ['preQtxt', 'qstnLit', 'postQTxt', 'ivuInstr']:
             var = var.qstn
         if head.startswith('sumStat'):
-            head = head.split(' ')[0]
-        attr = getattr(var, head)
+            heads = head.split(' ')[0]
+            types = head.split(' ')[-1]
+            varstr = var(type=types)
+            if varstr:
+                attr = varstr[0]
+            else:
+                attr = getattr(var, heads)
+        else:
+            attr = getattr(var, head)
         if hasattr(attr, 'string'):
             attr = attr.string
         if head == 'sumStat':
@@ -110,7 +117,8 @@ class DDIHarvester(HarvesterBase):
         for head in heads:
             has_elems = self._check_has_element(var, head)
             k, v = has_elems
-            retdict[k] = v
+            if k and v:
+                retdict[k] = v.encode('utf-8')
         return retdict
 
     def _get_headers(self, vars):
