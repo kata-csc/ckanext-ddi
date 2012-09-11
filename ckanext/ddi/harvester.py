@@ -221,7 +221,6 @@ class DDIHarvester(HarvesterBase):
             f = StringIO.StringIO()
             writer = csv.DictWriter(f,
                                 heads)
-            writer.writeheader()
             for var in vars:
                 writer.writerow(self._construct_csv(var, heads))
             f.flush()
