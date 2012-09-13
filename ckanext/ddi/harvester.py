@@ -118,6 +118,19 @@ class DDIHarvester(HarvesterBase):
         for head in heads:
             has_elems = self._check_has_element(var, head)
             k, v = has_elems
+            if head.startswith('cat') or re.match(r'labl\_\d+', head):
+                headname = head.split('_')[0]
+                if head.startswith('labl'):
+                    catgrys = var(headname, level='category')
+                else:
+                    catgrys = var(headname)
+                catnr = int(head.split('_')[-1])
+                catcnt = 0
+                for cati in catgrys:
+                    if catcnt == catnr:
+                        v = cati.string
+                        break
+                    catcnt += 1
             if v:
                 retdict[k] = v.encode('utf-8')
             else:
@@ -126,9 +139,11 @@ class DDIHarvester(HarvesterBase):
 
     def _get_headers(self, vars):
         longest_els = []
+        varlens = []
         for var in vars:
             els = var(re.compile('^((?!catgry).)'), recursive=False)
             tmpels = []
+            lastlen = 0
             for el in els:
                 if el.name == 'qstn':
                     tmpels.append('preQTxt')
@@ -139,6 +154,14 @@ class DDIHarvester(HarvesterBase):
                     tmpels.append('sumStat ' + el['type'])
                 if el.name not in ['qstn', 'sumStat']:
                     tmpels.append(el.name)
+            """vars = var('catgry')
+            varlens.append(len(vars))
+            if len(vars) > lastlen:
+                lastlen = len(vars)
+            for i in range(lastlen):
+                tmpels.append('catValu_%s' % i)
+                tmpels.append('labl_%s' % i)
+                tmpels.append('catStat_%s' % i)"""
             if len(tmpels) > len(longest_els):
                 longest_els = tmpels
         return longest_els
@@ -238,9 +261,7 @@ class DDIHarvester(HarvesterBase):
             for var in vars:
                 writer.writerow(self._construct_csv(var, heads))
             f.flush()
-            label = "%s/%s.csv" % (\
-                    nowstr,
-                    name)
+            label = "%s/%s.csv" % (nowstr, name)
             ofs.put_stream(BUCKET, label, f, {})
             fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
             pkg.add_resource(url=fileurl, description="Variable metadata",
