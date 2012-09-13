@@ -153,7 +153,8 @@ class DDIHarvester(HarvesterBase):
             xml_dict['source'] = harvest_object.content
             udict = json.loads(harvest_object.content)
             if 'url' in udict:
-                ddi_xml = BeautifulSoup(urllib2.urlopen(udict['url']).read(),
+                f = urllib2.urlopen(udict['url']).read()
+                ddi_xml = BeautifulSoup(f,
                                         'xml')
             else:
                 self._save_object_error('No url in content!', harvest_object)
@@ -198,6 +199,15 @@ class DDIHarvester(HarvesterBase):
                                    for description in description_array])
         pkg.title = title[:100]
         pkg.url = udict['url']
+        ofs = get_ofs()
+        nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
+        label = "%s/%s.xml" % (\
+                    nowstr,
+                    name)
+        ofs.put_stream(BUCKET, label, f, {})
+        fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
+        pkg.add_resource(url=fileurl, description="Original file",
+                         format="xml")
         pkg.add_resource(url=document_info.holdings['URI']\
                          if 'URI' in document_info.holdings else '',
                          description=title)
@@ -226,9 +236,8 @@ class DDIHarvester(HarvesterBase):
             for var in vars:
                 writer.writerow(self._construct_csv(var, heads))
             f.flush()
-            ofs = get_ofs()
             label = "%s/%s.csv" % (\
-                    datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f'),
+                    nowstr,
                     name)
             ofs.put_stream(BUCKET, label, f, {})
             fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
@@ -242,7 +251,8 @@ class DDIHarvester(HarvesterBase):
             if producer:
                 group = Group.by_name(producer)
                 if not group:
-                    group = Group(name=producer, description=producer)
+                    group = Group(name=producer, description=producer,
+                                  title=producer)
                 group.add_package_by_name(pkg.name)
                 group.save()
                 setup_default_user_roles(group)

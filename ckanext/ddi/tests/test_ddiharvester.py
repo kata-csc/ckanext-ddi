@@ -128,7 +128,7 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(pkg.title == "Puolueiden ajankohtaistutkimus 1981")
         log.debug(pkg.extras)
         self.assert_(len(pkg.get_groups()) == 2)
-        self.assert_(len(pkg.resources) == 2)
+        self.assert_(len(pkg.resources) == 3)
         self.assert_(len(pkg.get_tags()) == 9)
         self.assert_(pkg.url == "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml")
         self.assert_(isinstance(pkg.extras, _AssociationDict))
