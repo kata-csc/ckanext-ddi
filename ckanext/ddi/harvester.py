@@ -94,20 +94,19 @@ class DDIHarvester(HarvesterBase):
 
     def _check_has_element(self, var, head):
         origHead = head
+        attr = None
         if head in ['preQtxt', 'qstnLit', 'postQTxt', 'ivuInstr']:
             var = var.qstn
         if head.startswith('sumStat'):
-            heads = head.split(' ')[0]
             types = head.split(' ')[-1]
             varstr = var(type=types)
             if varstr:
                 attr = varstr[0]
-            else:
-                attr = getattr(var, heads)
         else:
             attr = getattr(var, head)
-        if hasattr(attr, 'string'):
-            attr = attr.string
+        if attr:
+            if hasattr(attr, 'string'):
+                attr = attr.string
         if head == 'sumStat':
             head = origHead
         return (head, attr)
@@ -116,9 +115,12 @@ class DDIHarvester(HarvesterBase):
         retdict = {}
         for head in heads:
             has_elems = self._check_has_element(var, head)
+            print has_elems
             k, v = has_elems
-            if k and v:
+            if v:
                 retdict[k] = v.encode('utf-8')
+            else:
+                retdict[k] = None
         return retdict
 
     def _get_headers(self, vars):
@@ -219,8 +221,7 @@ class DDIHarvester(HarvesterBase):
             vars = ddi_xml.codeBook.dataDscr('var')
             heads = self._get_headers(vars)
             f = StringIO.StringIO()
-            writer = csv.DictWriter(f,
-                                heads)
+            writer = csv.DictWriter(f, heads)
             for var in vars:
                 writer.writerow(self._construct_csv(var, heads))
             f.flush()
