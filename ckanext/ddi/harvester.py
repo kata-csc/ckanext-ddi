@@ -202,7 +202,7 @@ class DDIHarvester(HarvesterBase):
         ofs = get_ofs()
         nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
         idno = study_descr.citation.titlStmt.IDNo
-        agencyxml = idno['agency'] if 'agency' in idno.attrs else '' + idno.string
+        agencyxml = (idno['agency'] if 'agency' in idno.attrs else '') + idno.string
         label = "%s/%s.xml" % (\
                     nowstr,
                     agencyxml)
