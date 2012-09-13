@@ -115,7 +115,6 @@ class DDIHarvester(HarvesterBase):
         retdict = {}
         for head in heads:
             has_elems = self._check_has_element(var, head)
-            print has_elems
             k, v = has_elems
             if v:
                 retdict[k] = v.encode('utf-8')
