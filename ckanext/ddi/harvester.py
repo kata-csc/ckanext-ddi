@@ -12,6 +12,8 @@ import re
 import csv
 import datetime
 
+from pylons import config
+
 from lxml import etree
 
 from ckan.model import Package, Group
@@ -229,7 +231,7 @@ class DDIHarvester(HarvesterBase):
                     datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f'),
                     name)
             ofs.put_stream(BUCKET, label, f, {})
-            fileurl = h.url_for('storage_file', label=label)
+            fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
             pkg.add_resource(url=fileurl, description="Variable metadata",
                              format="csv")
         pkg.extras = metas
