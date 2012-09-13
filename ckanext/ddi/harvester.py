@@ -201,9 +201,11 @@ class DDIHarvester(HarvesterBase):
         pkg.url = udict['url']
         ofs = get_ofs()
         nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
+        idno = study_descr.citation.titlStmt.IDNo
+        agencyxml = idno['agency'] if 'agency' in idno.attrs else '' + idno.string
         label = "%s/%s.xml" % (\
                     nowstr,
-                    name)
+                    agencyxml)
         ofs.put_stream(BUCKET, label, f, {})
         fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
         pkg.add_resource(url=fileurl, description="Original file",
