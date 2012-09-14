@@ -127,6 +127,8 @@ class DDIHarvester(HarvesterBase):
                 retdict[var.name] = var.string.strip()
             elif var.name == 'valrng':
                 retdict['range'] = [("%s,%s" % (k, v) for k, v in var.attrs.iteritems())]
+            elif var.name == 'invalrng':
+                retdict['item'] = [("%s,%s" % (k, v) for k, v in var.attrs.iteritems())]
             else:
                 if var.name == 'labl' and 'level' in var.attrs:
                     if var['level'] == 'variable':
@@ -159,6 +161,7 @@ class DDIHarvester(HarvesterBase):
         longest_els.append('varFormat')
         longest_els.append('TotlResp')
         longest_els.append('range')
+        longest_els.append('item')
         longest_els.append('sumStat_vald')
         longest_els.append('sumStat_min')
         longest_els.append('sumStat_max')
