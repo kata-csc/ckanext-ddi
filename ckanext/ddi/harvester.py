@@ -119,7 +119,10 @@ class DDIHarvester(HarvesterBase):
                     else:
                         valstr = None
                 retdict['catLabl_%s' % varcnt] = valstr
-                valstr = var.catStat.string.strip() if var.catStat.string else None
+                if var.catStat:
+                    valstr = var.catStat.string.strip()
+                else:
+                    valstr = None
                 retdict['catStat_%s' % varcnt] = valstr
                 varcnt += 1
             elif var.name.startswith('sumStat'):
@@ -151,8 +154,6 @@ class DDIHarvester(HarvesterBase):
             if max(varlens) > lastlen:
                 lastlen = max(varlens)
                 longest = var
-        print longest['ID']
-        print lastlen
         longest_els.append('labl')
         longest_els.append('preQTxt')
         longest_els.append('qstnLit')
