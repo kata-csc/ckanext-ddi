@@ -133,6 +133,9 @@ class DDIHarvester(HarvesterBase):
                         retdict['labl'] = var.string.strip()
                 else:
                     retdict[var.name] = var.string.strip() if var.string else None
+        for k, v in retdict.iteritems():
+            if v:
+                retdict[k] = v.encode('utf-8')
         return retdict
 
     def _get_headers(self, vars):
