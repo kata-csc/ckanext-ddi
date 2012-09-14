@@ -94,76 +94,79 @@ class DDIHarvester(HarvesterBase):
                 astr += "(%s,%s)" % (k, v)
         return astr
 
-    def _check_has_element(self, var, head):
-        origHead = head
-        attr = None
-        if head in ['preQtxt', 'qstnLit', 'postQTxt', 'ivuInstr']:
-            var = var.qstn
-        if head.startswith('sumStat'):
-            types = head.split(' ')[-1]
-            varstr = var(type=types)
-            if varstr:
-                attr = varstr[0]
-        else:
-            attr = getattr(var, head)
-        if attr:
-            if hasattr(attr, 'string'):
-                attr = attr.string
-        if head == 'sumStat':
-            head = origHead
-        return (head, attr)
-
     def _construct_csv(self, var, heads):
         retdict = {}
-        for head in heads:
-            has_elems = self._check_has_element(var, head)
-            k, v = has_elems
-            if head.startswith('cat') or re.match(r'labl\_\d+', head):
-                headname = head.split('_')[0]
-                if head.startswith('labl'):
-                    catgrys = var(headname, level='category')
-                else:
-                    catgrys = var(headname)
-                catnr = int(head.split('_')[-1])
-                catcnt = 0
-                for cati in catgrys:
-                    if catcnt == catnr:
-                        v = cati.string
-                        break
-                    catcnt += 1
-            if v:
-                retdict[k] = v.encode('utf-8')
+        els = var(text=False)
+        varcnt = 0
+        for var in els:
+            if var.name in ('catValu', 'catStat', 'qstn'):
+                continue
+            if var.name == 'qstn':
+                valstr = var.preQTxt.string.strip() if var.preQTxt.string else None
+                retdict['preQTxt'] = valstr
+                valstr = var.qstnLit.string.strip() if var.qstnLit.string else None
+                retdict['qstnLit'] = valstr
+                valstr = var.postQTxt.string.strip() if var.postQTxt.string else None
+                retdict['postQTxt'] = valstr
+                valstr = var.ivuInstr.string.strip() if var.ivuInstr.string else None
+                retdict['ivuInstr'] = valstr
+            if var.name in ('catgry'):
+                valstr = var.catValu.string.strip() if var.catValu.string else None
+                retdict['catValu_%s' % varcnt] = valstr
+                if var.labl:
+                    if var.labl.string:
+                        valstr = var.labl.string.strip()
+                    else:
+                        valstr = None
+                retdict['catLabl_%s' % varcnt] = valstr
+                valstr = var.catStat.string.strip() if var.catStat.string else None
+                retdict['catStat_%s' % varcnt] = valstr
+                varcnt += 1
+            elif var.name.startswith('sumStat'):
+                var.name = "sumStat_%s" % var['type']
+                retdict[var.name] = var.string.strip()
+            elif var.name == 'valrng':
+                retdict['range'] = [("%s,%s" % (k, v) for k, v in var.attrs.iteritems())]
             else:
-                retdict[k] = None
+                if var.name == 'labl' and 'level' in var.attrs:
+                    if var['level'] == 'variable':
+                        retdict['labl'] = var.string.strip()
+                else:
+                    retdict[var.name] = var.string.strip() if var.string else None
         return retdict
 
     def _get_headers(self, vars):
         longest_els = []
         varlens = []
+        lastlen = 0
         for var in vars:
-            els = var(re.compile('^((?!catgry).)'), recursive=False)
+            els = list(var(text=False, recursive=False))
             tmpels = []
-            lastlen = 0
-            for el in els:
-                if el.name == 'qstn':
-                    tmpels.append('preQTxt')
-                    tmpels.append('qstnLit')
-                    tmpels.append('postQTxt')
-                    tmpels.append('ivuInstr')
-                if el.name == 'sumStat':
-                    tmpels.append('sumStat ' + el['type'])
-                if el.name not in ['qstn', 'sumStat']:
-                    tmpels.append(el.name)
-            """vars = var('catgry')
-            varlens.append(len(vars))
-            if len(vars) > lastlen:
-                lastlen = len(vars)
-            for i in range(lastlen):
-                tmpels.append('catValu_%s' % i)
-                tmpels.append('labl_%s' % i)
-                tmpels.append('catStat_%s' % i)"""
-            if len(tmpels) > len(longest_els):
-                longest_els = tmpels
+            varlens.append(len(els))
+            if max(varlens) > lastlen:
+                lastlen = max(varlens)
+                longest = var
+        print longest['ID']
+        print lastlen
+        longest_els.append('labl')
+        longest_els.append('preQTxt')
+        longest_els.append('qstnLit')
+        longest_els.append('postQTxt')
+        longest_els.append('ivuInstr')
+        longest_els.append('varFormat')
+        longest_els.append('TotlResp')
+        longest_els.append('range')
+        longest_els.append('sumStat_vald')
+        longest_els.append('sumStat_min')
+        longest_els.append('sumStat_max')
+        longest_els.append('sumStat_mean')
+        longest_els.append('sumStat_stdev')
+        longest_els.append('notes')
+        for i in range(len(longest('catgry', recursive=False, text=False))):
+            longest_els.append('catValu_%s' % i)
+            longest_els.append('catLabl_%s' % i)
+            longest_els.append('catStat_%s' % i)
+
         return longest_els
 
     def import_stage(self, harvest_object):
