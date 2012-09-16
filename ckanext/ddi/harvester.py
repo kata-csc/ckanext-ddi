@@ -240,7 +240,7 @@ class DDIHarvester(HarvesterBase):
                     nowstr,
                     agencyxml)
         ofs.put_stream(BUCKET, label, f, {})
-        fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
+        fileurl = '//' + h.url_for('storage_file', label=label)
         pkg.add_resource(url=fileurl, description="Original file",
                          format="xml")
         pkg.add_resource(url=document_info.holdings['URI']\
@@ -273,7 +273,7 @@ class DDIHarvester(HarvesterBase):
             f.flush()
             label = "%s/%s.csv" % (nowstr, name)
             ofs.put_stream(BUCKET, label, f, {})
-            fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
+            fileurl = '//' + h.url_for('storage_file', label=label)
             pkg.add_resource(url=fileurl, description="Variable metadata",
                              format="csv")
         pkg.extras = metas
