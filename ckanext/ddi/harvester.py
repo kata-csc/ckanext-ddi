@@ -147,7 +147,6 @@ class DDIHarvester(HarvesterBase):
         lastlen = 0
         for var in vars:
             els = list(var(text=False, recursive=False))
-            tmpels = []
             varlens.append(len(els))
             if max(varlens) > lastlen:
                 lastlen = max(varlens)
@@ -167,7 +166,7 @@ class DDIHarvester(HarvesterBase):
         longest_els.append('sumStat_mean')
         longest_els.append('sumStat_stdev')
         longest_els.append('notes')
-        for i in range(len(longest('catgry', recursive=False, text=False))):
+        for i in range(len(longest('catgry', recursive=False, text=False))+1):
             longest_els.append('catValu_%s' % i)
             longest_els.append('catLabl_%s' % i)
             longest_els.append('catStat_%s' % i)
