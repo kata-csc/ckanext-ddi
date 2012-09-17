@@ -9,7 +9,7 @@ import json
 import urllib2
 import StringIO
 import re
-import csv
+import unicodecsv as csv
 import datetime
 
 from pylons import config
@@ -138,9 +138,6 @@ class DDIHarvester(HarvesterBase):
                         retdict['labl'] = var.string.strip()
                 else:
                     retdict[var.name] = var.string.strip() if var.string else None
-        for k, v in retdict.iteritems():
-            if v:
-                retdict[k] = v.encode('utf-8')
         return retdict
 
     def _get_headers(self, vars):

@@ -23,6 +23,7 @@ setup(
 		# -*- Extra requirements: -*-
 		'beautifulsoup4',
 		'ckanclient',
+		'unicodecsv',
 	],
 	tests_require=[
 				'nose',
