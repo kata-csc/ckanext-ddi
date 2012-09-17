@@ -129,12 +129,12 @@ class DDIHarvester(HarvesterBase):
                 var.name = "sumStat_%s" % var['type']
                 retdict[var.name] = var.string.strip()
             elif var.name == 'valrng':
-                retdict['range'] = [("%s,%s" % (k, v) for k, v in var.attrs.iteritems())]
+                retdict['range'] = [("%s,%s" % (k, v) for k, v in var.range.attrs.iteritems())]
             elif var.name == 'invalrng':
-                retdict['item'] = [("%s,%s" % (k, v) for k, v in var.attrs.iteritems())]
+                retdict['item'] = [("%s,%s" % (k, v) for k, v in var.item.attrs.iteritems())]
             else:
                 if var.name == 'labl' and 'level' in var.attrs:
-                    if var['level'] == 'variable':
+                    if var['level'] == 'variable' and var.string:
                         retdict['labl'] = var.string.strip()
                 else:
                     retdict[var.name] = var.string.strip() if var.string else None
