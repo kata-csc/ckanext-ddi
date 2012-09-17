@@ -131,7 +131,8 @@ class DDIHarvester(HarvesterBase):
             elif var.name == 'valrng':
                 retdict['range'] = [("%s,%s" % (k, v) for k, v in var.range.attrs.iteritems())]
             elif var.name == 'invalrng':
-                retdict['item'] = [("%s,%s" % (k, v) for k, v in var.item.attrs.iteritems())]
+                if var.item:
+                    retdict['item'] = [("%s,%s" % (k, v) for k, v in var.item.attrs.iteritems())]
             else:
                 if var.name == 'labl' and 'level' in var.attrs:
                     if var['level'] == 'variable' and var.string:
