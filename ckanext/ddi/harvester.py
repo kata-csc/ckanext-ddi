@@ -139,14 +139,16 @@ class DDIHarvester(HarvesterBase):
                         retdict['labl'] = var.string.strip()
                 else:
                     retdict[var.name] = var.string.strip() if var.string else None
+
         return retdict
 
     def _get_headers(self, vars):
         longest_els = []
         varlens = []
         lastlen = 0
+        longest = None
         for var in vars:
-            els = list(var(text=False, recursive=False))
+            els = list(var('catgry', text=False, recursive=False))
             varlens.append(len(els))
             if max(varlens) > lastlen:
                 lastlen = max(varlens)
@@ -166,7 +168,10 @@ class DDIHarvester(HarvesterBase):
         longest_els.append('sumStat_mean')
         longest_els.append('sumStat_stdev')
         longest_els.append('notes')
-        for i in range(len(longest('catgry', recursive=False, text=False))+1):
+        longest_els.append('txt')
+        if not longest:
+            return longest_els
+        for i in range(len(longest('catgry', recursive=False, text=False))):
             longest_els.append('catValu_%s' % i)
             longest_els.append('catLabl_%s' % i)
             longest_els.append('catStat_%s' % i)
@@ -259,14 +264,16 @@ class DDIHarvester(HarvesterBase):
                         metas[docextra.name] += " " + docextra.string\
                                         if docextra.string\
                                         else self._collect_attribs(docextra)
-        csvs = ""
         if ddi_xml.codeBook.dataDscr:
             vars = ddi_xml.codeBook.dataDscr('var')
             heads = self._get_headers(vars)
             f = StringIO.StringIO()
             writer = csv.DictWriter(f, heads)
             for var in vars:
-                writer.writerow(self._construct_csv(var, heads))
+                try:
+                    writer.writerow(self._construct_csv(var, heads))
+                except ValueError:
+                    raise IOError("Failed to import DDI to CSV! %s" % e)
             f.flush()
             label = "%s/%s.csv" % (nowstr, name)
             ofs.put_stream(BUCKET, label, f, {})

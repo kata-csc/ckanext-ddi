@@ -11,6 +11,9 @@ from StringIO import StringIO
 import json
 import uuid
 import pprint
+from datetime import datetime, timedelta
+
+from nose.exc import SkipTest
 
 import testdata
 
@@ -211,3 +214,24 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         self.assert_(len(Package.text_search(\
                                 Session.query(Package),
                                 'Energia-asennetutkimus 2004').all()) >= 1)
+
+    def test_zzcomplete(self):
+        raise SkipTest('Takes ages, do not run')
+        urllib2.urlopen = realopen
+        harv = DDIHarvester()
+        harv.config = "{}"
+        harvest_job = HarvestJob()
+        harvest_job.source = HarvestSource()
+        harvest_job.source.title = "Test"
+        harvest_job.source.url = "http://www.fsd.uta.fi/fi/aineistot/luettelo/fsd-ddi-records-uris-fi.txt"
+        harvest_job.source.config = ''
+        harvest_job.source.type = "DDI"
+        Session.add(harvest_job)
+        gathered = harv.gather_stage(harvest_job)
+        for gath in gathered:
+            harvest_object = HarvestObject.get(gath)
+            print json.loads(harvest_object.content)['url']
+            before = datetime.now()
+            harv.fetch_stage(harvest_object)
+            harv.import_stage(harvest_object)
+            print datetime.now() - before
