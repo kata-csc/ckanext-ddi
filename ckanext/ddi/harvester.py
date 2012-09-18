@@ -269,6 +269,10 @@ class DDIHarvester(HarvesterBase):
             heads = self._get_headers(vars)
             f = StringIO.StringIO()
             writer = csv.DictWriter(f, heads)
+            heading_row = {}
+            for head in heads:
+                heading_row[head] = head
+            writer.writerow(heading_row)
             for var in vars:
                 try:
                     writer.writerow(self._construct_csv(var, heads))
