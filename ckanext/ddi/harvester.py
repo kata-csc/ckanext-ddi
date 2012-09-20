@@ -99,7 +99,7 @@ class DDIHarvester(HarvesterBase):
         els = var(text=False)
         varcnt = 0
         for var in els:
-            if var.name in ('catValu', 'catStat', 'qstn'):
+            if var.name in ('catValu', 'catStat', 'qstn', 'catgry'):
                 continue
             if var.name == 'qstn':
                 valstr = var.preQTxt.string.strip() if var.preQTxt.string else None
@@ -110,21 +110,6 @@ class DDIHarvester(HarvesterBase):
                 retdict['postQTxt'] = valstr
                 valstr = var.ivuInstr.string.strip() if var.ivuInstr.string else None
                 retdict['ivuInstr'] = valstr
-            if var.name in ('catgry'):
-                valstr = var.catValu.string.strip() if var.catValu.string else None
-                retdict['catValu_%s' % varcnt] = valstr
-                if var.labl:
-                    if var.labl.string:
-                        valstr = var.labl.string.strip()
-                    else:
-                        valstr = None
-                retdict['catLabl_%s' % varcnt] = valstr
-                if var.catStat:
-                    valstr = var.catStat.string.strip()
-                else:
-                    valstr = None
-                retdict['catStat_%s' % varcnt] = valstr
-                varcnt += 1
             elif var.name.startswith('sumStat'):
                 var.name = "sumStat_%s" % var['type']
                 retdict[var.name] = var.string.strip()
@@ -142,17 +127,19 @@ class DDIHarvester(HarvesterBase):
 
         return retdict
 
-    def _get_headers(self, vars):
+    def _create_code_rows(self, var):
+        rows = []
+        for cat in var('catgry', text=False, recursive=False):
+            catdict = {}
+            catdict['ID'] = var['ID'] if 'ID' in var else var['name']
+            catdict['catValu'] = cat.catValu.string if cat.catValu else None
+            catdict['labl'] = cat.labl.string if cat.labl else None
+            catdict['catStat'] = cat.catStat.string if cat.catStat else None
+            rows.append(catdict)
+        return rows
+
+    def _get_headers(self):
         longest_els = []
-        varlens = []
-        lastlen = 0
-        longest = None
-        for var in vars:
-            els = list(var('catgry', text=False, recursive=False))
-            varlens.append(len(els))
-            if max(varlens) > lastlen:
-                lastlen = max(varlens)
-                longest = var
         longest_els.append('labl')
         longest_els.append('preQTxt')
         longest_els.append('qstnLit')
@@ -169,13 +156,6 @@ class DDIHarvester(HarvesterBase):
         longest_els.append('sumStat_stdev')
         longest_els.append('notes')
         longest_els.append('txt')
-        if not longest:
-            return longest_els
-        for i in range(len(longest('catgry', recursive=False, text=False))):
-            longest_els.append('catValu_%s' % i)
-            longest_els.append('catLabl_%s' % i)
-            longest_els.append('catStat_%s' % i)
-
         return longest_els
 
     def import_stage(self, harvest_object):
@@ -266,23 +246,32 @@ class DDIHarvester(HarvesterBase):
                                         else self._collect_attribs(docextra)
         if ddi_xml.codeBook.dataDscr:
             vars = ddi_xml.codeBook.dataDscr('var')
-            heads = self._get_headers(vars)
-            f = StringIO.StringIO()
-            writer = csv.DictWriter(f, heads)
+            heads = self._get_headers()
+            c_heads = ['ID', 'catValu', 'labl', 'catStat']
+            f_var = StringIO.StringIO()
+            c_var = StringIO.StringIO()
+            varwriter = csv.DictWriter(f_var, heads)
+            codewriter = csv.DictWriter(c_var, c_heads)
             heading_row = {}
             for head in heads:
                 heading_row[head] = head
-            writer.writerow(heading_row)
+            varwriter.writerow(heading_row)
             for var in vars:
                 try:
-                    writer.writerow(self._construct_csv(var, heads))
-                except ValueError:
+                    varwriter.writerow(self._construct_csv(var, heads))
+                    codewriter.writerows(self._create_code_rows(var))
+                except ValueError, e:
                     raise IOError("Failed to import DDI to CSV! %s" % e)
-            f.flush()
-            label = "%s/%s.csv" % (nowstr, name)
-            ofs.put_stream(BUCKET, label, f, {})
+            f_var.flush()
+            label = "%s/%s_var.csv" % (nowstr, name)
+            ofs.put_stream(BUCKET, label, f_var, {})
             fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
             pkg.add_resource(url=fileurl, description="Variable metadata",
+                             format="csv")
+            label = "%s/%s_code.csv" % (nowstr, name)
+            ofs.put_stream(BUCKET, label, c_var, {})
+            fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
+            pkg.add_resource(url=fileurl, description="Variable code values",
                              format="csv")
         pkg.extras = metas
         pkg.save()
