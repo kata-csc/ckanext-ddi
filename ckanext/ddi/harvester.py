@@ -98,6 +98,7 @@ class DDIHarvester(HarvesterBase):
         retdict = {}
         els = var(text=False)
         varcnt = 0
+        retdict['ID'] = var['ID'] if 'ID' in var.attrs else var['name']
         for var in els:
             if var.name in ('catValu', 'catStat', 'qstn', 'catgry'):
                 continue
@@ -140,6 +141,7 @@ class DDIHarvester(HarvesterBase):
 
     def _get_headers(self):
         longest_els = []
+        longest_els.append('ID')
         longest_els.append('labl')
         longest_els.append('preQTxt')
         longest_els.append('qstnLit')
