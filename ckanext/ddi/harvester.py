@@ -257,7 +257,11 @@ class DDIHarvester(HarvesterBase):
             heading_row = {}
             for head in heads:
                 heading_row[head] = head
+            c_heading_row = {}
+            for head in c_heads:
+                c_heading_row[head] = head
             varwriter.writerow(heading_row)
+            codewriter.writerow(c_heading_row)
             for var in vars:
                 try:
                     varwriter.writerow(self._construct_csv(var, heads))
