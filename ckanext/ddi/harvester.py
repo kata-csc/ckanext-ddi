@@ -279,6 +279,10 @@ class DDIHarvester(HarvesterBase):
             fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
             pkg.add_resource(url=fileurl, description="Variable code values",
                              format="csv")
+            f_var.seek(0)
+            reader = csv.DictReader(f_var)
+            for var in reader:
+                metas[var['ID']] = var['labl'] if 'labl' in var else var['qstnLit']
         pkg.extras = metas
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
