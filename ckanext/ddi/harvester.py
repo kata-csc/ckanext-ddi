@@ -225,7 +225,7 @@ class DDIHarvester(HarvesterBase):
                     agencyxml)
         ofs.put_stream(BUCKET, label, f, {})
         fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
-        pkg.add_resource(url=fileurl, description="Original file",
+        pkg.add_resource(url=fileurl, description="Original metadata record",
                          format="xml")
         pkg.add_resource(url=document_info.holdings['URI']\
                          if 'URI' in document_info.holdings else '',
