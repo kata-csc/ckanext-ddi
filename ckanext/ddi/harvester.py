@@ -201,8 +201,8 @@ class DDIHarvester(HarvesterBase):
         pkg.author = producer.string
         pkg.author_email = producer.string
         if study_descr.citation.distStmt.contact:
-            pkg.maintainer = study_descr.citation.distStmt.contact
-            pkg.maintainer_email = study_descr.citation.distStmt.contact
+            pkg.maintainer = study_descr.citation.distStmt.contact.string
+            pkg.maintainer_email = study_descr.citation.distStmt.contact.string
         if document_info.titlStmt.IDNo:
             pkg.id = document_info.titlStmt.IDNo.string
         keywords = study_descr.stdyInfo.subject('keyword')
@@ -292,9 +292,9 @@ class DDIHarvester(HarvesterBase):
                 metas[var['ID']] = var['labl'] if 'labl' in var else var['qstnLit']
         pkg.extras = metas
         if study_descr.dataAccs.useStmt.restrctn:
-            pkg.extras['available'] = study_descr.dataAccs.useStmt.restrctn
+            pkg.extras['available'] = study_descr.dataAccs.useStmt.restrctn.string
         if study_descr.citation.distStmt.distrbtr:
-            pkg.extras['roles_0_distributor'] = study_descr.citation.distStmt.distrbtr
+            pkg.extras['roles_0_distributor'] = study_descr.citation.distStmt.distrbtr.string
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
