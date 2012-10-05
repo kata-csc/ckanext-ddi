@@ -294,7 +294,11 @@ class DDIHarvester(HarvesterBase):
         if study_descr.dataAccs.useStmt.restrctn:
             pkg.extras['available'] = study_descr.dataAccs.useStmt.restrctn.string
         if study_descr.citation.distStmt.distrbtr:
-            pkg.extras['roles_0_distributor'] = study_descr.citation.distStmt.distrbtr.string
+            pkg.extras['roles_0_Distributor'] = study_descr.citation.distStmt.distrbtr.string
+        for (idx, value) in enumerate(study_descr.citation.prodStmt('producer')):
+            pkg.extras['roles_%s_Producer' % idx] = value.string
+        for (idx, value) in enumerate(study_descr.citation.rspStmt('AuthEnty')):
+            pkg.extras['roles_%s_Author' % idx] = value.string
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
