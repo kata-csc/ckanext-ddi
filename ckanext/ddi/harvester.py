@@ -205,6 +205,8 @@ class DDIHarvester(HarvesterBase):
             pkg.maintainer_email = study_descr.citation.distStmt.contact.string
         if document_info.titlStmt.IDNo:
             pkg.id = document_info.titlStmt.IDNo.string
+        if study_descr.citation.verStmt:
+            pkg.version = study_descr.citation.verStmt.version.string
         keywords = study_descr.stdyInfo.subject('keyword')
         for kw in keywords:
             kw = kw.string
@@ -239,18 +241,19 @@ class DDIHarvester(HarvesterBase):
                          description=title)
         metas = {}
         descendants = [desc for desc in document_info.descendants] +\
-                      [sdesc for sdesc in study_descr.stdyInfo.descendants]
+                      [sdesc for sdesc in study_descr.descendants]
         for docextra in descendants:
             if isinstance(docextra, Tag):
                 if docextra:
                     if docextra.name == 'p':
                         docextra.name = docextra.parent.name
-                    if not docextra.name in metas:
+                    if not docextra.name in metas and docextra.string:
                         metas[docextra.name] = docextra.string\
                                     if docextra.string\
                                     else self._collect_attribs(docextra)
                     else:
-                        metas[docextra.name] += " " + docextra.string\
+                        if docextra.string:
+                            metas[docextra.name] += " " + docextra.string\
                                         if docextra.string\
                                         else self._collect_attribs(docextra)
         if ddi_xml.codeBook.dataDscr:
