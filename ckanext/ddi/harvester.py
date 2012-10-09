@@ -200,6 +200,8 @@ class DDIHarvester(HarvesterBase):
             producer = study_descr.citation.rspStmt.othId
         pkg.author = producer.string
         pkg.author_email = producer.string
+        pkg.maintainer = producer.string
+        pkg.maintainer_email = producer.string
         if study_descr.citation.distStmt.contact:
             pkg.maintainer = study_descr.citation.distStmt.contact.string
             pkg.maintainer_email = study_descr.citation.distStmt.contact.string
