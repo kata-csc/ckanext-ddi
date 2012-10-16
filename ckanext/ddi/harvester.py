@@ -16,7 +16,7 @@ from pylons import config
 
 from lxml import etree
 
-from ckan.model import Package, Group
+from ckan.model import Package, Group, Vocabulary
 from ckan.lib.base import h
 from ckan.controllers.storage import BUCKET, get_ofs
 
@@ -209,16 +209,16 @@ class DDIHarvester(HarvesterBase):
             pkg.id = document_info.titlStmt.IDNo.string
         if study_descr.citation.verStmt:
             pkg.version = study_descr.citation.verStmt.version.string
-        keywords = study_descr.stdyInfo.subject('keyword')
+        keywords = study_descr.stdyInfo.subject(re.compile('keyword|topcClas'))
         for kw in keywords:
-            kw = kw.string
             if kw:
-                pkg.add_tag_by_name(munge_tag(kw))
-        keywords = study_descr.stdyInfo.subject('topcClas')
-        for kw in keywords:
-            kw = kw.string
-            if kw:
-                pkg.add_tag_by_name(munge_tag(kw))
+                vocab = None
+                if 'vocabURI' in kw.attrs:
+                    vocab = Vocabulary.get(kw.attrs['vocabURI'])
+                    if not vocab:
+                        vocab = Vocabulary(kw.attrs['vocabURI'])
+                        vocab.save()
+                pkg.add_tag_by_name(munge_tag(kw.string), vocab=vocab)
         if study_descr.stdyInfo.abstract:
             description_array = study_descr.stdyInfo.abstract('p')
         else:
@@ -237,7 +237,7 @@ class DDIHarvester(HarvesterBase):
         ofs.put_stream(BUCKET, label, f, {})
         fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
         pkg.add_resource(url=fileurl, description="Original metadata record",
-                         format="xml")
+                         format="xml", size=len(f))
         pkg.add_resource(url=document_info.holdings['URI']\
                          if 'URI' in document_info.holdings else '',
                          description=title)
@@ -285,12 +285,12 @@ class DDIHarvester(HarvesterBase):
             ofs.put_stream(BUCKET, label, f_var, {})
             fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
             pkg.add_resource(url=fileurl, description="Variable metadata",
-                             format="csv")
+                             format="csv", size=f_var.len)
             label = "%s/%s_code.csv" % (nowstr, name)
             ofs.put_stream(BUCKET, label, c_var, {})
             fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
             pkg.add_resource(url=fileurl, description="Variable code values",
-                             format="csv")
+                             format="csv", size=c_var.len)
             f_var.seek(0)
             reader = csv.DictReader(f_var)
             for var in reader:
