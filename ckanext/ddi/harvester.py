@@ -210,6 +210,7 @@ class DDIHarvester(HarvesterBase):
         if study_descr.citation.verStmt:
             pkg.version = study_descr.citation.verStmt.version.string
         keywords = study_descr.stdyInfo.subject(re.compile('keyword|topcClas'))
+        keywords = list(set(keywords))
         for kw in keywords:
             if kw:
                 vocab = None
