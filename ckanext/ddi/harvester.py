@@ -190,21 +190,20 @@ class DDIHarvester(HarvesterBase):
         if not title:
             title = document_info.titlStmt.titl.string
         name = self._gen_new_name(self._check_name(title[:100]))
+        update = True
         pkg = Package.get(name)
         if not pkg:
             pkg = Package(name=name)
+            update = False
         producer = study_descr.citation.prodStmt.producer
         if not producer:
             producer = study_descr.citation.rspStmt.AuthEnty
         if not producer:
             producer = study_descr.citation.rspStmt.othId
         pkg.author = producer.string
-        pkg.author_email = producer.string
         pkg.maintainer = producer.string
-        pkg.maintainer_email = producer.string
         if study_descr.citation.distStmt.contact:
             pkg.maintainer = study_descr.citation.distStmt.contact.string
-            pkg.maintainer_email = study_descr.citation.distStmt.contact.string
         if document_info.titlStmt.IDNo:
             pkg.id = document_info.titlStmt.IDNo.string
         if study_descr.citation.verStmt:
@@ -228,20 +227,21 @@ class DDIHarvester(HarvesterBase):
                                    for description in description_array])
         pkg.title = title[:100]
         pkg.url = udict['url']
-        ofs = get_ofs()
-        nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
-        idno = study_descr.citation.titlStmt.IDNo
-        agencyxml = (idno['agency'] if 'agency' in idno.attrs else '') + idno.string
-        label = "%s/%s.xml" % (\
-                    nowstr,
-                    agencyxml)
-        ofs.put_stream(BUCKET, label, f, {})
-        fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
-        pkg.add_resource(url=fileurl, description="Original metadata record",
-                         format="xml", size=len(f))
-        pkg.add_resource(url=document_info.holdings['URI']\
-                         if 'URI' in document_info.holdings else '',
-                         description=title)
+        if not update:
+            ofs = get_ofs()
+            nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
+            idno = study_descr.citation.titlStmt.IDNo
+            agencyxml = (idno['agency'] if 'agency' in idno.attrs else '') + idno.string
+            label = "%s/%s.xml" % (\
+                        nowstr,
+                        agencyxml)
+            ofs.put_stream(BUCKET, label, f, {})
+            fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
+            pkg.add_resource(url=fileurl, description="Original metadata record",
+                             format="xml", size=len(f))
+            pkg.add_resource(url=document_info.holdings['URI']\
+                             if 'URI' in document_info.holdings else '',
+                             description=title)
         metas = {}
         descendants = [desc for desc in document_info.descendants] +\
                       [sdesc for sdesc in study_descr.descendants]
@@ -259,7 +259,7 @@ class DDIHarvester(HarvesterBase):
                             metas[docextra.name] += " " + docextra.string\
                                         if docextra.string\
                                         else self._collect_attribs(docextra)
-        if ddi_xml.codeBook.dataDscr:
+        if ddi_xml.codeBook.dataDscr and not update:
             vars = ddi_xml.codeBook.dataDscr('var')
             heads = self._get_headers()
             c_heads = ['ID', 'catValu', 'labl', 'catStat']
