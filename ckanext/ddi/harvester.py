@@ -301,6 +301,12 @@ class DDIHarvester(HarvesterBase):
             pkg.extras['available'] = study_descr.dataAccs.useStmt.restrctn.string
         if study_descr.citation.distStmt.distrbtr:
             pkg.extras['role_0_Distributor'] = study_descr.citation.distStmt.distrbtr.string
+        if study_descr.citation.prodStmt.prodDate:
+            if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
+                pkg.extras['lastmod'] = study_descr.citation.prodStmt.prodDate.attrs['date']
+        if study_descr.citation.titlStmt.parTitl:
+            if study_descr.citation.titlStmt.parTitl.attrs['{http://www.w3.org/XML/1998/namespace}lang'] == 'en':
+                pkg.extras['title_en'] = study_descr.citation.titlStmt.parTitl.string
         for (idx, value) in enumerate(study_descr.citation.prodStmt('producer')):
             pkg.extras['role_%s_Producer' % idx] = value.string
         for (idx, value) in enumerate(study_descr.citation.rspStmt('AuthEnty')):
