@@ -24,6 +24,7 @@ setup(
 		'beautifulsoup4',
 		'ckanclient',
 		'unicodecsv',
+		'python-dateutil',
 	],
 	tests_require=[
 				'nose',

@@ -11,12 +11,13 @@ import StringIO
 import re
 import unicodecsv as csv
 import datetime
+from dateutil import parser
 
 from pylons import config
 
 from lxml import etree
 
-from ckan.model import Package, Group, Vocabulary
+from ckan.model import Package, Group, Vocabulary, Session
 from ckan.lib.base import h
 from ckan.controllers.storage import BUCKET, get_ofs
 
@@ -24,7 +25,7 @@ from ckan import model
 from ckan.model.authz import setup_default_user_roles
 from ckan.lib.munge import munge_tag
 from ckanext.harvest.harvesters.base import HarvesterBase
-from ckanext.harvest.model import HarvestObject
+from ckanext.harvest.model import HarvestObject, HarvestJob
 
 from bs4 import BeautifulSoup, Tag
 
@@ -36,6 +37,7 @@ class DDIHarvester(HarvesterBase):
     DDI Harvester for ckanext-harvester.
     '''
     config = None
+    incremental = False
 
     def _set_config(self, config_str):
         '''Set the configuration string.
@@ -63,16 +65,34 @@ class DDIHarvester(HarvesterBase):
         documents containing the DDI documents.
         '''
         self._set_config(self.config)
+        previous_job = Session.query(HarvestJob) \
+            .filter(HarvestJob.source==harvest_job.source) \
+            .filter(HarvestJob.gather_finished!=None) \
+            .filter(HarvestJob.id!=harvest_job.id) \
+            .order_by(HarvestJob.gather_finished.desc()) \
+            .limit(1).first()
+        if previous_job:
+            self.incremental = True
         gather_url = harvest_job.source.url
         try:
             urls = urllib2.urlopen(gather_url)
             harvest_objs = []
             for url in urls.readlines():
-                harvest_obj = HarvestObject()
-                harvest_obj.content = json.dumps({'url': url})
-                harvest_obj.job = harvest_job
-                harvest_obj.save()
-                harvest_objs.append(harvest_obj.id)
+                gather = True
+                if self.incremental:
+                    request = urllib2.Request(url)
+                    request.get_method = lambda: 'HEAD'
+                    doc_url = urllib2.urlopen(request)
+                    lastmod = parser.parse(doc_url.headers['last-modified'], ignoretz=True)
+                    if previous_job.gather_finished < lastmod:
+                        log.debug("Gather false")
+                        gather = False
+                if gather and not self.incremental:
+                    harvest_obj = HarvestObject()
+                    harvest_obj.content = json.dumps({'url': url})
+                    harvest_obj.job = harvest_job
+                    harvest_obj.save()
+                    harvest_objs.append(harvest_obj.id)
         except urllib2.URLError:
             self._save_gather_error('Could not gather XML files from URL!', 
                                     harvest_job)
@@ -305,6 +325,7 @@ class DDIHarvester(HarvesterBase):
             if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
                 pkg.extras['lastmod'] = study_descr.citation.prodStmt.prodDate.attrs['date']
         if study_descr.citation.titlStmt.parTitl:
+            print study_descr.citation.titlStmt.parTitl.attrs
             if study_descr.citation.titlStmt.parTitl.attrs['{http://www.w3.org/XML/1998/namespace}lang'] == 'en':
                 pkg.extras['title_en'] = study_descr.citation.titlStmt.parTitl.string
         for (idx, value) in enumerate(study_descr.citation.prodStmt('producer')):
