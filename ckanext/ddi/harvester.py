@@ -316,20 +316,27 @@ class DDIHarvester(HarvesterBase):
             for var in reader:
                 metas[var['ID']] = var['labl'] if 'labl' in var else var['qstnLit']
         pkg.extras = metas
-        if study_descr.dataAccs.useStmt.restrctn:
-            pkg.extras['available'] = study_descr.dataAccs.useStmt.restrctn.string
         if study_descr.citation.distStmt.distrbtr:
-            pkg.extras['role_0_Distributor'] = study_descr.citation.distStmt.distrbtr.string
+            pkg.extras['owner_name'] = study_descr.citation.distStmt.distrbtr.string
         if study_descr.citation.prodStmt.prodDate:
             if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
                 pkg.extras['lastmod'] = study_descr.citation.prodStmt.prodDate.attrs['date']
         if study_descr.citation.titlStmt.parTitl:
             if study_descr.citation.titlStmt.parTitl.attrs['{http://www.w3.org/XML/1998/namespace}lang'] == 'en':
                 pkg.extras['title_en'] = study_descr.citation.titlStmt.parTitl.string
+        lastidx = 1
         for (idx, value) in enumerate(study_descr.citation.prodStmt('producer')):
-            pkg.extras['role_%s_Producer' % idx] = value.string
+            pkg.extras['organization_%s' % idx] = ""
+            if value.attrs.get('affiliation', None):
+                pkg.extras['organization_%s' % idx] = value.attrs['affiliation']
+            pkg.extras['author_%s' % idx] = value.string
+            lastidx = idx
         for (idx, value) in enumerate(study_descr.citation.rspStmt('AuthEnty')):
-            pkg.extras['role_%s_Author' % idx] = value.string
+            idx = idx + lastidx if idx != 0 else lastidx + 1
+            pkg.extras['organization_%s' % idx] = ""
+            if value.attrs.get('affiliation', None):
+                pkg.extras['organization_%s' % idx] = value.attrs['affiliation']
+            pkg.extras['author_%s' % idx] = value.string
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
