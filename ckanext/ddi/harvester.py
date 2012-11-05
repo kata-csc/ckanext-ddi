@@ -233,12 +233,11 @@ class DDIHarvester(HarvesterBase):
         for kw in keywords:
             if kw:
                 vocab = None
-                if 'vocabURI' in kw.attrs:
-                    vocab = Vocabulary.get(kw.attrs['vocabURI'])
-                    if not vocab:
-                        vocab = Vocabulary(kw.attrs['vocabURI'])
-                        vocab.save()
-                pkg.add_tag_by_name(munge_tag(kw.string), vocab=vocab)
+                if 'vocab' in kw.attrs:
+                    vocab = kw.attrs.get("vocab", None)
+                if vocab:
+                    kw_str = vocab + ':' + kw.string
+                pkg.add_tag_by_name(munge_tag(kw_str))
         if study_descr.stdyInfo.abstract:
             description_array = study_descr.stdyInfo.abstract('p')
         else:
@@ -325,7 +324,6 @@ class DDIHarvester(HarvesterBase):
             if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
                 pkg.extras['lastmod'] = study_descr.citation.prodStmt.prodDate.attrs['date']
         if study_descr.citation.titlStmt.parTitl:
-            print study_descr.citation.titlStmt.parTitl.attrs
             if study_descr.citation.titlStmt.parTitl.attrs['{http://www.w3.org/XML/1998/namespace}lang'] == 'en':
                 pkg.extras['title_en'] = study_descr.citation.titlStmt.parTitl.string
         for (idx, value) in enumerate(study_descr.citation.prodStmt('producer')):
