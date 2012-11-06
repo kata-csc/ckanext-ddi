@@ -233,10 +233,12 @@ class DDIHarvester(HarvesterBase):
         for kw in keywords:
             if kw:
                 vocab = None
-                kw_str = kw.string
+                kw_str = ""
+                if kw.string:
+                    kw_str = kw.string
                 if 'vocab' in kw.attrs:
                     vocab = kw.attrs.get("vocab", None)
-                if vocab:
+                if vocab and kw.string:
                     kw_str = vocab + ':' + kw.string
                 pkg.add_tag_by_name(munge_tag(kw_str))
         if study_descr.stdyInfo.abstract:
