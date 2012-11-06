@@ -233,6 +233,7 @@ class DDIHarvester(HarvesterBase):
         for kw in keywords:
             if kw:
                 vocab = None
+                kw_str = kw.string
                 if 'vocab' in kw.attrs:
                     vocab = kw.attrs.get("vocab", None)
                 if vocab:
