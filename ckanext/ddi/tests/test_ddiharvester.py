@@ -228,10 +228,14 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
         harvest_job.source.type = "DDI"
         Session.add(harvest_job)
         gathered = harv.gather_stage(harvest_job)
+        diffs = []
         for gath in gathered:
             harvest_object = HarvestObject.get(gath)
             print json.loads(harvest_object.content)['url']
             before = datetime.now()
             harv.fetch_stage(harvest_object)
             harv.import_stage(harvest_object)
-            print datetime.now() - before
+            diff = datetime.now() - before
+            print diff
+            diffs.append(diff)
+        print sum(diffs, timedelta)
