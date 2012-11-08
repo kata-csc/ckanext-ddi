@@ -325,8 +325,9 @@ class DDIHarvester(HarvesterBase):
             if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
                 pkg.extras['lastmod'] = study_descr.citation.prodStmt.prodDate.attrs['date']
         if study_descr.citation.titlStmt.parTitl:
-            if study_descr.citation.titlStmt.parTitl.attrs['{http://www.w3.org/XML/1998/namespace}lang'] == 'en':
-                pkg.extras['title_en'] = study_descr.citation.titlStmt.parTitl.string
+            for (idx, title) in enumerate(study_descr.citation.titlStmt('parTitl')):
+                pkg.extras['ltitle_%d' % idx] = title.string
+                pkg.extras['lsel_%d' % idx] = title.attr['{http://www.w3.org/XML/1998/namespace}lang']
         lastidx = 1
         for (idx, value) in enumerate(study_descr.citation.prodStmt('producer')):
             pkg.extras['organization_%s' % idx] = ""
