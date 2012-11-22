@@ -209,7 +209,7 @@ class DDIHarvester(HarvesterBase):
         title = study_descr.citation.titlStmt.titl.string
         if not title:
             title = document_info.titlStmt.titl.string
-        name = self._gen_new_name(self._check_name(title[:100]))
+        name = study_descr.citation.titlStmt.IDNo.string
         update = True
         pkg = Package.get(name)
         if not pkg:
