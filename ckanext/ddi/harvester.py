@@ -226,8 +226,6 @@ class DDIHarvester(HarvesterBase):
             pkg.maintainer = study_descr.citation.distStmt.contact.string
         if document_info.titlStmt.IDNo:
             pkg.id = document_info.titlStmt.IDNo.string
-        if study_descr.citation.verStmt:
-            pkg.version = study_descr.citation.verStmt.version.string
         keywords = study_descr.stdyInfo.subject(re.compile('keyword|topcClas'))
         keywords = list(set(keywords))
         for kw in keywords:
@@ -323,7 +321,8 @@ class DDIHarvester(HarvesterBase):
             pkg.extras['owner_name'] = study_descr.citation.distStmt.distrbtr.string
         if study_descr.citation.prodStmt.prodDate:
             if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
-                pkg.extras['lastmod'] = study_descr.citation.prodStmt.prodDate.attrs['date']
+                proddate = study_descr.citation.prodStmt.prodDate.attrs['date']
+                pkg.version = proddate
         if study_descr.citation.titlStmt.parTitl:
             for (idx, title) in enumerate(study_descr.citation.titlStmt('parTitl')):
                 pkg.extras['ltitle_%d' % idx] = title.string
