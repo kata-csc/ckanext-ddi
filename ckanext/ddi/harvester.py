@@ -354,4 +354,6 @@ class DDIHarvester(HarvesterBase):
                 setup_default_user_roles(group)
         log.debug("Saved pkg %s" % (pkg.url))
         setup_default_user_roles(pkg)
+        harvest_object.package_id = pkg.id
+        harvest_object.save()
         return True
