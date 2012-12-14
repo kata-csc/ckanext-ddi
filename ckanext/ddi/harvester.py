@@ -328,18 +328,18 @@ class DDIHarvester(HarvesterBase):
                 pkg.extras['ltitle_%d' % idx] = title.string
                 pkg.extras['lsel_%d' % idx] = title.attrs['{http://www.w3.org/XML/1998/namespace}lang']
         lastidx = 1
-        for (idx, value) in enumerate(study_descr.citation.prodStmt('producer')):
-            pkg.extras['organization_%s' % idx] = ""
+        for value in study_descr.citation.prodStmt('producer'):
+            pkg.extras['organization_%s' % lastidx] = ""
             if value.attrs.get('affiliation', None):
                 pkg.extras['organization_%s' % idx] = value.attrs['affiliation']
             pkg.extras['author_%s' % idx] = value.string
-            lastidx = idx
-        for (idx, value) in enumerate(study_descr.citation.rspStmt('AuthEnty')):
-            idx = idx + lastidx if idx != 0 else lastidx + 1
-            pkg.extras['organization_%s' % idx] = ""
+            lastidx = lastidx + 1
+        for value in study_descr.citation.rspStmt('AuthEnty'):
+            pkg.extras['organization_%s' % lastidx] = ""
             if value.attrs.get('affiliation', None):
-                pkg.extras['organization_%s' % idx] = value.attrs['affiliation']
-            pkg.extras['author_%s' % idx] = value.string
+                pkg.extras['organization_%s' % lastidx] = value.attrs['affiliation']
+            pkg.extras['author_%s' % lastidx] = value.string
+            lastidx = lastidx + 1
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
