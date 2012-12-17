@@ -327,25 +327,30 @@ class DDIHarvester(HarvesterBase):
             for (idx, title) in enumerate(study_descr.citation.titlStmt('parTitl')):
                 pkg.extras['ltitle_%d' % idx] = title.string
                 pkg.extras['lsel_%d' % idx] = title.attrs['{http://www.w3.org/XML/1998/namespace}lang']
-        lastidx = 1
+        authorgs = []
         for value in study_descr.citation.prodStmt('producer'):
-            pkg.extras['organization_%s' % lastidx] = ""
+            org = ""
             if value.attrs.get('affiliation', None):
-                pkg.extras['organization_%s' % idx] = value.attrs['affiliation']
-            pkg.extras['author_%s' % idx] = value.string
-            lastidx = lastidx + 1
+                org = value.attrs['affiliation']
+            author = value.string
+            authorgs.append((author, org))
         for value in study_descr.citation.rspStmt('AuthEnty'):
-            pkg.extras['organization_%s' % lastidx] = ""
+            org = ""
             if value.attrs.get('affiliation', None):
-                pkg.extras['organization_%s' % lastidx] = value.attrs['affiliation']
-            pkg.extras['author_%s' % lastidx] = value.string
-            lastidx = lastidx + 1
+                org = value.attrs['affiliation']
+            author = value.string
+            authorgs.append((author, org))
         for value in study_descr.citation.rspStmt('othId'):
-            pkg.extras['organization_%s' % lastidx] = ""
+            org = ""
             if value.attrs.get('affiliation', None):
-                pkg.extras['organization_%s' % lastidx] = value.attrs['affiliation']
-            pkg.extras['author_%s' % lastidx] = value.string
-            lastidx = lastidx + 1
+                org = value.attrs['affiliation']
+            author = value.string
+            authorgs.append((author, org))
+        authorgs = list(set(authorgs))
+        lastidx = 1
+        for auth, org in authorgs:
+            pkg.extras['author_%s' % lastidx] = auth
+            pkg.extras['organization_%s' % lastidx] = org
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
