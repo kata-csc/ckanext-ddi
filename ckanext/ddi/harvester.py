@@ -340,6 +340,12 @@ class DDIHarvester(HarvesterBase):
                 pkg.extras['organization_%s' % lastidx] = value.attrs['affiliation']
             pkg.extras['author_%s' % lastidx] = value.string
             lastidx = lastidx + 1
+        for value in study_descr.citation.rspStmt('othId'):
+            pkg.extras['organization_%s' % lastidx] = ""
+            if value.attrs.get('affiliation', None):
+                pkg.extras['organization_%s' % lastidx] = value.attrs['affiliation']
+            pkg.extras['author_%s' % lastidx] = value.string
+            lastidx = lastidx + 1
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
