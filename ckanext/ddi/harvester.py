@@ -318,7 +318,7 @@ class DDIHarvester(HarvesterBase):
                 metas[var['ID']] = var['labl'] if 'labl' in var else var['qstnLit']
         pkg.extras = metas
         if study_descr.citation.distStmt.distrbtr:
-            pkg.extras['owner_name'] = study_descr.citation.distStmt.distrbtr.string
+            pkg.extras['publisher'] = study_descr.citation.distStmt.distrbtr.string
         if study_descr.citation.prodStmt.prodDate:
             if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
                 proddate = study_descr.citation.prodStmt.prodDate.attrs['date']
@@ -329,11 +329,7 @@ class DDIHarvester(HarvesterBase):
                 pkg.extras['lang_title_%d' % idx] = title.attrs['{http://www.w3.org/XML/1998/namespace}lang']
         authorgs = []
         for value in study_descr.citation.prodStmt('producer'):
-            org = ""
-            if value.attrs.get('affiliation', None):
-                org = value.attrs['affiliation']
-            author = value.string
-            authorgs.append((author, org))
+            pkg.extras["producer"] = value
         for value in study_descr.citation.rspStmt('AuthEnty'):
             org = ""
             if value.attrs.get('affiliation', None):
@@ -341,11 +337,7 @@ class DDIHarvester(HarvesterBase):
             author = value.string
             authorgs.append((author, org))
         for value in study_descr.citation.rspStmt('othId'):
-            org = ""
-            if value.attrs.get('affiliation', None):
-                org = value.attrs['affiliation']
-            author = value.string
-            authorgs.append((author, org))
+            pkg.extras["contributor"] = value
         authorgs = list(set(authorgs))
         lastidx = 1
         for auth, org in authorgs:
