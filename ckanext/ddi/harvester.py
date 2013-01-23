@@ -329,7 +329,7 @@ class DDIHarvester(HarvesterBase):
                 pkg.extras['lang_title_%d' % idx] = title.attrs['{http://www.w3.org/XML/1998/namespace}lang']
         authorgs = []
         for value in study_descr.citation.prodStmt('producer'):
-            pkg.extras["producer"] = value
+            pkg.extras["producer"] = value.string
         for value in study_descr.citation.rspStmt('AuthEnty'):
             org = ""
             if value.attrs.get('affiliation', None):
@@ -337,7 +337,7 @@ class DDIHarvester(HarvesterBase):
             author = value.string
             authorgs.append((author, org))
         for value in study_descr.citation.rspStmt('othId'):
-            pkg.extras["contributor"] = value
+            pkg.extras["contributor"] = value.string
         authorgs = list(set(authorgs))
         lastidx = 1
         for auth, org in authorgs:
