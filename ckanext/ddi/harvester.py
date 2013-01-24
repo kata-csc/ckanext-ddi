@@ -338,11 +338,11 @@ class DDIHarvester(HarvesterBase):
             authorgs.append((author, org))
         for value in study_descr.citation.rspStmt('othId'):
             pkg.extras["contributor"] = value.string
-        authorgs = list(set(authorgs))
         lastidx = 1
         for auth, org in authorgs:
             pkg.extras['author_%s' % lastidx] = auth
             pkg.extras['organization_%s' % lastidx] = org
+            lastidx = lastidx + 1
         pkg.save()
         producers = study_descr.citation.prodStmt.find_all('producer')
         for producer in producers:
