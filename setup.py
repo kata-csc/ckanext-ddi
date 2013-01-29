@@ -23,7 +23,7 @@ setup(
 		# -*- Extra requirements: -*-
 		'beautifulsoup4',
 		'ckanclient',
-		'unicodecsv',
+		'unicodecsv==0.9.0',
 		'python-dateutil',
 	],
 	tests_require=[
