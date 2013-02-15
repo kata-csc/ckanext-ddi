@@ -32,6 +32,10 @@ from bs4 import BeautifulSoup, Tag
 log = logging.getLogger(__name__)
 
 
+import socket
+socket.setdefaulttimeout(5)
+
+
 class DDIHarvester(HarvesterBase):
     '''
     DDI Harvester for ckanext-harvester.
