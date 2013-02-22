@@ -11,6 +11,7 @@ import StringIO
 import re
 import unicodecsv as csv
 import datetime
+import pprint
 from dateutil import parser
 
 from pylons import config
@@ -184,11 +185,65 @@ class DDIHarvester(HarvesterBase):
         longest_els.append('txt')
         return longest_els
 
+    def import_ddi3(self, harvest_object):
+        xml_dict = {}
+        xml_dict['source'] = harvest_object.content
+        udict = json.loads(harvest_object.content)
+        if 'url' in udict:
+            f = urllib2.urlopen(udict['url']).read()
+            ddi_xml = BeautifulSoup(f,
+                                    'xml')
+        else:
+            self._save_object_error('No url in content!', harvest_object)
+            return False
+        model.repo.new_revision()
+        ddiroot = ddi_xml.DDIInstance
+        main_cit = ddiroot.Citation
+        study_info = ddiroot('StudyUnit')[-1]
+        idx = 0
+        authorgs = []
+        pkg = Package.get(study_info.attrs['id'])
+        if not pkg:
+            pkg = Package(name=study_info.attrs['id'])
+        pkg.id = ddiroot.attrs['id']
+        pkg.version = main_cit.PublicationDate.SimpleDate.string
+        for title in main_cit('Title'):
+            pkg.extras['title_%d' % idx] = title.string
+            pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
+            idx += 1
+        for title in study_info.Citation('Title'):
+            pkg.extras['title_%d' % idx] = title.string
+            pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
+            idx += 1
+        for value in study_info.Citation('Creator'):
+            org = ""
+            if value.attrs.get('affiliation', None):
+                org = value.attrs['affiliation']
+            author = value.string
+            authorgs.append((author, org))
+        pkg.author = authorgs[0][0]
+        pkg.maintainer = study_info.Citation.Publisher.string
+        lastidx = 0
+        for auth, org in authorgs:
+            pkg.extras['author_%s' % lastidx] = auth
+            pkg.extras['organization_%s' % lastidx] = org
+            lastidx = lastidx + 1
+        pkg.extras["licenseURL"] = study_info.Citation.Copyright.string
+        pkg.notes = "".join([unicode(repr(chi).replace('\n', '<br />'), 'utf8')\
+                             for chi in study_info.Abstract.Content.children])
+        for kw in study_info.Coverage.TopicalCoverage('Keyword'):
+            pkg.add_tag_by_name(kw.string)
+        pkg.extras['contributor'] = study_info.Citation.Contributor.string
+        pkg.extras['publisher'] = study_info.Citation.Publisher.string
+        pkg.save()
+
     def import_stage(self, harvest_object):
         '''Import the metadata received in the fetch stage to a dataset and
         create groups if ones are defined. Fill in metadata from study and
         document description.
         '''
+        if self.config.get('ddi3', ''):
+            return self.import_ddi3(harvest_object)
         try:
             xml_dict = {}
             xml_dict['source'] = harvest_object.content

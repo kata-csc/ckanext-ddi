@@ -239,3 +239,34 @@ class TestDDIHarvester(unittest.TestCase, FunctionalTestCase):
             print diff
             diffs.append(diff)
         print sum(diffs, timedelta)
+
+
+class TestDDI3Harvester(unittest.TestCase, FunctionalTestCase):
+    @classmethod
+    def setup_class(self):
+        setup()
+
+    @classmethod
+    def teardown_class(self):
+        Session.remove()
+
+    def _create_harvester(self):
+        harv = DDIHarvester()
+        harv.config = '{"ddi3":"yes"}'
+        harvest_job = HarvestJob()
+        harvest_job.source = HarvestSource()
+        harvest_job.source.title = "Test"
+        harvest_job.source.url = "http://foo"
+        harvest_job.source.type = "DDI"
+        Session.add(harvest_job)
+        return harv, harvest_job
+
+    def test_ddi3_harvesting(self):
+        harv, job = self._create_harvester()
+        res = "http://www.fsd.uta.fi/fi/aineistot/luettelo/FSD0115/FSD0115.xml"
+        urllib2.urlopen = mock.Mock(return_value=StringIO(res))
+        gathered = harv.gather_stage(job)
+        urllib2.urlopen = mock.Mock(return_value=open("ddi3.xml"))
+        harvest_obj = HarvestObject.get(gathered[0])
+        harv.fetch_stage(harvest_obj)
+        harv.import_stage(harvest_obj)
