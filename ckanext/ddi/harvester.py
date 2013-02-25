@@ -242,8 +242,10 @@ class DDIHarvester(HarvesterBase):
         create groups if ones are defined. Fill in metadata from study and
         document description.
         '''
-        if self.config.get('ddi3', ''):
-            return self.import_ddi3(harvest_object)
+        if self.config:
+            # TODO: filelist
+            if self.config.get('ddi3', ''):
+                return self.import_ddi3(harvest_object)
         try:
             xml_dict = {}
             xml_dict['source'] = harvest_object.content
