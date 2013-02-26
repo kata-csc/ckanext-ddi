@@ -69,7 +69,6 @@ class DDIHarvester(HarvesterBase):
         '''Gather the URLs to fetch from a URL which has a list of links to XML
         documents containing the DDI documents.
         '''
-        self._set_config(harvest_job.config)
         previous_job = Session.query(HarvestJob) \
             .filter(HarvestJob.source==harvest_job.source) \
             .filter(HarvestJob.gather_finished!=None) \
@@ -242,7 +241,7 @@ class DDIHarvester(HarvesterBase):
         create groups if ones are defined. Fill in metadata from study and
         document description.
         '''
-        self._set_config(harvest_object.job.config)
+        self._set_config(harvest_object.job.source.config)
         if self.config:
             if self.config.get('ddi3', ''):
                 return self.import_ddi3(harvest_object)
