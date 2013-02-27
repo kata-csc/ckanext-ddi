@@ -27,7 +27,7 @@ from ckan.logic.auth.get import package_show, group_show
 from ckan import model
 
 
-from ckanext.ddi.harvester import DDIHarvester
+from ckanext.ddi.harvester import DDIHarvester, DDI3Harvester
 from ckanext.harvest.model import HarvestJob, HarvestSource, HarvestObject, \
                                   HarvestObjectError, HarvestGatherError, setup
 from sqlalchemy.ext.associationproxy import _AssociationDict
@@ -251,13 +251,14 @@ class TestDDI3Harvester(unittest.TestCase, FunctionalTestCase):
         Session.remove()
 
     def _create_harvester(self):
-        harv = DDIHarvester()
+        harv = DDI3Harvester()
         harv.config = '{"ddi3":"yes"}'
         harvest_job = HarvestJob()
         harvest_job.source = HarvestSource()
         harvest_job.source.title = "Test"
         harvest_job.source.url = "http://foo"
         harvest_job.source.type = "DDI"
+        harvest_job.source.config = '{"ddi3":"yes"}'
         Session.add(harvest_job)
         return harv, harvest_job
 

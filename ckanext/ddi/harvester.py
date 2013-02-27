@@ -184,67 +184,11 @@ class DDIHarvester(HarvesterBase):
         longest_els.append('txt')
         return longest_els
 
-    def import_ddi3(self, harvest_object):
-        xml_dict = {}
-        xml_dict['source'] = harvest_object.content
-        udict = json.loads(harvest_object.content)
-        if 'url' in udict:
-            f = urllib2.urlopen(udict['url']).read()
-            ddi_xml = BeautifulSoup(f,
-                                    'xml')
-        else:
-            self._save_object_error('No url in content!', harvest_object)
-            return False
-        model.repo.new_revision()
-        ddiroot = ddi_xml.DDIInstance
-        main_cit = ddiroot.Citation
-        study_info = ddiroot('StudyUnit')[-1]
-        idx = 0
-        authorgs = []
-        pkg = Package.get(study_info.attrs['id'])
-        if not pkg:
-            pkg = Package(name=study_info.attrs['id'])
-        pkg.id = ddiroot.attrs['id']
-        pkg.version = main_cit.PublicationDate.SimpleDate.string
-        for title in main_cit('Title'):
-            pkg.extras['title_%d' % idx] = title.string
-            pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
-            idx += 1
-        for title in study_info.Citation('Title'):
-            pkg.extras['title_%d' % idx] = title.string
-            pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
-            idx += 1
-        for value in study_info.Citation('Creator'):
-            org = ""
-            if value.attrs.get('affiliation', None):
-                org = value.attrs['affiliation']
-            author = value.string
-            authorgs.append((author, org))
-        pkg.author = authorgs[0][0]
-        pkg.maintainer = study_info.Citation.Publisher.string
-        lastidx = 0
-        for auth, org in authorgs:
-            pkg.extras['author_%s' % lastidx] = auth
-            pkg.extras['organization_%s' % lastidx] = org
-            lastidx = lastidx + 1
-        pkg.extras["licenseURL"] = study_info.Citation.Copyright.string
-        pkg.notes = "".join([unicode(repr(chi).replace('\n', '<br />'), 'utf8')\
-                             for chi in study_info.Abstract.Content.children])
-        for kw in study_info.Coverage.TopicalCoverage('Keyword'):
-            pkg.add_tag_by_name(kw.string)
-        pkg.extras['contributor'] = study_info.Citation.Contributor.string
-        pkg.extras['publisher'] = study_info.Citation.Publisher.string
-        pkg.save()
-
     def import_stage(self, harvest_object):
         '''Import the metadata received in the fetch stage to a dataset and
         create groups if ones are defined. Fill in metadata from study and
         document description.
         '''
-        self._set_config(harvest_object.job.source.config)
-        if self.config:
-            if self.config.get('ddi3', ''):
-                return self.import_ddi3(harvest_object)
         try:
             xml_dict = {}
             xml_dict['source'] = harvest_object.content
@@ -420,4 +364,127 @@ class DDIHarvester(HarvesterBase):
         harvest_object.package_id = pkg.id
         harvest_object.current = True
         harvest_object.save()
+        return True
+
+
+class DDI3Harvester(HarvesterBase):
+    '''
+    DDI Harvester for ckanext-harvester.
+    '''
+    config = None
+    incremental = False
+
+    def _set_config(self, config_str):
+        '''Set the configuration string.
+        '''
+        if config_str:
+            self.config = json.loads(config_str)
+
+    def info(self):
+        '''Return information about this harvester.
+        '''
+        return {
+                'name': 'DDI3',
+                'title': 'DDI3 import (EXPERIMENTAL)',
+                'description': 'Mass importing harvester for DDI3',
+                }
+
+    def validate_config(self, config):
+        '''Validate the config, returns it since we don't have any configuration
+        parameters
+        '''
+        return config
+
+    def gather_stage(self, harvest_job):
+        '''Gather the URLs to fetch from a URL which has a list of links to XML
+        documents containing the DDI documents.
+        '''
+        previous_job = Session.query(HarvestJob) \
+            .filter(HarvestJob.source==harvest_job.source) \
+            .filter(HarvestJob.gather_finished!=None) \
+            .filter(HarvestJob.id!=harvest_job.id) \
+            .order_by(HarvestJob.gather_finished.desc()) \
+            .limit(1).first()
+        if previous_job:
+            self.incremental = True
+        gather_url = harvest_job.source.url
+        try:
+            urls = urllib2.urlopen(gather_url)
+            harvest_objs = []
+            for url in urls.readlines():
+                gather = True
+                if self.incremental:
+                    request = urllib2.Request(url)
+                    request.get_method = lambda: 'HEAD'
+                    doc_url = urllib2.urlopen(request)
+                    lastmod = parser.parse(doc_url.headers['last-modified'], ignoretz=True)
+                    if previous_job.gather_finished < lastmod:
+                        log.debug("Gather false")
+                        gather = False
+                if gather and not self.incremental:
+                    harvest_obj = HarvestObject()
+                    harvest_obj.content = json.dumps({'url': url})
+                    harvest_obj.job = harvest_job
+                    harvest_obj.save()
+                    harvest_objs.append(harvest_obj.id)
+        except urllib2.URLError:
+            self._save_gather_error('Could not gather XML files from URL!', 
+                                    harvest_job)
+            return None
+        return harvest_objs
+
+    def fetch_stage(self, harvest_object):
+        return True
+
+    def import_stage(self, harvest_object):
+        xml_dict = {}
+        xml_dict['source'] = harvest_object.content
+        udict = json.loads(harvest_object.content)
+        if 'url' in udict:
+            f = urllib2.urlopen(udict['url']).read()
+            ddi_xml = BeautifulSoup(f,
+                                    'xml')
+        else:
+            self._save_object_error('No url in content!', harvest_object)
+            return False
+        model.repo.new_revision()
+        ddiroot = ddi_xml.DDIInstance
+        main_cit = ddiroot.Citation
+        study_info = ddiroot('StudyUnit')[-1]
+        idx = 0
+        authorgs = []
+        pkg = Package.get(study_info.attrs['id'])
+        if not pkg:
+            pkg = Package(name=study_info.attrs['id'])
+        pkg.id = ddiroot.attrs['id']
+        pkg.version = main_cit.PublicationDate.SimpleDate.string
+        for title in main_cit('Title'):
+            pkg.extras['title_%d' % idx] = title.string
+            pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
+            idx += 1
+        for title in study_info.Citation('Title'):
+            pkg.extras['title_%d' % idx] = title.string
+            pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
+            idx += 1
+        for value in study_info.Citation('Creator'):
+            org = ""
+            if value.attrs.get('affiliation', None):
+                org = value.attrs['affiliation']
+            author = value.string
+            authorgs.append((author, org))
+        pkg.author = authorgs[0][0]
+        pkg.maintainer = study_info.Citation.Publisher.string
+        lastidx = 0
+        for auth, org in authorgs:
+            pkg.extras['author_%s' % lastidx] = auth
+            pkg.extras['organization_%s' % lastidx] = org
+            lastidx = lastidx + 1
+        pkg.extras["licenseURL"] = study_info.Citation.Copyright.string
+        pkg.notes = "".join([unicode(repr(chi).replace('\n', '<br />'), 'utf8')\
+                             for chi in study_info.Abstract.Content.children])
+        for kw in study_info.Coverage.TopicalCoverage('Keyword'):
+            pkg.add_tag_by_name(kw.string)
+        pkg.extras['contributor'] = study_info.Citation.Contributor.string
+        pkg.extras['publisher'] = study_info.Citation.Publisher.string
+        pkg.save()
         return True

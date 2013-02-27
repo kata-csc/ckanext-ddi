@@ -39,6 +39,7 @@ setup(
         [ckan.plugins]
 	# Add plugins here, eg
 	ddi_harvester=ckanext.ddi.harvester:DDIHarvester
+	ddi3_harvester=ckanext.ddi.harvester:DDI3Harvester
 	[paste.paster_command]
 	ddi_import = ckanext.ddi.commands.ddi_import:DDIImporter
 	""",
