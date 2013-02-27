@@ -330,7 +330,7 @@ class DDIHarvester(HarvesterBase):
         if study_descr.citation.titlStmt.parTitl:
             for (idx, title) in enumerate(study_descr.citation.titlStmt('parTitl')):
                 pkg.extras['title_%d' % idx] = title.string
-                pkg.extras['lang_title_%d' % idx] = title.attrs['{http://www.w3.org/XML/1998/namespace}lang']
+                pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
         authorgs = []
         for value in study_descr.citation.prodStmt('producer'):
             pkg.extras["producer"] = value.string
