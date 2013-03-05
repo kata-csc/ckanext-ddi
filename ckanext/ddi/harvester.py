@@ -266,7 +266,7 @@ class DDIHarvester(HarvesterBase):
             pkg.add_resource(url=document_info.holdings['URI']\
                              if 'URI' in document_info.holdings else '',
                              description=title)
-        metas = {}
+        metas = []
         descendants = [desc for desc in document_info.descendants] +\
                       [sdesc for sdesc in study_descr.descendants]
         for docextra in descendants:
@@ -275,14 +275,14 @@ class DDIHarvester(HarvesterBase):
                     if docextra.name == 'p':
                         docextra.name = docextra.parent.name
                     if not docextra.name in metas and docextra.string:
-                        metas[docextra.name] = docextra.string\
+                        metas.append(docextra.string\
                                     if docextra.string\
-                                    else self._collect_attribs(docextra)
+                                    else self._collect_attribs(docextra))
                     else:
                         if docextra.string:
-                            metas[docextra.name] += " " + docextra.string\
+                            metas.append(docextra.string\
                                         if docextra.string\
-                                        else self._collect_attribs(docextra)
+                                        else self._collect_attribs(docextra))
         if ddi_xml.codeBook.dataDscr and not update:
             vars = ddi_xml.codeBook.dataDscr('var')
             heads = self._get_headers()
@@ -319,8 +319,8 @@ class DDIHarvester(HarvesterBase):
             f_var.seek(0)
             reader = csv.DictReader(f_var)
             for var in reader:
-                metas[var['ID']] = var['labl'] if 'labl' in var else var['qstnLit']
-        pkg.extras = metas
+                metas.append(var['labl'] if 'labl' in var else var['qstnLit'])
+        pkg.extras['ddi_extras'] = " ".join(metas)
         if study_descr.citation.distStmt.distrbtr:
             pkg.extras['publisher'] = study_descr.citation.distStmt.distrbtr.string
         if study_descr.citation.prodStmt.prodDate:
@@ -487,4 +487,7 @@ class DDI3Harvester(HarvesterBase):
         pkg.extras['contributor'] = study_info.Citation.Contributor.string
         pkg.extras['publisher'] = study_info.Citation.Publisher.string
         pkg.save()
+        harvest_object.package_id = pkg.id
+        harvest_object.current = True
+        harvest_object.save()
         return True
