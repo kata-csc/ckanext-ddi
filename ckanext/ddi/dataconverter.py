@@ -184,7 +184,8 @@ def _ddi2ckan(ddi_xml, original_url, harvest_object):
             pkg.add_resource(url=fileurl,
                 description="Original metadata record",
                 format="xml", size=len(f))
-        except NameError:
+        except NameError as e:
+            log.debug(traceback.format_exc(e))
             log.debug('Resource fail: %s' % original_url)
             # Bug elsewhere:
             # /home/ckan/pyenv/lib/python2.6/site-packages/pairtree/pairtree_client.py
