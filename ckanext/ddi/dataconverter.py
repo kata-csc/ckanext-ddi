@@ -38,9 +38,9 @@ socket.setdefaulttimeout(30)
 import traceback
 
 
-def ddi2ckan(data, original_url=None, harvest_object=None):
+def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
     try:
-        return _ddi2ckan(data, original_url, harvest_object)
+        return _ddi2ckan(data, original_url, original_xml, harvest_object)
     except Exception as e:
         log.debug(traceback.format_exc(e))
     return False
@@ -122,7 +122,7 @@ def _get_headers():
     longest_els.append('txt')
     return longest_els
 
-def _ddi2ckan(ddi_xml, original_url, harvest_object):
+def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     model.repo.new_revision()
     study_descr = ddi_xml.codeBook.stdyDscr
     document_info = ddi_xml.codeBook.docDscr.citation
@@ -177,19 +177,11 @@ def _ddi2ckan(ddi_xml, original_url, harvest_object):
         idno = study_descr.citation.titlStmt.IDNo
         agencyxml = (idno['agency'] if 'agency' in idno.attrs else '') + idno.string
         label = "%s/%s.xml" % (nowstr, agencyxml,)
-        try:
-            f = json.loads(harvest_object.content)
-            ofs.put_stream(BUCKET, label, f['xml'], {})
-            fileurl = config.get('ckan.site_url') + h.url_for('storage_file', label=label)
-            pkg.add_resource(url=fileurl,
-                description="Original metadata record",
-                format="xml", size=len(f))
-        except NameError as e:
-            log.debug(traceback.format_exc(e))
-            log.debug('Resource fail: %s' % original_url)
-            # Bug elsewhere:
-            # /home/ckan/pyenv/lib/python2.6/site-packages/pairtree/pairtree_client.py
-            # NameError: global name 'logger' is not defined
+        ofs.put_stream(BUCKET, label, original_xml, {})
+        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
+            label=label)
+        pkg.add_resource(url=fileurl, description="Original metadata record",
+            format="xml", size=len(original_xml))
         pkg.add_resource(url=document_info.holdings['URI']\
                          if 'URI' in document_info.holdings else '',
                          description=title)

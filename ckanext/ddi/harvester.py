@@ -31,6 +31,7 @@ from ckanext.harvest.harvesters.retry import HarvesterRetry
 from dataconverter import ddi2ckan
 
 from bs4 import BeautifulSoup, Tag
+import pickle
 
 log = logging.getLogger(__name__)
 
@@ -177,14 +178,8 @@ class DDIHarvester(HarvesterBase):
                                     harvest_object)
             self._add_retry(harvest_object)
             return False
-        except etree.XMLSyntaxError:
-            self._save_object_error('Unable to parse XML!', harvest_object)
-            # I presume source sent wrong data but it arrived correctly.
-            # This could result in a case where incorrect source is tried
-            # over and over again without success.
-            self._add_retry(harvest_object)
-            return False
-        harvest_object.content = json.dumps({ 'url':url, 'xml':f })
+        # Need to pickle the XML so that the data type remains the same.
+        harvest_object.content = pickle.dumps({ 'url':url, 'xml':f })
         return True
 
     def import_stage(self, harvest_object):
@@ -192,9 +187,19 @@ class DDIHarvester(HarvesterBase):
         create groups if ones are defined. Fill in metadata from study and
         document description.
         '''
-        info = json.loads(harvest_object.content)
-        ddi_xml = BeautifulSoup(info['xml'], 'xml')
-        return ddi2ckan(ddi_xml, info['url'], harvest_object)
+        info = pickle.loads(harvest_object.content)
+        try:
+            ddi_xml = BeautifulSoup(info['xml'], 'xml')
+        except etree.XMLSyntaxError:
+            self._save_object_error('Unable to parse XML!', harvest_object)
+            # I presume source sent wrong data but it arrived correctly.
+            # This could result in a case where incorrect source is tried
+            # over and over again without success.
+            del info['xml']
+            harvest_object.content = info['url']
+            self._add_retry(harvest_object)
+            return False
+        return ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
 
 
 class DDI3Harvester(HarvesterBase):
