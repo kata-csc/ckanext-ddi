@@ -282,10 +282,11 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             setup_default_user_roles(group)
     #log.debug("Saved pkg %s" % (pkg.url))
     setup_default_user_roles(pkg)
-    harvest_object.package_id = pkg.id
-    harvest_object.content = None
-    harvest_object.current = True
-    harvest_object.save()
+    if harvest_object != None:
+        harvest_object.package_id = pkg.id
+        harvest_object.content = None
+        harvest_object.current = True
+        harvest_object.save()
     model.repo.commit()
     return True
 

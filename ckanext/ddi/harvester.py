@@ -201,6 +201,13 @@ class DDIHarvester(HarvesterBase):
             return False
         return ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
 
+    def import_xml(self, source, xml):
+        try:
+            ddi_xml = BeautifulSoup(xml, 'xml')
+        except etree.XMLSyntaxError:
+            log.debug('Unable to parse XML!')
+            return False
+        return ddi2ckan(ddi_xml, None, xml)
 
 class DDI3Harvester(HarvesterBase):
     '''
