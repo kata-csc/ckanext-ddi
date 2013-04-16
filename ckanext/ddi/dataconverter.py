@@ -291,18 +291,14 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     return True
 
 
+def ddi32ckan(ddi_xml, original_xml, original_url=None, harvest_object=None):
+    try:
+        return _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object)
+    except Exception as e:
+        log.debug(traceback.format_exc(e))
+    return False
 
-def _ddi3_import_stage(self, harvest_object):
-    xml_dict = {}
-    xml_dict['source'] = harvest_object.content
-    udict = json.loads(harvest_object.content)
-    if 'url' in udict:
-        f = urllib2.urlopen(udict['url']).read()
-        ddi_xml = BeautifulSoup(f,
-                                'xml')
-    else:
-        self._save_object_error('No url in content!', harvest_object)
-        return False
+def _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object):
     model.repo.new_revision()
     ddiroot = ddi_xml.DDIInstance
     main_cit = ddiroot.Citation
@@ -312,7 +308,22 @@ def _ddi3_import_stage(self, harvest_object):
     pkg = Package.get(study_info.attrs['id'])
     if not pkg:
         pkg = Package(name=study_info.attrs['id'])
-    pkg.id = ddiroot.attrs['id']
+        pkg.id = ddiroot.attrs['id']
+        # This presumes that resources have not changed. Wrong? If something
+        # has changed then technically the XML has chnaged and hence this may
+        # have to "delete" old resources and then add new ones.
+        ofs = get_ofs()
+        nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
+        label = "%s/%s.xml" % (nowstr, study_info.attrs['id'],)
+        ofs.put_stream(BUCKET, label, original_xml, {})
+        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
+            label=label)
+        pkg.add_resource(url=fileurl, description="Original metadata record",
+            format="xml", size=len(original_xml))
+        # What the URI should be?
+        #pkg.add_resource(url=document_info.holdings['URI']\
+        #                 if 'URI' in document_info.holdings else '',
+        #                 description=title)
     pkg.version = main_cit.PublicationDate.SimpleDate.string
     for title in main_cit('Title'):
         pkg.extras['title_%d' % idx] = title.string
@@ -343,7 +354,11 @@ def _ddi3_import_stage(self, harvest_object):
     pkg.extras['contributor'] = study_info.Citation.Contributor.string
     pkg.extras['publisher'] = study_info.Citation.Publisher.string
     pkg.save()
-    harvest_object.package_id = pkg.id
-    harvest_object.current = True
-    harvest_object.save()
+    if harvest_object:
+        harvest_object.package_id = pkg.id
+        harvest_object.content = None
+        harvest_object.current = True
+        harvest_object.save()
+    model.repo.commit()
     return True
+
