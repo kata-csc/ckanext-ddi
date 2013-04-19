@@ -12,6 +12,7 @@ import re
 import unicodecsv as csv
 import datetime
 import pprint
+import httplib
 from dateutil import parser
 
 from pylons import config
@@ -144,7 +145,7 @@ class DDIHarvester(HarvesterBase):
                         doc_url = urllib2.urlopen(request)
                         lastmod = parser.parse(doc_url.headers['last-modified'],
                             ignoretz=True)
-                    except urllib2.URLError:
+                    except (urllib2.URLError, urllib2.HTTPError,):
                         # Actually we do not know if it fits the time limits.
                         # Rather get it twice than lose it.
                         self._add_retry(add_harvest_object(harvest_job, url))
@@ -155,7 +156,7 @@ class DDIHarvester(HarvesterBase):
                         continue
                 obj = add_harvest_object(harvest_job, url)
                 harvest_objs.append(obj.id)
-        except urllib2.URLError:
+        except (urllib2.URLError, urllib2.HTTPError,):
             self._save_gather_error('Could not gather XML files from URL!', 
                                     harvest_job)
             return None
@@ -173,10 +174,15 @@ class DDIHarvester(HarvesterBase):
         url = harvest_object.content
         try:
             f = urllib2.urlopen(url).read()
-        except urllib2.URLError:
+        except (urllib2.URLError, urllib2.HTTPError,):
+            self._add_retry(harvest_object)
             self._save_object_error('Could not fetch from url %s!' % url, 
                                     harvest_object)
+            return False
+        except httplib.BadStatusLine:
             self._add_retry(harvest_object)
+            self._save_object_error('Bad HTTP response status line.',
+                harvest_object, stage='Fetch')
             return False
         # Need to pickle the XML so that the data type remains the same.
         harvest_object.content = pickle.dumps({ 'url':url, 'xml':f })
@@ -315,7 +321,7 @@ class DDI3Harvester(HarvesterBase):
                         doc_url = urllib2.urlopen(request)
                         lastmod = parser.parse(doc_url.headers['last-modified'],
                             ignoretz=True)
-                    except urllib2.URLError:
+                    except (urllib2.URLError, urllib2.HTTPError,):
                         # Actually we do not know if it fits the time limits.
                         # Rather get it twice than lose it.
                         self._add_retry(add_harvest_object(harvest_job, url))
@@ -326,11 +332,11 @@ class DDI3Harvester(HarvesterBase):
                         continue
                 obj = add_harvest_object(harvest_job, url)
                 harvest_objs.append(obj.id)
-        except urllib2.URLError:
+        except (urllib2.URLError, urllib2.HTTPError,):
             self._save_gather_error('Could not gather XML files from URL!', 
                                     harvest_job)
             return None
-        except exception as e:
+        except Exception as e:
             log.debug(traceback.format_exc(e))
             return None
         self._clear_retries()
@@ -344,10 +350,21 @@ class DDI3Harvester(HarvesterBase):
         url = harvest_object.content
         try:
             f = urllib2.urlopen(url).read()
-        except urllib2.URLError:
+        except (urllib2.URLErrori, urllib2.HTTPError,):
+            self._add_retry(harvest_object)
             self._save_object_error('Could not fetch from url %s!' % url, 
                                     harvest_object)
+            return False
+        except httplib.BadStatusLine:
             self._add_retry(harvest_object)
+            self._save_object_error('Bad HTTP response status line.',
+                harvest_object, stage='Fetch')
+            return False
+        except Exception as e:
+            # Guard against miscellaneous stuff. Probably plain bugs.
+            # Also very rare exceptions we haven't seen yet.
+            self._add_retry(harvest_object)
+            log.debug(traceback.format_exc(e))
             return False
         # Need to pickle the XML so that the data type remains the same.
         harvest_object.content = pickle.dumps({ 'url':url, 'xml':f })
