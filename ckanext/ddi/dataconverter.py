@@ -11,7 +11,6 @@ import StringIO
 import re
 import unicodecsv as csv
 import datetime
-import pprint
 
 from pylons import config
 
@@ -31,11 +30,11 @@ from bs4 import BeautifulSoup, Tag
 
 log = logging.getLogger(__name__)
 
-
 import socket
 socket.setdefaulttimeout(30)
 
 import traceback
+import pprint
 
 
 def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
@@ -133,7 +132,13 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     update = True
     pkg = Package.get(name)
     if not pkg:
-        pkg = Package(name=name)
+        if document_info.titlStmt.IDNo:
+            # Is this guaranteed to be unique?
+            pkg = Package(name=name, id=document_info.titlStmt.IDNo.string)
+        else:
+            pkg = Package(name=name)
+        setup_default_user_roles(pkg)
+        pkg.save()
         update = False
     producer = study_descr.citation.prodStmt.producer
     if not producer:
@@ -144,9 +149,6 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     pkg.maintainer = producer.string
     if study_descr.citation.distStmt.contact:
         pkg.maintainer = study_descr.citation.distStmt.contact.string
-    if document_info.titlStmt.IDNo:
-        # Is this guaranteed to be unique? If updating, check instead of set?
-        pkg.id = document_info.titlStmt.IDNo.string
     keywords = study_descr.stdyInfo.subject(re.compile('keyword|topcClas'))
     keywords = list(set(keywords))
     for kw in keywords:
@@ -155,18 +157,19 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             kw_str = ""
             if kw.string:
                 kw_str = kw.string
-            if 'vocab' in kw.attrs:
-                vocab = kw.attrs.get("vocab", None)
-            if vocab and kw.string:
-                kw_str = vocab + ' ' + kw.string
-            pkg.add_tag_by_name(munge_tag(kw_str))
+            #if 'vocab' in kw.attrs:
+            #    vocab = kw.attrs.get("vocab", None)
+            #if vocab and kw.string:
+            #    kw_str = vocab + ' ' + kw.string
+            if kw_str:
+                pkg.add_tag_by_name(munge_tag(kw_str))
     if study_descr.stdyInfo.abstract:
         description_array = study_descr.stdyInfo.abstract('p')
     else:
         description_array = study_descr.citation.serStmt.serInfo('p')
     pkg.notes = '<br />'.join([description.string
                                for description in description_array])
-    pkg.title = title[:100]
+    pkg.title = title
     pkg.url = original_url
     if not update:
         # This presumes that resources have not changed. Wrong? If something
@@ -246,8 +249,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         pkg.extras['publisher'] = study_descr.citation.distStmt.distrbtr.string
     if study_descr.citation.prodStmt.prodDate:
         if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
-            proddate = study_descr.citation.prodStmt.prodDate.attrs['date']
-            pkg.version = proddate
+            pkg.version = study_descr.citation.prodStmt.prodDate.attrs['date']
     if study_descr.citation.titlStmt.parTitl:
         for (idx, title) in enumerate(study_descr.citation.titlStmt('parTitl')):
             pkg.extras['title_%d' % idx] = title.string
@@ -268,7 +270,6 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         pkg.extras['author_%s' % lastidx] = auth
         pkg.extras['organization_%s' % lastidx] = org
         lastidx = lastidx + 1
-    pkg.save()
     producers = study_descr.citation.prodStmt.find_all('producer')
     for producer in producers:
         producer = producer.string
@@ -277,16 +278,13 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             if not group:
                 group = Group(name=producer, description=producer,
                               title=producer)
+                group.save()
             group.add_package_by_name(pkg.name)
-            group.save()
             setup_default_user_roles(group)
-    #log.debug("Saved pkg %s" % (pkg.url))
-    setup_default_user_roles(pkg)
     if harvest_object != None:
         harvest_object.package_id = pkg.id
         harvest_object.content = None
         harvest_object.current = True
-        harvest_object.save()
     model.repo.commit()
     return True
 
