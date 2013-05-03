@@ -123,6 +123,7 @@ def _get_headers():
 
 def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     model.repo.new_revision()
+    language = ddi_xml.codeBook.get('xml:lang')
     study_descr = ddi_xml.codeBook.stdyDscr
     document_info = ddi_xml.codeBook.docDscr.citation
     title = study_descr.citation.titlStmt.titl.string
@@ -145,6 +146,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         producer = study_descr.citation.rspStmt.AuthEnty
     if not producer:
         producer = study_descr.citation.rspStmt.othId
+    pkg.language = language
     pkg.author = producer.string
     pkg.maintainer = producer.string
     if study_descr.citation.distStmt.contact:
@@ -250,10 +252,13 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     if study_descr.citation.prodStmt.prodDate:
         if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
             pkg.version = study_descr.citation.prodStmt.prodDate.attrs['date']
+    # Store title in extras as well.
+    pkg.extras['title_0'] = pkg.title
+    pkg.extras['lang_title_0'] = pkg.language # Guess. Good, I hope.
     if study_descr.citation.titlStmt.parTitl:
         for (idx, title) in enumerate(study_descr.citation.titlStmt('parTitl')):
-            pkg.extras['title_%d' % idx] = title.string
-            pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
+            pkg.extras['title_%d' % (idx + 1)] = title.string
+            pkg.extras['lang_title_%d' % (idx + 1)] = title.attrs['xml:lang']
     authorgs = []
     for value in study_descr.citation.prodStmt('producer'):
         pkg.extras["producer"] = value.string
