@@ -291,7 +291,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         harvest_object.content = None
         harvest_object.current = True
     model.repo.commit()
-    return True
+    return pkg.id
 
 
 def ddi32ckan(ddi_xml, original_xml, original_url=None, harvest_object=None):
@@ -363,5 +363,5 @@ def _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object):
         harvest_object.current = True
         harvest_object.save()
     model.repo.commit()
-    return True
+    return pkg.id
 
