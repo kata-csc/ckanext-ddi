@@ -22,7 +22,7 @@ from ckan.controllers.storage import BUCKET, get_ofs
 
 from ckan import model
 from ckan.model.authz import setup_default_user_roles
-from ckan.lib.munge import munge_tag
+#from ckan.lib.munge import munge_tag
 from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject, HarvestJob
 
@@ -164,7 +164,8 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             #if vocab and kw.string:
             #    kw_str = vocab + ' ' + kw.string
             if kw_str:
-                pkg.add_tag_by_name(munge_tag(kw_str))
+                #pkg.add_tag_by_name(munge_tag(kw_str))
+                pkg.add_tag_by_name(kw_str[:100])
     if study_descr.stdyInfo.abstract:
         description_array = study_descr.stdyInfo.abstract('p')
     else:
