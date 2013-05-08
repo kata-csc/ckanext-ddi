@@ -27,6 +27,7 @@ from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject, HarvestJob
 
 from bs4 import BeautifulSoup, Tag
+from ckanext.kata.utils import label_list_yso
 
 log = logging.getLogger(__name__)
 
@@ -153,19 +154,28 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         pkg.maintainer = study_descr.citation.distStmt.contact.string
     keywords = study_descr.stdyInfo.subject(re.compile('keyword|topcClas'))
     keywords = list(set(keywords))
+    idx = 0
     for kw in keywords:
-        if kw:
-            vocab = None
-            kw_str = ""
-            if kw.string:
-                kw_str = kw.string
-            #if 'vocab' in kw.attrs:
-            #    vocab = kw.attrs.get("vocab", None)
-            #if vocab and kw.string:
-            #    kw_str = vocab + ' ' + kw.string
-            if kw_str:
-                #pkg.add_tag_by_name(munge_tag(kw_str))
-                pkg.add_tag_by_name(kw_str[:100])
+        if not kw:
+            continue
+        #vocab = None
+        #if 'vocab' in kw.attrs:
+        #    vocab = kw.attrs.get("vocab", None)
+        if not kw.string:
+            continue
+        tag = kw.string.strip()
+        if tag.startswith('http://www.yso.fi'):
+            tags = label_list_yso(tag)
+            extras['tag_source_%i' % idx] = tag
+            idx += 1
+        elif tag.startswith('http://') or tag.startswith('https://'):
+            extras['tag_source_%i' % idx] = tag
+            idx += 1
+            tags = [] # URL tags break links in UI.
+        else:
+            tags = [ tag ]
+        for t in tags:
+            pkg.add_tag_by_name(t[:100])
     if study_descr.stdyInfo.abstract:
         description_array = study_descr.stdyInfo.abstract('p')
     else:
