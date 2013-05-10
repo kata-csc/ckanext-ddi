@@ -166,16 +166,27 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         tag = kw.string.strip()
         if tag.startswith('http://www.yso.fi'):
             tags = label_list_yso(tag)
-            extras['tag_source_%i' % idx] = tag
+            pkg.extras['tag_source_%i' % idx] = tag
             idx += 1
         elif tag.startswith('http://') or tag.startswith('https://'):
-            extras['tag_source_%i' % idx] = tag
+            pkg.extras['tag_source_%i' % idx] = tag
             idx += 1
             tags = [] # URL tags break links in UI.
         else:
             tags = [ tag ]
-        for t in tags:
-            pkg.add_tag_by_name(t[:100])
+        for tagi in tags:
+            #pkg.add_tag_by_name(t[:100])
+            tagi = tagi[:100] # 100 char limit in DB.
+            tag_obj = model.Tag.by_name(tagi)
+            if not tag_obj:
+                tag_obj = model.Tag(name=tagi)
+                tag_obj.save()
+            pkgtag = model.Session.query(model.PackageTag).filter(
+                model.PackageTag.package_id==pkg.id).filter(
+                model.PackageTag.tag_id==tag_obj.id).limit(1).first()
+            if pkgtag is None:
+                pkgtag = model.PackageTag(tag=tag_obj, package=pkg)
+                pkgtag.save() # Avoids duplicates if tags has duplicates.
     if study_descr.stdyInfo.abstract:
         description_array = study_descr.stdyInfo.abstract('p')
     else:
