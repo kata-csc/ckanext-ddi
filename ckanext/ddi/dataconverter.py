@@ -4,38 +4,34 @@ Harvester for DDI2 formats
 '''
 
 #pylint: disable-msg=E1101,E0611,F0401
-import logging
-import json
-import urllib2
-import StringIO
-import re
-import unicodecsv as csv
 import datetime
+import json
+import logging
+import lxml.etree as etree
+import re
+import socket
+import StringIO
+import urllib2
 
+from bs4 import BeautifulSoup, Tag
 from pylons import config
-
-from lxml import etree
-
-from ckan.model import Package, Group, Vocabulary, Session
-from ckan.lib.base import h
-from ckan.controllers.storage import BUCKET, get_ofs
+import unicodecsv as csv
 
 from ckan import model
+from ckan.controllers.storage import BUCKET, get_ofs
+from ckan.lib.base import h
+from ckan.model import Package, Group, Vocabulary, Session
 from ckan.model.authz import setup_default_user_roles
 #from ckan.lib.munge import munge_tag
 from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject, HarvestJob
-
-from bs4 import BeautifulSoup, Tag
 from ckanext.kata.utils import label_list_yso
-
-log = logging.getLogger(__name__)
-
-import socket
-socket.setdefaulttimeout(30)
 
 import traceback
 import pprint
+
+log = logging.getLogger(__name__)
+socket.setdefaulttimeout(30)
 
 
 def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
@@ -102,24 +98,23 @@ def _create_code_rows(var):
     return rows
 
 def _get_headers():
-    longest_els = []
-    longest_els.append('ID')
-    longest_els.append('labl')
-    longest_els.append('preQTxt')
-    longest_els.append('qstnLit')
-    longest_els.append('postQTxt')
-    longest_els.append('ivuInstr')
-    longest_els.append('varFormat')
-    longest_els.append('TotlResp')
-    longest_els.append('range')
-    longest_els.append('item')
-    longest_els.append('sumStat_vald')
-    longest_els.append('sumStat_min')
-    longest_els.append('sumStat_max')
-    longest_els.append('sumStat_mean')
-    longest_els.append('sumStat_stdev')
-    longest_els.append('notes')
-    longest_els.append('txt')
+    longest_els = ['ID',
+                   'labl',
+                   'preQTxt',
+                   'qstnLit',
+                   'postQTxt',
+                   'ivuInstr',
+                   'varFormat',
+                   'TotlResp',
+                   'range',
+                   'item',
+                   'sumStat_vald',
+                   'sumStat_min',
+                   'sumStat_max',
+                   'sumStat_mean',
+                   'sumStat_stdev',
+                   'notes',
+                   'txt']
     return longest_els
 
 def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
