@@ -28,7 +28,7 @@ import ckan.model as model
 from ckan.model.authz import setup_default_user_roles
 from ckanext.harvest.harvesters.base import HarvesterBase
 #from ckanext.harvest.harvesters.retry import HarvesterRetry
-from ckanext.harvest.model import HarvestObject, HarvestJob
+from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
 from dataconverter import ddi2ckan, ddi32ckan
 
 import traceback
@@ -187,7 +187,10 @@ class DDIHarvester(HarvesterBase):
         create groups if ones are defined. Fill in metadata from study and
         document description.
         '''
+        # Serialize harvest_object.content
+        log.debug('harvest_object: {ho}'.format(ho=pprint.pformat(dir(harvest_object))))
         info = pickle.loads(harvest_object.content)
+        log.debug('pickled harvest_object.content: {po}'.format(po=pprint.pformat(info.keys())))
         try:
             ddi_xml = BeautifulSoup(info['xml'], 'xml')
         except etree.XMLSyntaxError:
@@ -199,7 +202,15 @@ class DDIHarvester(HarvesterBase):
             harvest_object.content = info['url']
 #            self._add_retry(harvest_object)
             return False
-        return ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
+        try:
+            pkgid = ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
+        except HarvestObjectError as hoe:
+            self._save_object_error('No identifiable field for object {ho}'
+                                    .format(ho=hoe.as_dict()),
+                                    harvest_object,
+                                    'Import')
+            return False
+        return pkgid
 
     def import_xml(self, source, xml):
         try:

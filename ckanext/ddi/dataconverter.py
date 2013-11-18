@@ -17,14 +17,13 @@ from bs4 import BeautifulSoup, Tag
 from pylons import config
 import unicodecsv as csv
 
-from ckan import model
 from ckan.controllers.storage import BUCKET, get_ofs
 from ckan.lib.base import h
-from ckan.model import Package, Group, Vocabulary, Session
-from ckan.model.authz import setup_default_user_roles
+import ckan.model as model
+import ckan.model.authz as authz
 #from ckan.lib.munge import munge_tag
 from ckanext.harvest.harvesters.base import HarvesterBase
-from ckanext.harvest.model import HarvestObject, HarvestJob
+import ckanext.harvest.model as hmodel
 from ckanext.kata.utils import label_list_yso
 
 import traceback
@@ -33,10 +32,16 @@ import pprint
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
 
+AVAILABILITY_DEFAULT = 'contact_owner'
+AVAILABILITY_FSD = 'access_request'
+ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.html'
+LICENCE_ID_FSD = 'other_closed'
 
 def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
     try:
         return _ddi2ckan(data, original_url, original_xml, harvest_object)
+    except hmodel.HarvestObjectError:
+        raise
     except Exception as e:
         log.debug(traceback.format_exc(e))
     return False
@@ -118,37 +123,97 @@ def _get_headers():
     return longest_els
 
 def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
+    # Create new revision with VDM
     model.repo.new_revision()
+
+    # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
+    # JuhoL: Language
     language = ddi_xml.codeBook.get('xml:lang')
-    study_descr = ddi_xml.codeBook.stdyDscr
+
+    # JuhoL: Extract bibliographic information part
+    # JuhoL: http://www.ddialliance.org/Specification/DDI-Codebook/2.1/DTD/Documentation/section1.html
     document_info = ddi_xml.codeBook.docDscr.citation
+
+    ## JuhoL: Extract Study Description section
+    # JuhoL: http://www.ddialliance.org/Specification/DDI-Codebook/2.1/DTD/Documentation/section2.html
+    study_descr = ddi_xml.codeBook.stdyDscr
+
+    # JuhoL: Title
     title = study_descr.citation.titlStmt.titl.string
     if not title:
+        log.debug("Title not found in 'codeBook.stdyDscr.citation.titlStmt.titl'"
+                  " 'trying codeBook.docDscr.titlStmt.titl'...")
         title = document_info.titlStmt.titl.string
+
+    # JuhoL: ID number to pkg.name
     name = study_descr.citation.titlStmt.IDNo.string
+    # JuhoL: WARN: this may mess up things...
+    if not name:
+        log.debug("Name not found in 'codeBook.stdyDscr.citation.titlStmt.IDNo'"
+                  " 'trying codeBook.docDscr.titlStmt.IDNo'...")
+        name = document_info.titlStmt.IDNo.string
+        if not name:
+            raise hmodel.HarvestObjectError
+        # TODO: JuhoL: Should we try last study_descr.citation.titlStmt.titl?
+        # It's one of few mandatory ddi fields.
     update = True
-    pkg = Package.get(name)
-    if not pkg:
-        if document_info.titlStmt.IDNo:
+    # JuhoL: Try to get existing package
+    # TODO: JuhoL: FSD's IDs for ddi are too simple ('1049'). May collide. They
+    # TODO: are about to change though. Just to notice.
+    # JuhoL: Use .by_name instead of .get. Otherwise if harvest object had its
+    # id (maliciously) set same as some existing packages id, it could overwrite
+    # that package.
+    pkg = model.Package.by_name(name)
+    if not pkg:  # JuhoL: Create a new package
+        #if document_info.titlStmt.IDNo:  # JuhoL: Why this is taken from different section compared to 'name'?
             # Is this guaranteed to be unique?
-            pkg = Package(name=name, id=document_info.titlStmt.IDNo.string)
-        else:
-            pkg = Package(name=name)
-        setup_default_user_roles(pkg)
+        #    pkg = model.Package(name=name, id=document_info.titlStmt.IDNo.string)
+        #else:
+        pkg = model.Package(name=name)
+        authz.setup_default_user_roles(pkg)
         pkg.save()
         update = False
+
+    # JuhoL: Extract producer element
+    # TODO: extract list to author: [ rspStmt.AuthEnty, prodStmt.producer, rspStmt.othId ]
     producer = study_descr.citation.prodStmt.producer
     if not producer:
         producer = study_descr.citation.rspStmt.AuthEnty
-    if not producer:
-        producer = study_descr.citation.rspStmt.othId
+        if not producer:
+            producer = study_descr.citation.rspStmt.othId
+    # JuhoL: Assign some metadata to package
     pkg.language = language
-    pkg.author = producer.string
-    pkg.maintainer = producer.string
-    if study_descr.citation.distStmt.contact:
-        pkg.maintainer = study_descr.citation.distStmt.contact.string
+    # TODO: author: list of dicts here more likely
+    pkg.author = {'value': study_descr.citation.rspStmt.AuthEnty.string}  # etc ...
+
+    # JuhoL: Assign and reassign the maintainer
+    pkg.maintainer = study_descr.citation.distStmt.contact.string
+    if not pkg.maintainer:
+        pkg.maintainer = study_descr.citation.distStmt.distrbtr.string
+        if not pkg.maintainer:
+            #pkg.maintainer = study_descr.citation.prodStmt.producer.string
+            pkg.maintainer = study_descr.citation.prodStmt.producer.get('affiliation')
+
+    pkg.maintainer_email = study_descr.citation.distStmt.contact.get('email')
+
+    # JuhoL: FSD specific hack. Automate later in ddi/harvester.py?
+    # JuhoL: Make sure pkg.availability is implemented: schema, ...
+    if is_fsd:
+        pkg.availability = AVAILABILITY_FSD
+        pkg.access_request_URL = ACCESS_REQUEST_URL_FSD
+    if access_request_URL_is_found:
+        pkg.availability = 'direct_download'
+    if not pkg.availabilty:
+        pkg.availability = AVAILABILITY_DEFAULT
+
+    # TODO: extract more pretty output
+    pkg.license_URL = ddi_xml.codeBook.stdyDscr.dataAccs.useStmt.get_text(separator=u' ')
+    pkg.license_id = LICENCE_ID_FSD
+
+    # JuhoL: extract, process and save keywords
+    # JuhoL: keywords, match elements <keyword> <topClass>
     keywords = study_descr.stdyInfo.subject(re.compile('keyword|topcClas'))
-    keywords = list(set(keywords))
+    keywords = list(set(keywords))  # JuhoL: For what? Transforming, filtering?
     idx = 0
     for kw in keywords:
         if not kw:
@@ -168,10 +233,10 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             idx += 1
             tags = [] # URL tags break links in UI.
         else:
-            tags = [ tag ]
+            tags = [tag]
         for tagi in tags:
             #pkg.add_tag_by_name(t[:100])
-            tagi = tagi[:100] # 100 char limit in DB.
+            tagi = tagi[:100]  # 100 char limit in DB.
             tag_obj = model.Tag.by_name(tagi)
             if not tag_obj:
                 tag_obj = model.Tag(name=tagi)
@@ -179,20 +244,26 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             pkgtag = model.Session.query(model.PackageTag).filter(
                 model.PackageTag.package_id==pkg.id).filter(
                 model.PackageTag.tag_id==tag_obj.id).limit(1).first()
-            if pkgtag is None:
+            if not pkgtag:
                 pkgtag = model.PackageTag(tag=tag_obj, package=pkg)
-                pkgtag.save() # Avoids duplicates if tags has duplicates.
+                pkgtag.save()  # Avoids duplicates if tags has duplicates.
+
+    # JuhoL: Description
     if study_descr.stdyInfo.abstract:
         description_array = study_descr.stdyInfo.abstract('p')
     else:
         description_array = study_descr.citation.serStmt.serInfo('p')
-    pkg.notes = '<br />'.join([description.string
-                               for description in description_array])
+    pkg.notes = '<br />'.join([description.string for
+                               description in description_array])
+    # JuhoL: Title
     pkg.title = title
+
+    # JuhoL: URL of ddi-xml
     pkg.url = original_url
+
     if not update:
         # This presumes that resources have not changed. Wrong? If something
-        # has changed then technically the XML has chnaged and hence this may
+        # has changed then technically the XML has changed and hence this may
         # have to "delete" old resources and then add new ones.
         ofs = get_ofs()
         nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
@@ -296,13 +367,13 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     for producer in producers:
         producer = producer.string
         if producer:
-            group = Group.by_name(producer)
+            group = model.Group.by_name(producer)
             if not group:
-                group = Group(name=producer, description=producer,
+                group = model.Group(name=producer, description=producer,
                               title=producer)
                 group.save()
             group.add_package_by_name(pkg.name)
-            setup_default_user_roles(group)
+            authz.setup_default_user_roles(group)
     if harvest_object != None:
         harvest_object.package_id = pkg.id
         harvest_object.content = None
@@ -325,9 +396,9 @@ def _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object):
     study_info = ddiroot('StudyUnit')[-1]
     idx = 0
     authorgs = []
-    pkg = Package.get(study_info.attrs['id'])
+    pkg = model.Package.get(study_info.attrs['id'])
     if not pkg:
-        pkg = Package(name=study_info.attrs['id'])
+        pkg = model.Package(name=study_info.attrs['id'])
         pkg.id = ddiroot.attrs['id']
         # This presumes that resources have not changed. Wrong? If something
         # has changed then technically the XML has chnaged and hence this may
