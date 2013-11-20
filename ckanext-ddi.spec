@@ -14,7 +14,7 @@ Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
 BuildArch: x86_64
-Vendor: Aleksi Suomalainen <aleksi.suomalainen@nomovok.com>
+Vendor: CSC - It Center for Science Ltd  <kata-project@postit.csc.fi>
 Url: http://not.there.yet
 Requires: libxslt
 Requires: kata-ckan-prod

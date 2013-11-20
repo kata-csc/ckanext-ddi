@@ -32,6 +32,7 @@ from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
 from dataconverter import ddi2ckan, ddi32ckan
 
 import traceback
+
 log = logging.getLogger(__name__)
 
 socket.setdefaulttimeout(30)
@@ -53,16 +54,26 @@ class DDIHarvester(HarvesterBase):
         '''Return information about this harvester.
         '''
         return {
-                'name': 'DDI',
-                'title': 'DDI import',
-                'description': 'Mass importing harvester for DDI2',
-                }
+            'name': 'DDI',
+            'title': 'DDI import',
+            'description': 'Mass importing harvester for DDI2',
+        }
 
     def validate_config(self, config):
         '''Validate the config, returns it since we don't have any configuration
         parameters
         '''
         return config
+
+    def get_original_url(self, harvest_object_id):
+        '''Return the URL to the original remote document, given a Harvest
+         Object id.
+         '''
+        obj = model.Session.query(HarvestObject). \
+            filter(HarvestObject.id == harvest_object_id).first()
+        if obj:
+            return obj.source.url
+        return None
 
     def _datetime_from_str(self, key, s):
         # Used to get date from settings file when testing harvesting with
@@ -84,19 +95,19 @@ class DDIHarvester(HarvesterBase):
     def _str_from_datetime(self, dt):
         return dt.strftime('%Y-%m-%dT%H:%M:%S')
 
-#    def _add_retry(self, harvest_object):
-#        HarvesterRetry.mark_for_retry(harvest_object)
+    #    def _add_retry(self, harvest_object):
+    #        HarvesterRetry.mark_for_retry(harvest_object)
 
-#    def _scan_retries(self, harvest_job):
-#        self._retry = HarvesterRetry()
-#        urls = []
-#        for harvest_object in self._retry.find_all_retries(harvest_job):
-#            data = json.loads(harvest_object.content)
-#            urls.append(data['url'])
-#        return urls
+    #    def _scan_retries(self, harvest_job):
+    #        self._retry = HarvesterRetry()
+    #        urls = []
+    #        for harvest_object in self._retry.find_all_retries(harvest_job):
+    #            data = json.loads(harvest_object.content)
+    #            urls.append(data['url'])
+    #        return urls
 
-#    def _clear_retries(self):
-#        self._retry.clear_retry_marks()
+    #    def _clear_retries(self):
+    #        self._retry.clear_retry_marks()
 
 
     def gather_stage(self, harvest_job):
@@ -104,30 +115,34 @@ class DDIHarvester(HarvesterBase):
         documents containing the DDI documents.
         '''
         self._set_config(harvest_job.source.config)
+
         def date_from_config(key):
             return self._datetime_from_str(key, config.get(key, None))
+
         from_ = date_from_config('ckanext.harvest.test.from')
         until = date_from_config('ckanext.harvest.test.until')
         previous_job = model.Session.query(HarvestJob) \
-            .filter(HarvestJob.source==harvest_job.source) \
-            .filter(HarvestJob.gather_finished!=None) \
-            .filter(HarvestJob.id!=harvest_job.id) \
+            .filter(HarvestJob.source == harvest_job.source) \
+            .filter(HarvestJob.gather_finished != None) \
+            .filter(HarvestJob.id != harvest_job.id) \
             .order_by(HarvestJob.gather_finished.desc()) \
             .limit(1).first()
         if previous_job and not until and not from_:
             from_ = previous_job.gather_finished
             until = None
+
         def add_harvest_object(harvest_job, url):
             harvest_obj = HarvestObject(job=harvest_job)
             harvest_obj.content = url
             harvest_obj.save()
             return harvest_obj
+
         harvest_objs = []
         # Add retries.
-#        for url in self._scan_retries(harvest_job):
-#            obj = add_harvest_object(harvest_job, url)
-#            harvest_objs.append(obj.id)
-#            log.debug('Retrying record: %s' % url)
+        #        for url in self._scan_retries(harvest_job):
+        #            obj = add_harvest_object(harvest_job, url)
+        #            harvest_objs.append(obj.id)
+        #            log.debug('Retrying record: %s' % url)
         try:
             urls = urllib2.urlopen(harvest_job.source.url)
             for url in urls.readlines():
@@ -138,11 +153,11 @@ class DDIHarvester(HarvesterBase):
                         request.get_method = lambda: 'HEAD'
                         doc_url = urllib2.urlopen(request)
                         lastmod = parser.parse(doc_url.headers['last-modified'],
-                            ignoretz=True)
+                                               ignoretz=True)
                     except (urllib2.URLError, urllib2.HTTPError,):
-                        # Actually we do not know if it fits the time limits.
-                        # Rather get it twice than lose it.
-#                        self._add_retry(add_harvest_object(harvest_job, url))
+                    # Actually we do not know if it fits the time limits.
+                    # Rather get it twice than lose it.
+                    # self._add_retry(add_harvest_object(harvest_job, url))
                         continue
                     if from_ and lastmod < from_:
                         continue
@@ -150,14 +165,21 @@ class DDIHarvester(HarvesterBase):
                         continue
                 obj = add_harvest_object(harvest_job, url)
                 harvest_objs.append(obj.id)
-        except (urllib2.URLError, urllib2.HTTPError,):
-            self._save_gather_error('Could not gather XML files from URL!', 
-                                    harvest_job)
+        except urllib2.HTTPError, err:
+            self._save_gather_error(
+                'HTTPError: Could not gather XML files from URL! ' +
+                'Error: {er}'.format(er=err.reason), harvest_job)
+            return None
+        except urllib2.URLError, err:
+            self._save_gather_error(
+                'URLError: Could not gather XML files from URL! ' +
+                'Error: {er}, urls: {ur}'.format(er=err.reason, ur=urls),
+                harvest_job)
             return None
         except Exception as e:
             log.debug(traceback.format_exc(e))
             return None
-#        self._clear_retries()
+        #        self._clear_retries()
         log.info('Gathered %i records from %s.' % (
             len(harvest_objs), harvest_job.source.url,))
         return harvest_objs
@@ -169,17 +191,17 @@ class DDIHarvester(HarvesterBase):
         try:
             f = urllib2.urlopen(url).read()
         except (urllib2.URLError, urllib2.HTTPError,):
-#            self._add_retry(harvest_object)
-            self._save_object_error('Could not fetch from url %s!' % url, 
+        #            self._add_retry(harvest_object)
+            self._save_object_error('Could not fetch from url %s!' % url,
                                     harvest_object)
             return False
         except httplib.BadStatusLine:
-#            self._add_retry(harvest_object)
+        #            self._add_retry(harvest_object)
             self._save_object_error('Bad HTTP response status line.',
-                harvest_object, stage='Fetch')
+                                    harvest_object, stage='Fetch')
             return False
-        # Need to pickle the XML so that the data type remains the same.
-        harvest_object.content = pickle.dumps({ 'url':url, 'xml':f })
+            # Need to pickle the XML so that the data type remains the same.
+        harvest_object.content = pickle.dumps({'url': url, 'xml': f})
         return True
 
     def import_stage(self, harvest_object):
@@ -188,28 +210,44 @@ class DDIHarvester(HarvesterBase):
         document description.
         '''
         # Serialize harvest_object.content
-        log.debug('harvest_object: {ho}'.format(ho=pprint.pformat(dir(harvest_object))))
+        log.debug('harvest_object: {ho}'.format(
+            ho=pprint.pformat(dir(harvest_object))))
         info = pickle.loads(harvest_object.content)
-        log.debug('pickled harvest_object.content: {po}'.format(po=pprint.pformat(info.keys())))
+        log.debug('pickled harvest_object.content: {po}'.format(
+            po=pprint.pformat(info.keys())))
         try:
             ddi_xml = BeautifulSoup(info['xml'], 'xml')
-        except etree.XMLSyntaxError:
-            self._save_object_error('Unable to parse XML!', harvest_object)
+        except etree.XMLSyntaxError, err:
+            self._save_object_error('Unable to parse XML! {er}'
+                                    .format(er=err.msg), harvest_object,
+                                    'Import')
             # I presume source sent wrong data but it arrived correctly.
             # This could result in a case where incorrect source is tried
             # over and over again without success.
             del info['xml']
             harvest_object.content = info['url']
-#            self._add_retry(harvest_object)
+            #            self._add_retry(harvest_object)
             return False
         try:
             pkgid = ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
-        except HarvestObjectError as hoe:
+        except HarvestObjectError, hoe:
             self._save_object_error('No identifiable field for object {ho}'
-                                    .format(ho=hoe.as_dict()),
-                                    harvest_object,
+                                    .format(ho=hoe.as_dict()), hoe.object,  # or harvest_object?
                                     'Import')
             return False
+        except AttributeError, err:
+            log.error('AttributeError: {er}'.format(er=err))
+            # TODO: JuhoL: add line number of exception
+            self._save_object_error('Missing minimum metadata. '
+                                    'AttributeError: {er}'
+                                    .format(er=err), harvest_object,
+                                    'Import')
+            return False
+        except Exception, e:
+            self._save_object_error('Unknown error: {na}:{er}'
+                                    .format(na=type(e).__name__, er=e),
+                                    harvest_object,
+                                    'Import')
         return pkgid
 
     def import_xml(self, source, xml):
@@ -219,6 +257,7 @@ class DDIHarvester(HarvesterBase):
             log.debug('Unable to parse XML!')
             return False
         return ddi2ckan(ddi_xml, None, xml)
+
 
 class DDI3Harvester(HarvesterBase):
     '''
@@ -236,10 +275,10 @@ class DDI3Harvester(HarvesterBase):
         '''Return information about this harvester.
         '''
         return {
-                'name': 'DDI3',
-                'title': 'DDI3 import (EXPERIMENTAL)',
-                'description': 'Mass importing harvester for DDI3',
-                }
+            'name': 'DDI3',
+            'title': 'DDI3 import (EXPERIMENTAL)',
+            'description': 'Mass importing harvester for DDI3',
+        }
 
     def validate_config(self, config):
         '''Validate the config, returns it since we don't have any configuration
@@ -291,24 +330,28 @@ class DDI3Harvester(HarvesterBase):
         documents containing the DDI documents.
         '''
         self._set_config(harvest_job.source.config)
+
         def date_from_config(key):
             return self._datetime_from_str(config.get(key, None))
+
         from_ = date_from_config('ckanext.harvest.test.from')
         until = date_from_config('ckanext.harvest.test.until')
         previous_job = model.Session.query(HarvestJob) \
-            .filter(HarvestJob.source==harvest_job.source) \
-            .filter(HarvestJob.gather_finished!=None) \
-            .filter(HarvestJob.id!=harvest_job.id) \
+            .filter(HarvestJob.source == harvest_job.source) \
+            .filter(HarvestJob.gather_finished != None) \
+            .filter(HarvestJob.id != harvest_job.id) \
             .order_by(HarvestJob.gather_finished.desc()) \
             .limit(1).first()
         if previous_job and not until and not from_:
             from_ = previous_job.gather_finished
             until = None
+
         def add_harvest_object(harvest_job, url):
             harvest_obj = HarvestObject(job=harvest_job)
             harvest_obj.content = url
             harvest_obj.save()
             return harvest_obj
+
         harvest_objs = []
         # Add retries.
         for url in self._scan_retries(harvest_job):
@@ -325,7 +368,7 @@ class DDI3Harvester(HarvesterBase):
                         request.get_method = lambda: 'HEAD'
                         doc_url = urllib2.urlopen(request)
                         lastmod = parser.parse(doc_url.headers['last-modified'],
-                            ignoretz=True)
+                                               ignoretz=True)
                     except (urllib2.URLError, urllib2.HTTPError,):
                         # Actually we do not know if it fits the time limits.
                         # Rather get it twice than lose it.
@@ -338,8 +381,9 @@ class DDI3Harvester(HarvesterBase):
                 obj = add_harvest_object(harvest_job, url)
                 harvest_objs.append(obj.id)
         except (urllib2.URLError, urllib2.HTTPError,):
-            self._save_gather_error('Could not gather XML files from URL!', 
-                                    harvest_job)
+            self._save_gather_error(
+                'DDI3: Could not gather XML files from URL!',
+                harvest_job)
             return None
         except Exception as e:
             log.debug(traceback.format_exc(e))
@@ -357,13 +401,13 @@ class DDI3Harvester(HarvesterBase):
             f = urllib2.urlopen(url).read()
         except (urllib2.URLErrori, urllib2.HTTPError,):
             self._add_retry(harvest_object)
-            self._save_object_error('Could not fetch from url %s!' % url, 
+            self._save_object_error('Could not fetch from url %s!' % url,
                                     harvest_object)
             return False
         except httplib.BadStatusLine:
             self._add_retry(harvest_object)
             self._save_object_error('Bad HTTP response status line.',
-                harvest_object, stage='Fetch')
+                                    harvest_object, stage='Fetch')
             return False
         except Exception as e:
             # Guard against miscellaneous stuff. Probably plain bugs.
@@ -371,8 +415,8 @@ class DDI3Harvester(HarvesterBase):
             self._add_retry(harvest_object)
             log.debug(traceback.format_exc(e))
             return False
-        # Need to pickle the XML so that the data type remains the same.
-        harvest_object.content = pickle.dumps({ 'url':url, 'xml':f })
+            # Need to pickle the XML so that the data type remains the same.
+        harvest_object.content = pickle.dumps({'url': url, 'xml': f})
         return True
 
     def import_stage(self, harvest_object):
@@ -404,15 +448,16 @@ class DDI3Harvester(HarvesterBase):
 
 
 if __name__ == '__main__':
-        import sys
-        if len(sys.argv) > 3:
-                header, metadata, about = test_fetch(sys.argv[1],
-                                sys.argv[2], sys.argv[3])
-                #for item in metadata.getMap().items():
-                #    print item
-                print header
-                print metadata.dc.subject
-        else:
-                for item in test_list(sys.argv[1]):
-                    print item
+    import sys
+
+    if len(sys.argv) > 3:
+        header, metadata, about = test_fetch(sys.argv[1],
+                                             sys.argv[2], sys.argv[3])
+        #for item in metadata.getMap().items():
+        #    print item
+        print header
+        print metadata.dc.subject
+    else:
+        for item in test_list(sys.argv[1]):
+            print item
 
