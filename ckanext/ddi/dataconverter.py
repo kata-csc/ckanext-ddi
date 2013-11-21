@@ -40,8 +40,6 @@ LICENCE_ID_FSD = 'other_closed'
 def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
     try:
         return _ddi2ckan(data, original_url, original_xml, harvest_object)
-    except hmodel.HarvestObjectError:
-        raise
     except AttributeError:
         raise
     except Exception as e:
@@ -188,9 +186,10 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
                   " 'trying codeBook.docDscr.titlStmt.IDNo'...")
         name = document_info.titlStmt.IDNo.string
         if not name:
-            raise hmodel.HarvestObjectError(message='No name found!',
-                                            object=harvest_object,
-                                            stage='Import')
+            raise Exception(message='No name found!',
+                            object=harvest_object,
+                            stage='Import')
+            # raise hmodel.HarvestObjectError
             # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
             # same harvest object at each reharvest
             # name = utils.generate_pid()
