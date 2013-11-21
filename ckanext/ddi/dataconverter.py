@@ -156,88 +156,117 @@ def dc_metadata_reader(xml):
 
 #@ExceptReturn(exception=(AttributeError, ), returns=False)
 def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
-    # Create new revision with VDM
-    model.repo.new_revision()
-
     # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
-    # JuhoL: Language
-    language = ddi_xml.codeBook.get('xml:lang')
 
-    # JuhoL: Extract bibliographic information part
-    # JuhoL: http://www.ddialliance.org/Specification/DDI-Codebook/2.1/DTD/Documentation/section1.html
-    document_info = ddi_xml.codeBook.docDscr.citation
+    doc_citation = ddi_xml.codeBook.docDscr.citation
+    stdy_dscr = ddi_xml.codeBook.stdyDscr
 
-    ## JuhoL: Extract Study Description section
-    # JuhoL: http://www.ddialliance.org/Specification/DDI-Codebook/2.1/DTD/Documentation/section2.html
-    study_descr = ddi_xml.codeBook.stdyDscr
+    try:
+        auth_entys = stdy_dscr.citation.rspStmt('AuthEnty')
+        authors = []
+        organizations = []
+        for a in auth_entys:
+            authors.append({'value': a.text})
+            organizations.append({'value': a.get('affiliation')})
 
-    # JuhoL: Title
-    title = study_descr.citation.titlStmt.titl.string
-    if not title:
-        log.debug("Title not found in 'codeBook.stdyDscr.citation.titlStmt.titl'"
-                  " 'trying codeBook.docDscr.titlStmt.titl'...")
-        title = document_info.titlStmt.titl.string
+        # TODO: Where/how to extract multiple languages?
+        #     'language': u'eng, fin, swe',
+        language = ddi_xml.codeBook.get('xml:lang')
+        # Titles
+        langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in stdy_dscr.citation.titlStmt(['titl', 'parTitl'])]
+        if not langtitle[0]['value']:
+            langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in doc_citation.titlStmt(['titl', 'parTitl'])]
 
-    # JuhoL: ID number to pkg.name
-    name = study_descr.citation.titlStmt.IDNo.string
-    # JuhoL: WARN: this may mess up things...
-    if not name:
-        log.debug("Name not found in 'codeBook.stdyDscr.citation.titlStmt.IDNo'"
-                  " 'trying codeBook.docDscr.titlStmt.IDNo'...")
-        name = document_info.titlStmt.IDNo.string
-        if not name:
-            raise Exception(message='No name found!',
-                            object=harvest_object,
-                            stage='Import')
-            # raise hmodel.HarvestObjectError
+        # Name
+        name = stdy_dscr.citation.titlStmt.IDNo.get('agency') + \
+               stdy_dscr.citation.titlStmt.IDNo.string
+        if not stdy_dscr.citation.titlStmt.IDNo.string:
+            name = doc_citation.titlStmt.IDNo.get('agency') + \
+                   doc_citation.titlStmt.IDNo.string
             # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
             # same harvest object at each reharvest
             # name = utils.generate_pid()
-        # TODO: JuhoL: Should we try last study_descr.citation.titlStmt.titl?
-        # It's one of few mandatory ddi fields.
-    update = True
-    # JuhoL: Try to get existing package
-    # TODO: JuhoL: FSD's IDs for ddi are too simple ('1049'). May collide. They
-    # TODO: are about to change though. Just to notice.
-    # JuhoL: Use .by_name instead of .get. Otherwise if harvest object had its
-    # id (maliciously) set same as some existing packages id, it could overwrite
-    # that package.
-    pkg = model.Package.by_name(name)
-    if not pkg:  # JuhoL: Create a new package
-        update = False
-        #if document_info.titlStmt.IDNo:  # JuhoL: Why this is taken from different section compared to 'name'?
-            # Is this guaranteed to be unique?
-        #    pkg = model.Package(name=name, id=document_info.titlStmt.IDNo.string)
-        #else:
-        pkg = model.Package(name=name)
-        authz.setup_default_user_roles(pkg)
-        pkg.save()
+
+
+    except AttributeError:
+        raise
+
+    package_dict = dict(
+
+        access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
+        access_request_URL=u'',
+        algorithm=NotImplemented,
+        availability=u'direct_download',  # |
+        #                     u'access_application' |
+        #                     u'access_request' |
+        #                     u'contact_owner'    ## JuhoL: changed 'access' to 'availability'
+        contact_phone=u'+35805050505',
+        contact_URL=u'http://www.jakelija.julkaisija.fi',  ## JuhoL: added underscore '_'
+        direct_download_URL=u'http://helsinki.fi/data-on-taalla',
+        discipline=u'Tilastotiede',
+        evdescr= [{'value': u'Keräsin dataa'},
+                {'value': u'Julkaistu vihdoinkin'},
+                {'value': u'hajotti kaiken'}],
+        evtype=[{'value': u'creation'},
+                {'value': u'published'},
+                {'value': u'modified'}],
+        evwhen=[{'value': u'2000-01-01'},
+                {'value': u'2010-04-15'},
+                {'value': u'2013-11-18'}],
+        evwho=[{'value': u'Tekijä Aineiston'},
+           {'value': u'Julkaisija Aineiston'},
+           {'value': u'T. Uhoaja'}],
+        geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
+        groups=[],
+        langtitle=langtitle,
+        langdis=u'True',
+        language=language,
+        license_URL=u'Lisenssin URL (obsolete)',   ## JuhoL: added underscore '_'
+        license_id=u'cc-zero',
+        maintainer=u'Jakelija / Julkaisija',   ## JuhoL: changed 'publisher' to 'maintainer'
+        maintainer_email=u'jakelija.julkaisija@csc.fi',
+        mimetype=u'application/csv',
+        name=name,
+        notes=u'T\xe4m\xe4 on testiaineisto.',
+        orgauth=[{'org': u'CSC Oy', 'value': u'Tekijä Aineiston (DC:Creator)'},
+                {'org': u'Helsingin Yliopisto', 'value': u'Timo Tutkija'},
+                {'org': u'Kolmas Oy', 'value': u'Kimmo Kolmas'}],
+        owner=u'Omistaja Aineiston',
+        project_funder=u'Roope Rahoittaja',
+        project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
+        project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
+        project_name=u'Rahoittajan Projekti',
+        ###     'resources': [{'algorithm': u'MD5',
+        ###                    'hash': u'f60e586509d99944e2d62f31979a802f',
+        ###                    'mimetype': u'application/csv',
+        ###                    'name': None,
+        ###                    'resource_type': 'dataset',
+        ###                    'url': u'http://aineiston.osoite.fi/tiedosto.csv'}],
+        tag_string=u'tragikomiikka,dadaismi,asiasanastot',
+        temporal_coverage_begin=u'1976-11-06T00:00:00Z',
+        temporal_coverage_end=u'2003-11-06T00:00:00Z',
+        version=u'2007-06-06T10:17:44Z',
+        version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
+    )
+    package_dict['extras'] = NotImplemented
 
     # JuhoL: Extract producer element
     # TODO: extract list to author: [ rspStmt.AuthEnty, prodStmt.producer, rspStmt.othId ]
-    producer = study_descr.citation.prodStmt.producer or \
-               study_descr.citation.rspStmt.AuthEnty or \
-               study_descr.citation.rspStmt.othId
+    producer = stdy_dscr.citation.prodStmt.producer or \
+               stdy_dscr.citation.rspStmt.AuthEnty or \
+               stdy_dscr.citation.rspStmt.othId
 
-   # JuhoL: Assign some metadata to package
-    pkg.language = language
-    # TODO: author: list of dicts here more likely
-    auth_entys = study_descr.citation.rspStmt('AuthEnty')
-    authors = []
-    organizations = []
-    for a in auth_entys:
-        authors.append({'value': a.text})
-        organizations.append({'value': a.get('affiliation')})
 
-    pkg.author = producer.string  #{'value': study_descr.citation.rspStmt.AuthEnty.string}  # etc ...
+
+
 
     # JuhoL: Assign and reassign the maintainer
-    maintainer = study_descr.citation.distStmt.contact or \
-                 study_descr.citation.distStmt.distrbtr or \
-                 study_descr.citation.prodStmt.producer.get('affiliation')
+    maintainer = stdy_dscr.citation.distStmt.contact or \
+                 stdy_dscr.citation.distStmt.distrbtr or \
+                 stdy_dscr.citation.prodStmt.producer.get('affiliation')
     if maintainer:
         pkg.maintainer = maintainer.string
-    contact = study_descr.citation.distStmt.contact
+    contact = stdy_dscr.citation.distStmt.contact
     try:
         pkg.maintainer_email = contact.get('email')
     except AttributeError, err:
@@ -256,7 +285,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         pkg.license_id = LICENCE_ID_FSD
     # TODO: Extract prettier output. Should we check that element contains something?
     try:
-        use_stmt = study_descr.dataAccs.useStmt
+        use_stmt = stdy_dscr.dataAccs.useStmt
     except AttributeError:
         raise
     if use_stmt:
@@ -264,7 +293,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
 
     # JuhoL: extract, process and save keywords
     # JuhoL: keywords, match elements <keyword> <topClass>
-    keywords = study_descr.stdyInfo.subject(re.compile('keyword|topcClas'))
+    keywords = stdy_dscr.stdyInfo.subject(re.compile('keyword|topcClas'))
     keywords = list(set(keywords))  # JuhoL: For what? Transforming, filtering?
     idx = 0
     for kw in keywords:
@@ -301,10 +330,10 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
                 pkgtag.save()  # Avoids duplicates if tags has duplicates.
 
     # JuhoL: Description
-    if study_descr.stdyInfo.abstract:
-        description_array = study_descr.stdyInfo.abstract('p')
+    if stdy_dscr.stdyInfo.abstract:
+        description_array = stdy_dscr.stdyInfo.abstract('p')
     else:
-        description_array = study_descr.citation.serStmt.serInfo('p')
+        description_array = stdy_dscr.citation.serStmt.serInfo('p')
     pkg.notes = '<br />'.join([description.string for
                                description in description_array])
     # JuhoL: Title
@@ -327,7 +356,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         # JuhoL: Yes, existing resources should be overwritten?
         ofs = get_ofs()
         nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
-        idno = study_descr.citation.titlStmt.IDNo
+        idno = stdy_dscr.citation.titlStmt.IDNo
         agencyxml = idno.get('agency', '') + idno.string
         label = "%s/%s.xml" % (nowstr, agencyxml,)
         ofs.put_stream(BUCKET, label, original_xml, {})
@@ -338,7 +367,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
                          format="xml",
                          size=len(original_xml))
         # JuhoL: for FSD 'URI' leads to summary web page of data, hence format='html'
-        pkg.add_resource(url=document_info.holdings.get('URI', ''),
+        pkg.add_resource(url=doc_citation.holdings.get('URI', ''),
                          description=title,
                          format='html')
 
@@ -347,8 +376,8 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     # extras = { xpath/as/key: val, ... }
     metas = []
     # JuhoL: Check if this multiplies some elements because recursive .descendants
-    descendants = [desc for desc in document_info.descendants] + \
-                  [sdesc for sdesc in study_descr.descendants]
+    descendants = [desc for desc in doc_citation.descendants] + \
+                  [sdesc for sdesc in stdy_dscr.descendants]
     for docextra in descendants:
         if isinstance(docextra, bs4.Tag):
             if docextra:
@@ -420,27 +449,27 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
 
     pkg.extras['ddi_extras'] = " ".join(metas)
     # JuhoL: Add also some basic fields to pkg.extras. Why?
-    if study_descr.citation.distStmt.distrbtr:
-        pkg.extras['publisher'] = study_descr.citation.distStmt.distrbtr.string
+    if stdy_dscr.citation.distStmt.distrbtr:
+        pkg.extras['publisher'] = stdy_dscr.citation.distStmt.distrbtr.string
     # JuhoL: Modified date
-    if study_descr.citation.prodStmt.prodDate:
-        if 'date' in study_descr.citation.prodStmt.prodDate.attrs:
-            pkg.version = study_descr.citation.prodStmt.prodDate.attrs['date']
+    if stdy_dscr.citation.prodStmt.prodDate:
+        if 'date' in stdy_dscr.citation.prodStmt.prodDate.attrs:
+            pkg.version = stdy_dscr.citation.prodStmt.prodDate.attrs['date']
 
     # Store title in extras as well.
     pkg.extras['title_0'] = pkg.title
     pkg.extras['lang_title_0'] = pkg.language  # Guess. Good, I hope.
-    if study_descr.citation.titlStmt.parTitl:
-        for (idx, title) in enumerate(study_descr.citation.titlStmt('parTitl')):
+    if stdy_dscr.citation.titlStmt.parTitl:
+        for (idx, title) in enumerate(stdy_dscr.citation.titlStmt('parTitl')):
             pkg.extras['title_%d' % (idx + 1)] = title.string
             # JuhoL: Should missing xml:lang return KeyError as in this?
             pkg.extras['lang_title_%d' % (idx + 1)] = title.attrs['xml:lang']
 
     # JuhoL: Authors & organizations to extras
     authorgs = []
-    for value in study_descr.citation.prodStmt('producer'):
+    for value in stdy_dscr.citation.prodStmt('producer'):
         pkg.extras["producer"] = value.string
-    for value in study_descr.citation.rspStmt('AuthEnty'):
+    for value in stdy_dscr.citation.rspStmt('AuthEnty'):
         org = ""
         if value.attrs.get('affiliation', None):
             org = value.attrs['affiliation']
@@ -448,7 +477,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         authorgs.append((author, org))
 
     # JuhoL: Other contributors
-    for value in study_descr.citation.rspStmt('othId'):
+    for value in stdy_dscr.citation.rspStmt('othId'):
         pkg.extras["contributor"] = value.string
 
     lastidx = 1
@@ -464,7 +493,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     # docDscr.citation.prodStmt.producer or
     # stdyDscr.citation.prodStmt.producer.get('affiliation') could be more
     # appropriate.
-    producers = study_descr.citation.prodStmt('producer')  # this is .find_all()
+    producers = stdy_dscr.citation.prodStmt('producer')  # this is .find_all()
     for producer in producers:
         producer = producer.string
         if producer:
@@ -517,8 +546,8 @@ def _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object):
         pkg.add_resource(url=fileurl, description="Original metadata record",
             format="xml", size=len(original_xml))
         # What the URI should be?
-        #pkg.add_resource(url=document_info.holdings['URI']\
-        #                 if 'URI' in document_info.holdings else '',
+        #pkg.add_resource(url=doc_citation.holdings['URI']\
+        #                 if 'URI' in doc_citation.holdings else '',
         #                 description=title)
     pkg.version = main_cit.PublicationDate.SimpleDate.string
     for title in main_cit('Title'):

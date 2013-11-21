@@ -229,7 +229,7 @@ class DDIHarvester(HarvesterBase):
             #            self._add_retry(harvest_object)
             return False
         try:
-            pkgid = ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
+            package_dict = ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
         except HarvestObjectError, hoe:
             self._save_object_error('No identifiable field for object {ho}'
                                     .format(ho=hoe.as_dict()), hoe.object,  # or harvest_object?
@@ -248,7 +248,10 @@ class DDIHarvester(HarvesterBase):
                                     .format(na=type(e).__name__, er=e),
                                     harvest_object,
                                     'Import')
-        return pkgid
+        #return pkgid
+        result = self._create_or_update_package(package_dict, harvest_object)
+        log.debug("Exiting import_stage()")
+        return result  # returns True
 
     def import_xml(self, source, xml):
         try:
