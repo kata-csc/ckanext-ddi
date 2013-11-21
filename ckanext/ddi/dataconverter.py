@@ -32,10 +32,16 @@ import pprint
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
 
-AVAILABILITY_DEFAULT = 'contact_owner'
-AVAILABILITY_FSD = 'access_request'
+AVAILABILITY_ENUM = [u'direct_download',
+                     u'access_application',
+                     u'access_request',
+                     u'contact_owner']
+AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[3]
+LICENCE_ID_DEFAULT =  'notspecified'
+AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
 ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.html'
 LICENCE_ID_FSD = 'other_closed'
+MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
 
 def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
     try:
@@ -122,8 +128,9 @@ def _get_headers():
     return longest_els
 
 def _is_fsd(url):
-    log.debug('url: {ur}'.format(ur=url))
-    return True
+    if 'fsd.uta.fi' in url:
+        return True
+    return False
 
 def _access_request_URL_is_found():
     return False
@@ -161,7 +168,9 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     doc_citation = ddi_xml.codeBook.docDscr.citation
     stdy_dscr = ddi_xml.codeBook.stdyDscr
 
+    # Try and raise exception for mandatory minimum metadata fields.
     try:
+        # Authors & organizations
         auth_entys = stdy_dscr.citation.rspStmt('AuthEnty')
         authors = []
         organizations = []
@@ -169,13 +178,40 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             authors.append({'value': a.text})
             organizations.append({'value': a.get('affiliation')})
 
-        # TODO: Where/how to extract multiple languages?
-        #     'language': u'eng, fin, swe',
+        # Availability
+        availability = AVAILABILITY_DEFAULT
+        if _access_request_URL_is_found:
+            availability = 'direct_download'
+        if _is_fsd(original_url):
+            availability = AVAILABILITY_FSD
+
+        # Language
+        # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
         language = ddi_xml.codeBook.get('xml:lang')
+
         # Titles
         langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in stdy_dscr.citation.titlStmt(['titl', 'parTitl'])]
         if not langtitle[0]['value']:
             langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in doc_citation.titlStmt(['titl', 'parTitl'])]
+
+        # License
+        # TODO: Extract prettier output. Should we check that element contains something?
+        license_URL = stdy_dscr.dataAccs.useStmt.get_text(separator=u' ')
+        if _is_fsd(original_url):
+            license_id = LICENCE_ID_FSD
+        else:
+            license_id = LICENCE_ID_DEFAULT
+
+
+        # Maintainer
+        maintainer = stdy_dscr.citation.distStmt.contact.string or \
+                     stdy_dscr.citation.distStmt.distrbtr.string or \
+                     stdy_dscr.citation.prodStmt.producer.get('affiliation')
+        if _is_fsd(original_url):
+            maintainer_email = MAINTAINER_EMAIL_FSD
+            # TODO: Allow trying other email also in FSD metadata
+        else:
+            maintainer_email = stdy_dscr.citation.distStmt.contact.get('email')
 
         # Name
         name = stdy_dscr.citation.titlStmt.IDNo.get('agency') + \
@@ -187,22 +223,44 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             # same harvest object at each reharvest
             # name = utils.generate_pid()
 
-
+        # Owner
+        owner = stdy_dscr.citation.prodStmt.producer.string or \
+                stdy_dscr.citation.rspStmt.AuthEnty.string or \
+                doc_citation.prodStmt.producer.string
     except AttributeError:
+        # TODO: Write 'try' above more generally and add FSD specific eg. here
         raise
 
-    package_dict = dict(
 
+    # Try and pass exceptions for optional metadata fields.
+    try:
+        # Availability
+        if _is_fsd(original_url):
+            access_request_URL=ACCESS_REQUEST_URL_FSD
+        else:
+            access_request_URL=u''
+
+        # Contact
+        contact_phone = doc_citation.holdings.get('callno') or \
+                        stdy_dscr.citation.holdings.get('callno')
+        contact_URL = stdy_dscr.dataAccs.setAvail.accsPlac.get('URI') or \
+                      stdy_dscr.citation.distStmt.contact.get('URI') or \
+                      stdy_dscr.citation.distStmt.distrbtr.get('URI')
+    except AttributeError, err:
+        log.debug('Some optional metadata not found: {er}'.format(er=err))
+        access_request_URL=u''
+        contact_phone=u''
+        contact_URL=u''
+
+
+    package_dict = dict(
         access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
-        access_request_URL=u'',
-        algorithm=NotImplemented,
-        availability=u'direct_download',  # |
-        #                     u'access_application' |
-        #                     u'access_request' |
-        #                     u'contact_owner'    ## JuhoL: changed 'access' to 'availability'
-        contact_phone=u'+35805050505',
-        contact_URL=u'http://www.jakelija.julkaisija.fi',  ## JuhoL: added underscore '_'
-        direct_download_URL=u'http://helsinki.fi/data-on-taalla',
+        access_request_URL=access_request_URL,
+        # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
+        availability=availability,
+        contact_phone=contact_phone,
+        contact_URL=contact_URL,
+        # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
         discipline=u'Tilastotiede',
         evdescr= [{'value': u'Keräsin dataa'},
                 {'value': u'Julkaistu vihdoinkin'},
@@ -219,29 +277,34 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
         groups=[],
         langtitle=langtitle,
-        langdis=u'True',
+        langdis=u'True',  ### HUOMAA!
         language=language,
-        license_URL=u'Lisenssin URL (obsolete)',   ## JuhoL: added underscore '_'
-        license_id=u'cc-zero',
-        maintainer=u'Jakelija / Julkaisija',   ## JuhoL: changed 'publisher' to 'maintainer'
-        maintainer_email=u'jakelija.julkaisija@csc.fi',
-        mimetype=u'application/csv',
+        license_URL=license_URL,
+        license_id=license_id,
+        maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
+        maintainer_email=maintainer_email,
+        # mimetype=u'application/csv',  ## To be implemented straight in 'resources
         name=name,
         notes=u'T\xe4m\xe4 on testiaineisto.',
         orgauth=[{'org': u'CSC Oy', 'value': u'Tekijä Aineiston (DC:Creator)'},
                 {'org': u'Helsingin Yliopisto', 'value': u'Timo Tutkija'},
                 {'org': u'Kolmas Oy', 'value': u'Kimmo Kolmas'}],
-        owner=u'Omistaja Aineiston',
+        owner=owner,
+        projdis=u'True',   ### HUOMAA!
         project_funder=u'Roope Rahoittaja',
         project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
         project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
         project_name=u'Rahoittajan Projekti',
-        ###     'resources': [{'algorithm': u'MD5',
-        ###                    'hash': u'f60e586509d99944e2d62f31979a802f',
-        ###                    'mimetype': u'application/csv',
-        ###                    'name': None,
-        ###                    'resource_type': 'dataset',
-        ###                    'url': u'http://aineiston.osoite.fi/tiedosto.csv'}],
+        resources=[{'algorithm': u'MD5',
+                    'hash': u'f60e586509d99944e2d62f31979a802f',
+                    'mimetype': u'application/csv',
+                    'resource_type': 'dataset',
+                    'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
+                   {'algorithm': u'',
+                    'hash': u'',
+                    'mimetype': u'',
+                    'resource_type': 'dataset',
+                    'url': u''}],
         tag_string=u'tragikomiikka,dadaismi,asiasanastot',
         temporal_coverage_begin=u'1976-11-06T00:00:00Z',
         temporal_coverage_end=u'2003-11-06T00:00:00Z',
@@ -250,46 +313,10 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     )
     package_dict['extras'] = NotImplemented
 
-    # JuhoL: Extract producer element
-    # TODO: extract list to author: [ rspStmt.AuthEnty, prodStmt.producer, rspStmt.othId ]
-    producer = stdy_dscr.citation.prodStmt.producer or \
-               stdy_dscr.citation.rspStmt.AuthEnty or \
-               stdy_dscr.citation.rspStmt.othId
 
 
 
-
-
-    # JuhoL: Assign and reassign the maintainer
-    maintainer = stdy_dscr.citation.distStmt.contact or \
-                 stdy_dscr.citation.distStmt.distrbtr or \
-                 stdy_dscr.citation.prodStmt.producer.get('affiliation')
-    if maintainer:
-        pkg.maintainer = maintainer.string
-    contact = stdy_dscr.citation.distStmt.contact
-    try:
-        pkg.maintainer_email = contact.get('email')
-    except AttributeError, err:
-        log.debug('Note: not all fields were found...')
-        pass
-
-    # JuhoL: Availability and license
-    # JuhoL: FSD specific hack. Automate later in ddi/harvester.py?
-    # JuhoL: Make sure pkg.availability is implemented: schema, ...
-    pkg.availability = AVAILABILITY_DEFAULT
-    if _access_request_URL_is_found:
-        pkg.availability = 'direct_download'
-    if _is_fsd(original_url):
-        pkg.availability = AVAILABILITY_FSD
-        pkg.access_request_URL = ACCESS_REQUEST_URL_FSD
-        pkg.license_id = LICENCE_ID_FSD
-    # TODO: Extract prettier output. Should we check that element contains something?
-    try:
-        use_stmt = stdy_dscr.dataAccs.useStmt
-    except AttributeError:
-        raise
-    if use_stmt:
-        pkg.license_URL = use_stmt.get_text(separator=u' ')
+#### VANHAA KOODIA ...
 
     # JuhoL: extract, process and save keywords
     # JuhoL: keywords, match elements <keyword> <topClass>
