@@ -210,8 +210,8 @@ class DDIHarvester(HarvesterBase):
         document description.
         '''
         # Serialize harvest_object.content
-        log.debug('harvest_object: {ho}'.format(
-            ho=pprint.pformat(dir(harvest_object))))
+        #log.debug('harvest_object: {ho}'.format(
+        #    ho=pprint.pformat(dir(harvest_object))))
         info = pickle.loads(harvest_object.content)
         log.debug('pickled harvest_object.content: {po}'.format(
             po=pprint.pformat(info.keys())))

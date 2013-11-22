@@ -491,11 +491,12 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
 
     # Flatten rest to 'XPath/path/to/element': 'value' pairs
     # TODO: Result is large, review.
-    etree_xml = etree.parse(original_xml)
-    lroot = etree_xml.getroot()
-    flattened_ddi = importcore.generic_xml_metadata_reader(lroot.find('.//{*}docDscr'))
-    flattened_ddi.update(
-        importcore.generic_xml_metadata_reader(lroot.find('.//{*}docDscr')))
+    etree_xml = etree.fromstring(original_xml)
+    #lroot = etree_xml.getroot()
+    flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}docDscr'))
+    xpath_dict = flattened_ddi.getMap()
+    flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
+    xpath_dict.update(flattened_ddi.getMap())
 
     package_dict = dict(
         access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
