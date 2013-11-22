@@ -230,27 +230,33 @@ class DDIHarvester(HarvesterBase):
             harvest_object.content = info['url']
             #            self._add_retry(harvest_object)
             return False
-        try:
-            package_dict = ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
-        except HarvestObjectError, hoe:
-            self._save_object_error('No identifiable field for object {ho}'
-                                    .format(ho=hoe.as_dict()), hoe.object,  # or harvest_object?
-                                    'Import')
-            return False
-        except AttributeError, err:
-            log.error('AttributeError: {er}'.format(er=err))
-            # TODO: JuhoL: add line number of exception
-            self._save_object_error('Missing minimum metadata in {ur}.\n'
-                                    'AttributeError: {er}'
-                                    .format(ur=info['url'], er=err), harvest_object,
-                                    'Import')
-            return False
-        except Exception, e:
-            self._save_object_error('Unknown error: {na}:{er}'
-                                    .format(na=type(e).__name__, er=e),
-                                    harvest_object,
-                                    'Import')
+        #try:
+
+        package_dict = ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
+
+        #except HarvestObjectError, hoe:
+        #    self._save_object_error('No identifiable field for object {ho}'
+        #                            .format(ho=hoe.as_dict()), hoe.object,  # or harvest_object?
+        #                            'Import')
+        #    return False
+        #except AttributeError, err:
+        #    log.error('AttributeError: {er}'.format(er=err))
+        #    # TODO: JuhoL: add line number of exception
+        #    self._save_object_error('Missing minimum metadata in {ur}.\n'
+        #                            'AttributeError: {er}'
+        #                            .format(ur=info['url'], er=err), harvest_object,
+        #                            'Import')
+        #    return False
+        #except Exception, e:
+        #    self._save_object_error('Unknown error: {na}:{er}'
+        #                            .format(na=type(e).__name__, er=e),
+        #                            harvest_object,
+        #                            'Import')
         #return pkgid
+
+        if not package_dict:
+            return False
+
         result = self._create_or_update_package(package_dict, harvest_object)
         log.debug("Exiting import_stage()")
         return result  # returns True

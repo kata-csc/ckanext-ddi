@@ -44,6 +44,10 @@ ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.
 LICENCE_ID_FSD = 'other_closed'
 MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
 
+# TODO: Create a DataConverter class to fix variable scopes in _ddi2ckan
+doc_citation = None
+stdy_dscr = None
+
 def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
     try:
         return _ddi2ckan(data, original_url, original_xml, harvest_object)
@@ -349,13 +353,31 @@ def _last_statements_to_rewrite():
         lastidx = lastidx + 1
 
 
+def _read_value(bs_eval_string, default=u'', mandatory_field=False):
+    '''
+    Read from Beautiful Soup object's partially applied method.
+    Returns default if no output received from given method, else return the method's output.
+    '''
+    try:
+        output = eval(bs_eval_string)
+        return output
+    except AttributeError, err:
+        log.debug('Unable to read value: {path}'.format(path=bs_eval_string))
+        # TODO: Save errors to dict if mandatory field
+        return default
+
+
 #@ExceptReturn(exception=(AttributeError, ), returns=False)
 def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
     # TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.
 
+    # TODO: Don't use globals
+    global doc_citation
+    global stdy_dscr
     doc_citation = ddi_xml.codeBook.docDscr.citation
     stdy_dscr = ddi_xml.codeBook.stdyDscr
+
 
     # Try and raise exception for mandatory minimum metadata fields.
     try:
@@ -375,7 +397,6 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         debug_pos = 2
         # Keywords
         keywords = stdy_dscr.stdyInfo.subject.get_text(',', strip=True)
-        keywords = list(set(keywords))  # JuhoL: For what? Filtering duplicates?
         debug_pos = 3
         # Language
         # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
@@ -423,6 +444,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
             # same harvest object at each reharvest
             # name = utils.generate_pid()
+        log.debug('Name: {namn}'.format(namn=name))
         debug_pos = 8
         # Owner
         owner = stdy_dscr.citation.prodStmt.producer.string or \
@@ -431,63 +453,64 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     except AttributeError, err:
         # TODO: Write 'try' above more generally and add FSD specific eg. here
         log.debug('DEBUG_POS: {dp}'.format(dp=debug_pos))
-        raise
+        #raise
+        return False
 
 
-    # Try and pass exceptions for optional metadata fields.
-    try:
-        # Availability
-        if _is_fsd(original_url):
-            access_request_URL=ACCESS_REQUEST_URL_FSD
-        else:
-            access_request_URL=u''
+    # Read optional metadata fields:
 
-        # Contact
-        contact_phone = doc_citation.holdings.get('callno') or \
-                        stdy_dscr.citation.holdings.get('callno')
-        contact_URL = stdy_dscr.dataAccs.setAvail.accsPlac.get('URI') or \
-                      stdy_dscr.citation.distStmt.contact.get('URI') or \
-                      stdy_dscr.citation.distStmt.distrbtr.get('URI')
-
-        # Description
-        if stdy_dscr.stdyInfo.abstract:
-            description_array = stdy_dscr.stdyInfo.abstract('p')
-        else:
-            description_array = stdy_dscr.citation.serStmt.serInfo('p')
-        notes = '<br />'.join([description.string for
-                               description in description_array])
-
-        # Events
-        evdescr = []
-        evtype = []
-        evwhen = []
-        evwho = []
-        # Event: Collection
-        ev_type_collect = stdy_dscr.stdyInfo.sumDscr('collDate', event="start")
-        data_collector = stdy_dscr.method.dataColl('dataCollector')
-        data_coll_string = u''
-        for d in data_collector:
-            data_coll_string += '; ' + (d.text)
-        data_coll_string = data_coll_string[2:]
-        for collection in ev_type_collect:
-            evdescr.append({'value': u'Event automatically created at import.'})
-            evtype.append({'value': u'collection'})
-            evwhen.append({'value': collection.get('date')})
-            evwho.append({'value': data_coll_string})
-        # Event: Creation (eg. Published in publication)
-        ev_type_create = stdy_dscr.citation.prodStmt.prodDate.text
-        data_creators = [ a['value'] for a in orgauth ]
-        data_creator_string = '; '.join(data_creators)
-        evdescr.append({'value': u'Event automatically created at import.'})
-        evtype.append({'value': u'creation'})
-        evwhen.append({'value': ev_type_create})
-        evwho.append({'value': data_creator_string})
-        # TODO: Event: Published (eg. Deposited to some public access archive)
-    except AttributeError, err:
-        log.debug('Some optional metadata not found: {er}'.format(er=err))
+    # Availability
+    if _is_fsd(original_url):
+        access_request_URL=ACCESS_REQUEST_URL_FSD
+    else:
         access_request_URL=u''
-        contact_phone=u''
-        contact_URL=u''
+
+    # Contact
+    contact_phone = _read_value("doc_citation.holdings.get('callno')") or \
+                    _read_value("stdy_dscr.citation.holdings.get('callno')")
+
+    contact_URL = _read_value( "stdy_dscr.dataAccs.setAvail.accsPlac.get('URI')") or \
+                  _read_value( "stdy_dscr.citation.distStmt.contact.get('URI')") or \
+                  _read_value( "stdy_dscr.citation.distStmt.distrbtr.get('URI')")
+
+    # Description
+    if stdy_dscr.stdyInfo.abstract:
+        description_array = _read_value("stdy_dscr.stdyInfo.abstract('p')")
+    else:
+        description_array = _read_value("stdy_dscr.citation.serStmt.serInfo('p')")
+
+    notes = '\r\n\r\n'.join([description.string for
+                           description in description_array])
+
+    # Events - initialize values
+    evdescr = []
+    evtype = []
+    evwhen = []
+    evwho = []
+
+    # Event: Collection
+    ev_type_collect = _read_value("stdy_dscr.stdyInfo.sumDscr('collDate', event='start')")
+    data_collector = _read_value("stdy_dscr.method.dataColl('dataCollector')")
+    data_coll_string = u''
+    for d in data_collector:
+        data_coll_string += '; ' + (d.text)
+    data_coll_string = data_coll_string[2:]
+    for collection in ev_type_collect:
+        evdescr.append({'value': u'Event automatically created at import.'})
+        evtype.append({'value': u'collection'})
+        evwhen.append({'value': collection.get('date')})
+        evwho.append({'value': data_coll_string})
+
+    # Event: Creation (eg. Published in publication)
+    ev_type_create = _read_value("stdy_dscr.citation.prodStmt.prodDate.text")
+    data_creators = [ a['value'] for a in orgauth ]
+    data_creator_string = '; '.join(data_creators)
+    evdescr.append({'value': u'Event automatically created at import.'})
+    evtype.append({'value': u'creation'})
+    evwhen.append({'value': ev_type_create})
+    evwho.append({'value': data_creator_string})
+    # TODO: Event: Published (eg. Deposited to some public access archive)
+
 
     # Flatten rest to 'XPath/path/to/element': 'value' pairs
     # TODO: Result is large, review.
@@ -513,6 +536,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         evwho=evwho or [],
         geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
         groups=[],
+        id=u'',
         langtitle=langtitle,
         langdis=u'True',  ### HUOMAA!
         language=language,
@@ -563,6 +587,9 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         harvest_object.current = True
     #model.repo.commit()
     #return pkg.id
+
+    # TODO: Check if we received errors from parsing minimum metadata model fields and throw an exception if so.
+
     return package_dict
 
 
