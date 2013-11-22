@@ -215,6 +215,8 @@ class DDIHarvester(HarvesterBase):
         info = pickle.loads(harvest_object.content)
         log.debug('pickled harvest_object.content: {po}'.format(
             po=pprint.pformat(info.keys())))
+        log.debug("harvest_object.content['url']: {po}".format(
+            po=pprint.pformat(info['url'])))
         try:
             ddi_xml = BeautifulSoup(info['xml'], 'xml')
         except etree.XMLSyntaxError, err:
@@ -238,9 +240,9 @@ class DDIHarvester(HarvesterBase):
         except AttributeError, err:
             log.error('AttributeError: {er}'.format(er=err))
             # TODO: JuhoL: add line number of exception
-            self._save_object_error('Missing minimum metadata. '
+            self._save_object_error('Missing minimum metadata in {ur}.\n'
                                     'AttributeError: {er}'
-                                    .format(er=err), harvest_object,
+                                    .format(ur=info['url'], er=err), harvest_object,
                                     'Import')
             return False
         except Exception, e:

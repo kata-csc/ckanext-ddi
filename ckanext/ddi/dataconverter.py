@@ -410,8 +410,9 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
             maintainer_email = stdy_dscr.citation.distStmt.contact.get('email')
         debug_pos = 6
         # Modified date
-        version = stdy_dscr.citation.prodStmt.prodDate.get('date') or \
-                  stdy_dscr.citation.distStmt.depDate.get('date')
+        version = stdy_dscr.citation('prodDate') or \
+                  stdy_dscr.citation('depDate')
+        version = version[0].get('date')
         debug_pos = 7
         # Name
         name = stdy_dscr.citation.titlStmt.IDNo.get('agency') + \
