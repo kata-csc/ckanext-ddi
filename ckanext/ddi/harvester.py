@@ -168,7 +168,7 @@ class DDIHarvester(HarvesterBase):
         except urllib2.HTTPError, err:
             self._save_gather_error(
                 'HTTPError: Could not gather XML files from URL! ' +
-                'Error: {er}'.format(er=err.reason), harvest_job)
+                'Error: {er}'.format(er=err.code), harvest_job)
             return None
         except urllib2.URLError, err:
             self._save_gather_error(
