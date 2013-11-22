@@ -25,6 +25,7 @@ import ckan.model.authz as authz
 from ckanext.harvest.harvesters.base import HarvesterBase
 import ckanext.harvest.model as hmodel
 import ckanext.kata.utils as utils
+import ckanext.oaipmh.importcore as importcore
 
 import traceback
 import pprint
@@ -161,163 +162,9 @@ def dc_metadata_reader(xml):
     log.debug('ExceptReturn()')
     return decorator
 
-#@ExceptReturn(exception=(AttributeError, ), returns=False)
-def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
-    # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
-
-    doc_citation = ddi_xml.codeBook.docDscr.citation
-    stdy_dscr = ddi_xml.codeBook.stdyDscr
-
-    # Try and raise exception for mandatory minimum metadata fields.
-    try:
-        # Authors & organizations
-        auth_entys = stdy_dscr.citation.rspStmt('AuthEnty')
-        authors = []
-        organizations = []
-        for a in auth_entys:
-            authors.append({'value': a.text})
-            organizations.append({'value': a.get('affiliation')})
-
-        # Availability
-        availability = AVAILABILITY_DEFAULT
-        if _access_request_URL_is_found:
-            availability = 'direct_download'
-        if _is_fsd(original_url):
-            availability = AVAILABILITY_FSD
-
-        # Language
-        # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
-        language = ddi_xml.codeBook.get('xml:lang')
-
-        # Titles
-        langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in stdy_dscr.citation.titlStmt(['titl', 'parTitl'])]
-        if not langtitle[0]['value']:
-            langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in doc_citation.titlStmt(['titl', 'parTitl'])]
-
-        # License
-        # TODO: Extract prettier output. Should we check that element contains something?
-        license_URL = stdy_dscr.dataAccs.useStmt.get_text(separator=u' ')
-        if _is_fsd(original_url):
-            license_id = LICENCE_ID_FSD
-        else:
-            license_id = LICENCE_ID_DEFAULT
-
-
-        # Maintainer
-        maintainer = stdy_dscr.citation.distStmt.contact.string or \
-                     stdy_dscr.citation.distStmt.distrbtr.string or \
-                     stdy_dscr.citation.prodStmt.producer.get('affiliation')
-        if _is_fsd(original_url):
-            maintainer_email = MAINTAINER_EMAIL_FSD
-            # TODO: Allow trying other email also in FSD metadata
-        else:
-            maintainer_email = stdy_dscr.citation.distStmt.contact.get('email')
-
-        # Name
-        name = stdy_dscr.citation.titlStmt.IDNo.get('agency') + \
-               stdy_dscr.citation.titlStmt.IDNo.string
-        if not stdy_dscr.citation.titlStmt.IDNo.string:
-            name = doc_citation.titlStmt.IDNo.get('agency') + \
-                   doc_citation.titlStmt.IDNo.string
-            # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
-            # same harvest object at each reharvest
-            # name = utils.generate_pid()
-
-        # Owner
-        owner = stdy_dscr.citation.prodStmt.producer.string or \
-                stdy_dscr.citation.rspStmt.AuthEnty.string or \
-                doc_citation.prodStmt.producer.string
-    except AttributeError:
-        # TODO: Write 'try' above more generally and add FSD specific eg. here
-        raise
-
-
-    # Try and pass exceptions for optional metadata fields.
-    try:
-        # Availability
-        if _is_fsd(original_url):
-            access_request_URL=ACCESS_REQUEST_URL_FSD
-        else:
-            access_request_URL=u''
-
-        # Contact
-        contact_phone = doc_citation.holdings.get('callno') or \
-                        stdy_dscr.citation.holdings.get('callno')
-        contact_URL = stdy_dscr.dataAccs.setAvail.accsPlac.get('URI') or \
-                      stdy_dscr.citation.distStmt.contact.get('URI') or \
-                      stdy_dscr.citation.distStmt.distrbtr.get('URI')
-    except AttributeError, err:
-        log.debug('Some optional metadata not found: {er}'.format(er=err))
-        access_request_URL=u''
-        contact_phone=u''
-        contact_URL=u''
-
-
-    package_dict = dict(
-        access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
-        access_request_URL=access_request_URL,
-        # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
-        availability=availability,
-        contact_phone=contact_phone,
-        contact_URL=contact_URL,
-        # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
-        discipline=u'Tilastotiede',
-        evdescr= [{'value': u'Keräsin dataa'},
-                {'value': u'Julkaistu vihdoinkin'},
-                {'value': u'hajotti kaiken'}],
-        evtype=[{'value': u'creation'},
-                {'value': u'published'},
-                {'value': u'modified'}],
-        evwhen=[{'value': u'2000-01-01'},
-                {'value': u'2010-04-15'},
-                {'value': u'2013-11-18'}],
-        evwho=[{'value': u'Tekijä Aineiston'},
-           {'value': u'Julkaisija Aineiston'},
-           {'value': u'T. Uhoaja'}],
-        geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
-        groups=[],
-        langtitle=langtitle,
-        langdis=u'True',  ### HUOMAA!
-        language=language,
-        license_URL=license_URL,
-        license_id=license_id,
-        maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
-        maintainer_email=maintainer_email,
-        # mimetype=u'application/csv',  ## To be implemented straight in 'resources
-        name=name,
-        notes=u'T\xe4m\xe4 on testiaineisto.',
-        orgauth=[{'org': u'CSC Oy', 'value': u'Tekijä Aineiston (DC:Creator)'},
-                {'org': u'Helsingin Yliopisto', 'value': u'Timo Tutkija'},
-                {'org': u'Kolmas Oy', 'value': u'Kimmo Kolmas'}],
-        owner=owner,
-        projdis=u'True',   ### HUOMAA!
-        project_funder=u'Roope Rahoittaja',
-        project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
-        project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
-        project_name=u'Rahoittajan Projekti',
-        resources=[{'algorithm': u'MD5',
-                    'hash': u'f60e586509d99944e2d62f31979a802f',
-                    'mimetype': u'application/csv',
-                    'resource_type': 'dataset',
-                    'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
-                   {'algorithm': u'',
-                    'hash': u'',
-                    'mimetype': u'',
-                    'resource_type': 'dataset',
-                    'url': u''}],
-        tag_string=u'tragikomiikka,dadaismi,asiasanastot',
-        temporal_coverage_begin=u'1976-11-06T00:00:00Z',
-        temporal_coverage_end=u'2003-11-06T00:00:00Z',
-        version=u'2007-06-06T10:17:44Z',
-        version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
-    )
-    package_dict['extras'] = NotImplemented
-
-
-
-
-#### VANHAA KOODIA ...
-
+def _future_keywords_to_labels_urls_implementation():
+    ''' This old code is kept here for now if needed in future
+    '''
     # JuhoL: extract, process and save keywords
     # JuhoL: keywords, match elements <keyword> <topClass>
     keywords = stdy_dscr.stdyInfo.subject(re.compile('keyword|topcClas'))
@@ -356,19 +203,7 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
                 pkgtag = model.PackageTag(tag=tag_obj, package=pkg)
                 pkgtag.save()  # Avoids duplicates if tags has duplicates.
 
-    # JuhoL: Description
-    if stdy_dscr.stdyInfo.abstract:
-        description_array = stdy_dscr.stdyInfo.abstract('p')
-    else:
-        description_array = stdy_dscr.citation.serStmt.serInfo('p')
-    pkg.notes = '<br />'.join([description.string for
-                               description in description_array])
-    # JuhoL: Title
-    pkg.title = title
-
-    # JuhoL: URL of ddi-xml
-    pkg.url = original_url
-
+def _save_original_xml_and_link_as_resources(original_xml, pkg, update=False):
     if not update:
         # JuhoL: Here is created a ofs storage ie. local pairtree storage for
         # objects/blobs (eg. /opt/data/ckan/data_tree). The original xml is
@@ -397,36 +232,15 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         pkg.add_resource(url=doc_citation.holdings.get('URI', ''),
                          description=title,
                          format='html')
+    return True
 
-    # JuhoL: Extra ddi metadata
-    # in codeBook.docDscr and .stdyDscr handled. This should be rewritten to
-    # extras = { xpath/as/key: val, ... }
-    metas = []
-    # JuhoL: Check if this multiplies some elements because recursive .descendants
-    descendants = [desc for desc in doc_citation.descendants] + \
-                  [sdesc for sdesc in stdy_dscr.descendants]
-    for docextra in descendants:
-        if isinstance(docextra, bs4.Tag):
-            if docextra:
-                if docextra.name == 'p':
-                    docextra.name = docextra.parent.name
-                if not docextra.name in metas and docextra.string:
-                    metas.append(docextra.string
-                                 if docextra.string
-                                 else _collect_attribs(docextra))
-                else:  # JuhoL: Why this is same as above?
-                    if docextra.string:
-                        metas.append(docextra.string
-                                     if docextra.string
-                                     else _collect_attribs(docextra))
-
+def _save_ddi_variables_to_csv(ddi_xml, pkg, update=True):
     # JuhoL: Handle codeBook.dataDscr parts, extract data (eg. questionnaire)
     # variables etc.
     # Saves <var>...</var> elements to a csv file accessible at:
     # <ckan_url>/storage/f/2013-11-05T18%3A10%3A19.686858/1049_var.csv
     # And separately saves <catgry> elements inside <var> to a csv as a resource
     # for package.
-
     # Assumes that dataDscr has not changed. Valid?
     if ddi_xml.codeBook.dataDscr and not update:
         vars = ddi_xml.codeBook.dataDscr('var')  # Find all <var> elements
@@ -469,19 +283,40 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
                          format="csv",
                          size=c_var.len)
         # JuhoL: Append labels of variables ('questions') also to metas
+        # TODO: change to return XPath dict of labels
+        flattened_var_labels = {}
         f_var.seek(0)  # JuhoL: Set 'read cursor' to row 0
         reader = csv.DictReader(f_var)
         for var in reader:
             metas.append(var['labl'] if 'labl' in var else var['qstnLit'])
+    return flattened_var_labels
 
-    pkg.extras['ddi_extras'] = " ".join(metas)
+def _create_group_based_on_organizations():
+    # JuhoL: Create groups
+    # for organizations extracted. Is this wanted? Check
+    # how groups should be used currently. For group
+    # stdyDscr.citation.distStmt.distrbtr or
+    # docDscr.citation.prodStmt.producer or
+    # stdyDscr.citation.prodStmt.producer.get('affiliation') could be more
+    # appropriate.
+    producers = stdy_dscr.citation.prodStmt('producer')  # this is .find_all()
+    for producer in producers:
+        producer = producer.string
+        if producer:
+            group = model.Group.by_name(producer)
+            if not group:
+                # JuhoL: Gives UnicodeEncodeError if contains scandics, see
+                # ckanext-shibboleth plugin.py for similar fix
+                group = model.Group(name=producer, description=producer,
+                                    title=producer)
+                group.save()
+            group.add_package_by_name(pkg.name)
+            authz.setup_default_user_roles(group)
+
+def _last_statements_to_rewrite():
     # JuhoL: Add also some basic fields to pkg.extras. Why?
     if stdy_dscr.citation.distStmt.distrbtr:
         pkg.extras['publisher'] = stdy_dscr.citation.distStmt.distrbtr.string
-    # JuhoL: Modified date
-    if stdy_dscr.citation.prodStmt.prodDate:
-        if 'date' in stdy_dscr.citation.prodStmt.prodDate.attrs:
-            pkg.version = stdy_dscr.citation.prodStmt.prodDate.attrs['date']
 
     # Store title in extras as well.
     pkg.extras['title_0'] = pkg.title
@@ -513,34 +348,220 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
         pkg.extras['organization_%s' % lastidx] = org
         lastidx = lastidx + 1
 
-    # JuhoL: Create groups
-    # for organizations extracted. Is this wanted? Check
-    # how groups should be used currently. For group
-    # stdyDscr.citation.distStmt.distrbtr or
-    # docDscr.citation.prodStmt.producer or
-    # stdyDscr.citation.prodStmt.producer.get('affiliation') could be more
-    # appropriate.
-    producers = stdy_dscr.citation.prodStmt('producer')  # this is .find_all()
-    for producer in producers:
-        producer = producer.string
-        if producer:
-            group = model.Group.by_name(producer)
-            if not group:
-                # JuhoL: Gives UnicodeEncodeError if contains scandics, see
-                # ckanext-shibboleth plugin.py for similar fix
-                group = model.Group(name=producer, description=producer,
-                                    title=producer)
-                group.save()
-            group.add_package_by_name(pkg.name)
-            authz.setup_default_user_roles(group)
+
+#@ExceptReturn(exception=(AttributeError, ), returns=False)
+def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
+    # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
+    # TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.
+
+    doc_citation = ddi_xml.codeBook.docDscr.citation
+    stdy_dscr = ddi_xml.codeBook.stdyDscr
+
+    # Try and raise exception for mandatory minimum metadata fields.
+    try:
+        debug_pos = 0
+        # Authors & organizations
+        auth_entys = stdy_dscr.citation.rspStmt('AuthEnty')
+        orgauth = []
+        for a in auth_entys:
+            orgauth.append({'org': a.get('affiliation'), 'value': a.text})
+        debug_pos = 1
+        # Availability
+        availability = AVAILABILITY_DEFAULT
+        if _access_request_URL_is_found:
+            availability = 'direct_download'
+        if _is_fsd(original_url):
+            availability = AVAILABILITY_FSD
+        debug_pos = 2
+        # Keywords
+        keywords = stdy_dscr.stdyInfo.subject.get_text(',', strip=True)
+        keywords = list(set(keywords))  # JuhoL: For what? Filtering duplicates?
+        debug_pos = 3
+        # Language
+        # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
+        language = ddi_xml.codeBook.get('xml:lang')
+
+        # Titles
+        langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in stdy_dscr.citation.titlStmt(['titl', 'parTitl'])]
+        if not langtitle[0]['value']:
+            langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in doc_citation.titlStmt(['titl', 'parTitl'])]
+        debug_pos = 4
+        # License
+        # TODO: Extract prettier output. Should we check that element contains something?
+        license_URL = stdy_dscr.dataAccs.useStmt.get_text(separator=u' ')
+        if _is_fsd(original_url):
+            license_id = LICENCE_ID_FSD
+        else:
+            license_id = LICENCE_ID_DEFAULT
+
+        debug_pos = 5
+        # Maintainer
+        maintainer = stdy_dscr.citation.distStmt('contact') or \
+                     stdy_dscr.citation.distStmt('distrbtr') or \
+                     doc_citation.prodStmt('producer')
+        if maintainer and maintainer[0].text:
+            maintainer = maintainer[0].text
+        else:
+            maintainer = stdy_dscr.citation.prodStmt.producer.get('affiliation')
+        if _is_fsd(original_url) or 'misanthropy.kapsi.fi' in original_url:  # DEBUG, remove after 'or'
+            maintainer_email = MAINTAINER_EMAIL_FSD
+            # TODO: Allow trying other email also in FSD metadata
+        else:
+            maintainer_email = stdy_dscr.citation.distStmt.contact.get('email')
+        debug_pos = 6
+        # Modified date
+        version = stdy_dscr.citation.prodStmt.prodDate.get('date') or \
+                  stdy_dscr.citation.distStmt.depDate.get('date')
+        debug_pos = 7
+        # Name
+        name = stdy_dscr.citation.titlStmt.IDNo.get('agency') + \
+               stdy_dscr.citation.titlStmt.IDNo.string
+        if not stdy_dscr.citation.titlStmt.IDNo.string:
+            name = doc_citation.titlStmt.IDNo.get('agency') + \
+                   doc_citation.titlStmt.IDNo.string
+            # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
+            # same harvest object at each reharvest
+            # name = utils.generate_pid()
+        debug_pos = 8
+        # Owner
+        owner = stdy_dscr.citation.prodStmt.producer.string or \
+                stdy_dscr.citation.rspStmt.AuthEnty.string or \
+                doc_citation.prodStmt.producer.string
+    except AttributeError, err:
+        # TODO: Write 'try' above more generally and add FSD specific eg. here
+        log.debug('DEBUG_POS: {dp}'.format(dp=debug_pos))
+        raise
+
+
+    # Try and pass exceptions for optional metadata fields.
+    try:
+        # Availability
+        if _is_fsd(original_url):
+            access_request_URL=ACCESS_REQUEST_URL_FSD
+        else:
+            access_request_URL=u''
+
+        # Contact
+        contact_phone = doc_citation.holdings.get('callno') or \
+                        stdy_dscr.citation.holdings.get('callno')
+        contact_URL = stdy_dscr.dataAccs.setAvail.accsPlac.get('URI') or \
+                      stdy_dscr.citation.distStmt.contact.get('URI') or \
+                      stdy_dscr.citation.distStmt.distrbtr.get('URI')
+
+        # Description
+        if stdy_dscr.stdyInfo.abstract:
+            description_array = stdy_dscr.stdyInfo.abstract('p')
+        else:
+            description_array = stdy_dscr.citation.serStmt.serInfo('p')
+        notes = '<br />'.join([description.string for
+                               description in description_array])
+
+        # Events
+        evdescr = []
+        evtype = []
+        evwhen = []
+        evwho = []
+        # Event: Collection
+        ev_type_collect = stdy_dscr.stdyInfo.sumDscr('collDate', event="start")
+        data_collector = stdy_dscr.method.dataColl('dataCollector')
+        data_coll_string = u''
+        for d in data_collector:
+            data_coll_string += '; ' + (d.text)
+        data_coll_string = data_coll_string[2:]
+        for collection in ev_type_collect:
+            evdescr.append({'value': u'Event automatically created at import.'})
+            evtype.append({'value': u'collection'})
+            evwhen.append({'value': collection.get('date')})
+            evwho.append({'value': data_coll_string})
+        # Event: Creation (eg. Published in publication)
+        ev_type_create = stdy_dscr.citation.prodStmt.prodDate.text
+        data_creators = [ a['value'] for a in orgauth ]
+        data_creator_string = '; '.join(data_creators)
+        evdescr.append({'value': u'Event automatically created at import.'})
+        evtype.append({'value': u'creation'})
+        evwhen.append({'value': ev_type_create})
+        evwho.append({'value': data_creator_string})
+        # TODO: Event: Published (eg. Deposited to some public access archive)
+    except AttributeError, err:
+        log.debug('Some optional metadata not found: {er}'.format(er=err))
+        access_request_URL=u''
+        contact_phone=u''
+        contact_URL=u''
+
+    # Flatten rest to 'XPath/path/to/element': 'value' pairs
+    # TODO: Result is large, review.
+    etree_xml = etree.parse(original_xml)
+    lroot = etree_xml.getroot()
+    flattened_ddi = importcore.generic_xml_metadata_reader(lroot.find('.//{*}docDscr'))
+    flattened_ddi.update(
+        importcore.generic_xml_metadata_reader(lroot.find('.//{*}docDscr')))
+
+    package_dict = dict(
+        access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
+        access_request_URL=access_request_URL,
+        # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
+        availability=availability,
+        contact_phone=contact_phone,
+        contact_URL=contact_URL,
+        # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
+        discipline=u'Tilastotiede',
+        evdescr=evdescr or [],
+        evtype=evtype or [],
+        evwhen=evwhen or [],
+        evwho=evwho or [],
+        geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
+        groups=[],
+        langtitle=langtitle,
+        langdis=u'True',  ### HUOMAA!
+        language=language,
+        license_URL=license_URL,
+        license_id=license_id,
+        maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
+        maintainer_email=maintainer_email,
+        # mimetype=u'application/csv',  ## To be implemented straight in 'resources
+        name=name,
+        notes=notes or u'',
+        orgauth=orgauth,
+        owner=owner,
+        projdis=u'True',   ### HUOMAA!
+        project_funder=u'Roope Rahoittaja',
+        project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
+        project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
+        project_name=u'Rahoittajan Projekti',
+        resources=[{'algorithm': u'MD5',
+                    'hash': u'f60e586509d99944e2d62f31979a802f',
+                    'mimetype': u'application/csv',
+                    'resource_type': 'dataset',
+                    'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
+                   {'algorithm': u'',
+                    'hash': u'',
+                    'mimetype': u'',
+                    'resource_type': 'dataset',
+                    'url': u''}],
+        tag_string=keywords,
+        temporal_coverage_begin=u'1976-11-06T00:00:00Z',
+        temporal_coverage_end=u'2003-11-06T00:00:00Z',
+        version=version,
+        version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
+    )
+    package_dict['extras'] = flattened_ddi
+    #package_dict['extras'].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))
+
+
+    # Vanhojen koodien järjestys:
+    #_save_original_xml_and_link_as_resources()
+    #_save_ddi_variables_to_csv()
+    #_create_group_based_on_organizations()
+    #_last_statements_to_rewrite()
 
     # JuhoL: Set harvest object to some end state and commit
     if harvest_object != None:
-        harvest_object.package_id = pkg.id
+        #harvest_object.package_id = pkg.id
         harvest_object.content = None
         harvest_object.current = True
-    model.repo.commit()
-    return pkg.id
+    #model.repo.commit()
+    #return pkg.id
+    return package_dict
 
 
 def ddi32ckan(ddi_xml, original_xml, original_url=None, harvest_object=None):
