@@ -566,74 +566,74 @@ def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
     return package_dict
 
 
-def ddi32ckan(ddi_xml, original_xml, original_url=None, harvest_object=None):
-    try:
-        return _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object)
-    except Exception as e:
-        log.debug(traceback.format_exc(e))
-    return False
-
-def _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object):
-    model.repo.new_revision()
-    ddiroot = ddi_xml.DDIInstance
-    main_cit = ddiroot.Citation
-    study_info = ddiroot('StudyUnit')[-1]
-    idx = 0
-    authorgs = []
-    pkg = model.Package.get(study_info.attrs['id'])
-    if not pkg:
-        pkg = model.Package(name=study_info.attrs['id'])
-        pkg.id = ddiroot.attrs['id']
-        # This presumes that resources have not changed. Wrong? If something
-        # has changed then technically the XML has chnaged and hence this may
-        # have to "delete" old resources and then add new ones.
-        ofs = get_ofs()
-        nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
-        label = "%s/%s.xml" % (nowstr, study_info.attrs['id'],)
-        ofs.put_stream(BUCKET, label, original_xml, {})
-        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
-            label=label)
-        pkg.add_resource(url=fileurl, description="Original metadata record",
-            format="xml", size=len(original_xml))
-        # What the URI should be?
-        #pkg.add_resource(url=doc_citation.holdings['URI']\
-        #                 if 'URI' in doc_citation.holdings else '',
-        #                 description=title)
-    pkg.version = main_cit.PublicationDate.SimpleDate.string
-    for title in main_cit('Title'):
-        pkg.extras['title_%d' % idx] = title.string
-        pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
-        idx += 1
-    for title in study_info.Citation('Title'):
-        pkg.extras['title_%d' % idx] = title.string
-        pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
-        idx += 1
-    for value in study_info.Citation('Creator'):
-        org = ""
-        if value.attrs.get('affiliation', None):
-            org = value.attrs['affiliation']
-        author = value.string
-        authorgs.append((author, org))
-    pkg.author = authorgs[0][0]
-    pkg.maintainer = study_info.Citation.Publisher.string
-    lastidx = 0
-    for auth, org in authorgs:
-        pkg.extras['author_%s' % lastidx] = auth
-        pkg.extras['organization_%s' % lastidx] = org
-        lastidx = lastidx + 1
-    pkg.extras["licenseURL"] = study_info.Citation.Copyright.string
-    pkg.notes = "".join([unicode(repr(chi).replace('\n', '<br />'), 'utf8')\
-                         for chi in study_info.Abstract.Content.children])
-    for kw in study_info.Coverage.TopicalCoverage('Keyword'):
-        pkg.add_tag_by_name(kw.string)
-    pkg.extras['contributor'] = study_info.Citation.Contributor.string
-    pkg.extras['publisher'] = study_info.Citation.Publisher.string
-    pkg.save()
-    if harvest_object:
-        harvest_object.package_id = pkg.id
-        harvest_object.content = None
-        harvest_object.current = True
-        harvest_object.save()
-    model.repo.commit()
-    return pkg.id
-
+#def ddi32ckan(ddi_xml, original_xml, original_url=None, harvest_object=None):
+#    try:
+#        return _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object)
+#    except Exception as e:
+#        log.debug(traceback.format_exc(e))
+#    return False
+#
+#def _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object):
+#    model.repo.new_revision()
+#    ddiroot = ddi_xml.DDIInstance
+#    main_cit = ddiroot.Citation
+#    study_info = ddiroot('StudyUnit')[-1]
+#    idx = 0
+#    authorgs = []
+#    pkg = model.Package.get(study_info.attrs['id'])
+#    if not pkg:
+#        pkg = model.Package(name=study_info.attrs['id'])
+#        pkg.id = ddiroot.attrs['id']
+#        # This presumes that resources have not changed. Wrong? If something
+#        # has changed then technically the XML has chnaged and hence this may
+#        # have to "delete" old resources and then add new ones.
+#        ofs = get_ofs()
+#        nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
+#        label = "%s/%s.xml" % (nowstr, study_info.attrs['id'],)
+#        ofs.put_stream(BUCKET, label, original_xml, {})
+#        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
+#            label=label)
+#        pkg.add_resource(url=fileurl, description="Original metadata record",
+#            format="xml", size=len(original_xml))
+#        # What the URI should be?
+#        #pkg.add_resource(url=doc_citation.holdings['URI']\
+#        #                 if 'URI' in doc_citation.holdings else '',
+#        #                 description=title)
+#    pkg.version = main_cit.PublicationDate.SimpleDate.string
+#    for title in main_cit('Title'):
+#        pkg.extras['title_%d' % idx] = title.string
+#        pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
+#        idx += 1
+#    for title in study_info.Citation('Title'):
+#        pkg.extras['title_%d' % idx] = title.string
+#        pkg.extras['lang_title_%d' % idx] = title.attrs['xml:lang']
+#        idx += 1
+#    for value in study_info.Citation('Creator'):
+#        org = ""
+#        if value.attrs.get('affiliation', None):
+#            org = value.attrs['affiliation']
+#        author = value.string
+#        authorgs.append((author, org))
+#    pkg.author = authorgs[0][0]
+#    pkg.maintainer = study_info.Citation.Publisher.string
+#    lastidx = 0
+#    for auth, org in authorgs:
+#        pkg.extras['author_%s' % lastidx] = auth
+#        pkg.extras['organization_%s' % lastidx] = org
+#        lastidx = lastidx + 1
+#    pkg.extras["licenseURL"] = study_info.Citation.Copyright.string
+#    pkg.notes = "".join([unicode(repr(chi).replace('\n', '<br />'), 'utf8')\
+#                         for chi in study_info.Abstract.Content.children])
+#    for kw in study_info.Coverage.TopicalCoverage('Keyword'):
+#        pkg.add_tag_by_name(kw.string)
+#    pkg.extras['contributor'] = study_info.Citation.Contributor.string
+#    pkg.extras['publisher'] = study_info.Citation.Publisher.string
+#    pkg.save()
+#    if harvest_object:
+#        harvest_object.package_id = pkg.id
+#        harvest_object.content = None
+#        harvest_object.current = True
+#        harvest_object.save()
+#    model.repo.commit()
+#    return pkg.id
+#
