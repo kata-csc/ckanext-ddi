@@ -44,18 +44,9 @@ ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.
 LICENCE_ID_FSD = 'other_closed'
 MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
 
-# TODO: Create a DataConverter class to fix variable scopes in _ddi2ckan
-doc_citation = None
-stdy_dscr = None
 
-def ddi2ckan(data, original_url=None, original_xml=None, harvest_object=None):
-    try:
-        return _ddi2ckan(data, original_url, original_xml, harvest_object)
-    except AttributeError:
-        raise
-    except Exception as e:
-        log.debug(traceback.format_exc(e))
-    return False
+class FieldMissingException(Exception):
+    pass
 
 
 def _collect_attribs(el):
@@ -67,6 +58,7 @@ def _collect_attribs(el):
         for k, v in el.attrs.items():
             astr += "(%s,%s)" % (k, v)
     return astr
+
 
 def _construct_csv(var, heads):
     retdict = {}
@@ -101,6 +93,7 @@ def _construct_csv(var, heads):
                 retdict[var.name] = var.string.strip() if var.string else None
     return retdict
 
+
 def _create_code_rows(var):
     rows = []
     for cat in var('catgry', text=False, recursive=False):
@@ -111,6 +104,7 @@ def _create_code_rows(var):
         catdict['catStat'] = cat.catStat.string if cat.catStat else None
         rows.append(catdict)
     return rows
+
 
 def _get_headers():
     longest_els = ['ID',
@@ -132,13 +126,16 @@ def _get_headers():
                    'txt']
     return longest_els
 
+
 def _is_fsd(url):
     if 'fsd.uta.fi' in url:
         return True
     return False
 
+
 def _access_request_URL_is_found():
     return False
+
 
 def ExceptReturn(exception, returns):
     '''
@@ -207,6 +204,7 @@ def _future_keywords_to_labels_urls_implementation():
                 pkgtag = model.PackageTag(tag=tag_obj, package=pkg)
                 pkgtag.save()  # Avoids duplicates if tags has duplicates.
 
+
 def _save_original_xml_and_link_as_resources(original_xml, pkg, update=False):
     if not update:
         # JuhoL: Here is created a ofs storage ie. local pairtree storage for
@@ -237,6 +235,7 @@ def _save_original_xml_and_link_as_resources(original_xml, pkg, update=False):
                          description=title,
                          format='html')
     return True
+
 
 def _save_ddi_variables_to_csv(ddi_xml, pkg, update=True):
     # JuhoL: Handle codeBook.dataDscr parts, extract data (eg. questionnaire)
@@ -295,6 +294,7 @@ def _save_ddi_variables_to_csv(ddi_xml, pkg, update=True):
             metas.append(var['labl'] if 'labl' in var else var['qstnLit'])
     return flattened_var_labels
 
+
 def _create_group_based_on_organizations():
     # JuhoL: Create groups
     # for organizations extracted. Is this wanted? Check
@@ -317,8 +317,11 @@ def _create_group_based_on_organizations():
             group.add_package_by_name(pkg.name)
             authz.setup_default_user_roles(group)
 
+
 def _last_statements_to_rewrite():
     # JuhoL: Add also some basic fields to pkg.extras. Why?
+    # MikkoK: Parsing to extras not needed with _create_or_update_package().
+
     if stdy_dscr.citation.distStmt.distrbtr:
         pkg.extras['publisher'] = stdy_dscr.citation.distStmt.distrbtr.string
 
@@ -353,244 +356,270 @@ def _last_statements_to_rewrite():
         lastidx = lastidx + 1
 
 
-def _read_value(bs_eval_string, default=u'', mandatory_field=False):
-    '''
-    Read from Beautiful Soup object's partially applied method.
-    Returns default if no output received from given method, else return the method's output.
-    '''
-    try:
-        output = eval(bs_eval_string)
-        return output
-    except AttributeError, err:
-        log.debug('Unable to read value: {path}'.format(path=bs_eval_string))
-        # TODO: Save errors to dict if mandatory field
-        return default
+class DataConverter:
 
+    def __init__(self):
+        self.ddi_xml = None
+        self.errors = []
 
-#@ExceptReturn(exception=(AttributeError, ), returns=False)
-def _ddi2ckan(ddi_xml, original_url, original_xml, harvest_object):
-    # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
-    # TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.
+    def ddi2ckan(self, data, original_url=None, original_xml=None, harvest_object=None):
+        try:
+            self.ddi_xml = data
+            return self._ddi2ckan(original_url, original_xml, harvest_object)
+        #except AttributeError:
+        #    raise
+        except Exception as e:
+            log.debug(traceback.format_exc(e))
+        return False
 
-    # TODO: Don't use globals
-    global doc_citation
-    global stdy_dscr
-    doc_citation = ddi_xml.codeBook.docDscr.citation
-    stdy_dscr = ddi_xml.codeBook.stdyDscr
+    def _read_value(self, bs_eval_string, default=u'', mandatory_field=False):
+        '''
+        Evaluate values from Beautiful Soup objects.
+        Returns default if evaluation failed, else return the evaluated output.
+        '''
+        # Make sure we are using class variables
+        eval_string = bs_eval_string if bs_eval_string.startswith('self.') else 'self.' + bs_eval_string
 
+        try:
+            output = eval(eval_string)
+            return output
+        except AttributeError, err:
+            log.debug('Unable to read value: {path}'.format(path=bs_eval_string))
+            if mandatory_field:
+                # TODO: Save errors to dict if mandatory field
+                self.errors.append('Unable to read mandatory field: {path}'.format(path=bs_eval_string))
+            return default
 
-    # Try and raise exception for mandatory minimum metadata fields.
-    try:
-        debug_pos = 0
+    def _get_events(self, stdy_dscr, orgauth):
+        '''
+        Parse data into events from DDI fields
+        '''
+        evdescr = []
+        evtype = []
+        evwhen = []
+        evwho = []
+
+        # Event: Collection
+        ev_type_collect = self._read_value(stdy_dscr + ".stdyInfo.sumDscr('collDate', event='start')")
+        data_collector = self._read_value(stdy_dscr + ".method.dataColl('dataCollector')")
+        data_coll_string = u''
+        for d in data_collector:
+            data_coll_string += '; ' + (d.text)
+        data_coll_string = data_coll_string[2:]
+        for collection in ev_type_collect:
+            evdescr.append({'value': u'Event automatically created at import.'})
+            evtype.append({'value': u'collection'})
+            evwhen.append({'value': collection.get('date')})
+            evwho.append({'value': data_coll_string})
+
+        # Event: Creation (eg. Published in publication)
+        ev_type_create = self._read_value(stdy_dscr + ".citation.prodStmt.prodDate.text")
+        data_creators = [ a['value'] for a in orgauth ]
+        data_creator_string = '; '.join(data_creators)
+        evdescr.append({'value': u'Event automatically created at import.'})
+        evtype.append({'value': u'creation'})
+        evwhen.append({'value': ev_type_create})
+        evwho.append({'value': data_creator_string})
+        # TODO: Event: Published (eg. Deposited to some public access archive)
+
+        return (evdescr, evtype, evwhen, evwho)
+
+    #@ExceptReturn(exception=(AttributeError, ), returns=False)
+    def _ddi2ckan(self, original_url, original_xml, harvest_object):
+        # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
+        # TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.
+
+        #self.doc_citation = ddi_xml.codeBook.docDscr.citation
+        #self.stdy_dscr = ddi_xml.codeBook.stdyDscr
+        doc_citation = "ddi_xml.codeBook.docDscr.citation"
+        stdy_dscr = "ddi_xml.codeBook.stdyDscr"
+
         # Authors & organizations
-        auth_entys = stdy_dscr.citation.rspStmt('AuthEnty')
+        auth_entys = self._read_value(stdy_dscr + ".citation.rspStmt('AuthEnty')", mandatory_field=True)
+        #auth_entys = self.stdy_dscr.citation.rspStmt('AuthEnty')
         orgauth = []
         for a in auth_entys:
             orgauth.append({'org': a.get('affiliation'), 'value': a.text})
-        debug_pos = 1
+
         # Availability
         availability = AVAILABILITY_DEFAULT
-        if _access_request_URL_is_found:
+        if _access_request_URL_is_found():
             availability = 'direct_download'
         if _is_fsd(original_url):
             availability = AVAILABILITY_FSD
-        debug_pos = 2
+
         # Keywords
-        keywords = stdy_dscr.stdyInfo.subject.get_text(',', strip=True)
-        debug_pos = 3
+        keywords = self._read_value(stdy_dscr + ".stdyInfo.subject.get_text(',', strip=True)", mandatory_field=True)
+
         # Language
         # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
-        language = ddi_xml.codeBook.get('xml:lang')
+        language = self._read_value("ddi_xml.codeBook.get('xml:lang')", mandatory_field=True)
 
         # Titles
-        langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in stdy_dscr.citation.titlStmt(['titl', 'parTitl'])]
-        if not langtitle[0]['value']:
-            langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in doc_citation.titlStmt(['titl', 'parTitl'])]
-        debug_pos = 4
+        titles = self._read_value(stdy_dscr + ".citation.titlStmt(['titl', 'parTitl'])", mandatory_field=False)
+        if not titles:
+            titles =  self._read_value(doc_citation + ".titlStmt(['titl', 'parTitl'])", mandatory_field=True)
+
+        langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in titles]
+
         # License
         # TODO: Extract prettier output. Should we check that element contains something?
-        license_URL = stdy_dscr.dataAccs.useStmt.get_text(separator=u' ')
+        license_url = self._read_value(stdy_dscr + ".dataAccs.useStmt.get_text(separator=u' ')", mandatory_field=False)
         if _is_fsd(original_url):
             license_id = LICENCE_ID_FSD
         else:
             license_id = LICENCE_ID_DEFAULT
 
-        debug_pos = 5
-        # Maintainer
-        maintainer = stdy_dscr.citation.distStmt('contact') or \
-                     stdy_dscr.citation.distStmt('distrbtr') or \
-                     doc_citation.prodStmt('producer')
+        # Publisher (maintainer in database)
+        maintainer = self._read_value(stdy_dscr + ".citation.distStmt('contact')", mandatory_field=False) or \
+                     self._read_value(stdy_dscr + ".citation.distStmt('distrbtr')", mandatory_field=False) or \
+                     self._read_value(doc_citation + ".prodStmt('producer')", mandatory_field=True)
         if maintainer and maintainer[0].text:
             maintainer = maintainer[0].text
         else:
-            maintainer = stdy_dscr.citation.prodStmt.producer.get('affiliation')
+            maintainer = self._read_value(stdy_dscr + ".citation.prodStmt.producer.get('affiliation')", mandatory_field=True)
         if _is_fsd(original_url) or 'misanthropy.kapsi.fi' in original_url:  # DEBUG, remove after 'or'
             maintainer_email = MAINTAINER_EMAIL_FSD
             # TODO: Allow trying other email also in FSD metadata
         else:
-            maintainer_email = stdy_dscr.citation.distStmt.contact.get('email')
-        debug_pos = 6
+            maintainer_email = self._read_value(stdy_dscr + ".citation.distStmt.contact.get('email')", mandatory_field=True)
+
         # Modified date
-        version = stdy_dscr.citation('prodDate') or \
-                  stdy_dscr.citation('depDate')
+        version = self._read_value(stdy_dscr + ".citation('prodDate')", mandatory_field=False) or \
+                  self._read_value(stdy_dscr + ".citation('depDate')", mandatory_field=True)
         version = version[0].get('date')
-        debug_pos = 7
+
         # Name
-        name = stdy_dscr.citation.titlStmt.IDNo.get('agency') + \
-               stdy_dscr.citation.titlStmt.IDNo.string
-        if not stdy_dscr.citation.titlStmt.IDNo.string:
-            name = doc_citation.titlStmt.IDNo.get('agency') + \
-                   doc_citation.titlStmt.IDNo.string
-            # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
-            # same harvest object at each reharvest
-            # name = utils.generate_pid()
+        name_prefix = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.get('agency')", mandatory_field=False)
+        name_id = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.string", mandatory_field=False)
+
+        if not name_prefix:
+            name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo.get('agency')", mandatory_field=True)
+
+        if not name_id:
+            self._read_value(doc_citation + ".titlStmt.IDNo.string", mandatory_field=True)
+
+        # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
+        # same harvest object at each reharvest
+        # name = utils.generate_pid()
+        name = name_prefix + name_id
         log.debug('Name: {namn}'.format(namn=name))
-        debug_pos = 8
+
         # Owner
-        owner = stdy_dscr.citation.prodStmt.producer.string or \
-                stdy_dscr.citation.rspStmt.AuthEnty.string or \
-                doc_citation.prodStmt.producer.string
-    except AttributeError, err:
-        # TODO: Write 'try' above more generally and add FSD specific eg. here
-        log.debug('DEBUG_POS: {dp}'.format(dp=debug_pos))
-        #raise
-        return False
+        owner = self._read_value(stdy_dscr + ".citation.prodStmt.producer.string") or \
+                self._read_value(stdy_dscr + ".citation.rspStmt.AuthEnty.string") or \
+                self._read_value(doc_citation + ".prodStmt.producer.string", mandatory_field=True)
 
 
-    # Read optional metadata fields:
+        # Read optional metadata fields:
 
-    # Availability
-    if _is_fsd(original_url):
-        access_request_URL=ACCESS_REQUEST_URL_FSD
-    else:
-        access_request_URL=u''
+        # Availability
+        if _is_fsd(original_url):
+            access_request_url=ACCESS_REQUEST_URL_FSD
+        else:
+            access_request_url=u''
 
-    # Contact
-    contact_phone = _read_value("doc_citation.holdings.get('callno')") or \
-                    _read_value("stdy_dscr.citation.holdings.get('callno')")
+        # Contact
+        contact_phone = self._read_value(doc_citation + ".holdings.get('callno')") or \
+                        self._read_value(stdy_dscr + ".citation.holdings.get('callno')")
 
-    contact_URL = _read_value( "stdy_dscr.dataAccs.setAvail.accsPlac.get('URI')") or \
-                  _read_value( "stdy_dscr.citation.distStmt.contact.get('URI')") or \
-                  _read_value( "stdy_dscr.citation.distStmt.distrbtr.get('URI')")
+        contact_URL = self._read_value( stdy_dscr + ".dataAccs.setAvail.accsPlac.get('URI')") or \
+                      self._read_value( stdy_dscr + ".citation.distStmt.contact.get('URI')") or \
+                      self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')")
 
-    # Description
-    if stdy_dscr.stdyInfo.abstract:
-        description_array = _read_value("stdy_dscr.stdyInfo.abstract('p')")
-    else:
-        description_array = _read_value("stdy_dscr.citation.serStmt.serInfo('p')")
+        # Description
+        description_array = self._read_value(stdy_dscr + ".stdyInfo.abstract('p')")
+        if not description_array:
+            description_array = self._read_value(stdy_dscr + ".citation.serStmt.serInfo('p')")
 
-    notes = '\r\n\r\n'.join([description.string for
-                           description in description_array])
+        notes = '\r\n\r\n'.join([description.string for
+                               description in description_array])
 
-    # Events - initialize values
-    evdescr = []
-    evtype = []
-    evwhen = []
-    evwho = []
+        evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
 
-    # Event: Collection
-    ev_type_collect = _read_value("stdy_dscr.stdyInfo.sumDscr('collDate', event='start')")
-    data_collector = _read_value("stdy_dscr.method.dataColl('dataCollector')")
-    data_coll_string = u''
-    for d in data_collector:
-        data_coll_string += '; ' + (d.text)
-    data_coll_string = data_coll_string[2:]
-    for collection in ev_type_collect:
-        evdescr.append({'value': u'Event automatically created at import.'})
-        evtype.append({'value': u'collection'})
-        evwhen.append({'value': collection.get('date')})
-        evwho.append({'value': data_coll_string})
+        # Flatten rest to 'XPath/path/to/element': 'value' pairs
+        # TODO: Result is large, review.
+        etree_xml = etree.fromstring(original_xml)
+        #lroot = etree_xml.getroot()
+        flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}docDscr'))
+        xpath_dict = flattened_ddi.getMap()
+        flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
+        xpath_dict.update(flattened_ddi.getMap())
 
-    # Event: Creation (eg. Published in publication)
-    ev_type_create = _read_value("stdy_dscr.citation.prodStmt.prodDate.text")
-    data_creators = [ a['value'] for a in orgauth ]
-    data_creator_string = '; '.join(data_creators)
-    evdescr.append({'value': u'Event automatically created at import.'})
-    evtype.append({'value': u'creation'})
-    evwhen.append({'value': ev_type_create})
-    evwho.append({'value': data_creator_string})
-    # TODO: Event: Published (eg. Deposited to some public access archive)
-
-
-    # Flatten rest to 'XPath/path/to/element': 'value' pairs
-    # TODO: Result is large, review.
-    etree_xml = etree.fromstring(original_xml)
-    #lroot = etree_xml.getroot()
-    flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}docDscr'))
-    xpath_dict = flattened_ddi.getMap()
-    flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
-    xpath_dict.update(flattened_ddi.getMap())
-
-    package_dict = dict(
-        access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
-        access_request_URL=access_request_URL,
-        # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
-        availability=availability,
-        contact_phone=contact_phone,
-        contact_URL=contact_URL,
-        # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
-        discipline=u'Tilastotiede',
-        evdescr=evdescr or [],
-        evtype=evtype or [],
-        evwhen=evwhen or [],
-        evwho=evwho or [],
-        geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
-        groups=[],
-        id=u'',
-        langtitle=langtitle,
-        langdis=u'True',  ### HUOMAA!
-        language=language,
-        license_URL=license_URL,
-        license_id=license_id,
-        maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
-        maintainer_email=maintainer_email,
-        # mimetype=u'application/csv',  ## To be implemented straight in 'resources
-        name=name,
-        notes=notes or u'',
-        orgauth=orgauth,
-        owner=owner,
-        projdis=u'True',   ### HUOMAA!
-        project_funder=u'Roope Rahoittaja',
-        project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
-        project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
-        project_name=u'Rahoittajan Projekti',
-        resources=[{'algorithm': u'MD5',
-                    'hash': u'f60e586509d99944e2d62f31979a802f',
-                    'mimetype': u'application/csv',
-                    'resource_type': 'dataset',
-                    'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
-                   {'algorithm': u'',
-                    'hash': u'',
-                    'mimetype': u'',
-                    'resource_type': 'dataset',
-                    'url': u''}],
-        tag_string=keywords,
-        temporal_coverage_begin=u'1976-11-06T00:00:00Z',
-        temporal_coverage_end=u'2003-11-06T00:00:00Z',
-        version=version,
-        version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
-    )
-    package_dict['extras'] = flattened_ddi
-    #package_dict['extras'].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))
+        package_dict = dict(
+            access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
+            access_request_URL=access_request_url,
+            # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
+            availability=availability,
+            contact_phone=contact_phone,
+            contact_URL=contact_URL,
+            # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
+            discipline=u'Tilastotiede',
+            evdescr=evdescr or [],
+            evtype=evtype or [],
+            evwhen=evwhen or [],
+            evwho=evwho or [],
+            geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
+            groups=[],
+            id=u'',
+            langtitle=langtitle,
+            langdis=u'True',  ### HUOMAA!
+            language=language,
+            license_URL=license_url,
+            license_id=license_id,
+            maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
+            maintainer_email=maintainer_email,
+            # mimetype=u'application/csv',  ## To be implemented straight in 'resources
+            name=name,
+            notes=notes or u'',
+            orgauth=orgauth,
+            owner=owner,
+            projdis=u'True',   ### HUOMAA!
+            project_funder=u'Roope Rahoittaja',
+            project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
+            project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
+            project_name=u'Rahoittajan Projekti',
+            resources=[{'algorithm': u'MD5',
+                        'hash': u'f60e586509d99944e2d62f31979a802f',
+                        'mimetype': u'application/csv',
+                        'resource_type': 'dataset',
+                        'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
+                       {'algorithm': u'',
+                        'hash': u'',
+                        'mimetype': u'',
+                        'resource_type': 'dataset',
+                        'url': u''}],
+            tag_string=keywords,
+            temporal_coverage_begin=u'1976-11-06T00:00:00Z',
+            temporal_coverage_end=u'2003-11-06T00:00:00Z',
+            #title='dummy',   # MikkoK: must have some value?
+            version=version,
+            version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
+        )
+        package_dict['extras'] = flattened_ddi
+        #package_dict['extras'].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))
 
 
-    # Vanhojen koodien järjestys:
-    #_save_original_xml_and_link_as_resources()
-    #_save_ddi_variables_to_csv()
-    #_create_group_based_on_organizations()
-    #_last_statements_to_rewrite()
+        # Vanhojen koodien järjestys:
+        #_save_original_xml_and_link_as_resources()
+        #_save_ddi_variables_to_csv()
+        #_create_group_based_on_organizations()
+        #_last_statements_to_rewrite()
 
-    # JuhoL: Set harvest object to some end state and commit
-    if harvest_object != None:
-        #harvest_object.package_id = pkg.id
-        harvest_object.content = None
-        harvest_object.current = True
-    #model.repo.commit()
-    #return pkg.id
+        # JuhoL: Set harvest object to some end state and commit
+        if harvest_object != None:
+            #harvest_object.package_id = pkg.id
+            harvest_object.content = None
+            harvest_object.current = True
+        #model.repo.commit()
+        #return pkg.id
 
-    # TODO: Check if we received errors from parsing minimum metadata model fields and throw an exception if so.
+        # TODO: Check if we received errors from parsing minimum metadata model fields and throw an exception if so.
 
-    return package_dict
+        if self.errors:
+            raise FieldMissingException(tuple(self.errors))
+
+        return package_dict
 
 
 #def ddi32ckan(ddi_xml, original_xml, original_url=None, harvest_object=None):

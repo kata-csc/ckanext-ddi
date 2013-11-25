@@ -29,7 +29,7 @@ from ckan.model.authz import setup_default_user_roles
 from ckanext.harvest.harvesters.base import HarvesterBase
 #from ckanext.harvest.harvesters.retry import HarvesterRetry
 from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
-from dataconverter import ddi2ckan
+from dataconverter import DataConverter, FieldMissingException
 
 import traceback
 
@@ -43,6 +43,9 @@ class DDIHarvester(HarvesterBase):
     DDI Harvester for ckanext-harvester.
     '''
     config = None
+
+    def __init__(self):
+        self.ddi_converter = DataConverter()
 
     def _set_config(self, config_str):
         '''Set the configuration string.
@@ -230,9 +233,11 @@ class DDIHarvester(HarvesterBase):
             harvest_object.content = info['url']
             #            self._add_retry(harvest_object)
             return False
-        #try:
 
-        package_dict = ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
+        try:
+            package_dict = self.ddi_converter.ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
+        except FieldMissingException as field_missing:
+            log.error(field_missing.message)
 
         #except HarvestObjectError, hoe:
         #    self._save_object_error('No identifiable field for object {ho}'
@@ -257,6 +262,7 @@ class DDIHarvester(HarvesterBase):
         if not package_dict:
             return False
 
+        #pprint.pprint(package_dict)
         result = self._create_or_update_package(package_dict, harvest_object)
         log.debug("Exiting import_stage()")
         return result  # returns True
@@ -267,7 +273,7 @@ class DDIHarvester(HarvesterBase):
         except etree.XMLSyntaxError:
             log.debug('Unable to parse XML!')
             return False
-        return ddi2ckan(ddi_xml, None, xml)
+        return self.ddi_converter.ddi2ckan(ddi_xml, None, xml)
 
 #
 #class DDI3Harvester(HarvesterBase):
