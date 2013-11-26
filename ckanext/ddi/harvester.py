@@ -176,7 +176,7 @@ class DDIHarvester(HarvesterBase):
         except urllib2.URLError, err:
             self._save_gather_error(
                 'URLError: Could not gather XML files from URL! ' +
-                'Error: {er}, urls: {ur}'.format(er=err.reason, ur=urls),
+                'Error: {er}, urls: {ur}'.format(er=err.reason, ur=harvest_job.source.url),
                 harvest_job)
             return None
         except Exception as e:
@@ -215,6 +215,7 @@ class DDIHarvester(HarvesterBase):
         # Serialize harvest_object.content
         #log.debug('harvest_object: {ho}'.format(
         #    ho=pprint.pformat(dir(harvest_object))))
+        # TODO: cPickle might be faster
         info = pickle.loads(harvest_object.content)
         log.debug('pickled harvest_object.content: {po}'.format(
             po=pprint.pformat(info.keys())))

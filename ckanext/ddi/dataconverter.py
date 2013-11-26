@@ -491,13 +491,13 @@ class DataConverter:
 
         # Name
         name_prefix = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.get('agency')", mandatory_field=False)
-        name_id = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.string", mandatory_field=False)
+        name_id = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.text", mandatory_field=False)
 
         if not name_prefix:
             name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo.get('agency')", mandatory_field=True)
 
         if not name_id:
-            self._read_value(doc_citation + ".titlStmt.IDNo.string", mandatory_field=True)
+            self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
 
         # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
         # same harvest object at each reharvest
@@ -506,8 +506,8 @@ class DataConverter:
         log.debug('Name: {namn}'.format(namn=name))
 
         # Owner
-        owner = self._read_value(stdy_dscr + ".citation.prodStmt.producer.string") or \
-                self._read_value(stdy_dscr + ".citation.rspStmt.AuthEnty.string") or \
+        owner = self._read_value(stdy_dscr + ".citation.prodStmt.producer.text") or \
+                self._read_value(stdy_dscr + ".citation.rspStmt.AuthEnty.text") or \
                 self._read_value(doc_citation + ".prodStmt.producer.string", mandatory_field=True)
 
 
@@ -548,11 +548,11 @@ class DataConverter:
 
         package_dict = dict(
             access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
-            access_request_URL=access_request_url,
+            access_request_URL=unicode(access_request_url),
             # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
-            availability=availability,
-            contact_phone=contact_phone,
-            contact_URL=contact_URL,
+            availability=unicode(availability),
+            contact_phone=unicode(contact_phone),
+            contact_URL=unicode(contact_URL),
             # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
             discipline=u'Tilastotiede',
             evdescr=evdescr or [],
@@ -561,7 +561,7 @@ class DataConverter:
             evwho=evwho or [],
             geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
             groups=[],
-            id=u'',
+            id=name,
             langtitle=langtitle,
             langdis=u'True',  ### HUOMAA!
             language=language,
@@ -592,11 +592,11 @@ class DataConverter:
             tag_string=keywords,
             temporal_coverage_begin=u'1976-11-06T00:00:00Z',
             temporal_coverage_end=u'2003-11-06T00:00:00Z',
-            #title='dummy',   # MikkoK: must have some value?
+            title='',   # MikkoK: must have some value?
             version=version,
             version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
         )
-        package_dict['extras'] = flattened_ddi
+        #package_dict['extras'] = flattened_ddi
         #package_dict['extras'].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))
 
 
