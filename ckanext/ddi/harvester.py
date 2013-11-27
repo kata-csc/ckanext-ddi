@@ -24,12 +24,13 @@ import unicodecsv as csv
 from ckan.controllers.storage import BUCKET, get_ofs
 from ckan.lib.base import h
 from ckan.lib.munge import munge_tag
+from ckan.logic import ValidationError
 import ckan.model as model
 from ckan.model.authz import setup_default_user_roles
 from ckanext.harvest.harvesters.base import HarvesterBase
 #from ckanext.harvest.harvesters.retry import HarvesterRetry
 from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
-from dataconverter import DataConverter, FieldMissingException
+from dataconverter import DataConverter
 
 from ckanext.kata.plugin import KataPlugin
 
@@ -237,10 +238,7 @@ class DDIHarvester(HarvesterBase):
             #            self._add_retry(harvest_object)
             return False
 
-        try:
-            package_dict = self.ddi_converter.ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
-        except FieldMissingException as field_missing:
-            log.error(field_missing.message)
+        package_dict = self.ddi_converter.ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
 
         #except HarvestObjectError, hoe:
         #    self._save_object_error('No identifiable field for object {ho}'
@@ -262,12 +260,21 @@ class DDIHarvester(HarvesterBase):
         #                            'Import')
         #return pkgid
 
+        errors = self.ddi_converter.get_errors()
+        if errors:
+            for err in errors:
+                self._save_object_error('Missing minimum metadata in {ur}.\n'
+                                        'AttributeError: {er}'
+                                        .format(ur=info['url'], er=err), harvest_object,
+                                        'Import')
+
         if not package_dict:
             return False
 
         #pprint.pprint(package_dict)
         #result = self._create_or_update_package(package_dict, harvest_object)
         result = self._create_or_update_package(package_dict, harvest_object, schema=KataPlugin.create_package_schema())
+
         log.debug("Exiting import_stage()")
         return result  # returns True
 
