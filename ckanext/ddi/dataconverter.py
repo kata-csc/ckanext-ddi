@@ -472,7 +472,7 @@ class DataConverter:
 
         # Language
         # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
-        language = self.convert_language(self._read_value("ddi_xml.codeBook.get('xml:lang')", mandatory_field=True))
+        language = self.convert_language(self._read_value("ddi_xml.codeBook.get('xml:lang')"))
 
         # Titles
         titles = self._read_value(stdy_dscr + ".citation.titlStmt(['titl', 'parTitl'])", mandatory_field=False)
