@@ -555,6 +555,10 @@ class DataConverter:
         notes = '\r\n\r\n'.join([description.string for
                                description in description_array])
 
+        # Discipline
+        discipline_list = self._read_value(stdy_dscr + ".stdyInfo.subject('topcClas', vocab='FSD')", mandatory_field=False)
+        discipline = ','.join([ tag.text for tag in discipline_list ])
+
         evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
 
         # Flatten rest to 'XPath/path/to/element': 'value' pairs
@@ -574,7 +578,7 @@ class DataConverter:
             #contact_phone=unicode(contact_phone),
             contact_URL=unicode(contact_URL),
             # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
-            #discipline=u'Tilastotiede',
+            discipline=discipline,
             evdescr=evdescr or [],
             evtype=evtype or [],
             evwhen=evwhen or [],
