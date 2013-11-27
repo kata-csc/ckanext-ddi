@@ -362,6 +362,9 @@ class DataConverter:
         self.errors = []
 
     def ddi2ckan(self, data, original_url=None, original_xml=None, harvest_object=None):
+        '''
+        Read DDI2 data and convert it to CKAN format.
+        '''
         try:
             self.ddi_xml = data
             return self._ddi2ckan(original_url, original_xml, harvest_object)
@@ -382,13 +385,16 @@ class DataConverter:
         try:
             output = eval(eval_string)
             return output
-        except AttributeError, err:
+        except (AttributeError, TypeError):
             log.debug('Unable to read value: {path}'.format(path=bs_eval_string))
             if mandatory_field:
                 self.errors.append('Unable to read mandatory field: {path}'.format(path=bs_eval_string))
             return default
 
     def get_errors(self):
+        '''
+        Return errors found in instance's data parsing.
+        '''
         return self.errors
 
     def _get_events(self, stdy_dscr, orgauth):
