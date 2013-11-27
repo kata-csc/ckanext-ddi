@@ -30,6 +30,8 @@ import ckanext.oaipmh.importcore as importcore
 import traceback
 import pprint
 
+from ckanext.kata.utils import generate_pid
+
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
 
@@ -562,7 +564,7 @@ class DataConverter:
             evwho=evwho or [],
             geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
             groups=[],
-            id=name,
+            id=generate_pid(),
             langtitle=langtitle,
             langdis=u'True',  ### HUOMAA!
             #language=language,
@@ -571,7 +573,7 @@ class DataConverter:
             maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
             maintainer_email=maintainer_email,
             # mimetype=u'application/csv',  ## To be implemented straight in 'resources
-            name=name,
+            name=filter(unicode.isalnum, name).lower(),
             notes=notes or u'',
             orgauth=orgauth,
             owner=owner,
@@ -580,21 +582,21 @@ class DataConverter:
             project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
             project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
             project_name=u'Rahoittajan Projekti',
-            resources=[{'algorithm': u'MD5',
-                        'hash': u'f60e586509d99944e2d62f31979a802f',
-                        'mimetype': u'application/csv',
-                        'resource_type': 'dataset',
-                        'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
-                       {'algorithm': u'',
-                        'hash': u'',
-                        'mimetype': u'',
-                        'resource_type': 'dataset',
-                        'url': u''}],
+            #resources=[{'algorithm': u'MD5',
+            #            'hash': u'f60e586509d99944e2d62f31979a802f',
+            #            'mimetype': u'application/csv',
+            #            'resource_type': 'dataset',
+            #            'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
+            #           {'algorithm': u'',
+            #            'hash': u'',
+            #            'mimetype': u'',
+            #            'resource_type': 'dataset',
+            #            'url': u''}],
             tag_string=keywords,
             temporal_coverage_begin=u'1976-11-06T00:00:00Z',
             temporal_coverage_end=u'2003-11-06T00:00:00Z',
             title='',   # Must exist in package dict
-            type='dataset',
+            #type='dataset',
             version=version,
             version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
         )
