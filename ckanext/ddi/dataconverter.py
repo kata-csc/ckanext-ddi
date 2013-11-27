@@ -27,6 +27,7 @@ import ckanext.harvest.model as hmodel
 import ckanext.kata.utils as utils
 import ckanext.oaipmh.importcore as importcore
 
+import pycountry
 import traceback
 import pprint
 
@@ -45,10 +46,6 @@ AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
 ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.html'
 LICENCE_ID_FSD = 'other_closed'
 MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
-
-
-class FieldMissingException(Exception):
-    pass
 
 
 def _collect_attribs(el):
@@ -388,9 +385,11 @@ class DataConverter:
         except AttributeError, err:
             log.debug('Unable to read value: {path}'.format(path=bs_eval_string))
             if mandatory_field:
-                # TODO: Save errors to dict if mandatory field
                 self.errors.append('Unable to read mandatory field: {path}'.format(path=bs_eval_string))
             return default
+
+    def get_errors(self):
+        return self.errors
 
     def _get_events(self, stdy_dscr, orgauth):
         '''
@@ -426,6 +425,18 @@ class DataConverter:
 
         return (evdescr, evtype, evwhen, evwho)
 
+    def convert_language(self, lang):
+        '''
+        Convert alpha2 language (eg. 'en') to terminology language (eg. 'eng')
+        '''
+        try:
+            lang_object = pycountry.languages.get(alpha2=lang)
+            return lang_object.terminology
+        except KeyError as ke:
+            # TODO: Parse ISO 639-2 B/T ?
+            log.debug('Invalid language: {ke}'.format(ke=ke))
+            return ''
+
     #@ExceptReturn(exception=(AttributeError, ), returns=False)
     def _ddi2ckan(self, original_url, original_xml, harvest_object):
         # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
@@ -455,15 +466,15 @@ class DataConverter:
 
         # Language
         # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
-        language = self._read_value("ddi_xml.codeBook.get('xml:lang')", mandatory_field=True)
+        language = self.convert_language(self._read_value("ddi_xml.codeBook.get('xml:lang')", mandatory_field=True))
 
         # Titles
         titles = self._read_value(stdy_dscr + ".citation.titlStmt(['titl', 'parTitl'])", mandatory_field=False)
         if not titles:
             titles =  self._read_value(doc_citation + ".titlStmt(['titl', 'parTitl'])", mandatory_field=True)
 
-        #langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in titles]
-        langtitle=[dict(lang='fin', value=a.text) for a in titles]
+        langtitle=[dict(lang=self.convert_language(a.get('xml:lang', '')), value=a.text) for a in titles]
+        #langtitle=[dict(lang='fin', value=a.text) for a in titles]
 
         # License
         # TODO: Extract prettier output. Should we check that element contains something?
@@ -557,7 +568,7 @@ class DataConverter:
             #contact_phone=unicode(contact_phone),
             contact_URL=unicode(contact_URL),
             # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
-            discipline=u'Tilastotiede',
+            #discipline=u'Tilastotiede',
             evdescr=evdescr or [],
             evtype=evtype or [],
             evwhen=evwhen or [],
@@ -567,13 +578,13 @@ class DataConverter:
             id=generate_pid(),
             langtitle=langtitle,
             langdis=u'True',  ### HUOMAA!
-            #language=language,
+            language=language,
             license_URL=license_url,
             license_id=license_id,
             maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
             maintainer_email=maintainer_email,
             # mimetype=u'application/csv',  ## To be implemented straight in 'resources
-            name=filter(unicode.isalnum, name).lower(),
+            name=name,
             notes=notes or u'',
             orgauth=orgauth,
             owner=owner,
@@ -595,7 +606,7 @@ class DataConverter:
             tag_string=keywords,
             temporal_coverage_begin=u'1976-11-06T00:00:00Z',
             temporal_coverage_end=u'2003-11-06T00:00:00Z',
-            title='',   # Must exist in package dict
+            title=langtitle[0].get('value'),   # Must exist in package dict
             #type='dataset',
             version=version,
             version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
@@ -617,11 +628,6 @@ class DataConverter:
             harvest_object.current = True
         #model.repo.commit()
         #return pkg.id
-
-        # TODO: Check if we received errors from parsing minimum metadata model fields and throw an exception if so.
-
-        if self.errors:
-            raise FieldMissingException(tuple(self.errors))
 
         return package_dict
 
