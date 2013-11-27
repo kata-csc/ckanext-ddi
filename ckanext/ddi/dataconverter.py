@@ -460,7 +460,8 @@ class DataConverter:
         if not titles:
             titles =  self._read_value(doc_citation + ".titlStmt(['titl', 'parTitl'])", mandatory_field=True)
 
-        langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in titles]
+        #langtitle=[dict(lang=a.get('xml:lang', ''), value=a.text) for a in titles]
+        langtitle=[dict(lang='fin', value=a.text) for a in titles]
 
         # License
         # TODO: Extract prettier output. Should we check that element contains something?
@@ -551,7 +552,7 @@ class DataConverter:
             access_request_URL=unicode(access_request_url),
             # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
             availability=unicode(availability),
-            contact_phone=unicode(contact_phone),
+            #contact_phone=unicode(contact_phone),
             contact_URL=unicode(contact_URL),
             # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
             discipline=u'Tilastotiede',
@@ -564,7 +565,7 @@ class DataConverter:
             id=name,
             langtitle=langtitle,
             langdis=u'True',  ### HUOMAA!
-            language=language,
+            #language=language,
             license_URL=license_url,
             license_id=license_id,
             maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
@@ -574,7 +575,7 @@ class DataConverter:
             notes=notes or u'',
             orgauth=orgauth,
             owner=owner,
-            projdis=u'True',   ### HUOMAA!
+            projdis=u'False',   ### HUOMAA!
             project_funder=u'Roope Rahoittaja',
             project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
             project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
@@ -592,7 +593,8 @@ class DataConverter:
             tag_string=keywords,
             temporal_coverage_begin=u'1976-11-06T00:00:00Z',
             temporal_coverage_end=u'2003-11-06T00:00:00Z',
-            title='',   # MikkoK: must have some value?
+            title='',   # Must exist in package dict
+            type='dataset',
             version=version,
             version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
         )

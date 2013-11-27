@@ -31,6 +31,8 @@ from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
 from dataconverter import DataConverter, FieldMissingException
 
+from ckanext.kata.plugin import KataPlugin
+
 import traceback
 
 log = logging.getLogger(__name__)
@@ -264,7 +266,8 @@ class DDIHarvester(HarvesterBase):
             return False
 
         #pprint.pprint(package_dict)
-        result = self._create_or_update_package(package_dict, harvest_object)
+        #result = self._create_or_update_package(package_dict, harvest_object)
+        result = self._create_or_update_package(package_dict, harvest_object, schema=KataPlugin.create_package_schema())
         log.debug("Exiting import_stage()")
         return result  # returns True
 
