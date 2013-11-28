@@ -17,7 +17,7 @@ import bs4
 from pylons import config
 import unicodecsv as csv
 
-from ckan.controllers.storage import BUCKET, get_ofs
+import ckan.controllers.storage as storage
 from ckan.lib.base import h
 import ckan.model as model
 import ckan.model.authz as authz
@@ -204,96 +204,6 @@ def _future_keywords_to_labels_urls_implementation():
                 pkgtag.save()  # Avoids duplicates if tags has duplicates.
 
 
-def _save_original_xml_and_link_as_resources(original_xml, pkg, update=False):
-    if not update:
-        # JuhoL: Here is created a ofs storage ie. local pairtree storage for
-        # objects/blobs (eg. /opt/data/ckan/data_tree). The original xml is
-        # saved to this local storage (eg.
-        # /opt/data/ckan/data_tree/pairtree_root//de/fa/ul/t/obj/2013-11-05T18\:10\:19.686858/FSD1049.xml).
-        # The original xml is accessible at:
-        # <ckan_url>/storage/f/2013-11-05T18%3A10%3A19.686858/FSD1049.xml
-
-        # This presumes that resources have not changed. Wrong? If something
-        # has changed then technically the XML has changed and hence this may
-        # have to "delete" old resources and then add new ones.
-        # JuhoL: Yes, existing resources should be overwritten?
-        ofs = get_ofs()
-        nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
-        idno = stdy_dscr.citation.titlStmt.IDNo
-        agencyxml = idno.get('agency', '') + idno.string
-        label = "%s/%s.xml" % (nowstr, agencyxml,)
-        ofs.put_stream(BUCKET, label, original_xml, {})
-        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
-                                                          label=label)
-        pkg.add_resource(url=fileurl,
-                         description="Original metadata record",
-                         format="xml",
-                         size=len(original_xml))
-        # JuhoL: for FSD 'URI' leads to summary web page of data, hence format='html'
-        pkg.add_resource(url=doc_citation.holdings.get('URI', ''),
-                         description=title,
-                         format='html')
-    return True
-
-
-def _save_ddi_variables_to_csv(ddi_xml, pkg, update=True):
-    # JuhoL: Handle codeBook.dataDscr parts, extract data (eg. questionnaire)
-    # variables etc.
-    # Saves <var>...</var> elements to a csv file accessible at:
-    # <ckan_url>/storage/f/2013-11-05T18%3A10%3A19.686858/1049_var.csv
-    # And separately saves <catgry> elements inside <var> to a csv as a resource
-    # for package.
-    # Assumes that dataDscr has not changed. Valid?
-    if ddi_xml.codeBook.dataDscr and not update:
-        vars = ddi_xml.codeBook.dataDscr('var')  # Find all <var> elements
-        heads = _get_headers()
-        c_heads = ['ID', 'catValu', 'labl', 'catStat']
-        f_var = StringIO.StringIO()
-        c_var = StringIO.StringIO()
-        varwriter = csv.DictWriter(f_var, heads)
-        codewriter = csv.DictWriter(c_var, c_heads)
-        heading_row = {}
-        for head in heads:
-            heading_row[head] = head
-        c_heading_row = {}
-        for head in c_heads:
-            c_heading_row[head] = head
-        varwriter.writerow(heading_row)
-        codewriter.writerow(c_heading_row)
-        for var in vars:
-            try:
-                varwriter.writerow(_construct_csv(var, heads))
-                codewriter.writerows(_create_code_rows(var))
-            except ValueError, e:
-                # Assumes that the process failed. Room for retry?
-                raise IOError("Failed to import DDI to CSV! %s" % e)
-        f_var.flush()
-        label = "%s/%s_var.csv" % (nowstr, name)
-        ofs.put_stream(BUCKET, label, f_var, {})
-        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
-                                                          label=label)
-        pkg.add_resource(url=fileurl,
-                         description="Variable metadata",
-                         format="csv",
-                         size=f_var.len)
-        label = "%s/%s_code.csv" % (nowstr, name)
-        ofs.put_stream(BUCKET, label, c_var, {})
-        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
-                                                          label=label)
-        pkg.add_resource(url=fileurl,
-                         description="Variable code values",
-                         format="csv",
-                         size=c_var.len)
-        # JuhoL: Append labels of variables ('questions') also to metas
-        # TODO: change to return XPath dict of labels
-        flattened_var_labels = {}
-        f_var.seek(0)  # JuhoL: Set 'read cursor' to row 0
-        reader = csv.DictReader(f_var)
-        for var in reader:
-            metas.append(var['labl'] if 'labl' in var else var['qstnLit'])
-    return flattened_var_labels
-
-
 def _create_group_based_on_organizations():
     # JuhoL: Create groups
     # for organizations extracted. Is this wanted? Check
@@ -324,27 +234,10 @@ def _last_statements_to_rewrite():
     if stdy_dscr.citation.distStmt.distrbtr:
         pkg.extras['publisher'] = stdy_dscr.citation.distStmt.distrbtr.string
 
-    # Store title in extras as well.
-    pkg.extras['title_0'] = pkg.title
+    # JuhoL: This was old language for first title
     pkg.extras['lang_title_0'] = pkg.language  # Guess. Good, I hope.
-    if stdy_dscr.citation.titlStmt.parTitl:
-        for (idx, title) in enumerate(stdy_dscr.citation.titlStmt('parTitl')):
-            pkg.extras['title_%d' % (idx + 1)] = title.string
-            # JuhoL: Should missing xml:lang return KeyError as in this?
-            pkg.extras['lang_title_%d' % (idx + 1)] = title.attrs['xml:lang']
 
-    # JuhoL: Authors & organizations to extras
-    authorgs = []
-    for value in stdy_dscr.citation.prodStmt('producer'):
-        pkg.extras["producer"] = value.string
-    for value in stdy_dscr.citation.rspStmt('AuthEnty'):
-        org = ""
-        if value.attrs.get('affiliation', None):
-            org = value.attrs['affiliation']
-        author = value.string
-        authorgs.append((author, org))
-
-    # JuhoL: Other contributors
+    # TODO: JuhoL: Other contributors
     for value in stdy_dscr.citation.rspStmt('othId'):
         pkg.extras["contributor"] = value.string
 
@@ -443,6 +336,106 @@ class DataConverter:
             log.debug('Invalid language: {ke}'.format(ke=ke))
             return ''
 
+    def _save_original_xml(self, original_xml, name, harvest_object):
+        ''' Here is created a ofs storage ie. local pairtree storage for
+        objects/blobs. The original xml is saved to this storage in
+        <harvest_source_id> named folder. NOTE: The content of this folder is
+        overwritten at reharvest. We assume that if metadata is re-parsed also
+        xml is changed. So old xml can be discarded.
+
+        Example:
+        pairtree storage: /opt/data/ckan/data_tree
+        xml: <pairtree storage>/pairtree_root//de/fa/ul/t/obj/<harvest_source_id>/FSD1049.xml
+        url:<ckan_url>/storage/f/<harvest_source_id>/FSD1049.xml
+        '''
+        label = '{dir}/{filename}.xml'.format(
+            dir=harvest_object.harvest_source_id, filename=name)
+        try:
+            ofs = storage.get_ofs()
+            ofs.put_stream(storage.BUCKET, label, original_xml, {})
+            fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
+                                                          label=label)
+        except IOError, ioe:
+            log.debug('Unable to save original xml: {io}'.format(io=ioe))
+            self.errors.append('Unable to save original xml: {io}'.format(io=ioe))
+            return u''
+        except Exception, exc:
+            log.debug('Unable to save original xml: {ex}'.format(ex=exc))
+            self.errors.append('Unable to save original xml: {ex}'.format(ex=exc))
+            return u''
+        return fileurl
+
+
+    def _save_ddi_variables_to_csv(self, name, pkg, harvest_object):
+        # JuhoL: Handle codeBook.dataDscr parts, extract data (eg. questionnaire)
+        # variables etc.
+        # Saves <var>...</var> elements to a csv file accessible at:
+        # <ckan_url>/storage/f/2013-11-05T18%3A10%3A19.686858/1049_var.csv
+        # And separately saves <catgry> elements inside <var> to a csv as a resource
+        # for package.
+        # Assumes that dataDscr has not changed. Valid?
+        data_dscr = "ddi_xml.codeBook.dataDscr"
+        try:
+            ofs = storage.get_ofs()
+        except IOError, ioe:
+            log.debug('Unable to save xml variables: {io}'.format(io=ioe))
+            self.errors.append('Unable to save xml variables: {io}'.format(io=ioe))
+            return u''
+
+        ddi_vars = self._read_value(data_dscr + "('var')")  # Find all <var> elements
+        heads = _get_headers()
+        c_heads = ['ID', 'catValu', 'labl', 'catStat']
+        f_var = StringIO.StringIO()
+        c_var = StringIO.StringIO()
+        varwriter = csv.DictWriter(f_var, heads)
+        codewriter = csv.DictWriter(c_var, c_heads)
+        heading_row = {}
+        for head in heads:
+            heading_row[head] = head
+        c_heading_row = {}
+        for head in c_heads:
+            c_heading_row[head] = head
+        varwriter.writerow(heading_row)
+        codewriter.writerow(c_heading_row)
+        for var in ddi_vars:
+            try:
+                varwriter.writerow(_construct_csv(var, heads))
+                codewriter.writerows(_create_code_rows(var))
+            except ValueError, e:
+                # Assumes that the process failed. Room for retry?
+                raise IOError("Failed to import DDI to CSV! %s" % e)
+        f_var.flush()
+        label = '{dir}/{filename}_var.csv'.format(
+            dir=harvest_object.harvest_source_id, filename=name)
+        ofs.put_stream(storage.BUCKET, label, f_var, {})
+        fileurl_var = config.get('ckan.site_url') + h.url_for('storage_file',
+                                                          label=label)
+        #pkg.add_resource(url=fileurl,
+        #                 description="Variable metadata",
+        #                 format="csv",
+        #                 size=f_var.len)
+
+        label = '{dir}/{filename}_code.csv'.format(
+            dir=harvest_object.harvest_source_id, filename=name)
+        ofs.put_stream(storage.BUCKET, label, c_var, {})
+        fileurl_code = config.get('ckan.site_url') + h.url_for('storage_file',
+                                                          label=label)
+        #pkg.add_resource(url=fileurl,
+        #                 description="Variable code values",
+        #                 format="csv",
+        #                 size=c_var.len)
+        # JuhoL: Append labels of variables ('questions') also to metas
+        # TODO: change to return XPath dict of labels
+        flattened_var_labels = {}
+        f_var.seek(0)  # JuhoL: Set 'read cursor' to row 0
+        reader = csv.DictReader(f_var)
+        #for var in reader:
+        #    metas.append(var['labl'] if 'labl' in var else var['qstnLit'])
+        # TODO: return flattened_var_labels
+        return fileurl_var, fileurl_code
+
+
+
     #@ExceptReturn(exception=(AttributeError, ), returns=False)
     def _ddi2ckan(self, original_url, original_xml, harvest_object):
         # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
@@ -468,6 +461,7 @@ class DataConverter:
             availability = AVAILABILITY_FSD
 
         # Keywords
+        # TODO: leave out disciplines which are handled separately
         keywords = self._read_value(stdy_dscr + ".stdyInfo.subject.get_text(',', strip=True)", mandatory_field=True)
 
         # Language
@@ -517,13 +511,25 @@ class DataConverter:
             name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo.get('agency')", mandatory_field=True)
 
         if not name_id:
-            self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
+            name_id = self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
 
         # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
         # same harvest object at each reharvest
         # name = utils.generate_pid()
         name = name_prefix + name_id
         log.debug('Name: {namn}'.format(namn=name))
+        
+        # Original xml and web page as resource
+        orig_xml_storage_url = self._save_original_xml(original_xml, name, harvest_object)
+        # JuhoL: for FSD 'URI' leads to summary web page of data, hence format='html'
+        orig_web_page = self._read_value(doc_citation + ".holdings.get('URI', '')")
+        if orig_web_page:
+            orig_web_page_resource = {'description': langtitle[0].get('value'),
+                                      'format': u'html',
+                                      'resource_type': 'dataset',  # JuhoL: should this be something else?
+                                      'url': orig_web_page}
+        else:
+            orig_web_page_resource = {}
 
         # Owner
         owner = self._read_value(stdy_dscr + ".citation.prodStmt.producer.text") or \
@@ -603,16 +609,14 @@ class DataConverter:
             project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
             project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
             project_name=u'Rahoittajan Projekti',
-            #resources=[{'algorithm': u'MD5',
-            #            'hash': u'f60e586509d99944e2d62f31979a802f',
-            #            'mimetype': u'application/csv',
-            #            'resource_type': 'dataset',
-            #            'url': u'http://aineiston.osoite.fi/tiedosto.csv'},
-            #           {'algorithm': u'',
-            #            'hash': u'',
-            #            'mimetype': u'',
-            #            'resource_type': 'dataset',
-            #            'url': u''}],
+            resources=[{'algorithm': u'MD5',
+                        'description': u'Original metadata record',
+                        'format': u'xml',
+                        'hash': u'f60e586509d99944e2d62f31979a802f',
+                        'resource_type': 'dataset',
+                        'size': len(original_xml),
+                        'url': orig_xml_storage_url},
+                       orig_web_page_resource],
             tag_string=keywords,
             temporal_coverage_begin=u'1976-11-06T00:00:00Z',
             temporal_coverage_end=u'2003-11-06T00:00:00Z',
@@ -663,10 +667,10 @@ class DataConverter:
 #        # This presumes that resources have not changed. Wrong? If something
 #        # has changed then technically the XML has chnaged and hence this may
 #        # have to "delete" old resources and then add new ones.
-#        ofs = get_ofs()
+#        ofs = storage.get_ofs()
 #        nowstr = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
 #        label = "%s/%s.xml" % (nowstr, study_info.attrs['id'],)
-#        ofs.put_stream(BUCKET, label, original_xml, {})
+#        ofs.put_stream(storage.BUCKET, label, original_xml, {})
 #        fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
 #            label=label)
 #        pkg.add_resource(url=fileurl, description="Original metadata record",
