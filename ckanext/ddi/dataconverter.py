@@ -354,14 +354,11 @@ class DataConverter:
             ofs = storage.get_ofs()
             ofs.put_stream(storage.BUCKET, label, original_xml, {})
             fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
-                                                          label=label)
+                                                              label=label)
         except IOError, ioe:
-            log.debug('Unable to save original xml: {io}'.format(io=ioe))
+            log.debug('Unable to save original xml to: {sto}, {io}'.format(
+                sto=storage.BUCKET, io=ioe))
             self.errors.append('Unable to save original xml: {io}'.format(io=ioe))
-            return u''
-        except Exception, exc:
-            log.debug('Unable to save original xml: {ex}'.format(ex=exc))
-            self.errors.append('Unable to save original xml: {ex}'.format(ex=exc))
             return u''
         return fileurl
 
@@ -551,7 +548,8 @@ class DataConverter:
 
         contact_URL = self._read_value( stdy_dscr + ".dataAccs.setAvail.accsPlac.get('URI')") or \
                       self._read_value( stdy_dscr + ".citation.distStmt.contact.get('URI')") or \
-                      self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')")
+                      self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')") or \
+                      u'undefined'
 
         # Description
         description_array = self._read_value(stdy_dscr + ".stdyInfo.abstract('p')")
@@ -563,9 +561,10 @@ class DataConverter:
 
         # Discipline
         discipline_list = self._read_value(stdy_dscr + ".stdyInfo.subject('topcClas', vocab='FSD')", mandatory_field=False)
-        discipline = ','.join([ tag.text for tag in discipline_list ])
+        discipline = ', '.join([ tag.text for tag in discipline_list ])
 
         evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
+
 
         # Flatten rest to 'XPath/path/to/element': 'value' pairs
         # TODO: Result is large, review.
@@ -582,14 +581,14 @@ class DataConverter:
             # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
             availability=unicode(availability),
             #contact_phone=unicode(contact_phone),
-            contact_URL=unicode(contact_URL),
+            contact_URL=contact_URL,
             # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
             discipline=discipline,
             evdescr=evdescr or [],
             evtype=evtype or [],
             evwhen=evwhen or [],
             evwho=evwho or [],
-            geographic_coverage=u'Espoo (city),Keilaniemi (populated place)',
+            geographic_coverage=u'',  #u'Espoo (city),Keilaniemi (populated place)',
             groups=[],
             id=generate_pid(),
             langtitle=langtitle,
@@ -597,18 +596,18 @@ class DataConverter:
             language=language,
             license_URL=license_url,
             license_id=license_id,
-            maintainer=maintainer,   ## JuhoL: changed 'publisher' to 'maintainer'
+            maintainer=maintainer,
             maintainer_email=maintainer_email,
             # mimetype=u'application/csv',  ## To be implemented straight in 'resources
             name=name,
             notes=notes or u'',
             orgauth=orgauth,
             owner=owner,
-            projdis=u'False',   ### HUOMAA!
-            project_funder=u'Roope Rahoittaja',
-            project_funding=u'1234-rahoitusp\xe4\xe4t\xf6snumero',
-            project_homepage=u'http://www.rahoittajan.kotisivu.fi/',
-            project_name=u'Rahoittajan Projekti',
+            projdis=u'True',   ### HUOMAA!
+            project_funder=u'',  #u'Roope Rahoittaja',
+            project_funding=u'',  #u'1234-rahoitusp\xe4\xe4t\xf6snumero',
+            project_homepage=u'',  #u'http://www.rahoittajan.kotisivu.fi/',
+            project_name=u'',  #u'Rahoittajan Projekti',
             resources=[{'algorithm': u'MD5',
                         'description': u'Original metadata record',
                         'format': u'xml',
@@ -618,14 +617,17 @@ class DataConverter:
                         'url': orig_xml_storage_url},
                        orig_web_page_resource],
             tag_string=keywords,
-            temporal_coverage_begin=u'1976-11-06T00:00:00Z',
-            temporal_coverage_end=u'2003-11-06T00:00:00Z',
+            temporal_coverage_begin=u'',  #u'1976-11-06T00:00:00Z',
+            temporal_coverage_end=u'',  #u'2003-11-06T00:00:00Z',
             title=langtitle[0].get('value'),   # Must exist in package dict
             #type='dataset',
             version=version,
-            version_PID=u'Aineistoversion-tunniste-PID'   ## JuhoL: added underscore '_'
+            version_PID=name,  #u'',  #u'Aineistoversion-tunniste-PID'
         )
-        #package_dict['extras'] = flattened_ddi
+        # TODO: JuhoL: ei voida laittaa dict:iä string avaimilla suoraan extra-
+        # kenttään. ckan/lib/navl/dictization_functions.py", line 393, in unflatten
+        # ei toimi vaan vaatii tupleja. Otetaan mallia muista extrasiin vietävistä.
+        #package_dict['extras'] = xpath_dict
         #package_dict['extras'].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))
 
 
@@ -639,7 +641,7 @@ class DataConverter:
         if harvest_object != None:
             #harvest_object.package_id = pkg.id
             harvest_object.content = None
-            harvest_object.current = True
+            #harvest_object.current = True
         #model.repo.commit()
         #return pkg.id
 
