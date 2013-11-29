@@ -544,7 +544,8 @@ class DataConverter:
 
         # Contact
         contact_phone = self._read_value(doc_citation + ".holdings.get('callno')") or \
-                        self._read_value(stdy_dscr + ".citation.holdings.get('callno')")
+                        self._read_value(stdy_dscr + ".citation.holdings.get('callno')") or \
+                        u''
 
         contact_URL = self._read_value( stdy_dscr + ".dataAccs.setAvail.accsPlac.get('URI')") or \
                       self._read_value( stdy_dscr + ".citation.distStmt.contact.get('URI')") or \
@@ -578,11 +579,11 @@ class DataConverter:
         package_dict = dict(
             access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
             access_request_URL=unicode(access_request_url),
-            # algorithm=NotImplemented,   ## To be implemented straight in 'resources'
+            algorithm=u'',   ## To be implemented straight in 'resources'
             availability=unicode(availability),
-            #contact_phone=unicode(contact_phone),
+            contact_phone=contact_phone,
             contact_URL=contact_URL,
-            # direct_download_URL=u'http://helsinki.fi/data-on-taalla',  ## To be implemented straight in 'resources
+            direct_download_URL=u'',  ## To be implemented straight in 'resources
             discipline=discipline,
             evdescr=evdescr or [],
             evtype=evtype or [],
@@ -598,7 +599,7 @@ class DataConverter:
             license_id=license_id,
             maintainer=maintainer,
             maintainer_email=maintainer_email,
-            # mimetype=u'application/csv',  ## To be implemented straight in 'resources
+            mimetype=u'',  ## To be implemented straight in 'resources
             name=name,
             notes=notes or u'',
             orgauth=orgauth,
@@ -620,7 +621,6 @@ class DataConverter:
             temporal_coverage_begin=u'',  #u'1976-11-06T00:00:00Z',
             temporal_coverage_end=u'',  #u'2003-11-06T00:00:00Z',
             title=langtitle[0].get('value'),   # Must exist in package dict
-            #type='dataset',
             version=version,
             version_PID=name,  #u'',  #u'Aineistoversion-tunniste-PID'
         )
