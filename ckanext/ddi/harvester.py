@@ -24,7 +24,9 @@ import unicodecsv as csv
 from ckan.controllers.storage import BUCKET, get_ofs
 from ckan.lib.base import h
 from ckan.lib.munge import munge_tag
+from ckan.lib.navl.validators import ignore_missing
 from ckan.logic import ValidationError
+from ckan.logic.converters import convert_to_extras
 import ckan.model as model
 from ckan.model.authz import setup_default_user_roles
 from ckanext.harvest.harvesters.base import HarvesterBase
@@ -273,7 +275,9 @@ class DDIHarvester(HarvesterBase):
 
         #pprint.pprint(package_dict)
         #result = self._create_or_update_package(package_dict, harvest_object)
-        result = self._create_or_update_package(package_dict, harvest_object, schema=KataPlugin.create_package_schema())
+        schema = KataPlugin.create_package_schema()
+        #schema['xpath'] = [ignore_missing, convert_to_extras]
+        result = self._create_or_update_package(package_dict, harvest_object, schema)
 
         log.debug("Exiting import_stage()")
         return result  # returns True
