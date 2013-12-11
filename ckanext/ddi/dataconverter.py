@@ -498,7 +498,7 @@ class DataConverter:
 
         # Modified date
         version = self._read_value(stdy_dscr + ".citation('prodDate')", mandatory_field=False) or \
-                  self._read_value(stdy_dscr + ".citation('depDate')", mandatory_field=True)
+                  self._read_value(stdy_dscr + ".citation('version')", mandatory_field=True)
         version = version[0].get('date')
 
         # Name
