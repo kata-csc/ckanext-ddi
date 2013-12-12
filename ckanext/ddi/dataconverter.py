@@ -631,7 +631,7 @@ class DataConverter:
         #package_dict['extras'] = logic.tuplize_dict(logic.parse_params(xpath_dict))
         #package_dict['extras'] = logic.tuplize_dict(xpath_dict)
         #package_dict['extras'] = json.dumps(xpath_dict,)
-        #package_dict['xpath'] = xpath_dict
+        package_dict['extras'] = xpath_dict
         #package_dict['extras'].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))
 
 
