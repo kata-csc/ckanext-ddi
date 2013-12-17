@@ -34,7 +34,7 @@ from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
 from dataconverter import DataConverter
 
-from ckanext.kata.converters import convert_to_extras_kata
+from ckanext.kata.converters import xpath_to_extras
 from ckanext.kata.plugin import KataPlugin
 
 import traceback
@@ -274,9 +274,8 @@ class DDIHarvester(HarvesterBase):
         if not package_dict:
             return False
 
-        #pprint.pprint(package_dict)
-        #result = self._create_or_update_package(package_dict, harvest_object)
-        schema = KataPlugin.create_package_schema()
+        schema = KataPlugin.create_package_schema_ddi()
+        schema['xpaths'] = [xpath_to_extras]
         result = self._create_or_update_package(package_dict, harvest_object, schema)
 
         log.debug("Exiting import_stage()")

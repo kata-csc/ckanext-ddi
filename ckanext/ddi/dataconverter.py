@@ -299,6 +299,7 @@ class DataConverter:
         evtype = []
         evwhen = []
         evwho = []
+        DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
 
         # Event: Collection
         ev_type_collect = self._read_value(stdy_dscr + ".stdyInfo.sumDscr('collDate', event='start')")
@@ -308,9 +309,11 @@ class DataConverter:
             data_coll_string += '; ' + (d.text)
         data_coll_string = data_coll_string[2:]
         for collection in ev_type_collect:
+            raw_date = DATE_REGEX.search(collection.get('date'))
+            clean_date = raw_date.group(0).rstrip('-') if raw_date.group(0) else ''
             evdescr.append({'value': u'Event automatically created at import.'})
             evtype.append({'value': u'collection'})
-            evwhen.append({'value': collection.get('date')})
+            evwhen.append({'value': clean_date})
             evwho.append({'value': data_coll_string})
 
         # Event: Creation (eg. Published in publication)
@@ -571,11 +574,11 @@ class DataConverter:
         # Flatten rest to 'XPath/path/to/element': 'value' pairs
         # TODO: Result is large, review.
         etree_xml = etree.fromstring(original_xml)
-        #lroot = etree_xml.getroot()
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}docDscr'))
         xpath_dict = flattened_ddi.getMap()
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
         xpath_dict.update(flattened_ddi.getMap())
+        # xpaths = [ {'key': key, 'value': value} for key, value in xpath_dict.iteritems() ]
 
         package_dict = dict(
             access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
@@ -630,8 +633,15 @@ class DataConverter:
         # ei toimi vaan vaatii tupleja. Otetaan mallia muista extrasiin vietävistä.
         #package_dict['extras'] = logic.tuplize_dict(logic.parse_params(xpath_dict))
         #package_dict['extras'] = logic.tuplize_dict(xpath_dict)
-        #package_dict['extras'] = json.dumps(xpath_dict,)
-        package_dict['extras'] = xpath_dict
+        package_dict['xpaths'] = xpath_dict
+        # Above line creates:
+        # package_dict = {
+        #     'access_request_url': 'some_url',
+        #     # ...
+        #     'xpaths': {'stdyDscr/othrStdyMat.0/relPubl.34':
+        #                'Uskon asia: nuorisobarometri 2006 (2006).'},
+        #               {'stdyD...': 'Some value'}]
+        # }
         #package_dict['extras'].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))
 
 
