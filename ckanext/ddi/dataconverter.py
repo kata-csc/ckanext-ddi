@@ -522,12 +522,12 @@ class DataConverter:
         
         # Original xml and web page as resource
         orig_xml_storage_url = self._save_original_xml(original_xml, name, harvest_object)
-        # JuhoL: for FSD 'URI' leads to summary web page of data, hence format='html'
+        # For FSD 'URI' leads to summary web page of data, hence format='html'
         orig_web_page = self._read_value(doc_citation + ".holdings.get('URI', '')")
         if orig_web_page:
             orig_web_page_resource = {'description': langtitle[0].get('value'),
                                       'format': u'html',
-                                      'resource_type': 'dataset',  # JuhoL: should this be something else?
+                                      'resource_type': 'documentation',
                                       'url': orig_web_page}
         else:
             orig_web_page_resource = {}
@@ -562,7 +562,7 @@ class DataConverter:
             description_array = self._read_value(stdy_dscr + ".citation.serStmt.serInfo('p')")
 
         notes = '\r\n\r\n'.join([description.string for
-                               description in description_array])
+                                 description in description_array])
 
         # Discipline
         discipline_list = self._read_value(stdy_dscr + ".stdyInfo.subject('topcClas', vocab='FSD')", mandatory_field=False)
@@ -617,7 +617,7 @@ class DataConverter:
                         'description': u'Original metadata record',
                         'format': u'xml',
                         'hash': u'f60e586509d99944e2d62f31979a802f',
-                        'resource_type': 'dataset',
+                        'resource_type': 'file.upload',
                         'size': len(original_xml),
                         'url': orig_xml_storage_url},
                        orig_web_page_resource],
