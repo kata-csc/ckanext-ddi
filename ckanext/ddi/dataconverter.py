@@ -301,6 +301,11 @@ class DataConverter:
         evwho = []
         DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
 
+        def get_clean_date(bs4_element):
+            raw_date = DATE_REGEX.search(bs4_element.get('date'))
+            return raw_date.group(0).rstrip('-') if raw_date and \
+                                                    raw_date.group(0) else ''
+
         # Event: Collection
         ev_type_collect = self._read_value(stdy_dscr + ".stdyInfo.sumDscr('collDate', event='start')")
         data_collector = self._read_value(stdy_dscr + ".method.dataColl('dataCollector')")
@@ -309,20 +314,22 @@ class DataConverter:
             data_coll_string += '; ' + (d.text)
         data_coll_string = data_coll_string[2:]
         for collection in ev_type_collect:
-            raw_date = DATE_REGEX.search(collection.get('date'))
-            clean_date = raw_date.group(0).rstrip('-') if raw_date.group(0) else ''
             evdescr.append({'value': u'Event automatically created at import.'})
             evtype.append({'value': u'collection'})
-            evwhen.append({'value': clean_date})
+            evwhen.append({'value': get_clean_date(collection)})
             evwho.append({'value': data_coll_string})
 
         # Event: Creation (eg. Published in publication)
-        ev_type_create = self._read_value(stdy_dscr + ".citation.prodStmt.prodDate.text")
+        ev_type_create = self._read_value(
+            stdy_dscr + ".citation.prodStmt.prodDate.get('date')")
+        raw_date = DATE_REGEX.search(ev_type_create)
+        clean_date = raw_date.group(0).rstrip('-') if raw_date and \
+                                                      raw_date.group(0) else ''
         data_creators = [ a['value'] for a in orgauth ]
         data_creator_string = '; '.join(data_creators)
         evdescr.append({'value': u'Event automatically created at import.'})
         evtype.append({'value': u'creation'})
-        evwhen.append({'value': ev_type_create})
+        evwhen.append({'value': clean_date})
         evwho.append({'value': data_creator_string})
         # TODO: Event: Published (eg. Deposited to some public access archive)
 
@@ -345,7 +352,7 @@ class DataConverter:
         objects/blobs. The original xml is saved to this storage in
         <harvest_source_id> named folder. NOTE: The content of this folder is
         overwritten at reharvest. We assume that if metadata is re-parsed also
-        xml is changed. So old xml can be discarded.
+        xml is changed. So old xml can be overwritten.
 
         Example:
         pairtree storage: /opt/data/ckan/data_tree
@@ -485,7 +492,7 @@ class DataConverter:
         else:
             license_id = LICENCE_ID_DEFAULT
 
-        # Publisher (maintainer in database)
+        # Publisher (maintainer in database, contact in WUI)
         maintainer = self._read_value(stdy_dscr + ".citation.distStmt('contact')", mandatory_field=False) or \
                      self._read_value(stdy_dscr + ".citation.distStmt('distrbtr')", mandatory_field=False) or \
                      self._read_value(doc_citation + ".prodStmt('producer')", mandatory_field=True)
@@ -553,8 +560,7 @@ class DataConverter:
 
         contact_URL = self._read_value( stdy_dscr + ".dataAccs.setAvail.accsPlac.get('URI')") or \
                       self._read_value( stdy_dscr + ".citation.distStmt.contact.get('URI')") or \
-                      self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')") or \
-                      u'undefined'
+                      self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')")
 
         # Description
         description_array = self._read_value(stdy_dscr + ".stdyInfo.abstract('p')")

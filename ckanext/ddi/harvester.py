@@ -128,6 +128,12 @@ class DDIHarvester(HarvesterBase):
         def date_from_config(key):
             return self._datetime_from_str(key, config.get(key, None))
 
+        def add_harvest_object(harvest_job, url):
+            harvest_obj = HarvestObject(job=harvest_job)
+            harvest_obj.content = url
+            harvest_obj.save()
+            return harvest_obj
+
         from_ = date_from_config('ckanext.harvest.test.from')
         until = date_from_config('ckanext.harvest.test.until')
         previous_job = model.Session.query(HarvestJob) \
@@ -139,12 +145,6 @@ class DDIHarvester(HarvesterBase):
         if previous_job and not until and not from_:
             from_ = previous_job.gather_finished
             until = None
-
-        def add_harvest_object(harvest_job, url):
-            harvest_obj = HarvestObject(job=harvest_job)
-            harvest_obj.content = url
-            harvest_obj.save()
-            return harvest_obj
 
         harvest_objs = []
         # Add retries.
