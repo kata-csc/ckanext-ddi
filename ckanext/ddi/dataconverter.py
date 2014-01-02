@@ -47,6 +47,7 @@ AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
 ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.html'
 LICENCE_ID_FSD = 'other_closed'
 MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
+KW_VOCAB_REGEX = re.compile(r'^(?!FSD$)')
 
 
 def _collect_attribs(el):
@@ -469,8 +470,8 @@ class DataConverter:
             availability = AVAILABILITY_FSD
 
         # Keywords
-        # TODO: leave out disciplines which are handled separately
-        keywords = self._read_value(stdy_dscr + ".stdyInfo.subject.get_text(',', strip=True)", mandatory_field=True)
+        keyword_list = self._read_value(stdy_dscr + ".stdyInfo.subject(vocab=KW_VOCAB_REGEX)", mandatory_field=True)
+        keywords = ','.join([ kw.text for kw in keyword_list ])
 
         # Language
         # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
@@ -549,14 +550,13 @@ class DataConverter:
 
         # Availability
         if _is_fsd(original_url):
-            access_request_url=ACCESS_REQUEST_URL_FSD
+            access_request_url = ACCESS_REQUEST_URL_FSD
         else:
-            access_request_url=u''
+            access_request_url = u''
 
         # Contact
         contact_phone = self._read_value(doc_citation + ".holdings.get('callno')") or \
-                        self._read_value(stdy_dscr + ".citation.holdings.get('callno')") or \
-                        u''
+                        self._read_value(stdy_dscr + ".citation.holdings.get('callno')")
 
         contact_URL = self._read_value( stdy_dscr + ".dataAccs.setAvail.accsPlac.get('URI')") or \
                       self._read_value( stdy_dscr + ".citation.distStmt.contact.get('URI')") or \
@@ -571,7 +571,7 @@ class DataConverter:
                                  description in description_array])
 
         # Discipline
-        discipline_list = self._read_value(stdy_dscr + ".stdyInfo.subject('topcClas', vocab='FSD')", mandatory_field=False)
+        discipline_list = self._read_value(stdy_dscr + ".stdyInfo.subject('topcClas', vocab='FSD')")
         discipline = ', '.join([ tag.text for tag in discipline_list ])
 
         evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
