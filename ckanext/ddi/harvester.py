@@ -32,10 +32,8 @@ from ckan.model.authz import setup_default_user_roles
 from ckanext.harvest.harvesters.base import HarvesterBase
 #from ckanext.harvest.harvesters.retry import HarvesterRetry
 from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
-from dataconverter import DataConverter
-
-from ckanext.kata.converters import xpath_to_extras
 from ckanext.kata.plugin import KataPlugin
+from dataconverter import DataConverter
 
 import traceback
 
@@ -209,24 +207,22 @@ class DDIHarvester(HarvesterBase):
             self._save_object_error('Bad HTTP response status line.',
                                     harvest_object, stage='Fetch')
             return False
-            # Need to pickle the XML so that the data type remains the same.
+        # Need to pickle the XML so that the data type remains the same.
         harvest_object.content = pickle.dumps({'url': url, 'xml': f})
         return True
 
     def import_stage(self, harvest_object):
-        '''Import the metadata received in the fetch stage to a dataset and
-        create groups if ones are defined. Fill in metadata from study and
-        document description.
+        '''Import the metadata received in the fetch stage to a dataset.
+
+        DDI document is parsed to a BeautifulSoup object for metadata
+        extraction. Study (stdyDscr) and document (docDscr) descriptions are
+        used. File (fileDscr) and data (dataDscr) description parts of a ddi
+        file are saved as csv files (unfinished).
+        Also create groups if ones are defined (unfinished).
         '''
-        # Serialize harvest_object.content
-        #log.debug('harvest_object: {ho}'.format(
-        #    ho=pprint.pformat(dir(harvest_object))))
         # TODO: cPickle might be faster
         info = pickle.loads(harvest_object.content)
-        log.debug('pickled harvest_object.content: {po}'.format(
-            po=pprint.pformat(info.keys())))
-        log.debug("harvest_object.content['url']: {po}".format(
-            po=pprint.pformat(info['url'])))
+        log.info("Harvest object url: {ur}".format(ur=info['url'].strip()))
         try:
             ddi_xml = BeautifulSoup(info['xml'], 'xml')
         except etree.XMLSyntaxError, err:
@@ -241,43 +237,21 @@ class DDIHarvester(HarvesterBase):
             #            self._add_retry(harvest_object)
             return False
 
-        package_dict = self.ddi_converter.ddi2ckan(ddi_xml, info['url'], info['xml'], harvest_object)
-
-        #except HarvestObjectError, hoe:
-        #    self._save_object_error('No identifiable field for object {ho}'
-        #                            .format(ho=hoe.as_dict()), hoe.object,  # or harvest_object?
-        #                            'Import')
-        #    return False
-        #except AttributeError, err:
-        #    log.error('AttributeError: {er}'.format(er=err))
-        #    # TODO: JuhoL: add line number of exception
-        #    self._save_object_error('Missing minimum metadata in {ur}.\n'
-        #                            'AttributeError: {er}'
-        #                            .format(ur=info['url'], er=err), harvest_object,
-        #                            'Import')
-        #    return False
-        #except Exception, e:
-        #    self._save_object_error('Unknown error: {na}:{er}'
-        #                            .format(na=type(e).__name__, er=e),
-        #                            harvest_object,
-        #                            'Import')
-        #return pkgid
-
+        package_dict = self.ddi_converter.ddi2ckan(ddi_xml, info['url'],
+                                                   info['xml'], harvest_object)
         errors = self.ddi_converter.get_errors()
         if errors:
             for err in errors:
                 self._save_object_error('Missing minimum metadata in {ur}.\n'
                                         'AttributeError: {er}'
-                                        .format(ur=info['url'], er=err), harvest_object,
+                                        .format(ur=info['url'], er=err),
+                                        harvest_object,
                                         'Import')
-
         if not package_dict:
             return False
-
         schema = KataPlugin.create_package_schema_ddi()
-        schema['xpaths'] = [xpath_to_extras]
-        result = self._create_or_update_package(package_dict, harvest_object, schema)
-
+        result = self._create_or_update_package(package_dict, harvest_object,
+                                                schema)
         log.debug("Exiting import_stage()")
         return result  # returns True
 

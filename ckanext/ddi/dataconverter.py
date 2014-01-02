@@ -138,32 +138,6 @@ def _access_request_URL_is_found():
     return False
 
 
-def ExceptReturn(exception, returns):
-    '''
-    Example:
-    @ExceptReturn(exception=AttributeError, returns='False_text')
-def dc_metadata_reader(xml):
-        print xml
-        raise AttributeError('virhe')
-
-    Jos "exception" tapahtuu dc_metadata_reader():ssa niin paluuarvo on "returns"
-
-    >>> dc_metadata_reader('test')
-    False_text
-    '''
-    def decorator(f):
-        def call(*args, **kwargs):
-            try:
-                log.debug('call()')
-                return f(*args, **kwargs)
-            except exception as e:
-                log.error('Exception occurred: %s' % e)
-                return returns
-        log.debug('decorator()')
-        return call
-    log.debug('ExceptReturn()')
-    return decorator
-
 def _future_keywords_to_labels_urls_implementation():
     ''' This old code is kept here for now if needed in future
     '''
@@ -239,16 +213,6 @@ def _last_statements_to_rewrite():
     # JuhoL: This was old language for first title
     pkg.extras['lang_title_0'] = pkg.language  # Guess. Good, I hope.
 
-    # TODO: JuhoL: Other contributors
-    for value in stdy_dscr.citation.rspStmt('othId'):
-        pkg.extras["contributor"] = value.string
-
-    lastidx = 1
-    for auth, org in authorgs:
-        pkg.extras['author_%s' % lastidx] = auth
-        pkg.extras['organization_%s' % lastidx] = org
-        lastidx = lastidx + 1
-
 
 class DataConverter:
 
@@ -275,15 +239,21 @@ class DataConverter:
         Returns default if evaluation failed, else return the evaluated output.
         '''
         # Make sure we are using class variables
-        eval_string = bs_eval_string if bs_eval_string.startswith('self.') else 'self.' + bs_eval_string
-
+        eval_string = bs_eval_string if bs_eval_string.startswith('self.') \
+            else 'self.' + bs_eval_string
         try:
             output = eval(eval_string)
             return output
         except (AttributeError, TypeError):
-            log.debug('Unable to read value: {path}'.format(path=bs_eval_string))
             if mandatory_field:
-                self.errors.append('Unable to read mandatory field: {path}'.format(path=bs_eval_string))
+                log.debug('Unable to read mandatory value: {path}'
+                          .format(path=bs_eval_string))
+                # TODO: Nice to have: Add line number of exception in code below
+                self.errors.append('Unable to read mandatory value: {path}'
+                                   .format(path=bs_eval_string))
+            else:
+                log.debug('Unable to read optional value: {path}'
+                          .format(path=bs_eval_string))
             return default
 
     def get_errors(self):
@@ -370,7 +340,8 @@ class DataConverter:
         except IOError, ioe:
             log.debug('Unable to save original xml to: {sto}, {io}'.format(
                 sto=storage.BUCKET, io=ioe))
-            self.errors.append('Unable to save original xml: {io}'.format(io=ioe))
+            self.errors.append('Unable to save original xml: {io}'.format(
+                io=ioe))
             return u''
         return fileurl
 
@@ -444,10 +415,9 @@ class DataConverter:
         return fileurl_var, fileurl_code
 
 
-
-    #@ExceptReturn(exception=(AttributeError, ), returns=False)
     def _ddi2ckan(self, original_url, original_xml, harvest_object):
-        # JuhoL: Extract package values from bs4 object 'ddi_xml' parsed from xml
+        '''Extract package values from bs4 object 'ddi_xml' parsed from xml
+        '''
         # TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.
 
         #self.doc_citation = ddi_xml.codeBook.docDscr.citation
@@ -456,11 +426,15 @@ class DataConverter:
         stdy_dscr = "ddi_xml.codeBook.stdyDscr"
 
         # Authors & organizations
-        auth_entys = self._read_value(stdy_dscr + ".citation.rspStmt('AuthEnty')", mandatory_field=True)
-        #auth_entys = self.stdy_dscr.citation.rspStmt('AuthEnty')
+        auth_entys = self._read_value(
+            stdy_dscr + ".citation.rspStmt('AuthEnty')", mandatory_field=True)
+        ## Other contributors. Should this be in the optional section?
+        auth_entys.extend(self._read_value(
+            stdy_dscr + ".citation.rspStmt('othId')", mandatory_field=False))
         orgauth = []
         for a in auth_entys:
-            orgauth.append({'org': a.get('affiliation'), 'value': a.text})
+            orgauth.append({'org': a.get('affiliation'),
+                            'value': a.text.strip()})
 
         # Availability
         availability = AVAILABILITY_DEFAULT
@@ -634,11 +608,6 @@ class DataConverter:
             version=version,
             version_PID=name,  #u'',  #u'Aineistoversion-tunniste-PID'
         )
-        # TODO: JuhoL: ei voida laittaa dict:iä string avaimilla suoraan extra-
-        # kenttään. ckan/lib/navl/dictization_functions.py", line 393, in unflatten
-        # ei toimi vaan vaatii tupleja. Otetaan mallia muista extrasiin vietävistä.
-        #package_dict['extras'] = logic.tuplize_dict(logic.parse_params(xpath_dict))
-        #package_dict['extras'] = logic.tuplize_dict(xpath_dict)
         package_dict['xpaths'] = xpath_dict
         # Above line creates:
         # package_dict = {
@@ -658,12 +627,10 @@ class DataConverter:
         #_last_statements_to_rewrite()
 
         # JuhoL: Set harvest object to some end state and commit
-        if harvest_object != None:
-            #harvest_object.package_id = pkg.id
+        if harvest_object is not None:
             harvest_object.content = None
-            #harvest_object.current = True
+            # Should this be flushed? model.Session.flush()
         #model.repo.commit()
-        #return pkg.id
 
         return package_dict
 
