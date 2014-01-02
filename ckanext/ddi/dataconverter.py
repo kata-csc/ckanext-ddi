@@ -221,8 +221,7 @@ class DataConverter:
         self.errors = []
 
     def ddi2ckan(self, data, original_url=None, original_xml=None, harvest_object=None):
-        '''
-        Read DDI2 data and convert it to CKAN format.
+        '''Read DDI2 data and convert it to CKAN format.
         '''
         try:
             self.ddi_xml = data
@@ -345,7 +344,6 @@ class DataConverter:
             return u''
         return fileurl
 
-
     def _save_ddi_variables_to_csv(self, name, pkg, harvest_object):
         # JuhoL: Handle codeBook.dataDscr parts, extract data (eg. questionnaire)
         # variables etc.
@@ -414,17 +412,21 @@ class DataConverter:
         # TODO: return flattened_var_labels
         return fileurl_var, fileurl_code
 
-
     def _ddi2ckan(self, original_url, original_xml, harvest_object):
         '''Extract package values from bs4 object 'ddi_xml' parsed from xml
         '''
         # TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.
-
+        # ... must use instance attribute self.ddi_xml and wrap it to etree after
+        # extracting and then flatten remaining xpaths.
         #self.doc_citation = ddi_xml.codeBook.docDscr.citation
         #self.stdy_dscr = ddi_xml.codeBook.stdyDscr
         doc_citation = "ddi_xml.codeBook.docDscr.citation"
         stdy_dscr = "ddi_xml.codeBook.stdyDscr"
 
+
+        ####################################################################
+        #      Read mandatory metadata fields:                             #
+        ####################################################################
         # Authors & organizations
         auth_entys = self._read_value(
             stdy_dscr + ".citation.rspStmt('AuthEnty')", mandatory_field=True)
@@ -444,33 +446,36 @@ class DataConverter:
             availability = AVAILABILITY_FSD
 
         # Keywords
-        keyword_list = self._read_value(stdy_dscr + ".stdyInfo.subject(vocab=KW_VOCAB_REGEX)", mandatory_field=True)
+        keyword_list = self._read_value(
+            stdy_dscr + ".stdyInfo.subject(vocab=KW_VOCAB_REGEX)",
+            mandatory_field=True)
         keywords = ','.join([ kw.text for kw in keyword_list ])
 
         # Language
         # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
-        language = self.convert_language(self._read_value("ddi_xml.codeBook.get('xml:lang')"))
+        language = self.convert_language(
+            self._read_value("ddi_xml.codeBook.get('xml:lang')"))
 
         # Titles
-        titles = self._read_value(stdy_dscr + ".citation.titlStmt(['titl', 'parTitl'])", mandatory_field=False)
-        if not titles:
-            titles =  self._read_value(doc_citation + ".titlStmt(['titl', 'parTitl'])", mandatory_field=True)
-
+        titles = self._read_value(stdy_dscr + ".citation.titlStmt(['titl', 'parTitl'])") or \
+            self._read_value(doc_citation + ".titlStmt(['titl', 'parTitl'])", mandatory_field=True)
         langtitle=[dict(lang=self.convert_language(a.get('xml:lang', '')), value=a.text) for a in titles]
         #langtitle=[dict(lang='fin', value=a.text) for a in titles]
 
         # License
         # TODO: Extract prettier output. Should we check that element contains something?
+        # Should this be in optional section if not mandatory_field?
         license_url = self._read_value(stdy_dscr + ".dataAccs.useStmt.get_text(separator=u' ')", mandatory_field=False)
         if _is_fsd(original_url):
             license_id = LICENCE_ID_FSD
         else:
             license_id = LICENCE_ID_DEFAULT
 
-        # Publisher (maintainer in database, contact in WUI)
-        maintainer = self._read_value(stdy_dscr + ".citation.distStmt('contact')", mandatory_field=False) or \
-                     self._read_value(stdy_dscr + ".citation.distStmt('distrbtr')", mandatory_field=False) or \
+        # Maintainer (package.maintainer in database, contact in WUI)
+        maintainer = self._read_value(stdy_dscr + ".citation.distStmt('contact')") or \
+                     self._read_value(stdy_dscr + ".citation.distStmt('distrbtr')") or \
                      self._read_value(doc_citation + ".prodStmt('producer')", mandatory_field=True)
+        # TODO: clean out (or ask FSD to clean) mid text newlines (eg. in FSD2482)
         if maintainer and maintainer[0].text:
             maintainer = maintainer[0].text
         else:
@@ -482,20 +487,18 @@ class DataConverter:
             maintainer_email = self._read_value(stdy_dscr + ".citation.distStmt.contact.get('email')", mandatory_field=True)
 
         # Modified date
-        version = self._read_value(stdy_dscr + ".citation('prodDate')", mandatory_field=False) or \
-                  self._read_value(stdy_dscr + ".citation('version')", mandatory_field=True)
+        version = self._read_value(stdy_dscr + ".citation('prodDate')") or \
+                  self._read_value(stdy_dscr + ".citation('version')",
+                                   mandatory_field=True)
         version = version[0].get('date')
 
         # Name
         name_prefix = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.get('agency')", mandatory_field=False)
         name_id = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.text", mandatory_field=False)
-
         if not name_prefix:
             name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo.get('agency')", mandatory_field=True)
-
         if not name_id:
             name_id = self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
-
         # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
         # same harvest object at each reharvest
         # name = utils.generate_pid()
@@ -520,8 +523,9 @@ class DataConverter:
                 self._read_value(doc_citation + ".prodStmt.producer.string", mandatory_field=True)
 
 
-        # Read optional metadata fields:
-
+        ####################################################################
+        #      Read optional metadata fields:                              #
+        ####################################################################
         # Availability
         if _is_fsd(original_url):
             access_request_url = ACCESS_REQUEST_URL_FSD
@@ -551,48 +555,49 @@ class DataConverter:
         evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
 
 
-        # Flatten rest to 'XPath/path/to/element': 'value' pairs
-        # TODO: Result is large, review.
+        ####################################################################
+        #      Flatten rest to 'XPath/path/to/element': 'value' pairs      #
+        ####################################################################
         etree_xml = etree.fromstring(original_xml)
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}docDscr'))
         xpath_dict = flattened_ddi.getMap()
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
         xpath_dict.update(flattened_ddi.getMap())
-        # xpaths = [ {'key': key, 'value': value} for key, value in xpath_dict.iteritems() ]
+
 
         package_dict = dict(
-            access_application_URL=u'',   ## JuhoL: changed 'accessRights' to 'access_application_URL
+            access_application_URL=u'',
             access_request_URL=unicode(access_request_url),
-            algorithm=u'',   ## To be implemented straight in 'resources'
+            algorithm=u'',   # To be implemented straight in 'resources'
             availability=unicode(availability),
             contact_phone=contact_phone,
             contact_URL=contact_URL,
-            direct_download_URL=u'',  ## To be implemented straight in 'resources
+            direct_download_URL=u'',  # To be implemented straight in 'resources
             discipline=discipline,
             evdescr=evdescr or [],
             evtype=evtype or [],
             evwhen=evwhen or [],
             evwho=evwho or [],
-            geographic_coverage=u'',  #u'Espoo (city),Keilaniemi (populated place)',
+            geographic_coverage=u'',  # u'Espoo (city),Keilaniemi (populated place)',
             groups=[],
             id=generate_pid(),
             langtitle=langtitle,
-            langdis=u'True',  ### HUOMAA!
+            langdis=u'True',  # HUOMAA!
             language=language,
             license_URL=license_url,
             license_id=license_id,
             maintainer=maintainer,
             maintainer_email=maintainer_email,
-            mimetype=u'',  ## To be implemented straight in 'resources
+            mimetype=u'',  # To be implemented straight in 'resources
             name=name,
             notes=notes or u'',
             orgauth=orgauth,
             owner=owner,
-            projdis=u'True',   ### HUOMAA!
-            project_funder=u'',  #u'Roope Rahoittaja',
-            project_funding=u'',  #u'1234-rahoitusp\xe4\xe4t\xf6snumero',
-            project_homepage=u'',  #u'http://www.rahoittajan.kotisivu.fi/',
-            project_name=u'',  #u'Rahoittajan Projekti',
+            projdis=u'True',   # HUOMAA!
+            project_funder=u'',  # u'Roope Rahoittaja',
+            project_funding=u'',  # u'1234-rahoitusp\xe4\xe4t\xf6snumero',
+            project_homepage=u'',  # u'http://www.rahoittajan.kotisivu.fi/',
+            project_name=u'',  # u'Rahoittajan Projekti',
             resources=[{'algorithm': u'MD5',
                         'description': u'Original metadata record',
                         'format': u'xml',
@@ -602,11 +607,11 @@ class DataConverter:
                         'url': orig_xml_storage_url},
                        orig_web_page_resource],
             tag_string=keywords,
-            temporal_coverage_begin=u'',  #u'1976-11-06T00:00:00Z',
-            temporal_coverage_end=u'',  #u'2003-11-06T00:00:00Z',
+            temporal_coverage_begin=u'',  # u'1976-11-06T00:00:00Z',
+            temporal_coverage_end=u'',  # u'2003-11-06T00:00:00Z',
             title=langtitle[0].get('value'),   # Must exist in package dict
             version=version,
-            version_PID=name,  #u'',  #u'Aineistoversion-tunniste-PID'
+            version_PID=name,
         )
         package_dict['xpaths'] = xpath_dict
         # Above line creates:
