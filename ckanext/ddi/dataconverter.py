@@ -48,6 +48,33 @@ ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.
 LICENCE_ID_FSD = 'other_closed'
 MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
 KW_VOCAB_REGEX = re.compile(r'^(?!FSD$)')
+DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
+
+
+def ExceptReturn(exception, returns=u'', mandatory_field=False):
+    def decorator(f):
+        def call(*args, **kwargs):
+            try:
+                return f(*args, **kwargs)
+            except exception as e:
+                log.error('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
+                # print('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
+                if mandatory_field:
+                    log.debug('Unable to read mandatory value: {path}'
+                              .format(path=args[1]))
+                    # print('Unable to read mandatory value: {path}'
+                    #       .format(path=args[1]))
+                    # TODO: Nice to have: Add line number of exception in code below
+                    args[0].errors.append('Unable to read mandatory value: {path}'
+                        .format(path=args[1]))
+                else:
+                    log.debug('Unable to read optional value: {path}'
+                        .format(path=args[1]))
+                    # print('Unable to read optional value: {path}'
+                    #       .format(path=args[1]))
+                return returns
+        return call
+    return decorator
 
 
 def _collect_attribs(el):
@@ -261,6 +288,12 @@ class DataConverter:
         '''
         return self.errors
 
+    @ExceptReturn(AttributeError)
+    def get_clean_date(self, bs4_element):
+        raw_date = DATE_REGEX.search(bs4_element.get('date'))
+        return raw_date.group(0).rstrip('-') if raw_date and \
+                                                raw_date.group(0) else ''
+
     def _get_events(self, stdy_dscr, orgauth):
         '''
         Parse data into events from DDI fields
@@ -269,12 +302,6 @@ class DataConverter:
         evtype = []
         evwhen = []
         evwho = []
-        DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
-
-        def get_clean_date(bs4_element):
-            raw_date = DATE_REGEX.search(bs4_element.get('date'))
-            return raw_date.group(0).rstrip('-') if raw_date and \
-                                                    raw_date.group(0) else ''
 
         # Event: Collection
         ev_type_collect = self._read_value(stdy_dscr + ".stdyInfo.sumDscr('collDate', event='start')")
@@ -286,7 +313,7 @@ class DataConverter:
         for collection in ev_type_collect:
             evdescr.append({'value': u'Event automatically created at import.'})
             evtype.append({'value': u'collection'})
-            evwhen.append({'value': get_clean_date(collection)})
+            evwhen.append({'value': self.get_clean_date(collection)})
             evwho.append({'value': data_coll_string})
 
         # Event: Creation (eg. Published in publication)
@@ -304,6 +331,19 @@ class DataConverter:
         # TODO: Event: Published (eg. Deposited to some public access archive)
 
         return (evdescr, evtype, evwhen, evwho)
+
+    @ExceptReturn(AttributeError)
+    def get_temporal_coverage(self, start_bs4tag):
+        time_prds = start_bs4tag('timePrd')
+        for t in time_prds:
+            clean_date = self.get_clean_date(t)
+            if t.attrs['event'] == 'single':
+                t_begin = t_end = clean_date
+            if t.attrs['event'] == 'start':
+                t_begin = clean_date
+            if t.attrs['event'] == 'end':
+                t_end = clean_date
+        return t_begin or u'', t_end or u''
 
     def convert_language(self, lang):
         '''
@@ -552,7 +592,11 @@ class DataConverter:
         discipline_list = self._read_value(stdy_dscr + ".stdyInfo.subject('topcClas', vocab='FSD')")
         discipline = ', '.join([ tag.text for tag in discipline_list ])
 
+        # Dataset lifetime events
         evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
+
+        # Temporal coverage
+        temp_start, temp_end = self.get_temporal_coverage(self.ddi_xml)
 
 
         ####################################################################
@@ -607,8 +651,8 @@ class DataConverter:
                         'url': orig_xml_storage_url},
                        orig_web_page_resource],
             tag_string=keywords,
-            temporal_coverage_begin=u'',  # u'1976-11-06T00:00:00Z',
-            temporal_coverage_end=u'',  # u'2003-11-06T00:00:00Z',
+            temporal_coverage_begin=temp_start,
+            temporal_coverage_end=temp_end,
             title=langtitle[0].get('value'),   # Must exist in package dict
             version=version,
             version_PID=name,
