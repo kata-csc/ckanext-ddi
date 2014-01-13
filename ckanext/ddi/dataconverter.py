@@ -51,27 +51,32 @@ KW_VOCAB_REGEX = re.compile(r'^(?!FSD$)')
 DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
 
 
-def ExceptReturn(exception, returns=u'', mandatory_field=False):
+def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
+    '''Decorator to handle exceptions in the import stage in controlled manner.
+
+    Prevents the whole import to fail with flawed harvest objects or in the case
+    of optional metadata. Collects all deficiencies of harvest objects to
+    self.errors to be showed in WUI.
+
+    :param exceptions: Exceptions to catch.
+    :type exceptions: single exception or tuple of exceptions
+    '''
     def decorator(f):
         def call(*args, **kwargs):
             try:
                 return f(*args, **kwargs)
-            except exception as e:
-                log.error('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
-                # print('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
+            except exceptions as e:
+                self_ = args[0]  # Decorator intercepts method args, 1st is self
                 if mandatory_field:
-                    log.debug('Unable to read mandatory value: {path}'
+                    log.error('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
+                    log.error('Unable to read mandatory value: {path}'
                               .format(path=args[1]))
-                    # print('Unable to read mandatory value: {path}'
-                    #       .format(path=args[1]))
                     # TODO: Nice to have: Add line number of exception in code below
-                    args[0].errors.append('Unable to read mandatory value: {path}'
-                        .format(path=args[1]))
+                    self_.errors.append('Unable to read mandatory value: {path}'
+                         .format(path=args[1]))
                 else:
-                    log.debug('Unable to read optional value: {path}'
-                        .format(path=args[1]))
-                    # print('Unable to read optional value: {path}'
-                    #       .format(path=args[1]))
+                    log.info('Unable to read optional value: {path}'
+                       .format(path=args[1]))
                 return returns
         return call
     return decorator
@@ -332,18 +337,42 @@ class DataConverter:
 
         return (evdescr, evtype, evwhen, evwho)
 
-    @ExceptReturn(AttributeError)
+    @ExceptReturn((AttributeError, TypeError))
+    def get_geo_coverage(self, start_bs4tag):
+        '''Return a string of comma separated locations.
+
+        Removes matched tags from ddi xml with extract().
+
+        >>> self.get_geo_coverage(self.ddi_xml)
+            u'Espoo,Keilaniemi'
+
+        :param start_bs4tag: bs4 tag to start search
+        :type start_bs4tag: bs4.element.Tag instance
+        :returns: a string of comma separated locations
+        :rtype: a string
+        '''
+        geog_lcs = start_bs4tag('geogCover')
+        geog_string = ','.join([ loc.extract().string for loc in geog_lcs ])
+        return geog_string
+
+    @ExceptReturn((AttributeError, TypeError))
     def get_temporal_coverage(self, start_bs4tag):
+        '''Return the beginning and ending date of a time period covered by
+        dataset.
+
+        Removes matched tags from ddi xml with extract().
+        '''
+        t_begin = t_end = u''
         time_prds = start_bs4tag('timePrd')
         for t in time_prds:
-            clean_date = self.get_clean_date(t)
+            clean_date = self.get_clean_date(t.extract())
             if t.attrs['event'] == 'single':
                 t_begin = t_end = clean_date
             if t.attrs['event'] == 'start':
                 t_begin = clean_date
             if t.attrs['event'] == 'end':
                 t_end = clean_date
-        return t_begin or u'', t_end or u''
+        return t_begin, t_end
 
     def convert_language(self, lang):
         '''
@@ -471,6 +500,7 @@ class DataConverter:
         auth_entys = self._read_value(
             stdy_dscr + ".citation.rspStmt('AuthEnty')", mandatory_field=True)
         ## Other contributors. Should this be in the optional section?
+        # TODO Prevent / filter duplicate authors.
         auth_entys.extend(self._read_value(
             stdy_dscr + ".citation.rspStmt('othId')", mandatory_field=False))
         orgauth = []
@@ -595,6 +625,9 @@ class DataConverter:
         # Dataset lifetime events
         evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
 
+        # Geographic coverage
+        geo_cover = self.get_geo_coverage(self.ddi_xml)
+
         # Temporal coverage
         temp_start, temp_end = self.get_temporal_coverage(self.ddi_xml)
 
@@ -602,7 +635,7 @@ class DataConverter:
         ####################################################################
         #      Flatten rest to 'XPath/path/to/element': 'value' pairs      #
         ####################################################################
-        etree_xml = etree.fromstring(original_xml)
+        etree_xml = etree.fromstring(str(self.ddi_xml))
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}docDscr'))
         xpath_dict = flattened_ddi.getMap()
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
@@ -622,7 +655,7 @@ class DataConverter:
             evtype=evtype or [],
             evwhen=evwhen or [],
             evwho=evwho or [],
-            geographic_coverage=u'',  # u'Espoo (city),Keilaniemi (populated place)',
+            geographic_coverage=geo_cover,
             groups=[],
             id=generate_pid(),
             langtitle=langtitle,
