@@ -71,6 +71,7 @@ def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
                     log.error('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
                     log.error('Unable to read mandatory value: {path}'
                               .format(path=args[1]))
+                    # TODO Restore showing the unevaluated xpath value of the element: {path}
                     # TODO: Nice to have: Add line number of exception in code below
                     self_.errors.append('Unable to read mandatory value: {path}'
                          .format(path=args[1]))
@@ -299,6 +300,27 @@ class DataConverter:
         return raw_date.group(0).rstrip('-') if raw_date and \
                                                 raw_date.group(0) else ''
 
+    @ExceptReturn((AttributeError, TypeError), mandatory_field=True)
+    def get_keywords(self, start_bs4tag):
+        '''Return a string of comma separated keywords.
+
+        Removes matched tags from ddi xml with extract().
+
+        :param start_bs4tag: bs4 tag to start search
+        :type start_bs4tag: bs4.element.Tag instance
+        :returns: a string of comma separated keywords
+        :rtype: a string
+        '''
+        result_set = start_bs4tag(vocab=KW_VOCAB_REGEX)
+        keywords = ','.join([ kw.extract().string.replace(',', ' ') for kw in result_set ])
+        return keywords
+
+    @ExceptReturn((AttributeError, TypeError))
+    def get_discipline(self, start_bs4tag):
+        result_set = start_bs4tag('topcClas', vocab='FSD')
+        disciplines = ','.join([ d.extract().string for d in result_set ])
+        return disciplines
+
     def _get_events(self, stdy_dscr, orgauth):
         '''
         Parse data into events from DDI fields
@@ -345,11 +367,6 @@ class DataConverter:
 
         >>> self.get_geo_coverage(self.ddi_xml)
             u'Espoo,Keilaniemi'
-
-        :param start_bs4tag: bs4 tag to start search
-        :type start_bs4tag: bs4.element.Tag instance
-        :returns: a string of comma separated locations
-        :rtype: a string
         '''
         geog_lcs = start_bs4tag('geogCover')
         geog_string = ','.join([ loc.extract().string for loc in geog_lcs ])
@@ -516,10 +533,7 @@ class DataConverter:
             availability = AVAILABILITY_FSD
 
         # Keywords
-        keyword_list = self._read_value(
-            stdy_dscr + ".stdyInfo.subject(vocab=KW_VOCAB_REGEX)",
-            mandatory_field=True)
-        keywords = ','.join([ kw.text for kw in keyword_list ])
+        keywords = self.get_keywords(self.ddi_xml.stdyDscr.stdyInfo.subject)
 
         # Language
         # TODO: Where/how to extract multiple languages: 'language': u'eng, fin, swe' ?
@@ -619,8 +633,7 @@ class DataConverter:
                                  description in description_array])
 
         # Discipline
-        discipline_list = self._read_value(stdy_dscr + ".stdyInfo.subject('topcClas', vocab='FSD')")
-        discipline = ', '.join([ tag.text for tag in discipline_list ])
+        discipline = self.get_discipline(self.ddi_xml.stdyDscr.stdyInfo.subject)
 
         # Dataset lifetime events
         evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
