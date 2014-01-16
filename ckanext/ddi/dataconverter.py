@@ -312,14 +312,16 @@ class DataConverter:
         :rtype: a string
         '''
         result_set = start_bs4tag(vocab=KW_VOCAB_REGEX)
-        keywords = ','.join([ kw.extract().string.replace(',', ' ') for kw in result_set ])
-        return keywords
+        keywords = [ tag.extract().string for tag in result_set ]
+        kw_string = ','.join([ kw.replace(',', '') for kw in keywords if kw ])
+        return kw_string
 
     @ExceptReturn((AttributeError, TypeError))
     def get_discipline(self, start_bs4tag):
         result_set = start_bs4tag('topcClas', vocab='FSD')
-        disciplines = ','.join([ d.extract().string for d in result_set ])
-        return disciplines
+        disciplines = [ tag.extract().string for tag in result_set ]
+        d_string = ','.join([ d.replace(',', '') for d in disciplines if d ])
+        return d_string
 
     def _get_events(self, stdy_dscr, orgauth):
         '''
