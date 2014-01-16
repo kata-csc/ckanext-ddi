@@ -302,26 +302,29 @@ class DataConverter:
 
     @ExceptReturn((AttributeError, TypeError), mandatory_field=True)
     def get_keywords(self, start_bs4tag):
-        '''Return a string of comma separated keywords.
+        return self.search_tag_content(start_bs4tag, vocab=KW_VOCAB_REGEX)
 
-        Removes matched tags from ddi xml with extract().
+    @ExceptReturn((AttributeError, TypeError))
+    def get_discipline(self, start_bs4tag):
+        return self.search_tag_content(start_bs4tag, 'topcClas', vocab='FSD')
+
+    def search_tag_content(self, start_bs4tag, *args, **kwargs):
+        '''Search BeautifulSoup object for keywords or alike and return comma
+        separated string of results.
+
+        Search beginning from start_bs4tag with *args and **kwargs. Remove found
+        tags from ddi xml with extract(). Assure that no empty tags fail. Remove
+        in-keyword-commas.
 
         :param start_bs4tag: bs4 tag to start search
         :type start_bs4tag: bs4.element.Tag instance
         :returns: a string of comma separated keywords
         :rtype: a string
         '''
-        result_set = start_bs4tag(vocab=KW_VOCAB_REGEX)
-        keywords = [ tag.extract().string for tag in result_set ]
-        kw_string = ','.join([ kw.replace(',', '') for kw in keywords if kw ])
+        result_set = start_bs4tag(args, kwargs)
+        strings = [ tag.extract().string for tag in result_set ]
+        kw_string = ','.join([ s.replace(',', '') for s in strings if s ])
         return kw_string
-
-    @ExceptReturn((AttributeError, TypeError))
-    def get_discipline(self, start_bs4tag):
-        result_set = start_bs4tag('topcClas', vocab='FSD')
-        disciplines = [ tag.extract().string for tag in result_set ]
-        d_string = ','.join([ d.replace(',', '') for d in disciplines if d ])
-        return d_string
 
     def _get_events(self, stdy_dscr, orgauth):
         '''
