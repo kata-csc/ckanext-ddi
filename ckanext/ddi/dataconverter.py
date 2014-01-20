@@ -4,14 +4,13 @@ Harvester for DDI2 formats
 '''
 
 #pylint: disable-msg=E1101,E0611,F0401
-import datetime
-import json
+import inspect
 import logging
 import lxml.etree as etree
 import re
 import socket
 import StringIO
-import urllib2
+import warnings
 
 import bs4
 from pylons import config
@@ -19,12 +18,8 @@ import unicodecsv as csv
 
 import ckan.controllers.storage as storage
 from ckan.lib.base import h
-import ckan.logic as logic
 import ckan.model as model
 import ckan.model.authz as authz
-#from ckan.lib.munge import munge_tag
-from ckanext.harvest.harvesters.base import HarvesterBase
-import ckanext.harvest.model as hmodel
 import ckanext.kata.utils as utils
 import ckanext.oaipmh.importcore as importcore
 
@@ -50,7 +45,7 @@ MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
 KW_VOCAB_REGEX = re.compile(r'^(?!FSD$)')
 DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
 
-
+# TODO Nice to have: decorator for this decorator to separate mandatory and not
 def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
     '''Decorator to handle exceptions in the import stage in controlled manner.
 
@@ -67,17 +62,23 @@ def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
                 return f(*args, **kwargs)
             except exceptions as e:
                 self_ = args[0]  # Decorator intercepts method args, 1st is self
+                frame = inspect.currentframe()  # To show caller argument
+                caller_record = inspect.getouterframes(frame)[1]
+                line_num = caller_record[2]
+                call_line = caller_record[4][0]
+                call_arg = call_line.strip().split(')', 1)[0]
+                del frame  # To remove possible reference cycles
                 if mandatory_field:
                     log.error('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
-                    log.error('Unable to read mandatory value: {path}'
-                              .format(path=args[1]))
-                    # TODO Restore showing the unevaluated xpath value of the element: {path}
-                    # TODO: Nice to have: Add line number of exception in code below
-                    self_.errors.append('Unable to read mandatory value: {path}'
-                         .format(path=args[1]))
+                    # If this too slow: .format(carg=args[2] or args[1])
+                    log.error('Unable to read mandatory value[{li}]: {carg}'
+                              .format(li=line_num, carg=call_arg))
+                    self_.errors.append('Unable to read mandatory value[{li}]: '
+                                        '{carg}'.format(li=line_num,
+                                                        carg=call_arg))
                 else:
-                    log.info('Unable to read optional value: {path}'
-                       .format(path=args[1]))
+                    log.info('Unable to read optional value [{li}]: {carg}'
+                       .format(li=line_num, carg=call_arg))
                 return returns
         return call
     return decorator
@@ -300,6 +301,62 @@ class DataConverter:
         return raw_date.group(0).rstrip('-') if raw_date and \
                                                 raw_date.group(0) else ''
 
+    @ExceptReturn((AttributeError, TypeError, UserWarning, IndexError),
+                  mandatory_field=True)
+    def get_tag_mandatory(self, start_bs4tag, *args, **kwargs):
+        ''''Search BeautifulSoup object for a tag and return its date attribute.
+
+        Search beginning from start_bs4tag with *args and **kwargs. Remove found
+        tags from ddi xml with extract(). Assure that no empty tags fail. Remove
+        in-keyword-commas.
+
+        :param start_bs4tag: bs4 tag to start search
+        :type start_bs4tag: bs4.element.Tag instance
+        :returns: a string of comma separated keywords
+        :rtype: a string
+        '''
+        result_set = start_bs4tag(args, kwargs)
+        if len(result_set) > 1:
+            warnings.simplefilter('error', UserWarning)  # raises warning
+            warnings.warn('Ambiguous tag found: {tag}'.format(
+                tag=result_set[0].name))
+        return self.get_clean_date(result_set[0])
+
+    @ExceptReturn((AttributeError, TypeError, UserWarning))
+    def get_tag_optional(self, start_bs4tag, *args, **kwargs):
+        '''Search BeautifulSoup object for a tag and return its date attribute.
+
+        Optional version. see. get_tag_mandatory
+        '''
+        result_set = start_bs4tag(args, kwargs)
+        if len(result_set) > 1:
+            warnings.simplefilter('error', UserWarning)  # raises warning
+            warnings.warn('Ambiguous tag found: {tag}'.format(
+                tag=result_set[0].name))
+        return self.get_clean_date(result_set[0]) if result_set else ''
+
+    @ExceptReturn((AttributeError, TypeError, KeyError, UserWarning), mandatory_field=True)
+    def get_attr_mandatory(self, start_bs4tag, search_tag, attr):
+        '''Return the value of an attribute of a BeautifulSoup tag.
+        '''
+        result_set = start_bs4tag(search_tag)
+        if len(result_set) > 1:
+            warnings.simplefilter('error', UserWarning)  # To raise as exception
+            warnings.warn('Ambiguous tag found: {tag}'.format(
+                tag=result_set[0].name))
+        # Strange 'else' statement is to trigger exception
+        return result_set[0][attr] if result_set else result_set[attr]
+
+    @ExceptReturn((AttributeError, TypeError, KeyError))
+    def get_attr_optional(self, start_bs4tag, search_tag, attr):
+        result_set = start_bs4tag(search_tag)
+        if len(result_set) > 1:
+            warnings.simplefilter('error', UserWarning)  # To raise as exception
+            warnings.warn('Ambiguous tag found: {tag}'.format(
+                tag=result_set[0].name))
+        # Strange 'else' statement is to trigger exception
+        return result_set[0][attr] if result_set else result_set[attr]
+
     @ExceptReturn((AttributeError, TypeError), mandatory_field=True)
     def get_keywords(self, start_bs4tag):
         return self.search_tag_content(start_bs4tag, vocab=KW_VOCAB_REGEX)
@@ -318,6 +375,10 @@ class DataConverter:
 
         :param start_bs4tag: bs4 tag to start search
         :type start_bs4tag: bs4.element.Tag instance
+        :param *args: searched tag (only one supported) or none
+        :type *args: one string or None
+        :param **kwargs: searched attributes of a ddi tag
+        :type **kwargs: zero or more key-value pairs
         :returns: a string of comma separated keywords
         :rtype: a string
         '''
@@ -576,16 +637,16 @@ class DataConverter:
             maintainer_email = self._read_value(stdy_dscr + ".citation.distStmt.contact.get('email')", mandatory_field=True)
 
         # Modified date
-        version = self._read_value(stdy_dscr + ".citation('prodDate')") or \
-                  self._read_value(stdy_dscr + ".citation('version')",
-                                   mandatory_field=True)
-        version = version[0].get('date')
+        version = self.get_attr_optional(self.ddi_xml.stdyDscr.citation,
+                                         'prodDate', 'date') or \
+                  self.get_attr_mandatory(self.ddi_xml.stdyDscr.citation,
+                                          'version', 'date')
 
         # Name
         name_prefix = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.get('agency')", mandatory_field=False)
         name_id = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.text", mandatory_field=False)
         if not name_prefix:
-            name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo.get('agency')", mandatory_field=True)
+            name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo['agency']", mandatory_field=True)
         if not name_id:
             name_id = self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
         # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
