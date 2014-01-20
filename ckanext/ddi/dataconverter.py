@@ -588,7 +588,7 @@ class DataConverter:
             stdy_dscr + ".citation.rspStmt('othId')", mandatory_field=False))
         orgauth = []
         for a in auth_entys:
-            orgauth.append({'org': a.get('affiliation'),
+            orgauth.append({'org': a.get('affiliation', ''),
                             'value': a.text.strip()})
 
         # Availability
