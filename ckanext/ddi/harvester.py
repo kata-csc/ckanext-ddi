@@ -241,12 +241,13 @@ class DDIHarvester(HarvesterBase):
                                                    info['xml'], harvest_object)
         errors = self.ddi_converter.get_errors()
         if errors:
-            for err in errors:
-                self._save_object_error('Missing minimum metadata in {ur}.\n'
-                                        'AttributeError: {er}'
-                                        .format(ur=info['url'], er=err),
+            for er, line in errors:
+                self._save_object_error('Invalid or missing mandatory metadata in {ur}. '
+                                        '{er}'.format(ur=info['url'], er=er),
                                         harvest_object,
-                                        'Import')
+                                        'Import',
+                                        line)
+            self.ddi_converter.empty_errors()
         if not package_dict:
             return False
         schema = KataPlugin.create_package_schema_ddi()

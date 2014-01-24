@@ -62,6 +62,8 @@ def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
                 return f(*args, **kwargs)
             except exceptions as e:
                 self_ = args[0]  # Decorator intercepts method args, 1st is self
+                # If inspecting is too slow remove it and use
+                # 'carg=args[2] or args[1]' in format()'s below.
                 frame = inspect.currentframe()  # To show caller argument
                 caller_record = inspect.getouterframes(frame)[1]
                 line_num = caller_record[2]
@@ -69,15 +71,15 @@ def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
                 call_arg = call_line.strip().split(')', 1)[0]
                 del frame  # To remove possible reference cycles
                 if mandatory_field:
-                    log.error('{etype}: {ex}'.format(etype=e.__class__.__name__, ex=e))
-                    # If this too slow: .format(carg=args[2] or args[1])
-                    log.error('Unable to read mandatory value[{li}]: {carg}'
-                              .format(li=line_num, carg=call_arg))
-                    self_.errors.append('Unable to read mandatory value[{li}]: '
-                                        '{carg}'.format(li=line_num,
-                                                        carg=call_arg))
+                    log.error('Unable to read mandatory value: {etype}: {ex} at'
+                              ' {carg} (line {li})'.format(
+                        etype=e.__class__.__name__, ex=e, li=line_num,
+                        carg=call_arg))
+                    self_.errors.append(('{etype}: {ex} at {carg}'.format(
+                        etype=e.__class__.__name__, ex=e, carg=call_arg),
+                                         line_num))
                 else:
-                    log.info('Unable to read optional value [{li}]: {carg}'
+                    log.info('Unable to read optional value: {carg} (line {li})'
                        .format(li=line_num, carg=call_arg))
                 return returns
         return call
@@ -281,13 +283,17 @@ class DataConverter:
             if mandatory_field:
                 log.debug('Unable to read mandatory value: {path}'
                           .format(path=bs_eval_string))
-                # TODO: Nice to have: Add line number of exception in code below
                 self.errors.append('Unable to read mandatory value: {path}'
                                    .format(path=bs_eval_string))
             else:
                 log.debug('Unable to read optional value: {path}'
                           .format(path=bs_eval_string))
             return default
+
+    def empty_errors(self):
+        '''Remove errors of the instance.
+        '''
+        self.errors = []
 
     def get_errors(self):
         '''
@@ -384,7 +390,7 @@ class DataConverter:
         '''
         result_set = start_bs4tag(args, kwargs)
         strings = [ tag.extract().string for tag in result_set ]
-        kw_string = ','.join([ s.replace(',', '') for s in strings if s ])
+        kw_string = ','.join([ s for s in strings if s ])
         return kw_string
 
     def _get_events(self, stdy_dscr, orgauth):
@@ -469,6 +475,7 @@ class DataConverter:
             log.debug('Invalid language: {ke}'.format(ke=ke))
             return ''
 
+    @ExceptReturn(UnicodeEncodeError, mandatory_field=True)
     def _save_original_xml(self, original_xml, name, harvest_object):
         ''' Here is created a ofs storage ie. local pairtree storage for
         objects/blobs. The original xml is saved to this storage in
@@ -649,12 +656,8 @@ class DataConverter:
             name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo['agency']", mandatory_field=True)
         if not name_id:
             name_id = self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
-        # JuhoL: if we generate pkg.name we cannot reharvest + end up adding
-        # same harvest object at each reharvest
-        # name = utils.generate_pid()
         name = name_prefix + name_id
-        log.debug('Name: {namn}'.format(namn=name))
-        
+
         # Original xml and web page as resource
         orig_xml_storage_url = self._save_original_xml(original_xml, name, harvest_object)
         # For FSD 'URI' leads to summary web page of data, hence format='html'
