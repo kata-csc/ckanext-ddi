@@ -3,56 +3,55 @@
 Tests for DDI harvester
 '''
 # pylint: disable=E1101,C1101,C0111
+
 # import logging
-from unittest import TestCase
 # import urllib2
 # from StringIO import StringIO
 # import json
 # import uuid
 # import pprint
 # from datetime import datetime, timedelta
-#
-# from nose.exc import SkipTest
-#
-# import testdata
-#
-# from lxml import etree
+import unittest
 
-import ckan.model
+# from nose.exc import SkipTest
+# from lxml import etree
+# from sqlalchemy.ext.associationproxy import _AssociationDict
+import bs4
 
 # from ckan.model import Session, Package, User
 # from ckan.lib.helpers import url_for
 # from ckan.tests.functional.base import FunctionalTestCase
 # from ckan.tests import CreateTestData
 # from ckan.logic.auth.get import package_show, group_show
-# from ckan import model
-
-
-# from ckanext.ddi.harvester import DDIHarvester
 # from ckanext.harvest.model import HarvestJob, HarvestSource, HarvestObject, \
 #                                   HarvestObjectError, HarvestGatherError, setup
-# from sqlalchemy.ext.associationproxy import _AssociationDict
-#
-from ckanext.ddi.harvester import DDIHarvester
+import ckan.model
 import ckanext.harvest.model as harvest_model
 from ckanext.kata import model as kata_model
+# from ckanext.ddi.harvester import DDIHarvester
+import ckanext.ddi.harvester as dharvester
 import ckanext.ddi.dataconverter as dconverter
+import testdata
+
 
 # log = logging.getLogger(__file__)
 # realopen = urllib2.urlopen
 
 
-class TestDataConverter(TestCase):
+class TestDataConverter(unittest.TestCase):
 
     @classmethod
-    def setup_class(self):
+    def setup_class(cls):
         '''
         Setup database and variables
         '''
         harvest_model.setup()
         kata_model.setup()
 
-        self.ddi_converter = dconverter.DataConverter()
+        cls.ddi_converter = dconverter.DataConverter()
+
+        # cls.ddi_xml = testdata.nr1
+        cls.ddi_xml = bs4.BeautifulSoup(testdata.nr1, 'xml')
 
         # username = u'testlogin2'
         # password = u'letmein'
@@ -68,8 +67,18 @@ class TestDataConverter(TestCase):
         # res = fv.submit()
         # setup()
 
-    def test_dummy(self):
-        assert 1
+    def test_get_discipline(self):
+        discipline = self.ddi_converter.get_discipline(
+            self.ddi_xml.stdyDscr.stdyInfo.subject)
+        assert discipline == u'politiikantutkimus'
+
+    def test_get_keywords(self):
+        keywords = self.ddi_converter.get_keywords(
+            self.ddi_xml.stdyDscr.stdyInfo.subject)
+        assert keywords == u'vaalit,eduskuntavaalit,kunnallisvaalit,' \
+                           u'äänestäminen,poliittinen käyttäytyminen,' \
+                           u'poliittiset asenteet,puolueiden kannatus,' \
+                           u'poliittinen käyttäytyminen, asenteet ja mielipiteet'
 
     @classmethod
     def teardown_class(self):
@@ -77,7 +86,7 @@ class TestDataConverter(TestCase):
         ckan.model.repo.rebuild_db()
 
 
-class TestDDIHarvester(TestCase):
+class TestDDIHarvester(unittest.TestCase):
 
     @classmethod
     def setup_class(self):
@@ -87,7 +96,7 @@ class TestDDIHarvester(TestCase):
         harvest_model.setup()
         kata_model.setup()
 
-        self.ddi_harvester = DDIHarvester()
+        self.ddi_harvester = dharvester.DDIHarvester()
 
         # username = u'testlogin2'
         # password = u'letmein'
