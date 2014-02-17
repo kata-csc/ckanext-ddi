@@ -768,7 +768,7 @@ class DataConverter:
             title=langtitle[0].get('value'),   # Must exist in package dict
             type='dataset',
             version=version,
-            version_PID=name,
+            version_PID='',
         )
         package_dict['xpaths'] = xpath_dict
         # Above line creates:
