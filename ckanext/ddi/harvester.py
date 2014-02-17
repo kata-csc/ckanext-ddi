@@ -6,6 +6,7 @@ Harvester for DDI2 formats
 #pylint: disable-msg=E1101,E0611,F0401
 import datetime
 import httplib
+import itertools
 import json
 import logging
 import lxml.etree as etree
@@ -14,11 +15,12 @@ import pprint
 import re
 import socket
 import StringIO
+import traceback
 import urllib2
 
 from bs4 import BeautifulSoup, Tag
 from dateutil import parser
-from pylons import config
+#from pylons import config
 import unicodecsv as csv
 
 from ckan.controllers.storage import BUCKET, get_ofs
@@ -31,11 +33,10 @@ import ckan.model as model
 from ckan.model.authz import setup_default_user_roles
 from ckanext.harvest.harvesters.base import HarvesterBase
 #from ckanext.harvest.harvesters.retry import HarvesterRetry
-from ckanext.harvest.model import HarvestObject, HarvestJob, HarvestObjectError
+import ckanext.harvest.model as hmodel
 from ckanext.kata.plugin import KataPlugin
-from dataconverter import DataConverter
+import dataconverter as dconverter
 
-import traceback
 
 log = logging.getLogger(__name__)
 
@@ -49,13 +50,24 @@ class DDIHarvester(HarvesterBase):
     config = None
 
     def __init__(self):
-        self.ddi_converter = DataConverter()
+        self.ddi_converter = dconverter.DataConverter()
 
     def _set_config(self, config_str):
         '''Set the configuration string.
+
+        :param config_str: For example: '{"limit": 30}'
+        :type config_str: str
         '''
         if config_str:
-            self.config = json.loads(config_str)
+            try:
+                self.config = json.loads(config_str)
+                log.debug('Using config: %r', self.config)
+            except ValueError as e:
+                log.error('Unable to decode config from: {c}, {e}'.format(
+                    e=e, c=config_str))
+                raise
+        else:
+            self.config = {}
 
     def info(self):
         '''Return information about this harvester.
@@ -70,14 +82,30 @@ class DDIHarvester(HarvesterBase):
         '''Validate the config, returns it since we don't have any configuration
         parameters
         '''
+        def validate_param(conf_obj, p, t):
+            '''
+            Check if param 'p' is specified and is of type 't'
+            '''
+            if p in conf_obj and not isinstance(conf_obj[p], t):
+                raise TypeError("'{p}' needs to be a '{t}'".format(t=t, p=p))
+            return p in conf_obj
+
+        if config:
+            try:
+                config_obj = json.loads(config)
+                validate_param(config_obj, 'limit', int)
+            except TypeError as e:
+                raise e
+        else:
+            config = {}
         return config
 
     def get_original_url(self, harvest_object_id):
         '''Return the URL to the original remote document, given a Harvest
          Object id.
          '''
-        obj = model.Session.query(HarvestObject). \
-            filter(HarvestObject.id == harvest_object_id).first()
+        obj = model.Session.query(hmodel.HarvestObject). \
+            filter(hmodel.HarvestObject.id == harvest_object_id).first()
         if obj:
             return obj.source.url
         return None
@@ -124,35 +152,35 @@ class DDIHarvester(HarvesterBase):
         self._set_config(harvest_job.source.config)
 
         def date_from_config(key):
-            return self._datetime_from_str(key, config.get(key, None))
+            return self._datetime_from_str(key, self.config.get(key, None))
 
         def add_harvest_object(harvest_job, url):
-            harvest_obj = HarvestObject(job=harvest_job)
+            harvest_obj = hmodel.HarvestObject(job=harvest_job)
             harvest_obj.content = url
             harvest_obj.save()
             return harvest_obj
 
         from_ = date_from_config('ckanext.harvest.test.from')
         until = date_from_config('ckanext.harvest.test.until')
-        previous_job = model.Session.query(HarvestJob) \
-            .filter(HarvestJob.source == harvest_job.source) \
-            .filter(HarvestJob.gather_finished != None) \
-            .filter(HarvestJob.id != harvest_job.id) \
-            .order_by(HarvestJob.gather_finished.desc()) \
+        previous_job = model.Session.query(hmodel.HarvestJob) \
+            .filter(hmodel.HarvestJob.source == harvest_job.source) \
+            .filter(hmodel.HarvestJob.gather_finished != None) \
+            .filter(hmodel.HarvestJob.id != harvest_job.id) \
+            .order_by(hmodel.HarvestJob.gather_finished.desc()) \
             .limit(1).first()
         if previous_job and not until and not from_:
             from_ = previous_job.gather_finished
             until = None
 
-        harvest_objs = []
+        object_ids = []
         # Add retries.
         #        for url in self._scan_retries(harvest_job):
         #            obj = add_harvest_object(harvest_job, url)
-        #            harvest_objs.append(obj.id)
+        #            object_ids.append(obj.id)
         #            log.debug('Retrying record: %s' % url)
         try:
             urls = urllib2.urlopen(harvest_job.source.url)
-            for url in urls.readlines():
+            for url in itertools.islice(urls.readlines(), self.config.get('limit')):
                 if from_ or until:
                     # This should not fail the whole gather.
                     try:
@@ -171,7 +199,7 @@ class DDIHarvester(HarvesterBase):
                     if until and until < lastmod:
                         continue
                 obj = add_harvest_object(harvest_job, url)
-                harvest_objs.append(obj.id)
+                object_ids.append(obj.id)
         except urllib2.HTTPError, err:
             self._save_gather_error(
                 'HTTPError: Could not gather XML files from URL! ' +
@@ -188,8 +216,8 @@ class DDIHarvester(HarvesterBase):
             return None
         #        self._clear_retries()
         log.info('Gathered %i records from %s.' % (
-            len(harvest_objs), harvest_job.source.url,))
-        return harvest_objs
+            len(object_ids), harvest_job.source.url,))
+        return object_ids
 
     def fetch_stage(self, harvest_object):
         '''Fetch and parse the DDI XML document.

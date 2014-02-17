@@ -35,7 +35,8 @@ socket.setdefaulttimeout(30)
 AVAILABILITY_ENUM = [u'direct_download',
                      u'access_application',
                      u'access_request',
-                     u'contact_owner']
+                     u'contact_owner',
+                     u'through_provider']
 AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[3]
 LICENCE_ID_DEFAULT =  'notspecified'
 AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
@@ -575,10 +576,6 @@ class DataConverter:
         '''Extract package values from bs4 object 'ddi_xml' parsed from xml
         '''
         # TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.
-        # ... must use instance attribute self.ddi_xml and wrap it to etree after
-        # extracting and then flatten remaining xpaths.
-        #self.doc_citation = ddi_xml.codeBook.docDscr.citation
-        #self.stdy_dscr = ddi_xml.codeBook.stdyDscr
         doc_citation = "ddi_xml.codeBook.docDscr.citation"
         stdy_dscr = "ddi_xml.codeBook.stdyDscr"
 
@@ -769,6 +766,7 @@ class DataConverter:
             temporal_coverage_begin=temp_start,
             temporal_coverage_end=temp_end,
             title=langtitle[0].get('value'),   # Must exist in package dict
+            type='dataset',
             version=version,
             version_PID=name,
         )
