@@ -1,3 +1,4 @@
+# coding: utf-8
 from setuptools import setup, find_packages
 import sys, os
 
@@ -12,10 +13,10 @@ setup(
     classifiers=[],
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords='',
-    author='CSC',
+    author=u'CSC – IT Center for Science Ltd.',
     author_email='kata-project@postit.csc.fi',
-    url='',
-    license='',
+    url='https://github.com/kata-csc/ckanext-ddi',
+    license='AGPL',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     namespace_packages=['ckanext', 'ckanext.ddi'],
     include_package_data=True,
