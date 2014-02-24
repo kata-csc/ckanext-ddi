@@ -1,0 +1,5355 @@
+<?xml version="1.0"?>
+<!DOCTYPE codeBook  SYSTEM "http://www.icpsr.umich.edu/DDI/Version2-0.dtd">
+<codeBook xml:lang="fi">
+  <docDscr>
+    <citation>
+      <titlStmt>
+        <titl>DDI-kuvailu: Kunta-alan työolobarometri 1998</titl>
+        <IDNo agency="FSD">2743</IDNo>
+      </titlStmt>
+      <prodStmt>
+        <producer abbr="FSD">Yhteiskuntatieteellinen tietoarkisto</producer>
+        <copyright>Yhteiskuntatieteellinen tietoarkisto</copyright>
+        <prodDate date="2012-08-22"/>
+        <prodPlac>Yhteiskuntatieteellinen tietoarkisto</prodPlac>
+      </prodStmt>
+      <biblCit format="MRDF">Kunta-alan työolobarometri 1998 [koodikirja]. Tampere: Yhteiskuntatieteellinen tietoarkisto [tuottaja ja jakaja], 2012.</biblCit>
+      <holdings location="Yhteiskuntatieteellinen tietoarkisto FSD" URI="http://www.fsd.uta.fi/aineistot/luettelo/FSD2743">Yhteiskuntatieteellinen tietoarkisto FSD</holdings>
+    </citation>
+    <notes xml:lang="fi">FSD:n aineistokuvailut (FSD metadata records), jonka tekijä on Suomen yhteiskuntatieteellinen tietoarkisto (Finnish Social Science Data Archive), on lisensoitu Creative Commons Nimeä-Epäkaupallinen 1.0 Suomi lisenssillä.</notes>
+    <notes xml:lang="sv">FSD:n aineistokuvailut (FSD metadata records) av Suomen yhteiskuntatieteellinen tietoarkisto (Finlands samhällsvetenskapliga dataarkiv) är licensierad under a Creative Commons Erkännande-IckeKommersiell 1.0 Finland License.</notes>
+    <notes xml:lang="en">FSD:n aineistokuvailut (FSD metadata records) by Suomen yhteiskuntatieteellinen tietoarkisto (Finnish Social Science Data Archive) is licensed under a Creative Commons Attribution-NonCommercial 1.0 Finland License.</notes>
+  </docDscr>
+  <stdyDscr>
+    <citation>
+      <titlStmt>
+        <titl>Kunta-alan työolobarometri 1998</titl>
+               <parTitl xml:lang="en">Finnish Working Life Barometer: Local Government Employees 1998</parTitl>
+        <IDNo agency="FSD">2743</IDNo>
+      </titlStmt>
+          <rspStmt>
+        <AuthEnty>Tilastokeskus. Haastattelu- ja tutkimuspalvelut</AuthEnty>
+        <AuthEnty>Työministeriö</AuthEnty>
+        <othId>
+          <p>Työtuvallisuuskeskus</p>
+        </othId>
+      </rspStmt>
+      <prodStmt>
+        <producer affiliation=""/>
+        <copyright>FSD:n ja aineiston luovuttajan tekemän sopimuksen mukaisesti.</copyright>
+      </prodStmt>
+      <distStmt>
+        <distrbtr abbr="FSD" URI="http://www.fsd.uta.fi/">Yhteiskuntatieteellinen tietoarkisto</distrbtr>
+             <distrbtr abbr="FSD" URI="http://www.fsd.uta.fi/">Yhteiskuntatieteellinen tietoarkisto</distrbtr>
+        <depositr affiliation="Tilastokeskus. Haastattelu- ja tutkimuspalvelut">Siikanen, Antti</depositr>
+        <depositr affiliation="Työturvallisuuskeskus">Suurnäkki, Timo</depositr>
+        <depositr affiliation="Työturvallisuuskeskus">Monni, Tiina-Mari</depositr>
+      </distStmt>
+      <biblCit>Siikanen, Antti: Kunta-alan työolobarometri 1998 [elektroninen aineisto]. FSD2743, versio 1.0 (2012-08-22). Tampere: Yhteiskuntatieteellinen tietoarkisto [jakaja], 2012.</biblCit>
+    </citation>
+    <stdyInfo>
+      <subject>
+       <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">kunta-ala</keyword>
+            <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">henkilöstö</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">palkansaajat</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">palkkaus</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">tasa-arvo</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">tulevaisuudenodotukset</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työaika</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työelämä</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työhyvinvointi</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työilmapiiri</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työkyky</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työolot</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työpaikkaväkivalta</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">työsuhde</keyword>
+        <keyword vocab="YSA" vocabURI="http://vesa.lib.helsinki.fi/">syrjintä</keyword>
+        <topcClas vocab="FSD" vocabURI="http://www.fsd.uta.fi/aineistot/arkistointi/FSD_topcClas.html">hyvinvointitutkimus</topcClas>
+        <topcClas vocab="FSD" vocabURI="http://www.fsd.uta.fi/aineistot/arkistointi/FSD_topcClas.html">työelämän sosiologia</topcClas>
+        <topcClas vocab="CESSDA">sosiaalinen käyttäytyminen ja asenteet</topcClas>
+        <topcClas vocab="CESSDA">tasa-arvo ja eriarvoisuus</topcClas>
+        <topcClas vocab="CESSDA">työllisyys</topcClas>
+        <topcClas vocab="CESSDA">työmarkkinasuhteet</topcClas>
+        <topcClas vocab="CESSDA">työolot</topcClas>
+      </subject>
+      <abstract>
+       <p>Tutkimuksessa selvitettiin suomalaisen työelämän laatua kunta-alan palkansaajien näkökulmasta vuonna 1998. Tiedot perustuvat työministeriön työolobarometrin aineistoon, joka kattaa kaikkien alojen palkansaajat. Tätä aineistoa on kasvatettu Työturvallisuuskeskuksen kuntaryhmän toimeksiannosta kunta-alalla työskentelevien osalta poimimalla heistä lisäotos.</p>
+        <p>Työolobarometrin sisällöstä pääosa on pidetty samanlaisena eri vuosina. Vuonna 1998 mukaan on otettu myös syrjintää koskevia kysymyksiä, sekä palkansaajien työkykyä ja kuntoutustarvetta koskevia kysymyksiä.</p>
+        <p>Työolobarometrin ensimmäiset kysymykset koskivat työsuhteen pituutta ja luonnetta sekä työpaikan henkilöstöä. Esimerkiksi kysyttiin vuoden aikana tapahtuneista muutoksista henkilöstön lukumäärässä, irtisanomisista ja lomautuksista. Samoin tiedusteltiin ulkoistamista, yksikköjen yhdistelyä ja tuottavuuden parantamista viimeisen vuoden aikana. Seuraavat kysymykset koskivat työpaikan ilmapiiriä, kuten esiintyykö työpaikalla ristiriitoja, olivatko ne lisääntyneet, ja keiden välillä niitä esiintyi. Tämän jälkeen kysyttiin työtehtävistä ja työn luonteesta sekä palkkaukseen liittyvistä asioista, kuten ylityökorvauksista, lisistä ja tulospalkkioista sekä vastaajan suhtautumisesta palkkaukseensa. Vastaajien kokemuksia vaikuttamisesta työtehtävien sisältöön, tahtiin, koulutukseen ja esimerkiksi laitehankintoihin selvitettiin.</p>
+        <p>Seuraavaksi tiedusteltiin työajan joustosta, ylitöistä, kotona työskentelystä ja ammattiliittoon kuulumisesta. Vastaajat ottivat kantaa mm. työtahdin, työturvallisuuden ja ammattitaidon kehittämisen mahdollisuuksien lisääntymiseen tai vähenemiseen kuluneen vuoden aikana. Seuraavaksi tiedusteltiin työn ja palkkauksen suhteesta, ja oliko työpaikalla toteutettu projekteja tuottavuuden tai laadun kehittämiseksi. Vastaajat kertoivat, oliko työpaikalla liian vähän henkilöitä tehtäviin nähden, olivatko työt hyvin organisoituja, ja esimerkiksi, kokiko vastaaja työn fyysisesti raskaaksi. Seuraavaksi vastaajilta tiedusteltiin, pitävätkö he mahdollisena, että seuraavan vuoden aikana heidät esimerkiksi lomautetaan, irtisanotaan tai siirretään toisiin tehtäviin. Vastaajia pyydettiin arvioimaan, kuinka eri tekijät vaikuttaisivat heidän työnsaantimahdollisuuksiinsa, mikäli he jäisivät työttömiksi. Lisäksi vastaajat pohtivat työllisyystilannetta sekä sitä, onko työelämä muuttumassa suuntaan tai toiseen esimerkiksi tasa-arvon, ympäristökysymysten huomioon ottamisen, esimiesten johtamistavan tai itsensä kehittämisen mahdollisuuksien suhteen.</p>
+        <p>Eriarvoisuutta ja syrjintää työpaikalla selvitettiin muun muassa tiedustelemalla, ilmenikö vastaajan työorganisaatiossa eriarvoista kohtelua, joka perustuu ikään tai sukupuoleen.</p>
+        <p>Kunta-alan työolobarometrissa on hyödynnetty työvoimatutkimuksen (Tilastokeskus 1998) taustamuuttujia. Taustamuuttujina olivat muun muassa sukupuoli, ikä ja työpaikan toimiala.</p>
+      </abstract>
+      <sumDscr>
+          <timePrd date="1998-00-00" event="single"/>
+        <collDate date="1998-09-01" event="start"/>
+        <collDate date="1998-09-30" event="end"/>
+        <nation abbr="FI">Suomi</nation>
+        <geogCover>Suomi</geogCover>
+        <anlyUnit>Henkilö</anlyUnit>
+        <universe clusion="I">Suomenkieliset 18-64-vuotiaat työssä olevat kunta-alan palkansaajat</universe>
+        <universe clusion="I">Suomenkieliset 18-64-vuotiaat työssä olevat kunta-alan palkansaajat</universe>
+        <dataKind>Kvantitatiivinen</dataKind>
+      </sumDscr>
+    </stdyInfo>
+    <method>
+      <dataColl>
+        <timeMeth>Pitkittäisaineisto: trendi/toistuva poikkileikkausaineisto</timeMeth>
+        <dataCollector affiliation="">Tilastokeskus</dataCollector>
+        <sampProc>
+          <p>Satunnaisotos (N=371), johon poimittiin työvoimatutkimuksen (Tilastokeskus 1996) aikaisempien tietojen perusteella sellaisia suomenkielisiä 18-64-vuotiaita palkansaajia, joiden säännöllinen työaika on vähintään 10 tuntia. Haastatelluista sisällytettiin aineistoon vain kunta-alan palkansaajat. Otosta kasvatettiin poimimalla kunta-alalla työskentelevistä lisäotos.</p>
+        </sampProc>
+        <collMode>Tietokoneavusteinen puhelinhaastattelu (CATI)</collMode>
+        <resInstru>Strukturoitu kyselylomake</resInstru>
+        <sources>
+          <dataSrc>Tilastokeskus (1998). Työvoimatutkimus 1998.</dataSrc>
+        </sources>
+        <weight>Aineisto ei sisällä painomuuttujia.</weight>
+      </dataColl>
+      <notes/>
+      <anlyInfo>
+        <respRate/>
+        <dataAppr/>
+      </anlyInfo>
+    </method>
+    <dataAccs>
+      <setAvail>
+        <accsPlac URI="http://www.fsd.uta.fi/">Yhteiskuntatieteellinen tietoarkisto</accsPlac>
+        <origArch/>
+        <avlStatus/>
+        <collSize>Data: suomenkielinen SPSS portable -tiedosto. Data saatavilla myös muissa tiedostoformaateissa.</collSize>
+        <complete/>
+      </setAvail>
+      <useStmt>
+        <restrctn>Aineistoa luovutetaan tieteelliseen tutkimus- ja opetuskäyttöön; FSD:n lupamenettely.</restrctn>
+        <citReq>Tutkimusaineisto on merkittävä lähdeviitteisiin kaikissa julkaisuissa, joissa aineistoa tai sen osaa käytetään. Tietoarkiston antaman malliviittaustiedon voi merkitä lähdeluetteloon sellaisenaan tai sitä voi muokata julkaisun käytäntöjen mukaisesti.</citReq>
+        <deposReq>Arkistolle tulee lähettää tiedot julkaisuista, joissa aineiston kopiota tai siitä luvallisesti otettuja kopioita on hyödynnetty.</deposReq>
+        <disclaimer>Aineiston arkistoon luovuttajilla ja arkistolla ei ole vastuuta aineiston jatkokäytössä tuotetuista tuloksista ja tulkinnoista.</disclaimer>
+      </useStmt>
+      <notes/>
+    </dataAccs>
+    <othrStdyMat>
+      <relMat/>
+      <relStdy>FSD2660 Työolobarometri 1998</relStdy>
+    </othrStdyMat>
+  </stdyDscr>
+  <fileDscr>
+    <fileTxt>
+      <fileName ID="F1">daF2743.por</fileName>
+      <dimensns>
+        <caseQnty>371</caseQnty>
+        <varQnty>109</varQnty>
+      </dimensns>
+      <fileType>SPSS Portable</fileType>
+    </fileTxt>
+  </fileDscr>
+  <dataDscr>
+    <varGrp var="K4_1 K4_2 K4_3 K4_4 K4_5">
+      <txt>Millä tavoin henkilöstö on lisääntynyt? Onko uusia työntekijöitä otettu:</txt>
+    </varGrp>
+    <varGrp var="K5_1 K5_2 K5_3 K5_4 K5_5 K5_6 K5_7 K5_8">
+      <txt>Onko työpaikassanne viimeksi kuluneen vuoden aikana:</txt>
+    </varGrp>
+    <varGrp var="K6_1 K6_2 K6_3 K6_4 K6_5">
+      <txt>Onko työpaikassa tapahtunut seuraavia muutoksia viimeeksi kuluneen 12 kuukauden aikana:</txt>
+    </varGrp>
+    <varGrp var="K9_1 K9_2 K9_3 K9_4 K9_5">
+      <txt>Ovatko seuraavat asiat lisääntyneet, ennallaan vai vähentyneet työpaikassanne viimeksi kuluneen 12 kuukauden aikana:</txt>
+    </varGrp>
+    <varGrp var="K11_1 K11_2 K11_3 K11_4 K11_5">
+      <txt>Ovatko vaikutusmahdollisuudet parantumassa vai heikkenemässä, jos ajattelette:</txt>
+    </varGrp>
+    <varGrp var="K18_1 K18_2 K18_3 K18_4 K18_5 K18_6 K18_7 K18_8 K18_9">
+      <txt>Ovatko seuraavat asiat lisääntyneet, ennallaan vai vähentyneet työpaikassanne viimeksi kuluneen 12 kk aikana:</txt>
+    </varGrp>
+    <varGrp var="K22_1 K22_2 K22_3 K22_4 K22_5">
+      <txt>Pidättekö mahdollisena, että seuraavan vuoden aikana:</txt>
+    </varGrp>
+    <varGrp var="K25_1 K25_2 K25_3 K25_4 K25_5 K25_6 K25_7 K25_8">
+      <txt>Nykyisin puhutaan paljon työelämän muuttumisesta ja muutosten suunnasta. Ovatko seuraavat asiat Teidän mielestänne muuttumassa parempaan suuntaan, huonompaan suuntaan vai ovatko ne ennallaan:</txt>
+    </varGrp>
+    <varGrp var="K26_1 K26_2 K26_3">
+      <txt>Työpaikoilla on kiinnitetty huomiota työntekijöiden työkyvyn ylläpitämiseen eri tavoin. Onko Teidän työpaikallanne pyritty systemaattisesti vaikuttamaan:</txt>
+    </varGrp>
+    <varGrp var="K27_1 K27_2 K27_3 K27_4 K27_5 K27_6 K27_7">
+      <txt>Seuraavassa on lueteltu joitakin työkykyä ylläpitäviä keinoja. Katsotteko tarvitsevanne niitä itse paljon, jonkin verran vai ei lainkaan.</txt>
+    </varGrp>
+    <varGrp var="K28_1 K28_2">
+      <txt>Onko joku työpaikallanne joutunut syrjinnän kohteeksi:</txt>
+    </varGrp>
+    <var files="F1" name="FSD_NO" intrvl="contin" dcml="0" ID="FSD_NO">
+      <labl level="variable">[fsd_no] Aineistonumero (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineistonumero (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2743" min="2743"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">2743</sumStat>
+      <sumStat type="max">2743</sumStat>
+      <sumStat type="mean">2743.00</sumStat>
+      <sumStat type="stdev">.000</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="FSD_VR" intrvl="contin" dcml="1" ID="FSD_VR">
+      <labl level="variable">[fsd_vr] Aineistoversio (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineistoversio (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="1.0" min="1.0"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.0</sumStat>
+      <sumStat type="max">1.0</sumStat>
+      <sumStat type="mean">1.000</sumStat>
+      <sumStat type="stdev">.0000</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="FSD_PRO" intrvl="discrete" dcml="0" ID="FSD_PRO">
+      <labl level="variable">[fsd_pro] Aineiston käsittelyn taso (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Aineiston käsittelyn taso (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">1</sumStat>
+      <sumStat type="mean">1.00</sumStat>
+      <sumStat type="stdev">.000</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">A (ks. koodikirja)</labl>
+        <catStat>371</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">B (ks. koodikirja)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">C (Dataa ei tarkastettu FSD:ssä)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="FSD_ID" intrvl="contin" dcml="0" ID="FSD_ID">
+      <labl level="variable">[fsd_id] Havaintotunnus (lisätty FSD:ssä)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Havaintotunnus (lisätty FSD:ssä)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="371" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">371</sumStat>
+      <sumStat type="mean">186.00</sumStat>
+      <sumStat type="stdev">107.243</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="TOL95" intrvl="contin" dcml="0" ID="TOL95">
+      <labl level="variable">[tol95] Työpaikan toimiala</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työpaikan toimiala</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="999" min="10"/>
+      </valrng>
+      <sumStat type="vald">358</sumStat>
+      <sumStat type="min">10</sumStat>
+      <sumStat type="max">999</sumStat>
+      <sumStat type="mean">798.97</sumStat>
+      <sumStat type="stdev">131.394</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="TYTYY" intrvl="discrete" dcml="0" ID="TYTYY">
+      <labl level="variable">[tytyy] Työnantajatyyppi</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työnantajatyyppi</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="9" min="1"/>
+      </valrng>
+      <sumStat type="vald">358</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <sumStat type="mean">2.03</sumStat>
+      <sumStat type="stdev">.436</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Valtio</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Kunta/kuntainliitto</labl>
+        <catStat>338</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Yksityinen</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Ei tietoa</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>13</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="AMMAS" intrvl="discrete" dcml="0" ID="AMMAS">
+      <labl level="variable">[ammas] Ammattiasema</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattiasema</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">358</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">1</sumStat>
+      <sumStat type="mean">1.00</sumStat>
+      <sumStat type="stdev">.000</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Palkansaaja</labl>
+        <catStat>358</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Yrittäjä</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Työskentelee perheenjäsenen yrityksessä ilman varsinaista palkkaa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>13</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="AMSTA" intrvl="discrete" dcml="0" ID="AMSTA">
+      <labl level="variable">[amsta] Ammattistatus</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ammattistatus</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="9" min="1"/>
+      </valrng>
+      <sumStat type="vald">358</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">3</sumStat>
+      <sumStat type="mean">1.81</sumStat>
+      <sumStat type="stdev">.402</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Työntekijä</labl>
+        <catStat>70</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Toimihenkilö</labl>
+        <catStat>287</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Palkansaaja, status tuntematon</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Yrittäjä</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Yrittäjäperheen jäsen</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">Ammattiasema tuntematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>13</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="SOSEK" intrvl="discrete" dcml="0" ID="SOSEK">
+      <labl level="variable">[sosek] Sosioekonominen asema</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sosioekonominen asema</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="99" min="31"/>
+      </valrng>
+      <sumStat type="vald">358</sumStat>
+      <sumStat type="min">31</sumStat>
+      <sumStat type="max">99</sumStat>
+      <sumStat type="mean">42.52</sumStat>
+      <sumStat type="stdev">7.672</sumStat>
+      <catgry>
+        <catValu>31</catValu>
+        <labl level="category">Johtotehtävissä toimivat ylemmät toimihenkilöt</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>32</catValu>
+        <labl level="category">Suunnittelu- ja tutkimustehtävissä toimivat ylemmät toimihen</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>33</catValu>
+        <labl level="category">Opetustehtävissä toimivat ylemmät toimihenkilöt</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>34</catValu>
+        <labl level="category">Muut ylemmät toimihenkilöt</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>39</catValu>
+        <labl level="category">Ylemmät toimihenkilöt, erittelemätön</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>41</catValu>
+        <labl level="category">Työnjohtotehtävissä toimivat alemmat toimihenkilöt</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>42</catValu>
+        <labl level="category">Itsenäistä toimistotyötä tekevät alemmat toimihenkilöt</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>43</catValu>
+        <labl level="category">Epäitsenäistä toimistotyötä tekevät alemmat toimihenkilöt</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>44</catValu>
+        <labl level="category">Muut alemmat toimihenkilöt</labl>
+        <catStat>138</catStat>
+      </catgry>
+      <catgry>
+        <catValu>49</catValu>
+        <labl level="category">Alemmat toimihenkilöt, erittelemätön</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>51</catValu>
+        <labl level="category">Maataloustyöntekijät</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>52</catValu>
+        <labl level="category">Teollisuustyöntekijät</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>53</catValu>
+        <labl level="category">Muut tuotantotyöntekijät</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>54</catValu>
+        <labl level="category">Jakelu- ja palvelutyöntekijät</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>59</catValu>
+        <labl level="category">Työntekijät, erittelemätön</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>99</catValu>
+        <labl level="category">ei tietoa</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>13</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="SAANAI" intrvl="contin" dcml="0" ID="SAANAI">
+      <labl level="variable">[saanai] Säännöllinen työaika (tuntia/viikko)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Säännöllinen työaika (tuntia/viikko)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="70" min="2"/>
+      </valrng>
+      <sumStat type="vald">349</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">70</sumStat>
+      <sumStat type="mean">37.08</sumStat>
+      <sumStat type="stdev">6.419</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="SIVUTYO" intrvl="discrete" dcml="0" ID="SIVUTYO">
+      <labl level="variable">[sivutyo] Tekee sivutyötä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Tekee sivutyötä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">349</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <sumStat type="mean">1.96</sumStat>
+      <sumStat type="stdev">.203</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>334</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>22</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="SIVUTOL" intrvl="discrete" dcml="0" ID="SIVUTOL">
+      <labl level="variable">[sivutol] Sivutyön työpaikan toimiala</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sivutyön työpaikan toimiala</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="999" min="10"/>
+      </valrng>
+      <sumStat type="vald">16</sumStat>
+      <sumStat type="min">220</sumStat>
+      <sumStat type="max">920</sumStat>
+      <sumStat type="mean">782.19</sumStat>
+      <sumStat type="stdev">164.288</sumStat>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">Maatalous, riistatalous ja niihin liittyvät palvelut</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>20</catValu>
+        <labl level="category">Metsätalous ja siihen liittyvät palvelut</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>50</catValu>
+        <labl level="category">Kalastus, kalanviljely ja niihin liittyvät palvelut</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>100</catValu>
+        <labl level="category">Kivi- ja ruskohiilen kaivu; turpeen nosto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>110</catValu>
+        <labl level="category">Raakaöljyn ja luonnonkaasun tuotanto sekä siihen liittyvät palvelut</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>120</catValu>
+        <labl level="category">Uraani- ja toriummalmien louhinta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>130</catValu>
+        <labl level="category">Metallimalmien louhinta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>140</catValu>
+        <labl level="category">Muu mineraalien kaivu</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>151</catValu>
+        <labl level="category">Elintarvikkeiden valmistus (151-158)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>159</catValu>
+        <labl level="category">Juomien valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>160</catValu>
+        <labl level="category">Tupakkatuotteiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>170</catValu>
+        <labl level="category">Tekstiilien valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>180</catValu>
+        <labl level="category">Vaatteiden valmistus; turkisten muokkaus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>191</catValu>
+        <labl level="category">Nahan ja nahkatuotteiden valmistus (191-192)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>193</catValu>
+        <labl level="category">Jalkineiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>201</catValu>
+        <labl level="category">Puun sahaus, höyläys ja kyllästys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>202</catValu>
+        <labl level="category">Vanerin ja muiden puulevyjen valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>203</catValu>
+        <labl level="category">Rakennuspuusepäntuotteiden valmistus (203-205)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>211</catValu>
+        <labl level="category">Massan, paperin ja kartongin valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>212</catValu>
+        <labl level="category">Paperi- ja kartonkituotteiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>220</catValu>
+        <labl level="category">Kustantaminen, painaminen sekä ääni-, kuva- ja atk-tallenteiden jäljentäminen</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>230</catValu>
+        <labl level="category">Koksin, öljytuotteiden ja ydinpolttoaineen valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>241</catValu>
+        <labl level="category">Peruskemikaalien valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>242</catValu>
+        <labl level="category">Kemiallisten tuotteiden ja tekokuitujen valmistus (242-247)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>251</catValu>
+        <labl level="category">Kumituotteiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>252</catValu>
+        <labl level="category">Muovituotteiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>260</catValu>
+        <labl level="category">Ei-metallisten mineraalituott. valmistus (lasi-, savi- ja kivituotteiden yms. valm.)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>270</catValu>
+        <labl level="category">Perusmetallien valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>280</catValu>
+        <labl level="category">Metallituotteiden valmistus pois lukien koneet ja laitteet</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>290</catValu>
+        <labl level="category">Koneiden ja laitteiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>300</catValu>
+        <labl level="category">Konttori- ja tietokoneiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>310</catValu>
+        <labl level="category">Muu sähkökoneiden ja -laitteiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>320</catValu>
+        <labl level="category">Radio-, televisio- ja tietoliikennevälineiden valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>330</catValu>
+        <labl level="category">Lääkintäkojeiden, hienomekaanisten kojeiden ja optisten instrumenttien sekä kellojen valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>340</catValu>
+        <labl level="category">Autojen ja perävaunujen valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>351</catValu>
+        <labl level="category">Laivojen ja veneiden valmistus ja korjaus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>352</catValu>
+        <labl level="category">Muiden kulkuneuvojen valmistus (352-355)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>361</catValu>
+        <labl level="category">Huonekalujen valmistus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>362</catValu>
+        <labl level="category">Muu valmistus (362-366)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>370</catValu>
+        <labl level="category">Kierrätys</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>400</catValu>
+        <labl level="category">Sähkö-, kaasu- ja lämpöhuolto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>410</catValu>
+        <labl level="category">Veden puhdistus ja jakelu</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>451</catValu>
+        <labl level="category">Maa- ja vesirakentaminen (451, 45219, 4523,4524)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>452</catValu>
+        <labl level="category">Talonrakentaminen (45211, 4522)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>453</catValu>
+        <labl level="category">Rakennusasennus, viimeistely (4525, 453, 454)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>455</catValu>
+        <labl level="category">Rakennuskoneiden vuokraus käyttäjineen</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>501</catValu>
+        <labl level="category">Moottoriajoneuvojen kauppa (501, 503, 504)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>502</catValu>
+        <labl level="category">Moottoriajoneuvojen huolto ja korjaus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>505</catValu>
+        <labl level="category">Polttoaineiden vähittäiskauppa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>510</catValu>
+        <labl level="category">Agentuuritoiminta ja tukkukauppa pois lukien moottoriajoneuvojen kauppa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>521</catValu>
+        <labl level="category">Vähittäiskauppa (521-526)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>527</catValu>
+        <labl level="category">Henkilökohtaisten esineiden ja kotitalousesineiden korjaus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>551</catValu>
+        <labl level="category">Hotellit, muu majoitustoiminta (551-552)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>553</catValu>
+        <labl level="category">Ravintolat, kahvilat, baarit, ruokakioskit, ateriapalvelu (553-555)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>601</catValu>
+        <labl level="category">Rautatieliikenne</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>602</catValu>
+        <labl level="category">Muu maaliikenne (602-603)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>610</catValu>
+        <labl level="category">Vesiliikenne</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>620</catValu>
+        <labl level="category">Ilmaliikenne</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>630</catValu>
+        <labl level="category">Liikennettä palveleva toiminta ja matkatoimistot</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>641</catValu>
+        <labl level="category">Posti- ja kuriiritoiminta</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>642</catValu>
+        <labl level="category">Teleliikenne</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>650</catValu>
+        <labl level="category">Rahoituksen välitys poislukien vakuutus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>660</catValu>
+        <labl level="category">Vakuutustoiminta poislukien pakollinen sosiaalivakuutus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>670</catValu>
+        <labl level="category">Rahoitusta palveleva toiminta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>700</catValu>
+        <labl level="category">Kiinteistöalan palvelut</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>710</catValu>
+        <labl level="category">Kulkuneuvojen, koneiden ja laitteiden vuokraus ilman käyttäjää sekä  kotitaloustavaroiden vuokraus</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>720</catValu>
+        <labl level="category">Tietojenkäsittelypalvelu</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>730</catValu>
+        <labl level="category">Tutkimus ja kehittäminen</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>741</catValu>
+        <labl level="category">Lainopillinen ja taloudellinen konsultointi; hallintayhtiöt</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>742</catValu>
+        <labl level="category">Tekninen palvelu, -testaus ja analysointi (742-743)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>744</catValu>
+        <labl level="category">Mainospalvelu</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>745</catValu>
+        <labl level="category">Työnvälitys ja henkilöstön hankinta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>746</catValu>
+        <labl level="category">Etsivä-, vartionti- ja turvallisuuspalvelu</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>747</catValu>
+        <labl level="category">Siivous</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>748</catValu>
+        <labl level="category">Muut palvelut liike-elämälle</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>751</catValu>
+        <labl level="category">Julkishallinto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>752</catValu>
+        <labl level="category">Ulkoasiain hallinto, maanpuolustus ja järjestystoimi</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>753</catValu>
+        <labl level="category">Pakollinen sosiaalivakuutustoiminta</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>801</catValu>
+        <labl level="category">Peruskoulu, lukio ja ammatillinen koulutus (801-802)</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>803</catValu>
+        <labl level="category">Korkeakoulut</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>804</catValu>
+        <labl level="category">Muu koulutus</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>851</catValu>
+        <labl level="category">Terveydenhuoltopalvelut</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>852</catValu>
+        <labl level="category">Eläinlääkintäpalvelut</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>853</catValu>
+        <labl level="category">Lasten päivähoito ( osa siirretty 854:ksi) (85321)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>854</catValu>
+        <labl level="category">Muu sosiaalipalvelu (uusi luokka) (8531, 85322-85329)</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>900</catValu>
+        <labl level="category">Ympäristönhuolto</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>911</catValu>
+        <labl level="category">Työmarkkinajärjestöt, elinkeinoelämän järjestöt (911-912)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>913</catValu>
+        <labl level="category">Uskonnolliset järjestöt (osa siirretty 914:ksi) (9131)</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>914</catValu>
+        <labl level="category">Muut järjestöt, puolueet (uusi luokka) (9132-9133)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>920</catValu>
+        <labl level="category">Virkistys-, kulttuuri- ja urheilutoiminta</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>931</catValu>
+        <labl level="category">Pesulat (uusi luokka) (9301)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>932</catValu>
+        <labl level="category">Muut palvelut (uusi luokka) (9302-9305)</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>950</catValu>
+        <labl level="category">Työnantajakotitaloudet</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>970</catValu>
+        <labl level="category">Kansainväliset järjestöt ja ulkomaiset edustustot</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry>
+        <catValu>999</catValu>
+        <labl level="category">Toimiala tuntematon</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>355</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="SIVUTUNN" intrvl="contin" dcml="0" ID="SIVUTUNN">
+      <labl level="variable">[sivutunn] Sivutyön työaika (tuntia/viikko)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sivutyön työaika (tuntia/viikko)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="28" min="2"/>
+      </valrng>
+      <sumStat type="vald">15</sumStat>
+      <sumStat type="min">2</sumStat>
+      <sumStat type="max">28</sumStat>
+      <sumStat type="mean">8.67</sumStat>
+      <sumStat type="stdev">7.461</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="IKA" intrvl="contin" dcml="0" ID="IKA">
+      <labl level="variable">[ika] Ikä</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ikä</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="63" min="18"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">18</sumStat>
+      <sumStat type="max">63</sumStat>
+      <sumStat type="mean">41.34</sumStat>
+      <sumStat type="stdev">9.612</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="SUKUP" intrvl="discrete" dcml="0" ID="SUKUP">
+      <labl level="variable">[sukup] Sukupuoli</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sukupuoli</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">2</sumStat>
+      <sumStat type="mean">1.75</sumStat>
+      <sumStat type="stdev">.432</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">mies</labl>
+        <catStat>92</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">nainen</labl>
+        <catStat>279</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="TOIMI" intrvl="discrete" dcml="0" ID="TOIMI">
+      <labl level="variable">[toimi] Työpaikan toimiala</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työpaikan toimiala</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="9" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1</sumStat>
+      <sumStat type="max">9</sumStat>
+      <sumStat type="mean">4.18</sumStat>
+      <sumStat type="stdev">1.275</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">teoll./rak./kaiv.</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">yksit. palvelut</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">valtion palvelut</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">kuntien palvelut</labl>
+        <catStat>329</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">muut/sekalaiset</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="KONU" intrvl="discrete" dcml="0" ID="KONU">
+      <labl level="variable">KOHDENUMERO</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>KOHDENUMERO</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K1" intrvl="contin" dcml="0" ID="K1">
+      <labl level="variable">[K1] Kuinka monta vuotta olette ollut nykyisellä työpaikallanne?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kuinka monta vuotta olette ollut nykyisellä työpaikallanne?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="34" min="0"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">0</sumStat>
+      <sumStat type="max">34</sumStat>
+      <sumStat type="mean">10.76</sumStat>
+      <sumStat type="stdev">8.923</sumStat>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K1B" intrvl="discrete" dcml="2" ID="K1B">
+      <labl level="variable">[K1B] Onko työsuhteenne luonteeltaan:</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko työsuhteenne luonteeltaan:</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">2.00</sumStat>
+      <sumStat type="mean">1.2291</sumStat>
+      <sumStat type="stdev">.42083</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">vakinainen</labl>
+        <catStat>286</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">määräaikainen</labl>
+        <catStat>85</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K2" intrvl="discrete" dcml="2" ID="K2">
+      <labl level="variable">[K2] Kuinka monta henkilöä on siinä työpaikassa, jossa itse työskentelette?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kuinka monta henkilöä on siinä työpaikassa, jossa itse työskentelette?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="10.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">368</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">10.00</sumStat>
+      <sumStat type="mean">4.0217</sumStat>
+      <sumStat type="stdev">2.18106</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">1 - 4 henkilöä</labl>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">5 - 9 henkilöä</labl>
+        <catStat>52</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">10 - 19 henkilöä</labl>
+        <catStat>71</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">20 - 29 henkilöä</labl>
+        <catStat>61</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">30 - 49 henkilöä</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">50 - 99 henkilöä</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>7</catValu>
+        <labl level="category">100 - 199 henkilöä</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>8</catValu>
+        <labl level="category">200 - 499 henkilöä</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>9</catValu>
+        <labl level="category">500 - 999 henkilöä</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>10</catValu>
+        <labl level="category">1000 henkilöä tai enemmän</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>99</catValu>
+        <labl level="category"/>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K3" intrvl="discrete" dcml="2" ID="K3">
+      <labl level="variable">[K3] Onko henkilöstön määrä työpaikassanne lisääntynyt, ennallaan vai vähentynyt viimeksi kuluneen vuoden (12 kk) aikana?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko henkilöstön määrä työpaikassanne lisääntynyt, ennallaan vai vähentynyt viimeksi kuluneen vuoden (12 kk) aikana?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.1995</sumStat>
+      <sumStat type="stdev">.66828</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>215</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vähentynyt</labl>
+        <catStat>103</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K4_1" intrvl="discrete" dcml="2" ID="K4_1">
+      <labl level="variable">[K4_1] (JOS K3=lisääntynyt) Millä tavoin henkilöstö on lisääntynyt: Onko uusia työntekijöitä otettu vakinaiseen työsuhteeseen?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko uusia työntekijöitä otettu vakinaiseen työsuhteeseen?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">45</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.6222</sumStat>
+      <sumStat type="stdev">.53466</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>326</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K4_2" intrvl="discrete" dcml="2" ID="K4_2">
+      <labl level="variable">[K4_2] (JOS K3=lisääntynyt) Millä tavoin henkilöstö on lisääntynyt: Onko uusia työntekijöitä otettu tilapäiseen tai määräaikaiseen työsuhteeseen?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko uusia työntekijöitä otettu tilapäiseen tai määräaikaiseen työsuhteeseen?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">45</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.2222</sumStat>
+      <sumStat type="stdev">.47140</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>326</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K4_3" intrvl="discrete" dcml="2" ID="K4_3">
+      <labl level="variable">[K4_3] (JOS K3=lisääntynyt) Millä tavoin henkilöstö on lisääntynyt: Onko uusia työntekijöitä otettu osa-aikaiseen työsuhteeseen?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko uusia työntekijöitä otettu osa-aikaiseen työsuhteeseen?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">45</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.7111</sumStat>
+      <sumStat type="stdev">.58861</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>326</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K4_4" intrvl="discrete" dcml="2" ID="K4_4">
+      <labl level="variable">[K4_4] (JOS K3=lisääntynyt) Millä tavoin henkilöstö on lisääntynyt: Onko työntekijöitä siirretty saman työnantajan muista työpaikoista?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko työntekijöitä siirretty saman työnantajan muista työpaikoista?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">45</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.8889</sumStat>
+      <sumStat type="stdev">.38271</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>326</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K4_5" intrvl="discrete" dcml="2" ID="K4_5">
+      <labl level="variable">[K4_5] (JOS K3=lisääntynyt) Millä tavoin henkilöstö on lisääntynyt: Onko otettu työntekijöitä, joiden palkka maksetaan julkisista työllistämisvaroista?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko otettu työntekijöitä, joiden palkka maksetaan julkisista työllistämisvaroista?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">45</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.5333</sumStat>
+      <sumStat type="stdev">.62523</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>326</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_1" intrvl="discrete" dcml="2" ID="K5_1">
+      <labl level="variable">[K5_1] Onko työpaikassanne kuluneen vuoden aikana: Lomautettu työntekijöitä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Lomautettu työntekijöitä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9407</sumStat>
+      <sumStat type="stdev">.32339</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>331</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_2" intrvl="discrete" dcml="2" ID="K5_2">
+      <labl level="variable">[K5_2] Onko työpaikassanne kuluneen vuoden aikana: Irtisanottu työntekijöitä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Irtisanottu työntekijöitä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9677</sumStat>
+      <sumStat type="stdev">.27318</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>343</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_3" intrvl="discrete" dcml="2" ID="K5_3">
+      <labl level="variable">[K5_3] Onko työpaikassanne kuluneen vuoden aikana: Tehty lyhennettyä työviikkoa?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Tehty lyhennettyä työviikkoa?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9569</sumStat>
+      <sumStat type="stdev">.32595</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>331</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_4" intrvl="discrete" dcml="2" ID="K5_4">
+      <labl level="variable">[K5_4] Onko työpaikassanne kuluneen vuoden aikana: Kokopäiväisiä työntekijöitä osa-aikaistettu?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kokopäiväisiä työntekijöitä osa-aikaistettu?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9892</sumStat>
+      <sumStat type="stdev">.30294</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>337</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_5" intrvl="discrete" dcml="2" ID="K5_5">
+      <labl level="variable">[K5_5] Onko työpaikassanne kuluneen vuoden aikana: Työntekijöitä siirtynyt eläkkeelle tai lähtenyt muualle siten, että avoimeksi jääneitä työpaikkoja ei ole täytetty (ns. luonnollinen poistuma)?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työntekijöitä siirtynyt eläkkeelle tai lähtenyt muualle siten, että avoimeksi jääneitä työpaikkoja ei ole täytetty (ns. luonnollinen poistuma)?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.7951</sumStat>
+      <sumStat type="stdev">.52616</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>97</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>253</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_6" intrvl="discrete" dcml="2" ID="K5_6">
+      <labl level="variable">[K5_6] Onko työpaikassanne kuluneen vuoden aikana: Työntekijöiden määrä vähentynyt sillä tavoin, että määräaikaisia työsuhteita ei ole uusittu?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työntekijöiden määrä vähentynyt sillä tavoin, että määräaikaisia työsuhteita ei ole uusittu?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.7978</sumStat>
+      <sumStat type="stdev">.51945</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>95</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>256</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_7" intrvl="discrete" dcml="2" ID="K5_7">
+      <labl level="variable">[K5_7] Onko työpaikassanne kuluneen vuoden aikana: Työntekijöiden määrä vähentynyt siten, että äitiysloman, sairausloman tai muun pitkäaikaisen poissaolon tilalle ei ole otettu sijaisia?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työntekijöiden määrä vähentynyt siten, että äitiysloman, sairausloman tai muun pitkäaikaisen poissaolon tilalle ei ole otettu sijaisia?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.8221</sumStat>
+      <sumStat type="stdev">.47151</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>80</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>277</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K5_8" intrvl="discrete" dcml="2" ID="K5_8">
+      <labl level="variable">[K5_8] Onko työpaikassanne kuluneen vuoden aikana: Siirretty työntekijöitä toiseen työyksikköön?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Siirretty työntekijöitä toiseen työyksikköön?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.8437</sumStat>
+      <sumStat type="stdev">.45599</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>285</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K6_1" intrvl="discrete" dcml="2" ID="K6_1">
+      <labl level="variable">[K6_1] Onko työpaikassa tapahtunut seuraavia muutoksia viimeeksi kuluneen 12 kuukauden aikana: Onko työpaikallanne laitoksia purettu pienemmiksi yksiköiksi, kuten tulosryhmiksi tai muiksi pienemmiksi ryhmiksi.</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko työpaikallanne laitoksia purettu pienemmiksi yksiköiksi, kuten tulosryhmiksi tai muiksi pienemmiksi ryhmiksi.</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9623</sumStat>
+      <sumStat type="stdev">.30077</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>337</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K6_2" intrvl="discrete" dcml="2" ID="K6_2">
+      <labl level="variable">[K6_2] Onko työpaikassa tapahtunut seuraavia muutoksia viimeeksi kuluneen 12 kuukauden aikana: Entä päinvastainen tilanne, onko eri yksiköitä yhdistetty aikaisempaa laajemmiksi kokonaisuuksiksi?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Entä päinvastainen tilanne, onko eri yksiköitä yhdistetty aikaisempaa laajemmiksi kokonaisuuksiksi?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9461</sumStat>
+      <sumStat type="stdev">.33257</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>329</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K6_3" intrvl="discrete" dcml="2" ID="K6_3">
+      <labl level="variable">[K6_3] Onko työpaikassa tapahtunut seuraavia muutoksia viimeeksi kuluneen 12 kuukauden aikana: Onko teidän työpaikallanne lisätty työn tuottavuuteen tai tuloksellisuuteen perustuvaa arviointia tai valvontaa?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko teidän työpaikallanne lisätty työn tuottavuuteen tai tuloksellisuuteen perustuvaa arviointia tai valvontaa?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.5202</sumStat>
+      <sumStat type="stdev">.58494</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>195</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>159</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K6_4" intrvl="discrete" dcml="2" ID="K6_4">
+      <labl level="variable">[K6_4] Onko työpaikassa tapahtunut seuraavia muutoksia viimeeksi kuluneen 12 kuukauden aikana: Onko teidän työpaikallanne alettu maksaa aikaisempaa enemmän työn tuloksellisuuteen perustuvia palkkioita?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko teidän työpaikallanne alettu maksaa aikaisempaa enemmän työn tuloksellisuuteen perustuvia palkkioita?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9704</sumStat>
+      <sumStat type="stdev">.30613</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>336</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K6_5" intrvl="discrete" dcml="2" ID="K6_5">
+      <labl level="variable">[K6_5] Onko työpaikassa tapahtunut seuraavia muutoksia viimeeksi kuluneen 12 kuukauden aikana: Entä onko aikaisemmin omalla väellä tehtyjä töitä alettu ostaa ulkopuolisilta aikaisempaa enemmän?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Entä onko aikaisemmin omalla väellä tehtyjä töitä alettu ostaa ulkopuolisilta aikaisempaa enemmän?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9353</sumStat>
+      <sumStat type="stdev">.41082</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>44</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>307</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K8" intrvl="discrete" dcml="2" ID="K8">
+      <labl level="variable">[K8] Työskennelläänkö työpaikallanne ryhmissä (tiimit, solut, projektityöryhmät ym.)?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työskennelläänkö työpaikallanne ryhmissä (tiimit, solut, projektityöryhmät ym.)?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.8973</sumStat>
+      <sumStat type="stdev">.74371</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">pääosin</labl>
+        <catStat>123</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">osittain</labl>
+        <catStat>162</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vai ei lainkaan</labl>
+        <catStat>85</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K9_1" intrvl="discrete" dcml="2" ID="K9_1">
+      <labl level="variable">[K9_1] Onko lisääntynyt/ennallaan/vähentynyt työpaikassanne kuluneen vuoden aikana: Esimiesten ja alaisten väliset ristiriidat?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Esimiesten ja alaisten väliset ristiriidat?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.9214</sumStat>
+      <sumStat type="stdev">.70078</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lisääntynyt selvästi</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Lisääntynyt jonkin verran</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>261</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Vähentynyt jonkin verran</labl>
+        <catStat>38</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Vähentynyt selvästi</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K9_2" intrvl="discrete" dcml="2" ID="K9_2">
+      <labl level="variable">[K9_2] Onko lisääntynyt/ennallaan/vähentynyt työpaikassanne kuluneen vuoden aikana: Työntekijöiden väliset ristiriidat?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työntekijöiden väliset ristiriidat?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8916</sumStat>
+      <sumStat type="stdev">.62045</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lisääntynyt selvästi</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Lisääntynyt jonkin verran</labl>
+        <catStat>58</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>268</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Vähentynyt jonkin verran</labl>
+        <catStat>28</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Vähentynyt selvästi</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K9_3" intrvl="discrete" dcml="2" ID="K9_3">
+      <labl level="variable">[K9_3] Onko lisääntynyt/ennallaan/vähentynyt työpaikassanne kuluneen vuoden aikana: Eri henkilöstöryhmien väliset ristiriidat?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Eri henkilöstöryhmien väliset ristiriidat?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">367</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8856</sumStat>
+      <sumStat type="stdev">.52060</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lisääntynyt selvästi</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Lisääntynyt jonkin verran</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>296</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Vähentynyt jonkin verran</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Vähentynyt selvästi</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K9_4" intrvl="discrete" dcml="2" ID="K9_4">
+      <labl level="variable">[K9_4] Onko lisääntynyt/ennallaan/vähentynyt työpaikassanne kuluneen vuoden aikana: Entä kilpailuhenki?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Entä kilpailuhenki?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">367</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8038</sumStat>
+      <sumStat type="stdev">.54791</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lisääntynyt selvästi</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Lisääntynyt jonkin verran</labl>
+        <catStat>57</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>288</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Vähentynyt jonkin verran</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Vähentynyt selvästi</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K9_5" intrvl="discrete" dcml="2" ID="K9_5">
+      <labl level="variable">[K9_5] Onko lisääntynyt/ennallaan/vähentynyt työpaikassanne kuluneen vuoden aikana: Ristiriidat asiakkaiden kanssa?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ristiriidat asiakkaiden kanssa?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">367</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8774</sumStat>
+      <sumStat type="stdev">.52135</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lisääntynyt selvästi</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Lisääntynyt jonkin verran</labl>
+        <catStat>43</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>298</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Vähentynyt jonkin verran</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Vähentynyt selvästi</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K10A" intrvl="discrete" dcml="2" ID="K10A">
+      <labl level="variable">[K10a] Jos ajattelette yleisesti työpaikkanne henkilöstön pätevyyttä ja ammatillista osaamista, niin onko se viimeisen vuoden aikana lisääntynyt, vähentynyt vai ennallaan?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jos ajattelette yleisesti työpaikkanne henkilöstön pätevyyttä ja ammatillista osaamista, niin onko se viimeisen vuoden aikana lisääntynyt, vähentynyt vai ennallaan?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">1.6900</sumStat>
+      <sumStat type="stdev">.75936</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lisääntynyt</labl>
+        <catStat>159</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>184</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vähentynyt</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Ei sovi, ei muita työntekijöitä</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Ei osaa sanoa</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K10B" intrvl="discrete" dcml="2" ID="K10B">
+      <labl level="variable">[K10B] Ovatko työtehtävien suoritusvaatimukset viimeisen vuoden aikana mielestänne lisääntyneet, vähentyneet vai ennallaan?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ovatko työtehtävien suoritusvaatimukset viimeisen vuoden aikana mielestänne lisääntyneet, vähentyneet vai ennallaan?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">1.3585</sumStat>
+      <sumStat type="stdev">.58198</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntyneet</labl>
+        <catStat>252</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>111</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vähentyneet</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei sovi, ei muita työntekijöitä</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K11_1" intrvl="discrete" dcml="2" ID="K11_1">
+      <labl level="variable">[K11_1] Ovatko vaikutusmahdollisuutesi parantumassa vai heikentymässä, jos ajattelette: Sitä, mitä työtehtäviinne kuuluu?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sitä, mitä työtehtäviinne kuuluu?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.7703</sumStat>
+      <sumStat type="stdev">.77821</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Parantumassa selvästi</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Parantumassa hieman</labl>
+        <catStat>109</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>202</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Heikkenemässä hieman</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Heikkenemässä selvästi</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K11_2" intrvl="discrete" dcml="2" ID="K11_2">
+      <labl level="variable">[K11_2] Ovatko vaikutusmahdollisuutesi parantumassa vai heikentymässä, jos ajattelette: Sitä, missä tahdissa teette työnne?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sitä, missä tahdissa teette työnne?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.0596</sumStat>
+      <sumStat type="stdev">.70458</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Parantumassa selvästi</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Parantumassa hieman</labl>
+        <catStat>47</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>245</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Heikkenemässä hieman</labl>
+        <catStat>57</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Heikkenemässä selvästi</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K11_3" intrvl="discrete" dcml="2" ID="K11_3">
+      <labl level="variable">[K11_3] Ovatko vaikutusmahdollisuutesi parantumassa vai heikentymässä, jos ajattelette: Sitä, miten työt jaetaan (työpaikalla) ihmisten kesken?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sitä, miten työt jaetaan (työpaikalla) ihmisten kesken?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">368</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8614</sumStat>
+      <sumStat type="stdev">.62625</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Parantumassa selvästi</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Parantumassa hieman</labl>
+        <catStat>57</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>271</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Heikkenemässä hieman</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Heikkenemässä selvästi</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K11_4" intrvl="discrete" dcml="2" ID="K11_4">
+      <labl level="variable">[K11_4] Ovatko vaikutusmahdollisuutesi parantumassa vai heikentymässä, jos ajattelette: Laitehankintoja?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Laitehankintoja?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.9730</sumStat>
+      <sumStat type="stdev">.72083</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Parantumassa selvästi</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Parantumassa hieman</labl>
+        <catStat>59</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>250</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Heikkenemässä hieman</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Heikkenemässä selvästi</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K11_5" intrvl="discrete" dcml="2" ID="K11_5">
+      <labl level="variable">[K11_5] Ovatko vaikutusmahdollisuutesi parantumassa vai heikentymässä, jos ajattelette: Sitä, miten työntekijöiden koulutus järjestetään?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sitä, miten työntekijöiden koulutus järjestetään?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">367</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8692</sumStat>
+      <sumStat type="stdev">.71235</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Parantumassa selvästi</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Parantumassa hieman</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>256</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Heikkenemässä hieman</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Heikkenemässä selvästi</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K13" intrvl="discrete" dcml="2" ID="K13">
+      <labl level="variable">[K13] Oletteko ammattiyhdistyksen toimihenkilöjärjestön tai vastaavan ammattiliiton jäsen (työttömyyskassan jäsen)?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko ammattiyhdistyksen toimihenkilöjärjestön tai vastaavan ammattiliiton jäsen (työttömyyskassan jäsen)?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">2.00</sumStat>
+      <sumStat type="mean">1.0674</sumStat>
+      <sumStat type="stdev">.25103</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>346</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K14" intrvl="discrete" dcml="2" ID="K14">
+      <labl level="variable">[K14] Ovatko palkalliset tai palkattomat ylityöt työpaikassanne lisääntyneet, ennallaan vai vähentyneet, jos vertaatte nykyistä tilannetta tilanteeseen vuosi sitten?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ovatko palkalliset tai palkattomat ylityöt työpaikassanne lisääntyneet, ennallaan vai vähentyneet, jos vertaatte nykyistä tilannetta tilanteeseen vuosi sitten?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">365</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8192</sumStat>
+      <sumStat type="stdev">.66726</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Lisääntyneet paljon</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Lisääntyneet jonkin verran</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>272</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Vähentyneet jonkin verran</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Vähentyneet paljon</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K15_1" intrvl="discrete" dcml="2" ID="K15_1">
+      <labl level="variable">[K15_1] Oletteko itse tehnyt elo-syyskuussa: Säännöllisen työajan ylittävää työtä, josta olette saanut korvauksen kokonaan tai osittain rahana?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko itse tehnyt elo-syyskuussa: Säännöllisen työajan ylittävää työtä, josta olette saanut korvauksen kokonaan tai osittain rahana?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.8356</sumStat>
+      <sumStat type="stdev">.42544</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>69</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>294</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K15_2" intrvl="discrete" dcml="2" ID="K15_2">
+      <labl level="variable">[K15_2] Oletteko itse tehnyt elo-syyskuussa: Säännöllisen työajan ylittävää työtä, josta olette saanut korvauksen kokonaan tai osittain vapaana?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko itse tehnyt elo-syyskuussa: Säännöllisen työajan ylittävää työtä, josta olette saanut korvauksen kokonaan tai osittain vapaana?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.7601</sumStat>
+      <sumStat type="stdev">.46976</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>96</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>268</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K15_3" intrvl="discrete" dcml="2" ID="K15_3">
+      <labl level="variable">[K15_3] Oletteko itse tehnyt elo-syyskuussa: Sellaista säännöllisen työajan ylittävää työtä, josta ette ole saanut lainkaan korvausta rahana tai vapaana?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko itse tehnyt elo-syyskuussa: Sellaista säännöllisen työajan ylittävää työtä, josta ette ole saanut lainkaan korvausta rahana tai vapaana?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.8302</sumStat>
+      <sumStat type="stdev">.42331</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>70</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>294</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K16_1" intrvl="discrete" dcml="2" ID="K16_1">
+      <labl level="variable">[K16_1] Onko työpaikallanne käytössä valvottu liukuva työaika (kellokortti, ajanvalvonta tms.)?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Onko työpaikallanne käytössä valvottu liukuva työaika (kellokortti, ajanvalvonta tms.)?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.8275</sumStat>
+      <sumStat type="stdev">.38541</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kyllä</labl>
+        <catStat>65</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>305</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ei osaa sanoa</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K16_2" intrvl="discrete" dcml="2" ID="K16_2">
+      <labl level="variable">[K16_2] Voitteko muuten (liukumien lisäksi) joustaa normaaleista työhöntulo- ja lähtöajoista?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Voitteko muuten (liukumien lisäksi) joustaa normaaleista työhöntulo- ja lähtöajoista?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.4501</sumStat>
+      <sumStat type="stdev">.50891</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kyllä</labl>
+        <catStat>206</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>163</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ei osaa sanoa</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K16_3" intrvl="discrete" dcml="2" ID="K16_3">
+      <labl level="variable">[K16_3] Oletteko elo-syyskuussa tehnyt normaalia työaikaanne pitempää tai lyhyempää työpäivää?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko elo-syyskuussa tehnyt normaalia työaikaanne pitempää tai lyhyempää työpäivää?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.7035</sumStat>
+      <sumStat type="stdev">.49151</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kyllä</labl>
+        <catStat>116</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>249</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ei osaa sanoa</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_1" intrvl="discrete" dcml="2" ID="K18_1">
+      <labl level="variable">[K18_1] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Työtahti ja kiire?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työtahti ja kiire?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.1054</sumStat>
+      <sumStat type="stdev">.77370</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>89</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>157</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>120</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_2" intrvl="discrete" dcml="2" ID="K18_2">
+      <labl level="variable">[K18_2] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Työturvallisuus?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työturvallisuus?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.0732</sumStat>
+      <sumStat type="stdev">.53422</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>26</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>292</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_3" intrvl="discrete" dcml="2" ID="K18_3">
+      <labl level="variable">[K18_3] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Työn fyysinen rasittavuus?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työn fyysinen rasittavuus?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.5935</sumStat>
+      <sumStat type="stdev">.67772</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>90</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>241</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_4" intrvl="discrete" dcml="2" ID="K18_4">
+      <labl level="variable">[K18_4] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Työn henkinen rasittavuus?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työn henkinen rasittavuus?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.2459</sumStat>
+      <sumStat type="stdev">.80415</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>75</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>138</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>149</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_5" intrvl="discrete" dcml="2" ID="K18_5">
+      <labl level="variable">[K18_5] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Työn tuloksellisuus?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työn tuloksellisuus?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">367</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.6431</sumStat>
+      <sumStat type="stdev">.61011</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>105</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>238</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_6" intrvl="discrete" dcml="2" ID="K18_6">
+      <labl level="variable">[K18_6] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Työnantajan kustantama koulutus?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työnantajan kustantama koulutus?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">368</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.9049</sumStat>
+      <sumStat type="stdev">.67592</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>266</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_7" intrvl="discrete" dcml="2" ID="K18_7">
+      <labl level="variable">[K18_7] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Kannustuksen ja tuen saanti esimiehiltä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kannustuksen ja tuen saanti esimiehiltä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.9541</sumStat>
+      <sumStat type="stdev">.60311</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>36</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>295</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_8" intrvl="discrete" dcml="2" ID="K18_8">
+      <labl level="variable">[K18_8] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Kannustuksen ja tuen saanti työtovereilta?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Kannustuksen ja tuen saanti työtovereilta?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.7805</sumStat>
+      <sumStat type="stdev">.58333</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>64</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>274</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K18_9" intrvl="discrete" dcml="2" ID="K18_9">
+      <labl level="variable">[K18_9] Onko muuttunut työpaikassanne kuluneen vuoden aikana: Mahdollisuus käyttää ammattitaitoaan ja kykyjään työssä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Mahdollisuus käyttää ammattitaitoaan ja kykyjään työssä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.6595</sumStat>
+      <sumStat type="stdev">.64831</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">lisääntynyt selvästi</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">lisääntynyt jonkin verran</labl>
+        <catStat>103</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>241</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">vähentynyt jonkin verran</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">vähentynyt selvästi</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K20_1" intrvl="discrete" dcml="2" ID="K20_1">
+      <labl level="variable">[K20_1] Vaikuttako tekemänne työn määrä palkkauksen tasoon paljon, jossain määrin, vain vähän vai ei lainkaan?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vaikuttako tekemänne työn määrä palkkauksen tasoon paljon, jossain määrin, vain vähän vai ei lainkaan?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">3.6558</sumStat>
+      <sumStat type="stdev">.77895</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jossain määrin</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vain vähän</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>301</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K20_2" intrvl="discrete" dcml="2" ID="K20_2">
+      <labl level="variable">[K20_2] Entä vaikuttaako tekemänne työn laatu palkkauksen tasoon?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Entä vaikuttaako tekemänne työn laatu palkkauksen tasoon?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">3.8108</sumStat>
+      <sumStat type="stdev">.57678</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jossain määrin</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vain vähän</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>330</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K20_3" intrvl="discrete" dcml="2" ID="K20_3">
+      <labl level="variable">[K20_3] Vaikuttaako ryhmän tai koko talousyksikön tulos palkkauksen tasoon?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Vaikuttaako ryhmän tai koko talousyksikön tulos palkkauksen tasoon?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">3.8514</sumStat>
+      <sumStat type="stdev">.50155</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jossain määrin</labl>
+        <catStat>20</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vain vähän</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>337</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K21" intrvl="discrete" dcml="2" ID="K21">
+      <labl level="variable">[K21] Arveletteko palkkanne olevan vuoden päästä korkeampi, ennallaan vai matalampi kuin tällä hetkellä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Arveletteko palkkanne olevan vuoden päästä korkeampi, ennallaan vai matalampi kuin tällä hetkellä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">358</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.7346</sumStat>
+      <sumStat type="stdev">.59359</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Paljon korkeampi</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran korkeampi</labl>
+        <catStat>101</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>231</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran matalampi</labl>
+        <catStat>18</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Paljon matalampi</labl>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>13</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K21A" intrvl="discrete" dcml="2" ID="K21A">
+      <labl level="variable">[K21A] Oletteko kuluneen vuoden aikana tehnyt esimiehelle tai työnantajalle työpaikkanne työolojen, työtapojen, tuotteiden tai palvelujen parantamiseen tähtääviä aloitteita?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko kuluneen vuoden aikana tehnyt esimiehelle tai työnantajalle työpaikkanne työolojen, työtapojen, tuotteiden tai palvelujen parantamiseen tähtääviä aloitteita?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">2.2865</sumStat>
+      <sumStat type="stdev">.67401</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kerran</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">useita kertoja</labl>
+        <catStat>172</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vai ette kertaakaan</labl>
+        <catStat>152</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K21B" intrvl="discrete" dcml="2" ID="K21B">
+      <labl level="variable">[K21b] Entä onko työpaikallanne kuluvan vuoden aikana erityisen ohjelman, projektin, työryhmän tai konsultin avulla suunnitelmallisesti kehitetty tuottavuutta, laatua tai palvelua?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Entä onko työpaikallanne kuluvan vuoden aikana erityisen ohjelman, projektin, työryhmän tai konsultin avulla suunnitelmallisesti kehitetty tuottavuutta, laatua tai palvelua?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.5418</sumStat>
+      <sumStat type="stdev">.57915</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kyllä</labl>
+        <catStat>186</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>169</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ei osaa sanoa</labl>
+        <catStat>16</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K21B1" intrvl="discrete" dcml="2" ID="K21B1">
+      <labl level="variable">[K21b1] Ovatko nämä kehittämistoimenpiteet ottaneet huomioon tasapuolisesti eri ikäisten vahvuudet ja kyvyt?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ovatko nämä kehittämistoimenpiteet ottaneet huomioon tasapuolisesti eri ikäisten vahvuudet ja kyvyt?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">169</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">2.00</sumStat>
+      <sumStat type="mean">1.2367</sumStat>
+      <sumStat type="stdev">.42631</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kyllä, ovat olleet tasapuolisia</labl>
+        <catStat>129</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Eivät ole olleet tasapuolisia</labl>
+        <catStat>40</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>185</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K21B2" intrvl="discrete" dcml="2" ID="K21B2">
+      <labl level="variable">[K21b2] Ovatko ne mielestänne suosineet nuoria, keski-ikäisiä vai vanhoja työntekijöitä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ovatko ne mielestänne suosineet nuoria, keski-ikäisiä vai vanhoja työntekijöitä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">29</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.5172</sumStat>
+      <sumStat type="stdev">.68768</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Nuoria</labl>
+        <catStat>17</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Keski-ikäisiä</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Vanhoja</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>331</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K22_1" intrvl="discrete" dcml="2" ID="K22_1">
+      <labl level="variable">[K22_1] Pidättekö mahdollisena, että seuraavan vuoden aikana: Teidät lomautetaan vähintään kahden viikon ajaksi?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Teidät lomautetaan vähintään kahden viikon ajaksi?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.4405</sumStat>
+      <sumStat type="stdev">.99483</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä varmasti</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">kyllä mahdollisesti</labl>
+        <catStat>50</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">luultavasti ei</labl>
+        <catStat>80</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">varmasti ei</labl>
+        <catStat>191</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">EOS / vaikea sanoa</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K22_2" intrvl="discrete" dcml="2" ID="K22_2">
+      <labl level="variable">[K22_2] Pidättekö mahdollisena, että seuraavan vuoden aikana: Teidät irtisanotaan nykyisestä työpaikastanne?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Teidät irtisanotaan nykyisestä työpaikastanne?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.7405</sumStat>
+      <sumStat type="stdev">.74188</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä varmasti</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">kyllä mahdollisesti</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">luultavasti ei</labl>
+        <catStat>54</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">varmasti ei</labl>
+        <catStat>264</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">EOS / vaikea sanoa</labl>
+        <catStat>23</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K22_3" intrvl="discrete" dcml="2" ID="K22_3">
+      <labl level="variable">[K22_3] Pidättekö mahdollisena, että seuraavan vuoden aikana: Teidät siirretään toisiin tehtäviin?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Teidät siirretään toisiin tehtäviin?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.4838</sumStat>
+      <sumStat type="stdev">.90527</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä varmasti</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">kyllä mahdollisesti</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">luultavasti ei</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">varmasti ei</labl>
+        <catStat>219</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">EOS / vaikea sanoa</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K22_4" intrvl="discrete" dcml="2" ID="K22_4">
+      <labl level="variable">[K22_4] Pidättekö mahdollisena, että seuraavan vuoden aikana: Joudutte tekemään lyhennettyä työviikkoa?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Joudutte tekemään lyhennettyä työviikkoa?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.7027</sumStat>
+      <sumStat type="stdev">.76029</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä varmasti</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">kyllä mahdollisesti</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">luultavasti ei</labl>
+        <catStat>58</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">varmasti ei</labl>
+        <catStat>252</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">EOS / vaikea sanoa</labl>
+        <catStat>24</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K22_5" intrvl="discrete" dcml="2" ID="K22_5">
+      <labl level="variable">[K22_5] Pidättekö mahdollisena, että seuraavan vuoden aikana: Viikoittaista tai päivittäistä työaikaanne muutetaan vastoin Teidän tahtoanne?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Viikoittaista tai päivittäistä työaikaanne muutetaan vastoin Teidän tahtoanne?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.6216</sumStat>
+      <sumStat type="stdev">.81155</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä varmasti</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">kyllä mahdollisesti</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">luultavasti ei</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">varmasti ei</labl>
+        <catStat>234</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">EOS / vaikea sanoa</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K23" intrvl="discrete" dcml="2" ID="K23">
+      <labl level="variable">[K23] Jos nyt jäisitte työttömäksi niin arveletteko, että saisitte ammattianne ja työkokemustanne vastaavaa työtä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jos nyt jäisitte työttömäksi niin arveletteko, että saisitte ammattianne ja työkokemustanne vastaavaa työtä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.3450</sumStat>
+      <sumStat type="stdev">1.06776</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä varmasti</labl>
+        <catStat>85</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">kyllä mahdollisesti</labl>
+        <catStat>148</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">luultavasti ei</labl>
+        <catStat>72</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">varmasti ei</labl>
+        <catStat>57</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">eos, vaikea sanoa</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K24" intrvl="discrete" dcml="2" ID="K24">
+      <labl level="variable">[K24] Minkälaiseksi arvioitte yleisen työllisyystilanteen vuoden kuluttua? Onko se parempi, ennallaan vai huonompi kuin tällä hetkellä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Minkälaiseksi arvioitte yleisen työllisyystilanteen vuoden kuluttua? Onko se parempi, ennallaan vai huonompi kuin tällä hetkellä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="6.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">6.00</sumStat>
+      <sumStat type="mean">2.8464</sumStat>
+      <sumStat type="stdev">.89781</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon parempi</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran parempi</labl>
+        <catStat>134</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ennallaan</labl>
+        <catStat>168</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">jonkin verran huonompi</labl>
+        <catStat>51</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">paljon huonompi</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_1" intrvl="discrete" dcml="2" ID="K25_1">
+      <labl level="variable">[K25_1] Mihin suuntaan muuttumassa: Työnteon mielekkyys ja työhalut yleensä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työnteon mielekkyys ja työhalut yleensä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">366</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.1038</sumStat>
+      <sumStat type="stdev">.92166</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>92</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>142</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>102</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_2" intrvl="discrete" dcml="2" ID="K25_2">
+      <labl level="variable">[K25_2] Mihin suuntaan muuttumassa: Naisten ja miesten välinen tasa-arvo työelämässä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Naisten ja miesten välinen tasa-arvo työelämässä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">363</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.8375</sumStat>
+      <sumStat type="stdev">.64245</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>94</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>231</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>6</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>8</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_3" intrvl="discrete" dcml="2" ID="K25_3">
+      <labl level="variable">[K25_3] Mihin suuntaan muuttumassa: Ympäristökysymysten huomioon ottaminen työpaikoilla?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Ympäristökysymysten huomioon ottaminen työpaikoilla?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.2210</sumStat>
+      <sumStat type="stdev">.66144</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>45</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>203</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>119</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_4" intrvl="discrete" dcml="2" ID="K25_4">
+      <labl level="variable">[K25_4] Mihin suuntaan muuttumassa: Tietojen saanti työpaikan tavoitteista ja tulevaisuuden suunnitelmista?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Tietojen saanti työpaikan tavoitteista ja tulevaisuuden suunnitelmista?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">367</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.6785</sumStat>
+      <sumStat type="stdev">.76118</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>14</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>135</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>180</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>31</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_5" intrvl="discrete" dcml="2" ID="K25_5">
+      <labl level="variable">[K25_5] Mihin suuntaan muuttumassa: Esimiesten johtamistapa?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Esimiesten johtamistapa?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.7859</sumStat>
+      <sumStat type="stdev">.75197</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>11</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>110</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>204</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>35</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>9</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_6" intrvl="discrete" dcml="2" ID="K25_6">
+      <labl level="variable">[K25_6] Mihin suuntaan muuttumassa: Mahdollisuudet itsensä kehittämiseen työssä?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Mahdollisuudet itsensä kehittämiseen työssä?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.6016</sumStat>
+      <sumStat type="stdev">.71178</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>136</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>190</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_7" intrvl="discrete" dcml="2" ID="K25_7">
+      <labl level="variable">[K25_7] Mihin suuntaan muuttumassa: Mahdollisuus vaikuttaa omaa asemaa ja työtehtäviä koskeviin ratkaisuihin?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Mahdollisuus vaikuttaa omaa asemaa ja työtehtäviä koskeviin ratkaisuihin?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.7507</sumStat>
+      <sumStat type="stdev">.65330</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>7</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>111</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>222</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>25</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>4</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K25_8" intrvl="discrete" dcml="2" ID="K25_8">
+      <labl level="variable">[K25_8] Jos ajattelette oman työpaikkanne taloudellista tilannetta, onko se muuttumassa parempaan suuntaan, huonompaan suuntaan vai pysyykö se ennallaan?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Jos ajattelette oman työpaikkanne taloudellista tilannetta, onko se muuttumassa parempaan suuntaan, huonompaan suuntaan vai pysyykö se ennallaan?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">366</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">3.4426</sumStat>
+      <sumStat type="stdev">.78739</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Selvästi parempaan suuntaan</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Jonkin verran parempaan</labl>
+        <catStat>29</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">Ennallaan</labl>
+        <catStat>173</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">Jonkin verran huonompaan</labl>
+        <catStat>129</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">Selvästi huonompaan suuntaan</labl>
+        <catStat>33</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K26_1" intrvl="discrete" dcml="2" ID="K26_1">
+      <labl level="variable">[K26_1] Työpaikoilla on kiinnitetty huomiota työntekijöiden työkyvyn ylläpitämiseen eri tavoin. Onko Teidän työpaikallanne pyritty systemaattisesti vaikuttamaan: Työntekijöiden kuntoon, terveyteen ja elintapoihin?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työntekijöiden kuntoon, terveyteen ja elintapoihin?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">368</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.4375</sumStat>
+      <sumStat type="stdev">.94041</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>44</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jossain määrin</labl>
+        <catStat>192</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vain vähän</labl>
+        <catStat>59</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>73</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K26_2" intrvl="discrete" dcml="2" ID="K26_2">
+      <labl level="variable">[K26_2] Työpaikoilla on kiinnitetty huomiota työntekijöiden työkyvyn ylläpitämiseen eri tavoin. Onko Teidän työpaikallanne pyritty systemaattisesti vaikuttamaan: Työturvallisuuteen?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työturvallisuuteen?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">368</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.4484</sumStat>
+      <sumStat type="stdev">.92058</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>41</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jossain määrin</labl>
+        <catStat>190</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vain vähän</labl>
+        <catStat>68</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>69</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K26_3" intrvl="discrete" dcml="2" ID="K26_3">
+      <labl level="variable">[K26_3] Työpaikoilla on kiinnitetty huomiota työntekijöiden työkyvyn ylläpitämiseen eri tavoin. Onko Teidän työpaikallanne pyritty systemaattisesti vaikuttamaan: Osaamiseen ja ammattitaidon kehittämiseen?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Osaamiseen ja ammattitaidon kehittämiseen?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">369</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.2900</sumStat>
+      <sumStat type="stdev">.87844</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jossain määrin</labl>
+        <catStat>219</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">vain vähän</labl>
+        <catStat>46</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K27_1" intrvl="discrete" dcml="2" ID="K27_1">
+      <labl level="variable">[K27_1]  Katsoisitteko tarvitsevanne paljon, jonkin verran vai ei lainkaan: Työtehtävien tai työaikojen uudelleen järjestely?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työtehtävien tai työaikojen uudelleen järjestely?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.5405</sumStat>
+      <sumStat type="stdev">.65826</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>22</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran</labl>
+        <catStat>138</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>198</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">eos</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K27_2" intrvl="discrete" dcml="2" ID="K27_2">
+      <labl level="variable">[K27_2]  Katsoisitteko tarvitsevanne paljon, jonkin verran vai ei lainkaan: Työtehtävien keventäminen apuvälinein tai muuten työolosuhteita muuttamalla?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työtehtävien keventäminen apuvälinein tai muuten työolosuhteita muuttamalla?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.4892</sumStat>
+      <sumStat type="stdev">.62569</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>21</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran</labl>
+        <catStat>152</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>192</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">eos</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K27_3" intrvl="discrete" dcml="2" ID="K27_3">
+      <labl level="variable">[K27_3]  Katsoisitteko tarvitsevanne paljon, jonkin verran vai ei lainkaan: Työyhteisön toimivuuden parantaminen?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työyhteisön toimivuuden parantaminen?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.1081</sumStat>
+      <sumStat type="stdev">.64534</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>56</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran</labl>
+        <catStat>221</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>90</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">eos</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K27_4" intrvl="discrete" dcml="2" ID="K27_4">
+      <labl level="variable">[K27_4]  Katsoisitteko tarvitsevanne paljon, jonkin verran vai ei lainkaan: Työssä tarvittaviin taitoihin liittyvää ammatillista osaamista lisäävä koulutus tai opastus?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Työssä tarvittaviin taitoihin liittyvää ammatillista osaamista lisäävä koulutus tai opastus?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.0216</sumStat>
+      <sumStat type="stdev">.61116</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>62</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran</labl>
+        <catStat>241</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>64</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">eos</labl>
+        <catStat>3</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K27_5" intrvl="discrete" dcml="2" ID="K27_5">
+      <labl level="variable">[K27_5]  Katsoisitteko tarvitsevanne paljon, jonkin verran vai ei lainkaan: Elämäntilanteeseen liittyvien asioiden selvittely?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Elämäntilanteeseen liittyvien asioiden selvittely?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.6892</sumStat>
+      <sumStat type="stdev">.57795</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran</labl>
+        <catStat>101</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>247</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">eos</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K27_6" intrvl="discrete" dcml="2" ID="K27_6">
+      <labl level="variable">[K27_6]  Katsoisitteko tarvitsevanne paljon, jonkin verran vai ei lainkaan: Osallistuminen kuntoutuslaitoksessa järjestettävään kuntoutukseen?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Osallistuminen kuntoutuslaitoksessa järjestettävään kuntoutukseen?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.4162</sumStat>
+      <sumStat type="stdev">.73234</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>49</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran</labl>
+        <catStat>123</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>193</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">eos</labl>
+        <catStat>5</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K27_7" intrvl="discrete" dcml="2" ID="K27_7">
+      <labl level="variable">[K27_7]  Katsoisitteko tarvitsevanne paljon, jonkin verran vai ei lainkaan: Muu työterveyteen liittyvä kuntoutus, tutkimus, hoito, ohjaus tai tuki?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Muu työterveyteen liittyvä kuntoutus, tutkimus, hoito, ohjaus tai tuki?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="4.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">370</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.3757</sumStat>
+      <sumStat type="stdev">.64766</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">paljon</labl>
+        <catStat>32</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">jonkin verran</labl>
+        <catStat>169</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei lainkaan</labl>
+        <catStat>167</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">eos</labl>
+        <catStat>2</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>9</catValu>
+        <labl level="category"/>
+        <catStat>1</catStat>
+      </catgry>
+      <catgry missing="Y">
+        <catValu>SYSMISS</catValu>
+        <labl level="category"/>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K28_1" intrvl="discrete" dcml="2" ID="K28_1">
+      <labl level="variable">[K28_1] Onko joku työpaikallanne joutunut syrjinnän kohteeksi: Sukupuolen perusteella</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Sukupuolen perusteella</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9946</sumStat>
+      <sumStat type="stdev">.24378</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>12</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>349</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>10</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K28_2" intrvl="discrete" dcml="2" ID="K28_2">
+      <labl level="variable">[K28_2] Onko joku työpaikallanne joutunut syrjinnän kohteeksi: Iän perusteella?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Iän perusteella?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="3.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">3.00</sumStat>
+      <sumStat type="mean">1.9353</sumStat>
+      <sumStat type="stdev">.36185</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kyllä</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ei</labl>
+        <catStat>321</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ei osaa sanoa</labl>
+        <catStat>13</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K33" intrvl="discrete" dcml="2" ID="K33">
+      <labl level="variable">[K33] Oletteko kunnan tai kuntayhtymän palveluksessa?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko kunnan tai kuntayhtymän palveluksessa?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="2" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">1.00</sumStat>
+      <sumStat type="mean">1.0000</sumStat>
+      <sumStat type="stdev">.00000</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">Kyllä</labl>
+        <catStat>371</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">Ei</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K34" intrvl="discrete" dcml="2" ID="K34">
+      <labl level="variable">[K34] (JOS K33=kyllä) Millä seuraavista kunta-alan sektoreista työskentelette?</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>(JOS K33=kyllä) Millä seuraavista kunta-alan sektoreista työskentelette?</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="6.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">6.00</sumStat>
+      <sumStat type="mean">2.5256</sumStat>
+      <sumStat type="stdev">1.37596</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">sosiaalitoimi</labl>
+        <catStat>93</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">terveydenhuolto</labl>
+        <catStat>122</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">opetus-/sivistystoimi</labl>
+        <catStat>88</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">yleishallinto</labl>
+        <catStat>19</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">tekninen toimi</labl>
+        <catStat>34</catStat>
+      </catgry>
+      <catgry>
+        <catValu>6</catValu>
+        <labl level="category">muu</labl>
+        <catStat>15</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K34MUU" intrvl="discrete" dcml="0" ID="K34MUU">
+      <labl level="variable">[K34muu] (JOS K34=muu) Mikä muu kunta-alan sektori? (Avokysymys)</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>(JOS K34=muu) Mikä muu kunta-alan sektori? (Avokysymys)</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K35" intrvl="discrete" dcml="2" ID="K35">
+      <labl level="variable">[K35] Oletteko suorittanut:</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Oletteko suorittanut:</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">4.00</sumStat>
+      <sumStat type="mean">2.2588</sumStat>
+      <sumStat type="stdev">1.22492</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">ylioppilastutkinnon</labl>
+        <catStat>154</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">keskikoulun</labl>
+        <catStat>55</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">peruskoulun</labl>
+        <catStat>74</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">kansakoulun tai kansalaiskoulun?</labl>
+        <catStat>88</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">ei mitään mainituista</labl>
+        <catStat>0</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+    <var files="F1" name="K36" intrvl="discrete" dcml="2" ID="K36">
+      <labl level="variable">[K36] Mikä on ammatillinen koulutuksenne? Oletteko suorittanut:</labl>
+      <qstn>
+        <preQTxt/>
+        <qstnLit>Mikä on ammatillinen koulutuksenne? Oletteko suorittanut:</qstnLit>
+        <postQTxt/>
+        <ivuInstr/>
+      </qstn>
+      <valrng>
+        <range max="5.00" min="1"/>
+      </valrng>
+      <sumStat type="vald">371</sumStat>
+      <sumStat type="min">1.00</sumStat>
+      <sumStat type="max">5.00</sumStat>
+      <sumStat type="mean">2.4609</sumStat>
+      <sumStat type="stdev">1.18798</sumStat>
+      <catgry>
+        <catValu>1</catValu>
+        <labl level="category">kokeakoulutukinnon</labl>
+        <catStat>88</catStat>
+      </catgry>
+      <catgry>
+        <catValu>2</catValu>
+        <labl level="category">ammatillisen opistotutkinnon</labl>
+        <catStat>121</catStat>
+      </catgry>
+      <catgry>
+        <catValu>3</catValu>
+        <labl level="category">ammattikoulutukinnon</labl>
+        <catStat>95</catStat>
+      </catgry>
+      <catgry>
+        <catValu>4</catValu>
+        <labl level="category">ammatillisen kurssin</labl>
+        <catStat>37</catStat>
+      </catgry>
+      <catgry>
+        <catValu>5</catValu>
+        <labl level="category">ei mitään edellä mainituista</labl>
+        <catStat>30</catStat>
+      </catgry>
+      <notes/>
+      <notes/>
+    </var>
+  </dataDscr>
+  <otherMat level="study">
+    <labl>Kyselylomake: pdf-tiedosto suomeksi</labl>
+    <txt/>
+  </otherMat>
+</codeBook>
