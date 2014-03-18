@@ -49,7 +49,7 @@ class DDIHarvester(HarvesterBase):
     '''
     config = None
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.ddi_converter = dconverter.DataConverter()
 
     def _set_config(self, config_str):
