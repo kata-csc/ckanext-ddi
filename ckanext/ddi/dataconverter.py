@@ -394,7 +394,7 @@ class DataConverter:
         kw_string = ','.join([ s for s in strings if s ])
         return kw_string
 
-    def _get_events(self, stdy_dscr, orgauth):
+    def _get_events(self, stdy_dscr, authors):
         '''
         Parse data into events from DDI fields
         '''
@@ -422,7 +422,7 @@ class DataConverter:
         raw_date = DATE_REGEX.search(ev_type_create)
         clean_date = raw_date.group(0).rstrip('-') if raw_date and \
                                                       raw_date.group(0) else ''
-        data_creators = [ a['value'] for a in orgauth ]
+        data_creators = [ a['name'] for a in authors ]
         data_creator_string = '; '.join(data_creators)
         evdescr.append({'value': u'Event automatically created at import.'})
         evtype.append({'value': u'creation'})
@@ -590,10 +590,12 @@ class DataConverter:
         # TODO Prevent / filter duplicate authors.
         auth_entys.extend(self._read_value(
             stdy_dscr + ".citation.rspStmt('othId')", mandatory_field=False))
-        orgauth = []
+        authors = []
         for a in auth_entys:
-            orgauth.append({'org': a.get('affiliation', ''),
-                            'value': a.text.strip()})
+            authors.append({'role': 'author',
+                            'name': a.text.strip(),
+                            'organisation': a.get('affiliation', '')})
+        agent = authors[:]
 
         # Availability
         availability = AVAILABILITY_DEFAULT
@@ -671,6 +673,8 @@ class DataConverter:
         owner = self._read_value(stdy_dscr + ".citation.prodStmt.producer.text") or \
                 self._read_value(stdy_dscr + ".citation.rspStmt.AuthEnty.text") or \
                 self._read_value(doc_citation + ".prodStmt.producer.string", mandatory_field=True)
+        agent.append({'role': 'owner',
+                      'name': owner})
 
 
         ####################################################################
@@ -702,7 +706,7 @@ class DataConverter:
         discipline = self.get_discipline(self.ddi_xml.stdyDscr.stdyInfo.subject)
 
         # Dataset lifetime events
-        evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, orgauth)
+        evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, authors)
 
         # Geographic coverage
         geo_cover = self.get_geo_coverage(self.ddi_xml)
@@ -724,6 +728,7 @@ class DataConverter:
         package_dict = dict(
             access_application_URL=u'',
             access_request_URL=unicode(access_request_url),
+            agent=agent,
             algorithm=u'',   # To be implemented straight in 'resources'
             availability=unicode(availability),
             contact_phone=contact_phone,
@@ -747,13 +752,6 @@ class DataConverter:
             mimetype=u'',  # To be implemented straight in 'resources
             name=name,
             notes=notes or u'',
-            orgauth=orgauth,
-            owner=owner,
-            projdis=u'True',   # HUOMAA!
-            project_funder=u'',  # u'Roope Rahoittaja',
-            project_funding=u'',  # u'1234-rahoitusp\xe4\xe4t\xf6snumero',
-            project_homepage=u'',  # u'http://www.rahoittajan.kotisivu.fi/',
-            project_name=u'',  # u'Rahoittajan Projekti',
             resources=[{'algorithm': u'MD5',
                         'description': u'Original metadata record',
                         'format': u'xml',
