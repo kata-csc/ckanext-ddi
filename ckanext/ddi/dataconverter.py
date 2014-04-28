@@ -42,7 +42,8 @@ LICENCE_ID_DEFAULT =  'notspecified'
 AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
 ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.html'
 LICENCE_ID_FSD = 'other_closed'
-MAINTAINER_EMAIL_FSD = 'fsd@uta.fi'
+CONTACT_EMAIL_FSD = 'fsd@uta.fi'
+CONTACT_URL_FSD = 'http://www.fsd.uta.fi'
 KW_VOCAB_REGEX = re.compile(r'^(?!FSD$)')
 DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
 
@@ -627,20 +628,20 @@ class DataConverter:
         else:
             license_id = LICENCE_ID_DEFAULT
 
-        # Maintainer (package.maintainer in database, contact in WUI)
-        maintainer = self._read_value(stdy_dscr + ".citation.distStmt('contact')") or \
+        # Contact (package_extra.key: contact_[k]_name in database, contact in WUI)
+        contact_name = self._read_value(stdy_dscr + ".citation.distStmt('contact')") or \
                      self._read_value(stdy_dscr + ".citation.distStmt('distrbtr')") or \
                      self._read_value(doc_citation + ".prodStmt('producer')", mandatory_field=True)
         # TODO: clean out (or ask FSD to clean) mid text newlines (eg. in FSD2482)
-        if maintainer and maintainer[0].text:
-            maintainer = maintainer[0].text
+        if contact_name and contact_name[0].text:
+            contact_name = contact_name[0].text
         else:
-            maintainer = self._read_value(stdy_dscr + ".citation.prodStmt.producer.get('affiliation')", mandatory_field=True)
-        if _is_fsd(original_url) or 'misanthropy.kapsi.fi' in original_url:  # DEBUG, remove after 'or'
-            maintainer_email = MAINTAINER_EMAIL_FSD
+            contact_name = self._read_value(stdy_dscr + ".citation.prodStmt.producer.get('affiliation')", mandatory_field=True)
+        if _is_fsd(original_url):
+            contact_email = CONTACT_EMAIL_FSD
             # TODO: Allow trying other email also in FSD metadata
         else:
-            maintainer_email = self._read_value(stdy_dscr + ".citation.distStmt.contact.get('email')", mandatory_field=True)
+            contact_email = self._read_value(stdy_dscr + ".citation.distStmt.contact.get('email')", mandatory_field=True)
 
         # Modified date
         version = self.get_attr_optional(self.ddi_xml.stdyDscr.citation,
@@ -676,6 +677,11 @@ class DataConverter:
         agent.append({'role': 'owner',
                       'name': owner})
 
+        # Distributor (Agent: distributor, not the one used as contact)
+        agent.append({
+            'role': 'distributor',
+            'name': model.Package.get(harvest_object.harvest_source_id).title})
+
 
         ####################################################################
         #      Read optional metadata fields:                              #
@@ -692,7 +698,8 @@ class DataConverter:
 
         contact_URL = self._read_value( stdy_dscr + ".dataAccs.setAvail.accsPlac.get('URI')") or \
                       self._read_value( stdy_dscr + ".citation.distStmt.contact.get('URI')") or \
-                      self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')")
+                      self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')") or \
+                      CONTACT_URL_FSD if _is_fsd(original_url) else None
 
         # Description
         description_array = self._read_value(stdy_dscr + ".stdyInfo.abstract('p')")
@@ -731,8 +738,10 @@ class DataConverter:
             agent=agent,
             algorithm=u'',   # To be implemented straight in 'resources'
             availability=unicode(availability),
-            contact_phone=contact_phone,
-            contact_URL=contact_URL,
+            contact=[{'name': contact_name,
+                      'email': contact_email,
+                      'URL': contact_URL,
+                      'phone': contact_phone}],
             direct_download_URL=u'',  # To be implemented straight in 'resources
             discipline=discipline,
             evdescr=evdescr or [],
@@ -747,8 +756,6 @@ class DataConverter:
             language=language,
             license_URL=license_url,
             license_id=license_id,
-            maintainer=maintainer,
-            maintainer_email=maintainer_email,
             mimetype=u'',  # To be implemented straight in 'resources
             name=name,
             notes=notes or u'',
