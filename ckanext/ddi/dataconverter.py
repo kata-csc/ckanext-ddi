@@ -45,7 +45,15 @@ LICENCE_ID_FSD = 'other_closed'
 CONTACT_EMAIL_FSD = 'fsd@uta.fi'
 CONTACT_URL_FSD = 'http://www.fsd.uta.fi'
 KW_VOCAB_REGEX = re.compile(r'^(?!FSD$)')
-DATE_REGEX = re.compile(r'([0-9]{4})-?(0[1-9]|1[0-2])?-?(0[1-9]|[12][0-9]|3[01])?')
+DATE_REGEX = re.compile(
+    r"""
+    ([0-9]{4})
+    -?
+    (0[1-9]|1[0-2])?
+    -?
+    (0[1-9]|[12][0-9]|3[01])?
+    """,
+    re.VERBOSE)
 
 # TODO Nice to have: decorator for this decorator to separate mandatory and not
 def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
@@ -399,10 +407,7 @@ class DataConverter:
         '''
         Parse data into events from DDI fields
         '''
-        evdescr = []
-        evtype = []
-        evwhen = []
-        evwho = []
+        events = []
 
         # Event: Collection
         ev_type_collect = self._read_value(stdy_dscr + ".stdyInfo.sumDscr('collDate', event='start')")
@@ -412,26 +417,23 @@ class DataConverter:
             data_coll_string += '; ' + (d.text)
         data_coll_string = data_coll_string[2:]
         for collection in ev_type_collect:
-            evdescr.append({'value': u'Event automatically created at import.'})
-            evtype.append({'value': u'collection'})
-            evwhen.append({'value': self.get_clean_date(collection)})
-            evwho.append({'value': data_coll_string})
+            events.append({'descr': u'Event automatically created at import.',
+                           'type': u'collection',
+                           'when': self.get_clean_date(collection),
+                           'who': data_coll_string})
 
         # Event: Creation (eg. Published in publication)
-        ev_type_create = self._read_value(
-            stdy_dscr + ".citation.prodStmt.prodDate.get('date')")
-        raw_date = DATE_REGEX.search(ev_type_create)
-        clean_date = raw_date.group(0).rstrip('-') if raw_date and \
-                                                      raw_date.group(0) else ''
-        data_creators = [ a['name'] for a in authors ]
-        data_creator_string = '; '.join(data_creators)
-        evdescr.append({'value': u'Event automatically created at import.'})
-        evtype.append({'value': u'creation'})
-        evwhen.append({'value': clean_date})
-        evwho.append({'value': data_creator_string})
+        ev_type_create = self._read_value(stdy_dscr + ".citation.prodStmt('prodDate')")
+        if ev_type_create:
+            data_creators = [ a['name'] for a in authors ]
+            data_creator_string = '; '.join(data_creators)
+            events.append({'descr': u'Event automatically created at import.',
+                           'type': u'creation',
+                           'when': self.get_clean_date(ev_type_create[0]),
+                           'who': data_creator_string})
         # TODO: Event: Published (eg. Deposited to some public access archive)
 
-        return (evdescr, evtype, evwhen, evwho)
+        return events
 
     @ExceptReturn((AttributeError, TypeError))
     def get_geo_coverage(self, start_bs4tag):
@@ -713,7 +715,7 @@ class DataConverter:
         discipline = self.get_discipline(self.ddi_xml.stdyDscr.stdyInfo.subject)
 
         # Dataset lifetime events
-        evdescr, evtype, evwhen, evwho = self._get_events(stdy_dscr, authors)
+        events = self._get_events(stdy_dscr, authors)
 
         # Geographic coverage
         geo_cover = self.get_geo_coverage(self.ddi_xml)
@@ -744,10 +746,7 @@ class DataConverter:
                       'phone': contact_phone}],
             direct_download_URL=u'',  # To be implemented straight in 'resources
             discipline=discipline,
-            evdescr=evdescr or [],
-            evtype=evtype or [],
-            evwhen=evwhen or [],
-            evwho=evwho or [],
+            event=events,
             geographic_coverage=geo_cover,
             groups=[],
             id=generate_pid(),
