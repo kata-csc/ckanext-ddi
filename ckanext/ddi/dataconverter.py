@@ -677,11 +677,10 @@ class DataConverter:
         agent.append({'role': 'owner',
                       'name': owner})
 
-        # Distributor (Agent: distributor, not the one used as contact)
+        # Distributor (Agent: distributor, the same is used as contact)
         agent.append({
             'role': 'distributor',
-            'name': model.Package.get(harvest_object.harvest_source_id).title})
-
+            'name': contact_name})
 
         ####################################################################
         #      Read optional metadata fields:                              #
