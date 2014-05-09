@@ -291,10 +291,11 @@ class DataConverter:
             return output
         except (AttributeError, TypeError):
             if mandatory_field:
+                dummy_line_num = 99999
                 log.debug('Unable to read mandatory value: {path}'
                           .format(path=bs_eval_string))
-                self.errors.append('Unable to read mandatory value: {path}'
-                                   .format(path=bs_eval_string))
+                self.errors.append(('Unable to read mandatory value: {path}'
+                                   .format(path=bs_eval_string), dummy_line_num))
             else:
                 log.debug('Unable to read optional value: {path}'
                           .format(path=bs_eval_string))
