@@ -415,7 +415,10 @@ class DataConverter:
         data_collector = self._read_value(stdy_dscr + ".method.dataColl('dataCollector')")
         data_coll_string = u''
         for d in data_collector:
-            data_coll_string += '; ' + (d.text)
+            if d.text:
+                data_coll_string += '; ' + (d.text)
+            elif d['affiliation']:  # This is ok because d is BeautifulSoup object
+                data_coll_string += '; ' + (d['affiliation'])
         data_coll_string = data_coll_string[2:]
         for collection in ev_type_collect:
             events.append({'descr': u'Event automatically created at import.',
@@ -426,7 +429,7 @@ class DataConverter:
         # Event: Creation (eg. Published in publication)
         ev_type_create = self._read_value(stdy_dscr + ".citation.prodStmt('prodDate')")
         if ev_type_create:
-            data_creators = [ a['name'] for a in authors ]
+            data_creators = [ a.get('name') or a.get('organisation') for a in authors ]
             data_creator_string = '; '.join(data_creators)
             events.append({'descr': u'Event automatically created at import.',
                            'type': u'creation',
