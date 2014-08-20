@@ -264,11 +264,16 @@ class DataConverter:
 
     def __init__(self):
         self.ddi_xml = None
+        self.context = None
+        self.enforce_mandatory = True
         self.errors = []
 
-    def ddi2ckan(self, data, original_url=None, original_xml=None, harvest_object=None):
+    def ddi2ckan(self, data, original_url=None, original_xml=None,
+                 harvest_object=None, context=None, enforce_mandatory=True):
         '''Read DDI2 data and convert it to CKAN format.
         '''
+        self.context = context
+        self.enforce_mandatory = enforce_mandatory
         try:
             self.ddi_xml = data
             return self._ddi2ckan(original_url, original_xml, harvest_object)
@@ -290,7 +295,7 @@ class DataConverter:
             output = eval(eval_string)
             return output
         except (AttributeError, TypeError):
-            if mandatory_field:
+            if mandatory_field and self.enforce_mandatory:
                 log.debug('Unable to read mandatory value: {path}'
                           .format(path=bs_eval_string))
                 self.errors.append('Unable to read mandatory value: {path}'
@@ -480,20 +485,25 @@ class DataConverter:
             return ''
 
     @ExceptReturn(UnicodeEncodeError, mandatory_field=True)
-    def _save_original_xml(self, original_xml, name, harvest_object):
+    def _save_original_xml(self, original_xml, name, harvest_object=None):
         ''' Here is created a ofs storage ie. local pairtree storage for
         objects/blobs. The original xml is saved to this storage in
-        <harvest_source_id> named folder. NOTE: The content of this folder is
-        overwritten at reharvest. We assume that if metadata is re-parsed also
-        xml is changed. So old xml can be overwritten.
+        <harvest_source_id> (or <c.user>) named folder. NOTE: The content of
+        this folder is overwritten at reharvest. We assume that if metadata is
+        re-parsed also xml is changed. So old xml can be overwritten.
 
-        Example:
+        Example::
+
         pairtree storage: /opt/data/ckan/data_tree
         xml: <pairtree storage>/pairtree_root//de/fa/ul/t/obj/<harvest_source_id>/FSD1049.xml
         url:<ckan_url>/storage/f/<harvest_source_id>/FSD1049.xml
         '''
-        label = '{dir}/{filename}.xml'.format(
-            dir=harvest_object.harvest_source_id, filename=name)
+        if harvest_object:
+            dir = harvest_object.harvest_source_id
+        else:
+            dir = self.context['user']
+        label = '{directory}/{filename}.xml'.format(directory=dir,
+                                                    filename=name)
         try:
             ofs = storage.get_ofs()
             ofs.put_stream(storage.BUCKET, label, original_xml, {})

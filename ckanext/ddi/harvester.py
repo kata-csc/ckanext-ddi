@@ -73,9 +73,9 @@ class DDIHarvester(HarvesterBase):
         '''Return information about this harvester.
         '''
         return {
-            'name': 'DDI',
-            'title': 'DDI import',
-            'description': 'Mass importing harvester for DDI2',
+            'name': 'ddi',
+            'title': 'DDI2',
+            'description': 'Harvests DDI2 sources.',
         }
 
     def validate_config(self, config):
@@ -269,6 +269,7 @@ class DDIHarvester(HarvesterBase):
                                                    info['xml'], harvest_object)
         errors = self.ddi_converter.get_errors()
         if errors:
+            # FIXME: Using line number here hazardous. Old _read_value doesn't provide
             for er, line in errors:
                 self._save_object_error('Invalid or missing mandatory metadata in {ur}. '
                                         '{er}'.format(ur=info['url'], er=er),
@@ -284,13 +285,59 @@ class DDIHarvester(HarvesterBase):
         log.debug("Exiting import_stage()")
         return result  # returns True
 
-    def import_xml(self, source, xml):
+    def import_xml(self, source, context):
+        '''Import single metadata file.
+
+        :param source: the url for metadata file
+        :param type: string
+
+        :returns:
+        :rtype:
+        '''
+        def _fetch_xml(self, url):
+            '''Get xml for import. Shortened from :meth:`fetch_stage`
+
+            :param url: the url for metadata file
+            :param type: string
+
+            :return: a xml file
+            :rtype: string
+            '''
+            try:
+                f = urllib2.urlopen(url).read()
+                return f
+            except (urllib2.URLError, urllib2.HTTPError,):
+                log.debug('Could not fetch from url {ur}!'.format(ur=url))
+            except httplib.BadStatusLine:
+                log.debug('Bad HTTP response status line.')
+
         try:
-            ddi_xml = BeautifulSoup(xml, 'xml')
-        except etree.XMLSyntaxError:
-            log.debug('Unable to parse XML!')
-            return False
-        return self.ddi_converter.ddi2ckan(ddi_xml, None, xml)
+            f = urllib2.urlopen(source).read()
+        except (urllib2.URLError, urllib2.HTTPError,):
+            log.debug('Could not fetch from url {ur}!'.format(ur=url))
+        except httplib.BadStatusLine:
+            log.debug('Bad HTTP response status line.')
+        try:
+            # xml = _fetch_xml(source)
+            ddi_xml = BeautifulSoup(f, 'xml')
+        except etree.XMLSyntaxError, err:
+            log.debug('Unable to parse XML! {er}'.format(er=err.msg))
+            return None
+        package_dict = self.ddi_converter.ddi2ckan(ddi_xml, source, f, context=context, enforce_mandatory=False)
+        errors = self.ddi_converter.get_errors()
+        if errors:
+            # FIXME: Can't use line number here. Old _read_value doesn't provide
+            for er in errors:
+                log.debug('Invalid or missing mandatory metadata in {ur}. '
+                                        '{er}'.format(ur=source, er=er))
+            self.ddi_converter.empty_errors()
+        # if not package_dict:
+        #     return False
+        # schema = KataPlugin.create_package_schema_ddi()
+        # result = self._create_or_update_package(package_dict, harvest_object,
+        #                                         schema)
+        # log.debug("Exiting import_stage()")
+        return package_dict
 
 #
 #class DDI3Harvester(HarvesterBase):
