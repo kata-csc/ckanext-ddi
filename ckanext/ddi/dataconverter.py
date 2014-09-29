@@ -6,13 +6,15 @@ Harvester for DDI2 formats
 #pylint: disable-msg=E1101,E0611,F0401
 import inspect
 import logging
-import lxml.etree as etree
 import re
 import socket
 import StringIO
+import traceback
 import warnings
 
 import bs4
+import lxml.etree as etree
+import pycountry
 from pylons import config
 import unicodecsv as csv
 
@@ -21,13 +23,8 @@ from ckan.lib.base import h
 import ckan.model as model
 import ckan.model.authz as authz
 import ckanext.kata.utils as utils
-import ckanext.oaipmh.importcore as importcore
-
-import pycountry
-import traceback
-import pprint
-
 from ckanext.kata.utils import generate_pid
+import ckanext.oaipmh.importcore as importcore
 
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
@@ -54,6 +51,7 @@ DATE_REGEX = re.compile(
     (0[1-9]|[12][0-9]|3[01])?
     """,
     re.VERBOSE)
+
 
 # TODO Nice to have: decorator for this decorator to separate mandatory and not
 def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
@@ -175,7 +173,7 @@ def _get_headers():
 
 
 def _is_fsd(url):
-    if 'fsd.uta.fi' in url:
+    if url and 'fsd.uta.fi' in url:
         return True
     return False
 
@@ -265,20 +263,18 @@ class DataConverter:
     def __init__(self):
         self.ddi_xml = None
         self.context = None
-        self.enforce_mandatory = True
+        self.strict = True
         self.errors = []
 
     def ddi2ckan(self, data, original_url=None, original_xml=None,
-                 harvest_object=None, context=None, enforce_mandatory=True):
+                 harvest_object=None, context=None, strict=True):
         '''Read DDI2 data and convert it to CKAN format.
         '''
+        self.ddi_xml = data
         self.context = context
-        self.enforce_mandatory = enforce_mandatory
+        self.strict = strict
         try:
-            self.ddi_xml = data
             return self._ddi2ckan(original_url, original_xml, harvest_object)
-        #except AttributeError:
-        #    raise
         except Exception as e:
             log.debug(traceback.format_exc(e))
         return False
@@ -295,7 +291,7 @@ class DataConverter:
             output = eval(eval_string)
             return output
         except (AttributeError, TypeError):
-            if mandatory_field and self.enforce_mandatory:
+            if mandatory_field and self.strict:
                 log.debug('Unable to read mandatory value: {path}'
                           .format(path=bs_eval_string))
                 self.errors.append('Unable to read mandatory value: {path}'
@@ -324,7 +320,8 @@ class DataConverter:
 
     @ExceptReturn((AttributeError, TypeError, UserWarning, IndexError),
                   mandatory_field=True)
-    def get_tag_mandatory(self, start_bs4tag, *args, **kwargs):
+    def get_attrdate_mandatory(self, start_bs4tag, *args, **kwargs):
+        # TODO: this is obsolete, more general see: get_attr_mandatory()
         ''''Search BeautifulSoup object for a tag and return its date attribute.
 
         Search beginning from start_bs4tag with *args and **kwargs. Remove found
@@ -344,10 +341,10 @@ class DataConverter:
         return self.get_clean_date(result_set[0])
 
     @ExceptReturn((AttributeError, TypeError, UserWarning))
-    def get_tag_optional(self, start_bs4tag, *args, **kwargs):
+    def get_attrdate_optional(self, start_bs4tag, *args, **kwargs):
         '''Search BeautifulSoup object for a tag and return its date attribute.
 
-        Optional version. see. get_tag_mandatory
+        Optional version. see. get_attrdate_mandatory
         '''
         result_set = start_bs4tag(args, kwargs)
         if len(result_set) > 1:
@@ -378,6 +375,30 @@ class DataConverter:
         # Strange 'else' statement is to trigger exception
         return result_set[0][attr] if result_set else result_set[attr]
 
+    # Authors & organizations
+    @ExceptReturn((AttributeError, TypeError), mandatory_field=True)
+    def get_authors(self, start_bs4tag, search_tag='AuthEnty'):
+        result_set = start_bs4tag(search_tag)
+        # TODO Prevent / filter duplicate authors.
+        authors = []
+        for tag in result_set:
+            authors.append({'role': 'author',
+                            # TODO: use extract() to remove tag
+                            'name': tag.text.strip(),
+                            'organisation': tag.get('affiliation', '')})
+        return authors
+
+    @ExceptReturn((AttributeError, TypeError))
+    def get_contributors(self, start_bs4tag, search_tag='othId'):
+        result_set = start_bs4tag(search_tag)
+        contributors = []
+        for tag in result_set:
+            contributors.append({'role': 'author',
+                            # TODO: use extract() to remove tag
+                            'name': tag.text.strip(),
+                            'organisation': tag.get('affiliation', '')})
+        return contributors
+
     @ExceptReturn((AttributeError, TypeError), mandatory_field=True)
     def get_keywords(self, start_bs4tag):
         return self.search_tag_content(start_bs4tag, vocab=KW_VOCAB_REGEX)
@@ -391,8 +412,7 @@ class DataConverter:
         separated string of results.
 
         Search beginning from start_bs4tag with *args and **kwargs. Remove found
-        tags from ddi xml with extract(). Assure that no empty tags fail. Remove
-        in-keyword-commas.
+        tags from ddi xml with extract(). Assure that no empty tags fail.
 
         :param start_bs4tag: bs4 tag to start search
         :type start_bs4tag: bs4.element.Tag instance
@@ -592,23 +612,13 @@ class DataConverter:
         doc_citation = "ddi_xml.codeBook.docDscr.citation"
         stdy_dscr = "ddi_xml.codeBook.stdyDscr"
 
-
         ####################################################################
         #      Read mandatory metadata fields:                             #
         ####################################################################
         # Authors & organizations
-        auth_entys = self._read_value(
-            stdy_dscr + ".citation.rspStmt('AuthEnty')", mandatory_field=True)
-        ## Other contributors. Should this be in the optional section?
-        # TODO Prevent / filter duplicate authors.
-        auth_entys.extend(self._read_value(
-            stdy_dscr + ".citation.rspStmt('othId')", mandatory_field=False))
-        authors = []
-        for a in auth_entys:
-            authors.append({'role': 'author',
-                            'name': a.text.strip(),
-                            'organisation': a.get('affiliation', '')})
+        authors = self.get_authors(self.ddi_xml.stdyDscr.citation, 'AuthEnty')
         agent = authors[:]
+        agent.extend(self.get_contributors(self.ddi_xml.stdyDscr.citation))
 
         # Availability
         availability = AVAILABILITY_DEFAULT
