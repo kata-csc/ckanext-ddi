@@ -699,6 +699,11 @@ class DataConverter:
         agent.append({'role': 'owner',
                       'name': owner})
 
+        # Owner organisation
+        hsid = harvest_object.harvest_source_id
+        hsooid = model.Session.query(model.Package).filter(model.Package.id==hsid).one().owner_org
+        owner_org = model.Session.query(model.Group).filter(model.Group.id==hsooid).one().name
+
         # Distributor (Agent: distributor, the same is used as contact)
         agent.append({
             'role': 'distributor',
@@ -777,6 +782,7 @@ class DataConverter:
             mimetype=u'',  # To be implemented straight in 'resources
             name=name,
             notes=notes or u'',
+            owner_org=owner_org,
             resources=[{'algorithm': u'MD5',
                         'description': u'Original metadata record',
                         'format': u'xml',
