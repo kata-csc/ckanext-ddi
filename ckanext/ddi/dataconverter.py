@@ -38,9 +38,9 @@ AVAILABILITY_ENUM = [u'direct_download',
                      u'contact_owner',
                      u'through_provider']
 AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[3]
-LICENCE_ID_DEFAULT =  'notspecified'
+LICENCE_ID_DEFAULT = 'notspecified'
 AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
-ACCESS_REQUEST_URL_FSD = 'http://www.fsd.uta.fi/fi/aineistot/jatkokaytto/tilaus.html'
+ACCESS_REQUEST_URL_FSD = 'https://services.fsd.uta.fi/'
 LICENCE_ID_FSD = 'other_closed'
 CONTACT_EMAIL_FSD = 'fsd@uta.fi'
 CONTACT_URL_FSD = 'http://www.fsd.uta.fi'
