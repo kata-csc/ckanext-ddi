@@ -765,7 +765,7 @@ class DataConverter:
                         'description': u'Original metadata record',
                         'format': u'xml',
                         'hash': u'f60e586509d99944e2d62f31979a802f',
-                        'resource_type': 'file.upload',
+                        'resource_type': 'file.harvest',
                         'size': len(original_xml),
                         'url': orig_xml_storage_url},
                        orig_web_page_resource],
