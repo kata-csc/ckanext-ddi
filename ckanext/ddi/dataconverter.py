@@ -6,12 +6,15 @@ Harvester for DDI2 formats
 #pylint: disable-msg=E1101,E0611,F0401
 import inspect
 import logging
-import lxml.etree as etree
 import re
 import socket
 import StringIO
+import traceback
 import warnings
 
+
+import lxml.etree as etree
+import pycountry
 from pylons import config
 import unicodecsv as csv
 from ckanext.kata.utils import generate_pid
@@ -23,8 +26,7 @@ import ckan.model.authz as authz
 import ckanext.kata.utils as utils
 import ckanext.oaipmh.importcore as importcore
 
-import pycountry
-import traceback
+from ckanext.kata.utils import generate_pid
 
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
@@ -51,6 +53,7 @@ DATE_REGEX = re.compile(
     (0[1-9]|[12][0-9]|3[01])?
     """,
     re.VERBOSE)
+
 
 # TODO Nice to have: decorator for this decorator to separate mandatory and not
 def ExceptReturn(exceptions, returns=u'', mandatory_field=False):
@@ -172,7 +175,7 @@ def _get_headers():
 
 
 def _is_fsd(url):
-    if 'fsd.uta.fi' in url:
+    if url and 'fsd.uta.fi' in url:
         return True
     return False
 
@@ -261,16 +264,19 @@ class DataConverter:
 
     def __init__(self):
         self.ddi_xml = None
+        self.context = None
+        self.strict = True
         self.errors = []
 
-    def ddi2ckan(self, data, original_url=None, original_xml=None, harvest_object=None):
+    def ddi2ckan(self, data, original_url=None, original_xml=None,
+                 harvest_object=None, context=None, strict=True):
         '''Read DDI2 data and convert it to CKAN format.
         '''
+        self.ddi_xml = data
+        self.context = context
+        self.strict = strict
         try:
-            self.ddi_xml = data
             return self._ddi2ckan(original_url, original_xml, harvest_object)
-        #except AttributeError:
-        #    raise
         except Exception as e:
             log.debug(traceback.format_exc(e))
         return False
@@ -287,16 +293,16 @@ class DataConverter:
             output = eval(eval_string)
             return output
         except (AttributeError, TypeError):
-            if mandatory_field:
-                dummy_line_num = 99999
+            if mandatory_field and self.strict:
                 log.debug('Unable to read mandatory value: {path}'
                           .format(path=bs_eval_string))
-                self.errors.append(('Unable to read mandatory value: {path}'
-                                   .format(path=bs_eval_string), dummy_line_num))
+                self.errors.append('Unable to read mandatory value: {path}'
+                                   .format(path=bs_eval_string))
             else:
                 log.debug('Unable to read optional value: {path}'
                           .format(path=bs_eval_string))
             return default
+
 
     def empty_errors(self):
         '''Remove errors of the instance.
@@ -317,7 +323,8 @@ class DataConverter:
 
     @ExceptReturn((AttributeError, TypeError, UserWarning, IndexError),
                   mandatory_field=True)
-    def get_tag_mandatory(self, start_bs4tag, *args, **kwargs):
+    def get_attrdate_mandatory(self, start_bs4tag, *args, **kwargs):
+        # TODO: this is obsolete, more general see: get_attr_mandatory()
         ''''Search BeautifulSoup object for a tag and return its date attribute.
 
         Search beginning from start_bs4tag with *args and **kwargs. Remove found
@@ -337,10 +344,10 @@ class DataConverter:
         return self.get_clean_date(result_set[0])
 
     @ExceptReturn((AttributeError, TypeError, UserWarning))
-    def get_tag_optional(self, start_bs4tag, *args, **kwargs):
+    def get_attrdate_optional(self, start_bs4tag, *args, **kwargs):
         '''Search BeautifulSoup object for a tag and return its date attribute.
 
-        Optional version. see. get_tag_mandatory
+        Optional version. see. get_attrdate_mandatory
         '''
         result_set = start_bs4tag(args, kwargs)
         if len(result_set) > 1:
@@ -371,6 +378,30 @@ class DataConverter:
         # Strange 'else' statement is to trigger exception
         return result_set[0][attr] if result_set else result_set[attr]
 
+    # Authors & organizations
+    @ExceptReturn((AttributeError, TypeError), mandatory_field=True)
+    def get_authors(self, start_bs4tag, search_tag='AuthEnty'):
+        result_set = start_bs4tag(search_tag)
+        # TODO Prevent / filter duplicate authors.
+        authors = []
+        for tag in result_set:
+            authors.append({'role': 'author',
+                            # TODO: use extract() to remove tag
+                            'name': tag.text.strip(),
+                            'organisation': tag.get('affiliation', '')})
+        return authors
+
+    @ExceptReturn((AttributeError, TypeError))
+    def get_contributors(self, start_bs4tag, search_tag='othId'):
+        result_set = start_bs4tag(search_tag)
+        contributors = []
+        for tag in result_set:
+            contributors.append({'role': 'author',
+                            # TODO: use extract() to remove tag
+                            'name': tag.text.strip(),
+                            'organisation': tag.get('affiliation', '')})
+        return contributors
+
     @ExceptReturn((AttributeError, TypeError), mandatory_field=True)
     def get_keywords(self, start_bs4tag):
         return self.search_tag_content(start_bs4tag, vocab=KW_VOCAB_REGEX)
@@ -384,8 +415,7 @@ class DataConverter:
         separated string of results.
 
         Search beginning from start_bs4tag with *args and **kwargs. Remove found
-        tags from ddi xml with extract(). Assure that no empty tags fail. Remove
-        in-keyword-commas.
+        tags from ddi xml with extract(). Assure that no empty tags fail.
 
         :param start_bs4tag: bs4 tag to start search
         :type start_bs4tag: bs4.element.Tag instance
@@ -481,20 +511,25 @@ class DataConverter:
             return ''
 
     @ExceptReturn(UnicodeEncodeError, mandatory_field=True)
-    def _save_original_xml(self, original_xml, name, harvest_object):
+    def _save_original_xml(self, original_xml, name, harvest_object=None):
         ''' Here is created a ofs storage ie. local pairtree storage for
         objects/blobs. The original xml is saved to this storage in
-        <harvest_source_id> named folder. NOTE: The content of this folder is
-        overwritten at reharvest. We assume that if metadata is re-parsed also
-        xml is changed. So old xml can be overwritten.
+        <harvest_source_id> (or <c.user>) named folder. NOTE: The content of
+        this folder is overwritten at reharvest. We assume that if metadata is
+        re-parsed also xml is changed. So old xml can be overwritten.
 
-        Example:
+        Example::
+
         pairtree storage: /opt/data/ckan/data_tree
         xml: <pairtree storage>/pairtree_root//de/fa/ul/t/obj/<harvest_source_id>/FSD1049.xml
         url:<ckan_url>/storage/f/<harvest_source_id>/FSD1049.xml
         '''
-        label = '{dir}/{filename}.xml'.format(
-            dir=harvest_object.harvest_source_id, filename=name)
+        if harvest_object:
+            dir = harvest_object.harvest_source_id
+        else:
+            dir = self.context['user']
+        label = '{directory}/{filename}.xml'.format(directory=dir,
+                                                    filename=name)
         try:
             ofs = storage.get_ofs()
             ofs.put_stream(storage.BUCKET, label, original_xml, {})
@@ -583,23 +618,13 @@ class DataConverter:
         doc_citation = "ddi_xml.codeBook.docDscr.citation"
         stdy_dscr = "ddi_xml.codeBook.stdyDscr"
 
-
         ####################################################################
         #      Read mandatory metadata fields:                             #
         ####################################################################
         # Authors & organizations
-        auth_entys = self._read_value(
-            stdy_dscr + ".citation.rspStmt('AuthEnty')", mandatory_field=True)
-        ## Other contributors. Should this be in the optional section?
-        # TODO Prevent / filter duplicate authors.
-        auth_entys.extend(self._read_value(
-            stdy_dscr + ".citation.rspStmt('othId')", mandatory_field=False))
-        authors = []
-        for a in auth_entys:
-            authors.append({'role': 'author',
-                            'name': a.text.strip(),
-                            'organisation': a.get('affiliation', '')})
+        authors = self.get_authors(self.ddi_xml.stdyDscr.citation, 'AuthEnty')
         agent = authors[:]
+        agent.extend(self.get_contributors(self.ddi_xml.stdyDscr.citation))
 
         # Availability
         availability = AVAILABILITY_DEFAULT
@@ -687,6 +712,14 @@ class DataConverter:
         agent.append({'role': 'owner',
                       'name': owner})
 
+        # Owner organisation
+        if harvest_object:
+            hsid = harvest_object.harvest_source_id
+            hsooid = model.Session.query(model.Package).filter(model.Package.id==hsid).one().owner_org
+            owner_org = model.Session.query(model.Group).filter(model.Group.id==hsooid).one().name
+        else:
+            owner_org = u''
+
         # Distributor (Agent: distributor, the same is used as contact)
         agent.append({
             'role': 'distributor',
@@ -766,6 +799,7 @@ class DataConverter:
             name=name,
             notes=notes or u'',
             pids=pids,
+            owner_org=owner_org,
             resources=[{'algorithm': u'MD5',
                         'description': u'Original metadata record',
                         'format': u'xml',

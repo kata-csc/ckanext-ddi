@@ -60,9 +60,9 @@ class DDIHarvester(HarvesterBase):
         '''Return information about this harvester.
         '''
         return {
-            'name': 'DDI',
-            'title': 'DDI import',
-            'description': 'Mass importing harvester for DDI2',
+            'name': 'ddi',
+            'title': 'DDI2',
+            'description': 'Harvests DDI2 sources.',
         }
 
     def validate_config(self, config):
@@ -262,6 +262,7 @@ class DDIHarvester(HarvesterBase):
 
         errors = self.ddi_converter.get_errors()
         if errors:
+            # FIXME: Using line number here hazardous. Old _read_value doesn't support
             for er, line in errors:
                 self._save_object_error('Invalid or missing mandatory metadata in {ur}. '
                                         '{er}'.format(ur=info['url'], er=er),
@@ -277,13 +278,53 @@ class DDIHarvester(HarvesterBase):
         log.debug("Exiting import_stage()")
         return result  # returns True
 
-    def import_xml(self, source, xml):
+    def fetch_xml(self, url, context):
+        '''Get xml for import. Shortened from :meth:`fetch_stage`
+
+        :param url: the url for metadata file
+        :param type: string
+
+        :return: a xml file
+        :rtype: string
+        '''
         try:
-            ddi_xml = BeautifulSoup(xml, 'xml')
-        except etree.XMLSyntaxError:
-            log.debug('Unable to parse XML!')
-            return False
-        return self.ddi_converter.ddi2ckan(ddi_xml, None, xml)
+            log.debug('Requesting url {ur}'.format(ur=url))
+            f = urllib2.urlopen(url).read()
+            return self.parse_xml(f, context, url)
+        except (urllib2.URLError, urllib2.HTTPError,):
+            log.debug('fetch_xml: Could not fetch from url {ur}!'.format(ur=url))
+        except httplib.BadStatusLine:
+            log.debug('Bad HTTP response status line.')
+
+    def parse_xml(self, f, context, orig_url=None, strict=True):
+        '''Import single metadata file.
+
+        :param f: the metadata file
+        :param type: string
+        :param orig_url: the url for metadata file
+        :param type: string
+        :param strict: require mandatory metadata fields
+        :param type: boolean
+
+        :returns: package dictionary of parsed metadata
+        :rtype: dict
+        '''
+        try:
+            ddi_xml = BeautifulSoup(f, 'xml')
+        except etree.XMLSyntaxError, err:
+            log.debug('Unable to parse XML! {er}'.format(er=err.msg))
+            return None
+        package_dict = self.ddi_converter.ddi2ckan(ddi_xml, orig_url, f,
+                                                   context=context,
+                                                   strict=strict)
+        errors = self.ddi_converter.get_errors()
+        if errors:
+            # FIXME: Can't use line number here. Old _read_value doesn't provide
+            for er in errors:
+                log.debug('Invalid or missing mandatory metadata in {ur}. '
+                          '{er}'.format(ur=orig_url, er=er))
+            self.ddi_converter.empty_errors()
+        return package_dict
 
 #
 #class DDI3Harvester(HarvesterBase):

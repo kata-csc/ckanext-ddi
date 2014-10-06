@@ -41,6 +41,6 @@ setup(
     ddi_harvester=ckanext.ddi.harvester:DDIHarvester
     # ddi3_harvester=ckanext.ddi.harvester:DDI3Harvester
     [paste.paster_command]
-    ddi_import = ckanext.ddi.commands.ddi_import:DDIImporter
+    ddi_import = ckanext.ddi.commands:DDIImporter
     """,
 )
