@@ -12,9 +12,9 @@ import socket
 import StringIO
 import warnings
 
-import bs4
 from pylons import config
 import unicodecsv as csv
+from ckanext.kata.utils import generate_pid
 
 import ckan.controllers.storage as storage
 from ckan.lib.base import h
@@ -25,9 +25,6 @@ import ckanext.oaipmh.importcore as importcore
 
 import pycountry
 import traceback
-import pprint
-
-from ckanext.kata.utils import generate_pid
 
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
@@ -662,7 +659,14 @@ class DataConverter:
             name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo['agency']", mandatory_field=True)
         if not name_id:
             name_id = self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
-        name = name_prefix + name_id
+        name = utils.datapid_to_name(name_prefix + name_id)
+
+        pids = list()
+        pids.append({'id': name, 'type': 'data', 'primary': 'True', 'provider': name_prefix})
+
+        # Should we generate a version PID?
+        # vpid = utils.generate_pid()
+        # pids.append({'id': vpid, 'type': 'version', 'provider': 'kata'})
 
         # Original xml and web page as resource
         orig_xml_storage_url = self._save_original_xml(original_xml, name, harvest_object)
@@ -761,6 +765,7 @@ class DataConverter:
             mimetype=u'',  # To be implemented straight in 'resources
             name=name,
             notes=notes or u'',
+            pids=pids,
             resources=[{'algorithm': u'MD5',
                         'description': u'Original metadata record',
                         'format': u'xml',

@@ -11,28 +11,15 @@ import json
 import logging
 import lxml.etree as etree
 import pickle
-import pprint
-import re
 import socket
-import StringIO
 import traceback
 import urllib2
 
-from bs4 import BeautifulSoup, Tag
-from dateutil import parser
-#from pylons import config
-import unicodecsv as csv
 
-from ckan.controllers.storage import BUCKET, get_ofs
-from ckan.lib.base import h
-from ckan.lib.munge import munge_tag
-from ckan.lib.navl.validators import ignore_missing
-from ckan.logic import ValidationError
-from ckan.logic.converters import convert_to_extras
+from bs4 import BeautifulSoup
+from dateutil import parser
 import ckan.model as model
-from ckan.model.authz import setup_default_user_roles
 from ckanext.harvest.harvesters.base import HarvesterBase
-#from ckanext.harvest.harvesters.retry import HarvesterRetry
 import ckanext.harvest.model as hmodel
 from ckanext.kata.plugin import KataPlugin
 import dataconverter as dconverter
@@ -267,6 +254,12 @@ class DDIHarvester(HarvesterBase):
 
         package_dict = self.ddi_converter.ddi2ckan(ddi_xml, info['url'],
                                                    info['xml'], harvest_object)
+
+        # Obsolete for now, as we only have one pid
+        # pkg_id = ckanext.kata.utils.get_package_id_by_data_pids(package_dict)
+        # pkg = model.Session.query(model.Package).filter(model.Package.id == pkg_id).first() if pkg_id else None
+        # package_dict['id'] = pkg.id if pkg else generate_pid()
+
         errors = self.ddi_converter.get_errors()
         if errors:
             for er, line in errors:
