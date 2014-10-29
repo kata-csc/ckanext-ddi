@@ -14,7 +14,7 @@ import warnings
 
 
 import lxml.etree as etree
-import pycountry
+from iso639 import languages
 from pylons import config
 import unicodecsv as csv
 from ckanext.kata.utils import generate_pid
@@ -503,7 +503,7 @@ class DataConverter:
         Convert alpha2 language (eg. 'en') to terminology language (eg. 'eng')
         '''
         try:
-            lang_object = pycountry.languages.get(alpha2=lang)
+            lang_object = languages.get(alpha2=lang)
             return lang_object.terminology
         except KeyError as ke:
             # TODO: Parse ISO 639-2 B/T ?

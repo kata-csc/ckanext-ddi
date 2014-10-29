@@ -27,6 +27,10 @@ setup(
         'ckanclient',
         'unicodecsv>=0.9.0',
         'python-dateutil',
+        'iso639',
+    ],
+    dependency_links=[
+        "git+https://github.com/kata-csc/iso639.git#egg=iso639"
     ],
     tests_require=[
         'nose',
