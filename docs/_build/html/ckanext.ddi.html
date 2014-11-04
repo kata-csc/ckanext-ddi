@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ckanext.ddi package &mdash; Kata metadata catalogue documentation</title>
+    
+    <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Kata metadata catalogue documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="headertitle"><a
+          href="index.html">Kata</a></div>
+        <div class="rel">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ckanext-ddi-package">
+<h1>ckanext.ddi package<a class="headerlink" href="#ckanext-ddi-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ckanext.ddi.dataconverter">
+<span id="ckanext-ddi-dataconverter-module"></span><h2>ckanext.ddi.dataconverter module<a class="headerlink" href="#module-ckanext.ddi.dataconverter" title="Permalink to this headline">¶</a></h2>
+<p>Harvester for DDI2 formats</p>
+<dl class="class">
+<dt id="ckanext.ddi.dataconverter.DataConverter">
+<em class="property">class </em><tt class="descclassname">ckanext.ddi.dataconverter.</tt><tt class="descname">DataConverter</tt><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.convert_language">
+<tt class="descname">convert_language</tt><big>(</big><em>lang</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.convert_language"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.convert_language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert alpha2 language (eg. &#8216;en&#8217;) to terminology language (eg. &#8216;eng&#8217;)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.ddi2ckan">
+<tt class="descname">ddi2ckan</tt><big>(</big><em>data</em>, <em>original_url=None</em>, <em>original_xml=None</em>, <em>harvest_object=None</em>, <em>context=None</em>, <em>strict=True</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.ddi2ckan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.ddi2ckan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read DDI2 data and convert it to CKAN format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.empty_errors">
+<tt class="descname">empty_errors</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.empty_errors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.empty_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove errors of the instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_attr_mandatory">
+<tt class="descname">get_attr_mandatory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_attr_mandatory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_attr_mandatory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_attr_optional">
+<tt class="descname">get_attr_optional</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_attr_optional"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_attr_optional" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_attrdate_mandatory">
+<tt class="descname">get_attrdate_mandatory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_attrdate_mandatory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_attrdate_mandatory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_attrdate_optional">
+<tt class="descname">get_attrdate_optional</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_attrdate_optional"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_attrdate_optional" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_authors">
+<tt class="descname">get_authors</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_authors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_authors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_clean_date">
+<tt class="descname">get_clean_date</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_clean_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_clean_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_contributors">
+<tt class="descname">get_contributors</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_contributors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_contributors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_discipline">
+<tt class="descname">get_discipline</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_discipline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_discipline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_errors">
+<tt class="descname">get_errors</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_errors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return errors found in instance&#8217;s data parsing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_geo_coverage">
+<tt class="descname">get_geo_coverage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_geo_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_geo_coverage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_keywords">
+<tt class="descname">get_keywords</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_keywords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_keywords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.get_temporal_coverage">
+<tt class="descname">get_temporal_coverage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.get_temporal_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.get_temporal_coverage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.dataconverter.DataConverter.search_tag_content">
+<tt class="descname">search_tag_content</tt><big>(</big><em>start_bs4tag</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#DataConverter.search_tag_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.DataConverter.search_tag_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search BeautifulSoup object for keywords or alike and return comma
+separated string of results.</p>
+<p>Search beginning from start_bs4tag with <cite>args</cite> and <cite>kwargs</cite>. Remove found
+tags from ddi xml with extract(). Assure that no empty tags fail.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_bs4tag</strong> (<em>bs4.element.Tag instance</em>) &#8211; bs4 tag to start search</li>
+<li><strong>args</strong> (<em>one string or None</em>) &#8211; searched tag (only one supported) or none</li>
+<li><strong>kwargs</strong> (<em>zero or more key-value pairs</em>) &#8211; searched attributes of a ddi tag</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a string of comma separated keywords</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">a string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ckanext.ddi.dataconverter.ExceptReturn">
+<tt class="descclassname">ckanext.ddi.dataconverter.</tt><tt class="descname">ExceptReturn</tt><big>(</big><em>exceptions</em>, <em>returns=u''</em>, <em>mandatory_field=False</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/dataconverter.html#ExceptReturn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.dataconverter.ExceptReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to handle exceptions in the import stage in controlled manner.</p>
+<p>Prevents the whole import to fail with flawed harvest objects or in the case
+of optional metadata. Collects all deficiencies of harvest objects to
+self.errors to be showed in WUI.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>exceptions</strong> (<em>single exception or tuple of exceptions</em>) &#8211; Exceptions to catch.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ckanext.ddi.harvester">
+<span id="ckanext-ddi-harvester-module"></span><h2>ckanext.ddi.harvester module<a class="headerlink" href="#module-ckanext.ddi.harvester" title="Permalink to this headline">¶</a></h2>
+<p>Harvester for DDI2 formats</p>
+<dl class="class">
+<dt id="ckanext.ddi.harvester.DDIHarvester">
+<em class="property">class </em><tt class="descclassname">ckanext.ddi.harvester.</tt><tt class="descname">DDIHarvester</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">ckanext.harvest.harvesters.base.HarvesterBase</span></tt></p>
+<p>DDI Harvester for ckanext-harvester.</p>
+<dl class="attribute">
+<dt id="ckanext.ddi.harvester.DDIHarvester.config">
+<tt class="descname">config</tt><em class="property"> = None</em><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.fetch_stage">
+<tt class="descname">fetch_stage</tt><big>(</big><em>harvest_object</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.fetch_stage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.fetch_stage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch and parse the DDI XML document.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.fetch_xml">
+<tt class="descname">fetch_xml</tt><big>(</big><em>url</em>, <em>context</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.fetch_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.fetch_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get xml for import. Shortened from <a class="reference internal" href="#ckanext.ddi.harvester.DDIHarvester.fetch_stage" title="ckanext.ddi.harvester.DDIHarvester.fetch_stage"><tt class="xref py py-meth docutils literal"><span class="pre">fetch_stage()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> &#8211; the url for metadata file</li>
+<li><strong>type</strong> &#8211; string</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a xml file</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.gather_stage">
+<tt class="descname">gather_stage</tt><big>(</big><em>harvest_job</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.gather_stage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.gather_stage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather the URLs to fetch from a URL which has a list of links to XML
+documents containing the DDI documents.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.get_original_url">
+<tt class="descname">get_original_url</tt><big>(</big><em>harvest_object_id</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.get_original_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.get_original_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to the original remote document, given a Harvest
+Object id.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.import_stage">
+<tt class="descname">import_stage</tt><big>(</big><em>harvest_object</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.import_stage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.import_stage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import the metadata received in the fetch stage to a dataset.</p>
+<p>DDI document is parsed to a BeautifulSoup object for metadata
+extraction. Study (stdyDscr) and document (docDscr) descriptions are
+used. File (fileDscr) and data (dataDscr) description parts of a ddi
+file are saved as csv files (unfinished).
+Also create groups if ones are defined (unfinished).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.info">
+<tt class="descname">info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about this harvester.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.parse_xml">
+<tt class="descname">parse_xml</tt><big>(</big><em>f</em>, <em>context</em>, <em>orig_url=None</em>, <em>strict=True</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.parse_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.parse_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import single metadata file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> &#8211; the metadata file</li>
+<li><strong>type</strong> &#8211; string</li>
+<li><strong>orig_url</strong> &#8211; the url for metadata file</li>
+<li><strong>type</strong> &#8211; string</li>
+<li><strong>strict</strong> &#8211; require mandatory metadata fields</li>
+<li><strong>type</strong> &#8211; boolean</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">package dictionary of parsed metadata</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ckanext.ddi.harvester.DDIHarvester.validate_config">
+<tt class="descname">validate_config</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/ckanext/ddi/harvester.html#DDIHarvester.validate_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.ddi.harvester.DDIHarvester.validate_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate the config, returns it since we don&#8217;t have any configuration
+parameters</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ckanext.ddi">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ckanext.ddi" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <ul class="simple">
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="genindex.html" title="General Index"
+             >index</a>
+            <br/>
+            <a href="_sources/ckanext.ddi.txt"
+               rel="nofollow">Show Source</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2014, CSC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,1016 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ckanext.ddi.dataconverter &mdash; Kata metadata catalogue documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Kata metadata catalogue documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="headertitle"><a
+          href="../../../index.html">Kata</a></div>
+        <div class="rel">
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for ckanext.ddi.dataconverter</h1><div class="highlight"><pre>
+<span class="c"># coding: utf-8</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Harvester for DDI2 formats</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c">#pylint: disable-msg=E1101,E0611,F0401</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">StringIO</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+<span class="kn">import</span> <span class="nn">lxml.etree</span> <span class="kn">as</span> <span class="nn">etree</span>
+<span class="kn">from</span> <span class="nn">iso639</span> <span class="kn">import</span> <span class="n">languages</span>
+<span class="kn">from</span> <span class="nn">pylons</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span> <span class="nn">unicodecsv</span> <span class="kn">as</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">ckanext.kata.utils</span> <span class="kn">import</span> <span class="n">generate_pid</span>
+
+<span class="kn">import</span> <span class="nn">ckan.controllers.storage</span> <span class="kn">as</span> <span class="nn">storage</span>
+<span class="kn">from</span> <span class="nn">ckan.lib.base</span> <span class="kn">import</span> <span class="n">h</span>
+<span class="kn">import</span> <span class="nn">ckan.model</span> <span class="kn">as</span> <span class="nn">model</span>
+<span class="kn">import</span> <span class="nn">ckan.model.authz</span> <span class="kn">as</span> <span class="nn">authz</span>
+<span class="kn">import</span> <span class="nn">ckanext.kata.utils</span> <span class="kn">as</span> <span class="nn">utils</span>
+<span class="kn">import</span> <span class="nn">ckanext.oaipmh.importcore</span> <span class="kn">as</span> <span class="nn">importcore</span>
+
+<span class="kn">from</span> <span class="nn">ckanext.kata.utils</span> <span class="kn">import</span> <span class="n">generate_pid</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">socket</span><span class="o">.</span><span class="n">setdefaulttimeout</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="n">AVAILABILITY_ENUM</span> <span class="o">=</span> <span class="p">[</span><span class="s">u&#39;direct_download&#39;</span><span class="p">,</span>
+                     <span class="s">u&#39;access_application&#39;</span><span class="p">,</span>
+                     <span class="s">u&#39;access_request&#39;</span><span class="p">,</span>
+                     <span class="s">u&#39;contact_owner&#39;</span><span class="p">,</span>
+                     <span class="s">u&#39;through_provider&#39;</span><span class="p">]</span>
+<span class="n">AVAILABILITY_DEFAULT</span> <span class="o">=</span> <span class="n">AVAILABILITY_ENUM</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">LICENCE_ID_DEFAULT</span> <span class="o">=</span> <span class="s">&#39;notspecified&#39;</span>
+<span class="n">AVAILABILITY_FSD</span> <span class="o">=</span> <span class="n">AVAILABILITY_ENUM</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">ACCESS_REQUEST_URL_FSD</span> <span class="o">=</span> <span class="s">&#39;https://services.fsd.uta.fi/&#39;</span>
+<span class="n">LICENCE_ID_FSD</span> <span class="o">=</span> <span class="s">&#39;other_closed&#39;</span>
+<span class="n">CONTACT_EMAIL_FSD</span> <span class="o">=</span> <span class="s">&#39;fsd@uta.fi&#39;</span>
+<span class="n">CONTACT_URL_FSD</span> <span class="o">=</span> <span class="s">&#39;http://www.fsd.uta.fi&#39;</span>
+<span class="n">KW_VOCAB_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;^(?!FSD$)&#39;</span><span class="p">)</span>
+<span class="n">DATE_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    ([0-9]{4})</span>
+<span class="sd">    -?</span>
+<span class="sd">    (0[1-9]|1[0-2])?</span>
+<span class="sd">    -?</span>
+<span class="sd">    (0[1-9]|[12][0-9]|3[01])?</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+
+
+<span class="c"># TODO Nice to have: decorator for this decorator to separate mandatory and not</span>
+<div class="viewcode-block" id="ExceptReturn"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.ExceptReturn">[docs]</a><span class="k">def</span> <span class="nf">ExceptReturn</span><span class="p">(</span><span class="n">exceptions</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">u&#39;&#39;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Decorator to handle exceptions in the import stage in controlled manner.</span>
+
+<span class="sd">    Prevents the whole import to fail with flawed harvest objects or in the case</span>
+<span class="sd">    of optional metadata. Collects all deficiencies of harvest objects to</span>
+<span class="sd">    self.errors to be showed in WUI.</span>
+
+<span class="sd">    :param exceptions: Exceptions to catch.</span>
+<span class="sd">    :type exceptions: single exception or tuple of exceptions</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">self_</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c"># Decorator intercepts method args, 1st is self</span>
+                <span class="c"># If inspecting is too slow remove it and use</span>
+                <span class="c"># &#39;carg=args[2] or args[1]&#39; in format()&#39;s below.</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span>  <span class="c"># To show caller argument</span>
+                <span class="n">caller_record</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getouterframes</span><span class="p">(</span><span class="n">frame</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">line_num</span> <span class="o">=</span> <span class="n">caller_record</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">call_line</span> <span class="o">=</span> <span class="n">caller_record</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">call_arg</span> <span class="o">=</span> <span class="n">call_line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">frame</span>  <span class="c"># To remove possible reference cycles</span>
+                <span class="k">if</span> <span class="n">mandatory_field</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Unable to read mandatory value: {etype}: {ex} at&#39;</span>
+                              <span class="s">&#39; {carg} (line {li})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">etype</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">li</span><span class="o">=</span><span class="n">line_num</span><span class="p">,</span>
+                        <span class="n">carg</span><span class="o">=</span><span class="n">call_arg</span><span class="p">))</span>
+                    <span class="n">self_</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s">&#39;{etype}: {ex} at {carg}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">etype</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">carg</span><span class="o">=</span><span class="n">call_arg</span><span class="p">),</span>
+                                         <span class="n">line_num</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Unable to read optional value: {carg} (line {li})&#39;</span>
+                       <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">li</span><span class="o">=</span><span class="n">line_num</span><span class="p">,</span> <span class="n">carg</span><span class="o">=</span><span class="n">call_arg</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">returns</span>
+        <span class="k">return</span> <span class="n">call</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_collect_attribs</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Collect attributes of a tag &#39;el&#39; to a string with (k,v) value where k is</span>
+<span class="sd">    the attribute name and v is the attribute value.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">astr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">el</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">astr</span> <span class="o">+=</span> <span class="s">&quot;(</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">astr</span>
+
+
+<span class="k">def</span> <span class="nf">_construct_csv</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">heads</span><span class="p">):</span>
+    <span class="n">retdict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">els</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">varcnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;ID&#39;</span><span class="p">,</span> <span class="n">var</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">els</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;catValu&#39;</span><span class="p">,</span> <span class="s">&#39;catStat&#39;</span><span class="p">,</span> <span class="s">&#39;qstn&#39;</span><span class="p">,</span> <span class="s">&#39;catgry&#39;</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;qstn&#39;</span><span class="p">:</span>
+            <span class="n">valstr</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">preQTxt</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">preQTxt</span><span class="o">.</span><span class="n">string</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;preQTxt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">valstr</span>
+            <span class="n">valstr</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">qstnLit</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">qstnLit</span><span class="o">.</span><span class="n">string</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;qstnLit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">valstr</span>
+            <span class="n">valstr</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">postQTxt</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">postQTxt</span><span class="o">.</span><span class="n">string</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;postQTxt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">valstr</span>
+            <span class="n">valstr</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ivuInstr</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ivuInstr</span><span class="o">.</span><span class="n">string</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;ivuInstr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">valstr</span>
+        <span class="k">elif</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;sumStat&#39;</span><span class="p">):</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;sumStat_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">var</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+            <span class="n">retdict</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;valrng&#39;</span><span class="p">:</span>
+            <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())]</span>
+        <span class="k">elif</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;invalrng&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">item</span><span class="p">:</span>
+                <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;item&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;labl&#39;</span> <span class="ow">and</span> <span class="s">&#39;level&#39;</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">var</span><span class="p">[</span><span class="s">&#39;level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;variable&#39;</span> <span class="ow">and</span> <span class="n">var</span><span class="o">.</span><span class="n">string</span><span class="p">:</span>
+                    <span class="n">retdict</span><span class="p">[</span><span class="s">&#39;labl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">retdict</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">string</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">retdict</span>
+
+
+<span class="k">def</span> <span class="nf">_create_code_rows</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">var</span><span class="p">(</span><span class="s">&#39;catgry&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">catdict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">catdict</span><span class="p">[</span><span class="s">&#39;ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span><span class="p">[</span><span class="s">&#39;ID&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s">&#39;ID&#39;</span> <span class="ow">in</span> <span class="n">var</span> <span class="k">else</span> <span class="n">var</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">catdict</span><span class="p">[</span><span class="s">&#39;catValu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">catValu</span><span class="o">.</span><span class="n">string</span> <span class="k">if</span> <span class="n">cat</span><span class="o">.</span><span class="n">catValu</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">catdict</span><span class="p">[</span><span class="s">&#39;labl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">labl</span><span class="o">.</span><span class="n">string</span> <span class="k">if</span> <span class="n">cat</span><span class="o">.</span><span class="n">labl</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">catdict</span><span class="p">[</span><span class="s">&#39;catStat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">catStat</span><span class="o">.</span><span class="n">string</span> <span class="k">if</span> <span class="n">cat</span><span class="o">.</span><span class="n">catStat</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">catdict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rows</span>
+
+
+<span class="k">def</span> <span class="nf">_get_headers</span><span class="p">():</span>
+    <span class="n">longest_els</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;ID&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;labl&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;preQTxt&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;qstnLit&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;postQTxt&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;ivuInstr&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;varFormat&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;TotlResp&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;range&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;item&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;sumStat_vald&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;sumStat_min&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;sumStat_max&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;sumStat_mean&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;sumStat_stdev&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;notes&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;txt&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">longest_els</span>
+
+
+<span class="k">def</span> <span class="nf">_is_fsd</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">url</span> <span class="ow">and</span> <span class="s">&#39;fsd.uta.fi&#39;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+
+<span class="k">def</span> <span class="nf">_access_request_URL_is_found</span><span class="p">():</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+
+<span class="k">def</span> <span class="nf">_future_keywords_to_labels_urls_implementation</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; This old code is kept here for now if needed in future</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c"># JuhoL: extract, process and save keywords</span>
+    <span class="c"># JuhoL: keywords, match elements &lt;keyword&gt; &lt;topClass&gt;</span>
+    <span class="n">keywords</span> <span class="o">=</span> <span class="n">stdy_dscr</span><span class="o">.</span><span class="n">stdyInfo</span><span class="o">.</span><span class="n">subject</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;keyword|topcClas&#39;</span><span class="p">))</span>
+    <span class="n">keywords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">keywords</span><span class="p">))</span>  <span class="c"># JuhoL: For what? Transforming, filtering?</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kw</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c">#vocab = None</span>
+        <span class="c">#if &#39;vocab&#39; in kw.attrs:</span>
+        <span class="c">#    vocab = kw.attrs.get(&quot;vocab&quot;, None)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kw</span><span class="o">.</span><span class="n">string</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;http://www.yso.fi&#39;</span><span class="p">):</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">label_list_yso</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+            <span class="n">pkg</span><span class="o">.</span><span class="n">extras</span><span class="p">[</span><span class="s">&#39;tag_source_</span><span class="si">%i</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tag</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;http://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;https://&#39;</span><span class="p">):</span>
+            <span class="n">pkg</span><span class="o">.</span><span class="n">extras</span><span class="p">[</span><span class="s">&#39;tag_source_</span><span class="si">%i</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tag</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># URL tags break links in UI.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">tag</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">tagi</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+            <span class="c">#pkg.add_tag_by_name(t[:100])</span>
+            <span class="n">tagi</span> <span class="o">=</span> <span class="n">tagi</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>  <span class="c"># 100 char limit in DB.</span>
+            <span class="n">tag_obj</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Tag</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="n">tagi</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tag_obj</span><span class="p">:</span>
+                <span class="n">tag_obj</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Tag</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">tagi</span><span class="p">)</span>
+                <span class="n">tag_obj</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="n">pkgtag</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">PackageTag</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">PackageTag</span><span class="o">.</span><span class="n">package_id</span><span class="o">==</span><span class="n">pkg</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">PackageTag</span><span class="o">.</span><span class="n">tag_id</span><span class="o">==</span><span class="n">tag_obj</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pkgtag</span><span class="p">:</span>
+                <span class="n">pkgtag</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PackageTag</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">tag_obj</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="n">pkg</span><span class="p">)</span>
+                <span class="n">pkgtag</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>  <span class="c"># Avoids duplicates if tags has duplicates.</span>
+
+
+<span class="k">def</span> <span class="nf">_create_group_based_on_organizations</span><span class="p">():</span>
+    <span class="c"># JuhoL: Create groups</span>
+    <span class="c"># for organizations extracted. Is this wanted? Check</span>
+    <span class="c"># how groups should be used currently. For group</span>
+    <span class="c"># stdyDscr.citation.distStmt.distrbtr or</span>
+    <span class="c"># docDscr.citation.prodStmt.producer or</span>
+    <span class="c"># stdyDscr.citation.prodStmt.producer.get(&#39;affiliation&#39;) could be more</span>
+    <span class="c"># appropriate.</span>
+    <span class="n">producers</span> <span class="o">=</span> <span class="n">stdy_dscr</span><span class="o">.</span><span class="n">citation</span><span class="o">.</span><span class="n">prodStmt</span><span class="p">(</span><span class="s">&#39;producer&#39;</span><span class="p">)</span>  <span class="c"># this is .find_all()</span>
+    <span class="k">for</span> <span class="n">producer</span> <span class="ow">in</span> <span class="n">producers</span><span class="p">:</span>
+        <span class="n">producer</span> <span class="o">=</span> <span class="n">producer</span><span class="o">.</span><span class="n">string</span>
+        <span class="k">if</span> <span class="n">producer</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="n">producer</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span><span class="p">:</span>
+                <span class="c"># JuhoL: Gives UnicodeEncodeError if contains scandics, see</span>
+                <span class="c"># ckanext-shibboleth plugin.py for similar fix</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">producer</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">producer</span><span class="p">,</span>
+                                    <span class="n">title</span><span class="o">=</span><span class="n">producer</span><span class="p">)</span>
+                <span class="n">group</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="n">group</span><span class="o">.</span><span class="n">add_package_by_name</span><span class="p">(</span><span class="n">pkg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">authz</span><span class="o">.</span><span class="n">setup_default_user_roles</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_last_statements_to_rewrite</span><span class="p">():</span>
+    <span class="c"># JuhoL: Add also some basic fields to pkg.extras. Why?</span>
+    <span class="c"># MikkoK: Parsing to extras not needed with _create_or_update_package().</span>
+
+    <span class="k">if</span> <span class="n">stdy_dscr</span><span class="o">.</span><span class="n">citation</span><span class="o">.</span><span class="n">distStmt</span><span class="o">.</span><span class="n">distrbtr</span><span class="p">:</span>
+        <span class="n">pkg</span><span class="o">.</span><span class="n">extras</span><span class="p">[</span><span class="s">&#39;publisher&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stdy_dscr</span><span class="o">.</span><span class="n">citation</span><span class="o">.</span><span class="n">distStmt</span><span class="o">.</span><span class="n">distrbtr</span><span class="o">.</span><span class="n">string</span>
+
+    <span class="c"># JuhoL: This was old language for first title</span>
+    <span class="n">pkg</span><span class="o">.</span><span class="n">extras</span><span class="p">[</span><span class="s">&#39;lang_title_0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">language</span>  <span class="c"># Guess. Good, I hope.</span>
+
+
+<div class="viewcode-block" id="DataConverter"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter">[docs]</a><span class="k">class</span> <span class="nc">DataConverter</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strict</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="DataConverter.ddi2ckan"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.ddi2ckan">[docs]</a>    <span class="k">def</span> <span class="nf">ddi2ckan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">original_url</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">original_xml</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">harvest_object</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Read DDI2 data and convert it to CKAN format.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strict</span> <span class="o">=</span> <span class="n">strict</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ddi2ckan</span><span class="p">(</span><span class="n">original_url</span><span class="p">,</span> <span class="n">original_xml</span><span class="p">,</span> <span class="n">harvest_object</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+    <span class="k">def</span> <span class="nf">_read_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bs_eval_string</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">u&#39;&#39;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Evaluate values from Beautiful Soup objects.</span>
+<span class="sd">        Returns default if evaluation failed, else return the evaluated output.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># Make sure we are using class variables</span>
+        <span class="n">eval_string</span> <span class="o">=</span> <span class="n">bs_eval_string</span> <span class="k">if</span> <span class="n">bs_eval_string</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;self.&#39;</span><span class="p">)</span> \
+            <span class="k">else</span> <span class="s">&#39;self.&#39;</span> <span class="o">+</span> <span class="n">bs_eval_string</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">eval_string</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">output</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">mandatory_field</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Unable to read mandatory value: {path}&#39;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bs_eval_string</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Unable to read mandatory value: {path}&#39;</span>
+                                   <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bs_eval_string</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Unable to read optional value: {path}&#39;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bs_eval_string</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">default</span>
+
+
+<div class="viewcode-block" id="DataConverter.empty_errors"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.empty_errors">[docs]</a>    <span class="k">def</span> <span class="nf">empty_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Remove errors of the instance.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="DataConverter.get_errors"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_errors">[docs]</a>    <span class="k">def</span> <span class="nf">get_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return errors found in instance&#39;s data parsing.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">)</span>
+<div class="viewcode-block" id="DataConverter.get_clean_date"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_clean_date">[docs]</a>    <span class="k">def</span> <span class="nf">get_clean_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bs4_element</span><span class="p">):</span>
+        <span class="n">raw_date</span> <span class="o">=</span> <span class="n">DATE_REGEX</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">bs4_element</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;date&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">raw_date</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">raw_date</span> <span class="ow">and</span> \
+                                                <span class="n">raw_date</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="s">&#39;&#39;</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">),</span>
+                  <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="viewcode-block" id="DataConverter.get_attrdate_mandatory"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_attrdate_mandatory">[docs]</a>    <span class="k">def</span> <span class="nf">get_attrdate_mandatory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c"># TODO: this is obsolete, more general see: get_attr_mandatory()</span>
+        <span class="sd">&#39;&#39;&#39;&#39;Search BeautifulSoup object for a tag and return its date attribute.</span>
+
+<span class="sd">        Search beginning from start_bs4tag with *args and **kwargs. Remove found</span>
+<span class="sd">        tags from ddi xml with extract(). Assure that no empty tags fail. Remove</span>
+<span class="sd">        in-keyword-commas.</span>
+
+<span class="sd">        :param start_bs4tag: bs4 tag to start search</span>
+<span class="sd">        :type start_bs4tag: bs4.element.Tag instance</span>
+<span class="sd">        :returns: a string of comma separated keywords</span>
+<span class="sd">        :rtype: a string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">result_set</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&#39;error&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>  <span class="c"># raises warning</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Ambiguous tag found: {tag}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">tag</span><span class="o">=</span><span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clean_date</span><span class="p">(</span><span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">))</span>
+<div class="viewcode-block" id="DataConverter.get_attrdate_optional"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_attrdate_optional">[docs]</a>    <span class="k">def</span> <span class="nf">get_attrdate_optional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Search BeautifulSoup object for a tag and return its date attribute.</span>
+
+<span class="sd">        Optional version. see. get_attrdate_mandatory</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">result_set</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&#39;error&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>  <span class="c"># raises warning</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Ambiguous tag found: {tag}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">tag</span><span class="o">=</span><span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clean_date</span><span class="p">(</span><span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">result_set</span> <span class="k">else</span> <span class="s">&#39;&#39;</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">),</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="viewcode-block" id="DataConverter.get_attr_mandatory"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_attr_mandatory">[docs]</a>    <span class="k">def</span> <span class="nf">get_attr_mandatory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">,</span> <span class="n">search_tag</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Return the value of an attribute of a BeautifulSoup tag.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">result_set</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="n">search_tag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&#39;error&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>  <span class="c"># To raise as exception</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Ambiguous tag found: {tag}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">tag</span><span class="o">=</span><span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="c"># Strange &#39;else&#39; statement is to trigger exception</span>
+        <span class="k">return</span> <span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span> <span class="k">if</span> <span class="n">result_set</span> <span class="k">else</span> <span class="n">result_set</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">))</span>
+<div class="viewcode-block" id="DataConverter.get_attr_optional"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_attr_optional">[docs]</a>    <span class="k">def</span> <span class="nf">get_attr_optional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">,</span> <span class="n">search_tag</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="n">result_set</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="n">search_tag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&#39;error&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>  <span class="c"># To raise as exception</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Ambiguous tag found: {tag}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">tag</span><span class="o">=</span><span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="c"># Strange &#39;else&#39; statement is to trigger exception</span>
+        <span class="k">return</span> <span class="n">result_set</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span> <span class="k">if</span> <span class="n">result_set</span> <span class="k">else</span> <span class="n">result_set</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
+
+    <span class="c"># Authors &amp; organizations</span></div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">),</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="viewcode-block" id="DataConverter.get_authors"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_authors">[docs]</a>    <span class="k">def</span> <span class="nf">get_authors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">,</span> <span class="n">search_tag</span><span class="o">=</span><span class="s">&#39;AuthEnty&#39;</span><span class="p">):</span>
+        <span class="n">result_set</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="n">search_tag</span><span class="p">)</span>
+        <span class="c"># TODO Prevent / filter duplicate authors.</span>
+        <span class="n">authors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">result_set</span><span class="p">:</span>
+            <span class="n">authors</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;role&#39;</span><span class="p">:</span> <span class="s">&#39;author&#39;</span><span class="p">,</span>
+                            <span class="c"># TODO: use extract() to remove tag</span>
+                            <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">tag</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+                            <span class="s">&#39;organisation&#39;</span><span class="p">:</span> <span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;affiliation&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)})</span>
+        <span class="k">return</span> <span class="n">authors</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">))</span>
+<div class="viewcode-block" id="DataConverter.get_contributors"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_contributors">[docs]</a>    <span class="k">def</span> <span class="nf">get_contributors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">,</span> <span class="n">search_tag</span><span class="o">=</span><span class="s">&#39;othId&#39;</span><span class="p">):</span>
+        <span class="n">result_set</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="n">search_tag</span><span class="p">)</span>
+        <span class="n">contributors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">result_set</span><span class="p">:</span>
+            <span class="n">contributors</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;role&#39;</span><span class="p">:</span> <span class="s">&#39;author&#39;</span><span class="p">,</span>
+                            <span class="c"># TODO: use extract() to remove tag</span>
+                            <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">tag</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+                            <span class="s">&#39;organisation&#39;</span><span class="p">:</span> <span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;affiliation&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)})</span>
+        <span class="k">return</span> <span class="n">contributors</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">),</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="viewcode-block" id="DataConverter.get_keywords"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_keywords">[docs]</a>    <span class="k">def</span> <span class="nf">get_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_tag_content</span><span class="p">(</span><span class="n">start_bs4tag</span><span class="p">,</span> <span class="n">vocab</span><span class="o">=</span><span class="n">KW_VOCAB_REGEX</span><span class="p">)</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">))</span>
+<div class="viewcode-block" id="DataConverter.get_discipline"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_discipline">[docs]</a>    <span class="k">def</span> <span class="nf">get_discipline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_tag_content</span><span class="p">(</span><span class="n">start_bs4tag</span><span class="p">,</span> <span class="s">&#39;topcClas&#39;</span><span class="p">,</span> <span class="n">vocab</span><span class="o">=</span><span class="s">&#39;FSD&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DataConverter.search_tag_content"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.search_tag_content">[docs]</a>    <span class="k">def</span> <span class="nf">search_tag_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Search BeautifulSoup object for keywords or alike and return comma</span>
+<span class="sd">        separated string of results.</span>
+
+<span class="sd">        Search beginning from start_bs4tag with `args` and `kwargs`. Remove found</span>
+<span class="sd">        tags from ddi xml with extract(). Assure that no empty tags fail.</span>
+
+<span class="sd">        :param start_bs4tag: bs4 tag to start search</span>
+<span class="sd">        :type start_bs4tag: bs4.element.Tag instance</span>
+<span class="sd">        :param args: searched tag (only one supported) or none</span>
+<span class="sd">        :type args: one string or None</span>
+<span class="sd">        :param kwargs: searched attributes of a ddi tag</span>
+<span class="sd">        :type kwargs: zero or more key-value pairs</span>
+<span class="sd">        :returns: a string of comma separated keywords</span>
+<span class="sd">        :rtype: a string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">result_set</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span> <span class="n">tag</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">result_set</span> <span class="p">]</span>
+        <span class="n">kw_string</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span> <span class="k">if</span> <span class="n">s</span> <span class="p">])</span>
+        <span class="k">return</span> <span class="n">kw_string</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stdy_dscr</span><span class="p">,</span> <span class="n">authors</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Parse data into events from DDI fields</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c"># Event: Collection</span>
+        <span class="n">ev_type_collect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.stdyInfo.sumDscr(&#39;collDate&#39;, event=&#39;start&#39;)&quot;</span><span class="p">)</span>
+        <span class="n">data_collector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.method.dataColl(&#39;dataCollector&#39;)&quot;</span><span class="p">)</span>
+        <span class="n">data_coll_string</span> <span class="o">=</span> <span class="s">u&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data_collector</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                <span class="n">data_coll_string</span> <span class="o">+=</span> <span class="s">&#39;; &#39;</span> <span class="o">+</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;affiliation&#39;</span><span class="p">]:</span>  <span class="c"># This is ok because d is BeautifulSoup object</span>
+                <span class="n">data_coll_string</span> <span class="o">+=</span> <span class="s">&#39;; &#39;</span> <span class="o">+</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&#39;affiliation&#39;</span><span class="p">])</span>
+        <span class="n">data_coll_string</span> <span class="o">=</span> <span class="n">data_coll_string</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="k">for</span> <span class="n">collection</span> <span class="ow">in</span> <span class="n">ev_type_collect</span><span class="p">:</span>
+            <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;descr&#39;</span><span class="p">:</span> <span class="s">u&#39;Event automatically created at import.&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">u&#39;collection&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;when&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clean_date</span><span class="p">(</span><span class="n">collection</span><span class="p">),</span>
+                           <span class="s">&#39;who&#39;</span><span class="p">:</span> <span class="n">data_coll_string</span><span class="p">})</span>
+
+        <span class="c"># Event: Creation (eg. Published in publication)</span>
+        <span class="n">ev_type_create</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.prodStmt(&#39;prodDate&#39;)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ev_type_create</span><span class="p">:</span>
+            <span class="n">data_creators</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;organisation&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">authors</span> <span class="p">]</span>
+            <span class="n">data_creator_string</span> <span class="o">=</span> <span class="s">&#39;; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_creators</span><span class="p">)</span>
+            <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;descr&#39;</span><span class="p">:</span> <span class="s">u&#39;Event automatically created at import.&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">u&#39;creation&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;when&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clean_date</span><span class="p">(</span><span class="n">ev_type_create</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                           <span class="s">&#39;who&#39;</span><span class="p">:</span> <span class="n">data_creator_string</span><span class="p">})</span>
+        <span class="c"># TODO: Event: Published (eg. Deposited to some public access archive)</span>
+
+        <span class="k">return</span> <span class="n">events</span>
+
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">))</span>
+<div class="viewcode-block" id="DataConverter.get_geo_coverage"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_geo_coverage">[docs]</a>    <span class="k">def</span> <span class="nf">get_geo_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Return a string of comma separated locations.</span>
+
+<span class="sd">        Removes matched tags from ddi xml with extract().</span>
+
+<span class="sd">        &gt;&gt;&gt; self.get_geo_coverage(self.ddi_xml)</span>
+<span class="sd">            u&#39;Espoo,Keilaniemi&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">geog_lcs</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="s">&#39;geogCover&#39;</span><span class="p">)</span>
+        <span class="n">geog_string</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="n">loc</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">geog_lcs</span> <span class="p">])</span>
+        <span class="k">return</span> <span class="n">geog_string</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">((</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">))</span>
+<div class="viewcode-block" id="DataConverter.get_temporal_coverage"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.get_temporal_coverage">[docs]</a>    <span class="k">def</span> <span class="nf">get_temporal_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_bs4tag</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Return the beginning and ending date of a time period covered by</span>
+<span class="sd">        dataset.</span>
+
+<span class="sd">        Removes matched tags from ddi xml with extract().</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">t_begin</span> <span class="o">=</span> <span class="n">t_end</span> <span class="o">=</span> <span class="s">u&#39;&#39;</span>
+        <span class="n">time_prds</span> <span class="o">=</span> <span class="n">start_bs4tag</span><span class="p">(</span><span class="s">&#39;timePrd&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time_prds</span><span class="p">:</span>
+            <span class="n">clean_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clean_date</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">extract</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;single&#39;</span><span class="p">:</span>
+                <span class="n">t_begin</span> <span class="o">=</span> <span class="n">t_end</span> <span class="o">=</span> <span class="n">clean_date</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;start&#39;</span><span class="p">:</span>
+                <span class="n">t_begin</span> <span class="o">=</span> <span class="n">clean_date</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;end&#39;</span><span class="p">:</span>
+                <span class="n">t_end</span> <span class="o">=</span> <span class="n">clean_date</span>
+        <span class="k">return</span> <span class="n">t_begin</span><span class="p">,</span> <span class="n">t_end</span>
+</div>
+<div class="viewcode-block" id="DataConverter.convert_language"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.dataconverter.DataConverter.convert_language">[docs]</a>    <span class="k">def</span> <span class="nf">convert_language</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lang</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Convert alpha2 language (eg. &#39;en&#39;) to terminology language (eg. &#39;eng&#39;)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">lang_object</span> <span class="o">=</span> <span class="n">languages</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">alpha2</span><span class="o">=</span><span class="n">lang</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">lang_object</span><span class="o">.</span><span class="n">terminology</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">ke</span><span class="p">:</span>
+            <span class="c"># TODO: Parse ISO 639-2 B/T ?</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Invalid language: {ke}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ke</span><span class="o">=</span><span class="n">ke</span><span class="p">))</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+</div>
+    <span class="nd">@ExceptReturn</span><span class="p">(</span><span class="ne">UnicodeEncodeError</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_save_original_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_xml</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">harvest_object</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Here is created a ofs storage ie. local pairtree storage for</span>
+<span class="sd">        objects/blobs. The original xml is saved to this storage in</span>
+<span class="sd">        &lt;harvest_source_id&gt; (or &lt;c.user&gt;) named folder. NOTE: The content of</span>
+<span class="sd">        this folder is overwritten at reharvest. We assume that if metadata is</span>
+<span class="sd">        re-parsed also xml is changed. So old xml can be overwritten.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">        pairtree storage: /opt/data/ckan/data_tree</span>
+<span class="sd">        xml: &lt;pairtree storage&gt;/pairtree_root//de/fa/ul/t/obj/&lt;harvest_source_id&gt;/FSD1049.xml</span>
+<span class="sd">        url:&lt;ckan_url&gt;/storage/f/&lt;harvest_source_id&gt;/FSD1049.xml</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">harvest_object</span><span class="p">:</span>
+            <span class="nb">dir</span> <span class="o">=</span> <span class="n">harvest_object</span><span class="o">.</span><span class="n">harvest_source_id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;{directory}/{filename}.xml&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="nb">dir</span><span class="p">,</span>
+                                                    <span class="n">filename</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ofs</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">get_ofs</span><span class="p">()</span>
+            <span class="n">ofs</span><span class="o">.</span><span class="n">put_stream</span><span class="p">(</span><span class="n">storage</span><span class="o">.</span><span class="n">BUCKET</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">original_xml</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">fileurl</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;ckan.site_url&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span><span class="o">.</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;storage_file&#39;</span><span class="p">,</span>
+                                                              <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">,</span> <span class="n">ioe</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Unable to save original xml to: {sto}, {io}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">sto</span><span class="o">=</span><span class="n">storage</span><span class="o">.</span><span class="n">BUCKET</span><span class="p">,</span> <span class="n">io</span><span class="o">=</span><span class="n">ioe</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Unable to save original xml: {io}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">io</span><span class="o">=</span><span class="n">ioe</span><span class="p">))</span>
+            <span class="k">return</span> <span class="s">u&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">fileurl</span>
+
+    <span class="k">def</span> <span class="nf">_save_ddi_variables_to_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">pkg</span><span class="p">,</span> <span class="n">harvest_object</span><span class="p">):</span>
+        <span class="c"># JuhoL: Handle codeBook.dataDscr parts, extract data (eg. questionnaire)</span>
+        <span class="c"># variables etc.</span>
+        <span class="c"># Saves &lt;var&gt;...&lt;/var&gt; elements to a csv file accessible at:</span>
+        <span class="c"># &lt;ckan_url&gt;/storage/f/2013-11-05T18%3A10%3A19.686858/1049_var.csv</span>
+        <span class="c"># And separately saves &lt;catgry&gt; elements inside &lt;var&gt; to a csv as a resource</span>
+        <span class="c"># for package.</span>
+        <span class="c"># Assumes that dataDscr has not changed. Valid?</span>
+        <span class="n">data_dscr</span> <span class="o">=</span> <span class="s">&quot;ddi_xml.codeBook.dataDscr&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ofs</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">get_ofs</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">,</span> <span class="n">ioe</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Unable to save xml variables: {io}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">ioe</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Unable to save xml variables: {io}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">ioe</span><span class="p">))</span>
+            <span class="k">return</span> <span class="s">u&#39;&#39;</span>
+
+        <span class="n">ddi_vars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">data_dscr</span> <span class="o">+</span> <span class="s">&quot;(&#39;var&#39;)&quot;</span><span class="p">)</span>  <span class="c"># Find all &lt;var&gt; elements</span>
+        <span class="n">heads</span> <span class="o">=</span> <span class="n">_get_headers</span><span class="p">()</span>
+        <span class="n">c_heads</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;ID&#39;</span><span class="p">,</span> <span class="s">&#39;catValu&#39;</span><span class="p">,</span> <span class="s">&#39;labl&#39;</span><span class="p">,</span> <span class="s">&#39;catStat&#39;</span><span class="p">]</span>
+        <span class="n">f_var</span> <span class="o">=</span> <span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+        <span class="n">c_var</span> <span class="o">=</span> <span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+        <span class="n">varwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f_var</span><span class="p">,</span> <span class="n">heads</span><span class="p">)</span>
+        <span class="n">codewriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">c_var</span><span class="p">,</span> <span class="n">c_heads</span><span class="p">)</span>
+        <span class="n">heading_row</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">head</span> <span class="ow">in</span> <span class="n">heads</span><span class="p">:</span>
+            <span class="n">heading_row</span><span class="p">[</span><span class="n">head</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="n">c_heading_row</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">head</span> <span class="ow">in</span> <span class="n">c_heads</span><span class="p">:</span>
+            <span class="n">c_heading_row</span><span class="p">[</span><span class="n">head</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="n">varwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">heading_row</span><span class="p">)</span>
+        <span class="n">codewriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">c_heading_row</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ddi_vars</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">varwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">_construct_csv</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">heads</span><span class="p">))</span>
+                <span class="n">codewriter</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">_create_code_rows</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c"># Assumes that the process failed. Room for retry?</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;Failed to import DDI to CSV! </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+        <span class="n">f_var</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;{dir}/{filename}_var.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">dir</span><span class="o">=</span><span class="n">harvest_object</span><span class="o">.</span><span class="n">harvest_source_id</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">ofs</span><span class="o">.</span><span class="n">put_stream</span><span class="p">(</span><span class="n">storage</span><span class="o">.</span><span class="n">BUCKET</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">f_var</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">fileurl_var</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;ckan.site_url&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span><span class="o">.</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;storage_file&#39;</span><span class="p">,</span>
+                                                          <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="c">#pkg.add_resource(url=fileurl,</span>
+        <span class="c">#                 description=&quot;Variable metadata&quot;,</span>
+        <span class="c">#                 format=&quot;csv&quot;,</span>
+        <span class="c">#                 size=f_var.len)</span>
+
+        <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;{dir}/{filename}_code.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">dir</span><span class="o">=</span><span class="n">harvest_object</span><span class="o">.</span><span class="n">harvest_source_id</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">ofs</span><span class="o">.</span><span class="n">put_stream</span><span class="p">(</span><span class="n">storage</span><span class="o">.</span><span class="n">BUCKET</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">c_var</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">fileurl_code</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;ckan.site_url&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span><span class="o">.</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;storage_file&#39;</span><span class="p">,</span>
+                                                          <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="c">#pkg.add_resource(url=fileurl,</span>
+        <span class="c">#                 description=&quot;Variable code values&quot;,</span>
+        <span class="c">#                 format=&quot;csv&quot;,</span>
+        <span class="c">#                 size=c_var.len)</span>
+        <span class="c"># JuhoL: Append labels of variables (&#39;questions&#39;) also to metas</span>
+        <span class="c"># TODO: change to return XPath dict of labels</span>
+        <span class="n">flattened_var_labels</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">f_var</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># JuhoL: Set &#39;read cursor&#39; to row 0</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f_var</span><span class="p">)</span>
+        <span class="c">#for var in reader:</span>
+        <span class="c">#    metas.append(var[&#39;labl&#39;] if &#39;labl&#39; in var else var[&#39;qstnLit&#39;])</span>
+        <span class="c"># TODO: return flattened_var_labels</span>
+        <span class="k">return</span> <span class="n">fileurl_var</span><span class="p">,</span> <span class="n">fileurl_code</span>
+
+    <span class="k">def</span> <span class="nf">_ddi2ckan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_url</span><span class="p">,</span> <span class="n">original_xml</span><span class="p">,</span> <span class="n">harvest_object</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Extract package values from bs4 object &#39;ddi_xml&#39; parsed from xml</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># TODO: Use .extract() and .string.extract() function so handled elements are removed from ddi_xml.</span>
+        <span class="n">doc_citation</span> <span class="o">=</span> <span class="s">&quot;ddi_xml.codeBook.docDscr.citation&quot;</span>
+        <span class="n">stdy_dscr</span> <span class="o">=</span> <span class="s">&quot;ddi_xml.codeBook.stdyDscr&quot;</span>
+
+        <span class="c">####################################################################</span>
+        <span class="c">#      Read mandatory metadata fields:                             #</span>
+        <span class="c">####################################################################</span>
+        <span class="c"># Authors &amp; organizations</span>
+        <span class="n">authors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_authors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="o">.</span><span class="n">stdyDscr</span><span class="o">.</span><span class="n">citation</span><span class="p">,</span> <span class="s">&#39;AuthEnty&#39;</span><span class="p">)</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">authors</span><span class="p">[:]</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_contributors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="o">.</span><span class="n">stdyDscr</span><span class="o">.</span><span class="n">citation</span><span class="p">))</span>
+
+        <span class="c"># Availability</span>
+        <span class="n">availability</span> <span class="o">=</span> <span class="n">AVAILABILITY_DEFAULT</span>
+        <span class="k">if</span> <span class="n">_access_request_URL_is_found</span><span class="p">():</span>
+            <span class="n">availability</span> <span class="o">=</span> <span class="s">&#39;direct_download&#39;</span>
+        <span class="k">if</span> <span class="n">_is_fsd</span><span class="p">(</span><span class="n">original_url</span><span class="p">):</span>
+            <span class="n">availability</span> <span class="o">=</span> <span class="n">AVAILABILITY_FSD</span>
+
+        <span class="c"># Keywords</span>
+        <span class="n">keywords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_keywords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="o">.</span><span class="n">stdyDscr</span><span class="o">.</span><span class="n">stdyInfo</span><span class="o">.</span><span class="n">subject</span><span class="p">)</span>
+
+        <span class="c"># Language</span>
+        <span class="c"># TODO: Where/how to extract multiple languages: &#39;language&#39;: u&#39;eng, fin, swe&#39; ?</span>
+        <span class="n">language</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_language</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="s">&quot;ddi_xml.codeBook.get(&#39;xml:lang&#39;)&quot;</span><span class="p">))</span>
+
+        <span class="c"># Titles</span>
+        <span class="n">titles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.titlStmt([&#39;titl&#39;, &#39;parTitl&#39;])&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">doc_citation</span> <span class="o">+</span> <span class="s">&quot;.titlStmt([&#39;titl&#39;, &#39;parTitl&#39;])&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">langtitle</span><span class="o">=</span><span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_language</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xml:lang&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">]</span>
+        <span class="c">#langtitle=[dict(lang=&#39;fin&#39;, value=a.text) for a in titles]</span>
+
+        <span class="c"># License</span>
+        <span class="c"># TODO: Extract prettier output. Should we check that element contains something?</span>
+        <span class="c"># Should this be in optional section if not mandatory_field?</span>
+        <span class="n">license_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.dataAccs.useStmt.get_text(separator=u&#39; &#39;)&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_is_fsd</span><span class="p">(</span><span class="n">original_url</span><span class="p">):</span>
+            <span class="n">license_id</span> <span class="o">=</span> <span class="n">LICENCE_ID_FSD</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">license_id</span> <span class="o">=</span> <span class="n">LICENCE_ID_DEFAULT</span>
+
+        <span class="c"># Contact (package_extra.key: contact_[k]_name in database, contact in WUI)</span>
+        <span class="n">contact_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.distStmt(&#39;contact&#39;)&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.distStmt(&#39;distrbtr&#39;)&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">doc_citation</span> <span class="o">+</span> <span class="s">&quot;.prodStmt(&#39;producer&#39;)&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c"># TODO: clean out (or ask FSD to clean) mid text newlines (eg. in FSD2482)</span>
+        <span class="k">if</span> <span class="n">contact_name</span> <span class="ow">and</span> <span class="n">contact_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+            <span class="n">contact_name</span> <span class="o">=</span> <span class="n">contact_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">contact_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.prodStmt.producer.get(&#39;affiliation&#39;)&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_is_fsd</span><span class="p">(</span><span class="n">original_url</span><span class="p">):</span>
+            <span class="n">contact_email</span> <span class="o">=</span> <span class="n">CONTACT_EMAIL_FSD</span>
+            <span class="c"># TODO: Allow trying other email also in FSD metadata</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">contact_email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.distStmt.contact.get(&#39;email&#39;)&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="c"># Modified date</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_attr_optional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="o">.</span><span class="n">stdyDscr</span><span class="o">.</span><span class="n">citation</span><span class="p">,</span>
+                                         <span class="s">&#39;prodDate&#39;</span><span class="p">,</span> <span class="s">&#39;date&#39;</span><span class="p">)</span> <span class="ow">or</span> \
+                  <span class="bp">self</span><span class="o">.</span><span class="n">get_attr_mandatory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="o">.</span><span class="n">stdyDscr</span><span class="o">.</span><span class="n">citation</span><span class="p">,</span>
+                                          <span class="s">&#39;version&#39;</span><span class="p">,</span> <span class="s">&#39;date&#39;</span><span class="p">)</span>
+
+        <span class="c"># Name</span>
+        <span class="n">name_prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.titlStmt.IDNo.get(&#39;agency&#39;)&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">name_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.titlStmt.IDNo.text&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name_prefix</span><span class="p">:</span>
+            <span class="n">name_prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">doc_citation</span> <span class="o">+</span> <span class="s">&quot;.titlStmt.IDNo[&#39;agency&#39;]&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name_id</span><span class="p">:</span>
+            <span class="n">name_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">doc_citation</span> <span class="o">+</span> <span class="s">&quot;.titlStmt.IDNo.text&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">datapid_to_name</span><span class="p">(</span><span class="n">name_prefix</span> <span class="o">+</span> <span class="n">name_id</span><span class="p">)</span>
+
+        <span class="n">pids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">pids</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;data&#39;</span><span class="p">,</span> <span class="s">&#39;primary&#39;</span><span class="p">:</span> <span class="s">&#39;True&#39;</span><span class="p">,</span> <span class="s">&#39;provider&#39;</span><span class="p">:</span> <span class="n">name_prefix</span><span class="p">})</span>
+
+        <span class="c"># Should we generate a version PID?</span>
+        <span class="c"># vpid = utils.generate_pid()</span>
+        <span class="c"># pids.append({&#39;id&#39;: vpid, &#39;type&#39;: &#39;version&#39;, &#39;provider&#39;: &#39;kata&#39;})</span>
+
+        <span class="c"># Original xml and web page as resource</span>
+        <span class="n">orig_xml_storage_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_original_xml</span><span class="p">(</span><span class="n">original_xml</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">harvest_object</span><span class="p">)</span>
+        <span class="c"># For FSD &#39;URI&#39; leads to summary web page of data, hence format=&#39;html&#39;</span>
+        <span class="n">orig_web_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">doc_citation</span> <span class="o">+</span> <span class="s">&quot;.holdings.get(&#39;URI&#39;, &#39;&#39;)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">orig_web_page</span><span class="p">:</span>
+            <span class="n">orig_web_page_resource</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="n">langtitle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">),</span>
+                                      <span class="s">&#39;format&#39;</span><span class="p">:</span> <span class="s">u&#39;html&#39;</span><span class="p">,</span>
+                                      <span class="s">&#39;resource_type&#39;</span><span class="p">:</span> <span class="s">&#39;documentation&#39;</span><span class="p">,</span>
+                                      <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">orig_web_page</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">orig_web_page_resource</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c"># Owner</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.prodStmt.producer.text&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.rspStmt.AuthEnty.text&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">doc_citation</span> <span class="o">+</span> <span class="s">&quot;.prodStmt.producer.string&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;role&#39;</span><span class="p">:</span> <span class="s">&#39;owner&#39;</span><span class="p">,</span>
+                      <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">owner</span><span class="p">})</span>
+
+        <span class="c"># Owner organisation</span>
+        <span class="k">if</span> <span class="n">harvest_object</span><span class="p">:</span>
+            <span class="n">hsid</span> <span class="o">=</span> <span class="n">harvest_object</span><span class="o">.</span><span class="n">harvest_source_id</span>
+            <span class="n">hsooid</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Package</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Package</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">hsid</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span><span class="o">.</span><span class="n">owner_org</span>
+            <span class="n">owner_org</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Group</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">hsooid</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">owner_org</span> <span class="o">=</span> <span class="s">u&#39;&#39;</span>
+
+        <span class="c"># Distributor (Agent: distributor, the same is used as contact)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s">&#39;role&#39;</span><span class="p">:</span> <span class="s">&#39;distributor&#39;</span><span class="p">,</span>
+            <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">contact_name</span><span class="p">})</span>
+
+        <span class="c">####################################################################</span>
+        <span class="c">#      Read optional metadata fields:                              #</span>
+        <span class="c">####################################################################</span>
+        <span class="c"># Availability</span>
+        <span class="k">if</span> <span class="n">_is_fsd</span><span class="p">(</span><span class="n">original_url</span><span class="p">):</span>
+            <span class="n">access_request_url</span> <span class="o">=</span> <span class="n">ACCESS_REQUEST_URL_FSD</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">access_request_url</span> <span class="o">=</span> <span class="s">u&#39;&#39;</span>
+
+        <span class="c"># Contact</span>
+        <span class="n">contact_phone</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">doc_citation</span> <span class="o">+</span> <span class="s">&quot;.holdings.get(&#39;callno&#39;)&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.holdings.get(&#39;callno&#39;)&quot;</span><span class="p">)</span>
+
+        <span class="n">contact_URL</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span> <span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.dataAccs.setAvail.accsPlac.get(&#39;URI&#39;)&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                      <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span> <span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.distStmt.contact.get(&#39;URI&#39;)&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                      <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span> <span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.distStmt.distrbtr.get(&#39;URI&#39;)&quot;</span><span class="p">)</span> <span class="ow">or</span> \
+                      <span class="n">CONTACT_URL_FSD</span> <span class="k">if</span> <span class="n">_is_fsd</span><span class="p">(</span><span class="n">original_url</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span>
+
+        <span class="c"># Description</span>
+        <span class="n">description_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.stdyInfo.abstract(&#39;p&#39;)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">description_array</span><span class="p">:</span>
+            <span class="n">description_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.serStmt.serInfo(&#39;p&#39;)&quot;</span><span class="p">)</span>
+
+        <span class="n">notes</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\r\n\r\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">description</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span>
+                                 <span class="n">description</span> <span class="ow">in</span> <span class="n">description_array</span><span class="p">])</span>
+
+        <span class="c"># Discipline</span>
+        <span class="n">discipline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_discipline</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="o">.</span><span class="n">stdyDscr</span><span class="o">.</span><span class="n">stdyInfo</span><span class="o">.</span><span class="n">subject</span><span class="p">)</span>
+
+        <span class="c"># Dataset lifetime events</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_events</span><span class="p">(</span><span class="n">stdy_dscr</span><span class="p">,</span> <span class="n">authors</span><span class="p">)</span>
+
+        <span class="c"># Geographic coverage</span>
+        <span class="n">geo_cover</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_geo_coverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="p">)</span>
+
+        <span class="c"># Temporal coverage</span>
+        <span class="n">temp_start</span><span class="p">,</span> <span class="n">temp_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_temporal_coverage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="p">)</span>
+
+
+        <span class="c">####################################################################</span>
+        <span class="c">#      Flatten rest to &#39;XPath/path/to/element&#39;: &#39;value&#39; pairs      #</span>
+        <span class="c">####################################################################</span>
+        <span class="n">etree_xml</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ddi_xml</span><span class="p">))</span>
+        <span class="n">flattened_ddi</span> <span class="o">=</span> <span class="n">importcore</span><span class="o">.</span><span class="n">generic_xml_metadata_reader</span><span class="p">(</span><span class="n">etree_xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//{*}docDscr&#39;</span><span class="p">))</span>
+        <span class="n">xpath_dict</span> <span class="o">=</span> <span class="n">flattened_ddi</span><span class="o">.</span><span class="n">getMap</span><span class="p">()</span>
+        <span class="n">flattened_ddi</span> <span class="o">=</span> <span class="n">importcore</span><span class="o">.</span><span class="n">generic_xml_metadata_reader</span><span class="p">(</span><span class="n">etree_xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//{*}stdyDscr&#39;</span><span class="p">))</span>
+        <span class="n">xpath_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">flattened_ddi</span><span class="o">.</span><span class="n">getMap</span><span class="p">())</span>
+
+
+        <span class="n">package_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">access_application_URL</span><span class="o">=</span><span class="s">u&#39;&#39;</span><span class="p">,</span>
+            <span class="n">access_request_URL</span><span class="o">=</span><span class="nb">unicode</span><span class="p">(</span><span class="n">access_request_url</span><span class="p">),</span>
+            <span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span>
+            <span class="n">algorithm</span><span class="o">=</span><span class="s">u&#39;&#39;</span><span class="p">,</span>   <span class="c"># To be implemented straight in &#39;resources&#39;</span>
+            <span class="n">availability</span><span class="o">=</span><span class="nb">unicode</span><span class="p">(</span><span class="n">availability</span><span class="p">),</span>
+            <span class="n">contact</span><span class="o">=</span><span class="p">[{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">contact_name</span><span class="p">,</span>
+                      <span class="s">&#39;email&#39;</span><span class="p">:</span> <span class="n">contact_email</span><span class="p">,</span>
+                      <span class="s">&#39;URL&#39;</span><span class="p">:</span> <span class="n">contact_URL</span><span class="p">,</span>
+                      <span class="s">&#39;phone&#39;</span><span class="p">:</span> <span class="n">contact_phone</span><span class="p">}],</span>
+            <span class="n">direct_download_URL</span><span class="o">=</span><span class="s">u&#39;&#39;</span><span class="p">,</span>  <span class="c"># To be implemented straight in &#39;resources</span>
+            <span class="n">discipline</span><span class="o">=</span><span class="n">discipline</span><span class="p">,</span>
+            <span class="n">event</span><span class="o">=</span><span class="n">events</span><span class="p">,</span>
+            <span class="n">geographic_coverage</span><span class="o">=</span><span class="n">geo_cover</span><span class="p">,</span>
+            <span class="n">groups</span><span class="o">=</span><span class="p">[],</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">generate_pid</span><span class="p">(),</span>
+            <span class="n">langtitle</span><span class="o">=</span><span class="n">langtitle</span><span class="p">,</span>
+            <span class="n">langdis</span><span class="o">=</span><span class="s">u&#39;True&#39;</span><span class="p">,</span>  <span class="c"># HUOMAA!</span>
+            <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
+            <span class="n">license_URL</span><span class="o">=</span><span class="n">license_url</span><span class="p">,</span>
+            <span class="n">license_id</span><span class="o">=</span><span class="n">license_id</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s">u&#39;&#39;</span><span class="p">,</span>  <span class="c"># To be implemented straight in &#39;resources</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">notes</span><span class="o">=</span><span class="n">notes</span> <span class="ow">or</span> <span class="s">u&#39;&#39;</span><span class="p">,</span>
+            <span class="n">pids</span><span class="o">=</span><span class="n">pids</span><span class="p">,</span>
+            <span class="n">owner_org</span><span class="o">=</span><span class="n">owner_org</span><span class="p">,</span>
+            <span class="n">resources</span><span class="o">=</span><span class="p">[{</span><span class="s">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s">u&#39;&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">u&#39;Original metadata record&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;format&#39;</span><span class="p">:</span> <span class="s">u&#39;xml&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">u&#39;&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;resource_type&#39;</span><span class="p">:</span> <span class="s">&#39;file.harvest&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">original_xml</span><span class="p">),</span>
+                        <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">orig_xml_storage_url</span><span class="p">},</span>
+                       <span class="n">orig_web_page_resource</span><span class="p">],</span>
+            <span class="n">tag_string</span><span class="o">=</span><span class="n">keywords</span><span class="p">,</span>
+            <span class="n">temporal_coverage_begin</span><span class="o">=</span><span class="n">temp_start</span><span class="p">,</span>
+            <span class="n">temporal_coverage_end</span><span class="o">=</span><span class="n">temp_end</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">langtitle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">),</span>   <span class="c"># Must exist in package dict</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s">&#39;dataset&#39;</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">version_PID</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">package_dict</span><span class="p">[</span><span class="s">&#39;xpaths&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xpath_dict</span>
+        <span class="c"># Above line creates:</span>
+        <span class="c"># package_dict = {</span>
+        <span class="c">#     &#39;access_request_url&#39;: &#39;some_url&#39;,</span>
+        <span class="c">#     # ...</span>
+        <span class="c">#     &#39;xpaths&#39;: {&#39;stdyDscr/othrStdyMat.0/relPubl.34&#39;:</span>
+        <span class="c">#                &#39;Uskon asia: nuorisobarometri 2006 (2006).&#39;},</span>
+        <span class="c">#               {&#39;stdyD...&#39;: &#39;Some value&#39;}]</span>
+        <span class="c"># }</span>
+        <span class="c">#package_dict[&#39;extras&#39;].update(_save_ddi_variables_to_csv(ddi_xml, somepkg))</span>
+
+
+        <span class="c"># Vanhojen koodien järjestys:</span>
+        <span class="c">#_save_original_xml_and_link_as_resources()</span>
+        <span class="c">#_save_ddi_variables_to_csv()</span>
+        <span class="c">#_create_group_based_on_organizations()</span>
+        <span class="c">#_last_statements_to_rewrite()</span>
+
+        <span class="c"># JuhoL: Set harvest object to some end state and commit</span>
+        <span class="k">if</span> <span class="n">harvest_object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">harvest_object</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="c"># Should this be flushed? model.Session.flush()</span>
+        <span class="c">#model.repo.commit()</span>
+
+        <span class="k">return</span> <span class="n">package_dict</span>
+
+
+<span class="c">#def ddi32ckan(ddi_xml, original_xml, original_url=None, harvest_object=None):</span>
+<span class="c">#    try:</span>
+<span class="c">#        return _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object)</span>
+<span class="c">#    except Exception as e:</span>
+<span class="c">#        log.debug(traceback.format_exc(e))</span>
+<span class="c">#    return False</span>
+<span class="c">#</span>
+<span class="c">#def _ddi32ckan(ddi_xml, original_xml, original_url, harvest_object):</span>
+<span class="c">#    model.repo.new_revision()</span>
+<span class="c">#    ddiroot = ddi_xml.DDIInstance</span>
+<span class="c">#    main_cit = ddiroot.Citation</span>
+<span class="c">#    study_info = ddiroot(&#39;StudyUnit&#39;)[-1]</span>
+<span class="c">#    idx = 0</span>
+<span class="c">#    authorgs = []</span>
+<span class="c">#    pkg = model.Package.get(study_info.attrs[&#39;id&#39;])</span>
+<span class="c">#    if not pkg:</span>
+<span class="c">#        pkg = model.Package(name=study_info.attrs[&#39;id&#39;])</span>
+<span class="c">#        pkg.id = ddiroot.attrs[&#39;id&#39;]</span>
+<span class="c">#        # This presumes that resources have not changed. Wrong? If something</span>
+<span class="c">#        # has changed then technically the XML has chnaged and hence this may</span>
+<span class="c">#        # have to &quot;delete&quot; old resources and then add new ones.</span>
+<span class="c">#        ofs = storage.get_ofs()</span>
+<span class="c">#        nowstr = datetime.datetime.now().strftime(&#39;%Y-%m-%dT%H:%M:%S.%f&#39;)</span>
+<span class="c">#        label = &quot;%s/%s.xml&quot; % (nowstr, study_info.attrs[&#39;id&#39;],)</span>
+<span class="c">#        ofs.put_stream(storage.BUCKET, label, original_xml, {})</span>
+<span class="c">#        fileurl = config.get(&#39;ckan.site_url&#39;) + h.url_for(&#39;storage_file&#39;,</span>
+<span class="c">#            label=label)</span>
+<span class="c">#        pkg.add_resource(url=fileurl, description=&quot;Original metadata record&quot;,</span>
+<span class="c">#            format=&quot;xml&quot;, size=len(original_xml))</span>
+<span class="c">#        # What the URI should be?</span>
+<span class="c">#        #pkg.add_resource(url=doc_citation.holdings[&#39;URI&#39;]\</span>
+<span class="c">#        #                 if &#39;URI&#39; in doc_citation.holdings else &#39;&#39;,</span>
+<span class="c">#        #                 description=title)</span>
+<span class="c">#    pkg.version = main_cit.PublicationDate.SimpleDate.string</span>
+<span class="c">#    for title in main_cit(&#39;Title&#39;):</span>
+<span class="c">#        pkg.extras[&#39;title_%d&#39; % idx] = title.string</span>
+<span class="c">#        pkg.extras[&#39;lang_title_%d&#39; % idx] = title.attrs[&#39;xml:lang&#39;]</span>
+<span class="c">#        idx += 1</span>
+<span class="c">#    for title in study_info.Citation(&#39;Title&#39;):</span>
+<span class="c">#        pkg.extras[&#39;title_%d&#39; % idx] = title.string</span>
+<span class="c">#        pkg.extras[&#39;lang_title_%d&#39; % idx] = title.attrs[&#39;xml:lang&#39;]</span>
+<span class="c">#        idx += 1</span>
+<span class="c">#    for value in study_info.Citation(&#39;Creator&#39;):</span>
+<span class="c">#        org = &quot;&quot;</span>
+<span class="c">#        if value.attrs.get(&#39;affiliation&#39;, None):</span>
+<span class="c">#            org = value.attrs[&#39;affiliation&#39;]</span>
+<span class="c">#        author = value.string</span>
+<span class="c">#        authorgs.append((author, org))</span>
+<span class="c">#    pkg.author = authorgs[0][0]</span>
+<span class="c">#    pkg.maintainer = study_info.Citation.Publisher.string</span>
+<span class="c">#    lastidx = 0</span>
+<span class="c">#    for auth, org in authorgs:</span>
+<span class="c">#        pkg.extras[&#39;author_%s&#39; % lastidx] = auth</span>
+<span class="c">#        pkg.extras[&#39;organization_%s&#39; % lastidx] = org</span>
+<span class="c">#        lastidx = lastidx + 1</span>
+<span class="c">#    pkg.extras[&quot;licenseURL&quot;] = study_info.Citation.Copyright.string</span>
+<span class="c">#    pkg.notes = &quot;&quot;.join([unicode(repr(chi).replace(&#39;\n&#39;, &#39;&lt;br /&gt;&#39;), &#39;utf8&#39;)\</span>
+<span class="c">#                         for chi in study_info.Abstract.Content.children])</span>
+<span class="c">#    for kw in study_info.Coverage.TopicalCoverage(&#39;Keyword&#39;):</span>
+<span class="c">#        pkg.add_tag_by_name(kw.string)</span>
+<span class="c">#    pkg.extras[&#39;contributor&#39;] = study_info.Citation.Contributor.string</span>
+<span class="c">#    pkg.extras[&#39;publisher&#39;] = study_info.Citation.Publisher.string</span>
+<span class="c">#    pkg.save()</span>
+<span class="c">#    if harvest_object:</span>
+<span class="c">#        harvest_object.package_id = pkg.id</span>
+<span class="c">#        harvest_object.content = None</span>
+<span class="c">#        harvest_object.current = True</span>
+<span class="c">#        harvest_object.save()</span>
+<span class="c">#    model.repo.commit()</span>
+<span class="c">#    return pkg.id</span>
+<span class="c">#</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <ul class="simple">
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="../../../search.html" method="get">
+            <input type="text" name="q" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="../../../genindex.html" title="General Index"
+             >index</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2014, CSC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>

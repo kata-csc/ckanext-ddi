@@ -1,0 +1,630 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ckanext.ddi.harvester &mdash; Kata metadata catalogue documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Kata metadata catalogue documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="headertitle"><a
+          href="../../../index.html">Kata</a></div>
+        <div class="rel">
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for ckanext.ddi.harvester</h1><div class="highlight"><pre>
+<span class="c"># coding: utf-8</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Harvester for DDI2 formats</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c">#pylint: disable-msg=E1101,E0611,F0401</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">httplib</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">lxml.etree</span> <span class="kn">as</span> <span class="nn">etree</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span>
+<span class="kn">import</span> <span class="nn">ckan.model</span> <span class="kn">as</span> <span class="nn">model</span>
+<span class="kn">from</span> <span class="nn">ckanext.harvest.harvesters.base</span> <span class="kn">import</span> <span class="n">HarvesterBase</span>
+<span class="kn">import</span> <span class="nn">ckanext.harvest.model</span> <span class="kn">as</span> <span class="nn">hmodel</span>
+<span class="kn">from</span> <span class="nn">ckanext.kata.plugin</span> <span class="kn">import</span> <span class="n">KataPlugin</span>
+<span class="kn">import</span> <span class="nn">dataconverter</span> <span class="kn">as</span> <span class="nn">dconverter</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="n">socket</span><span class="o">.</span><span class="n">setdefaulttimeout</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="DDIHarvester"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester">[docs]</a><span class="k">class</span> <span class="nc">DDIHarvester</span><span class="p">(</span><span class="n">HarvesterBase</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    DDI Harvester for ckanext-harvester.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ddi_converter</span> <span class="o">=</span> <span class="n">dconverter</span><span class="o">.</span><span class="n">DataConverter</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_set_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_str</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Set the configuration string.</span>
+
+<span class="sd">        :param config_str: For example: &#39;{&quot;limit&quot;: 30}&#39;</span>
+<span class="sd">        :type config_str: str</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">config_str</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">config_str</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Using config: </span><span class="si">%r</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Unable to decode config from: {c}, {e}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">e</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">config_str</span><span class="p">))</span>
+                <span class="k">raise</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="DDIHarvester.info"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Return information about this harvester.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;ddi&#39;</span><span class="p">,</span>
+            <span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="s">&#39;DDI2&#39;</span><span class="p">,</span>
+            <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;Harvests DDI2 sources.&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="DDIHarvester.validate_config"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.validate_config">[docs]</a>    <span class="k">def</span> <span class="nf">validate_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Validate the config, returns it since we don&#39;t have any configuration</span>
+<span class="sd">        parameters</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">def</span> <span class="nf">validate_param</span><span class="p">(</span><span class="n">conf_obj</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Check if param &#39;p&#39; is specified and is of type &#39;t&#39;</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">conf_obj</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conf_obj</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">t</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;&#39;{p}&#39; needs to be a &#39;{t}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">conf_obj</span>
+
+        <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">config_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+                <span class="n">validate_param</span><span class="p">(</span><span class="n">config_obj</span><span class="p">,</span> <span class="s">&#39;limit&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="n">config</span>
+</div>
+<div class="viewcode-block" id="DDIHarvester.get_original_url"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.get_original_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_original_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">harvest_object_id</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Return the URL to the original remote document, given a Harvest</span>
+<span class="sd">         Object id.</span>
+<span class="sd">         &#39;&#39;&#39;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestObject</span><span class="p">)</span><span class="o">.</span> \
+            <span class="nb">filter</span><span class="p">(</span><span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestObject</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">harvest_object_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">obj</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">url</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+    <span class="k">def</span> <span class="nf">_datetime_from_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="c"># Used to get date from settings file when testing harvesting with</span>
+        <span class="c"># (semi-open) date interval.</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">s</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">T%H:%M:%S&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">t</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Bad date for </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">s</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">_str_from_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">T%H:%M:%S&#39;</span><span class="p">)</span>
+
+    <span class="c">#    def _add_retry(self, harvest_object):</span>
+    <span class="c">#        HarvesterRetry.mark_for_retry(harvest_object)</span>
+
+    <span class="c">#    def _scan_retries(self, harvest_job):</span>
+    <span class="c">#        self._retry = HarvesterRetry()</span>
+    <span class="c">#        urls = []</span>
+    <span class="c">#        for harvest_object in self._retry.find_all_retries(harvest_job):</span>
+    <span class="c">#            data = json.loads(harvest_object.content)</span>
+    <span class="c">#            urls.append(data[&#39;url&#39;])</span>
+    <span class="c">#        return urls</span>
+
+    <span class="c">#    def _clear_retries(self):</span>
+    <span class="c">#        self._retry.clear_retry_marks()</span>
+
+
+<div class="viewcode-block" id="DDIHarvester.gather_stage"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.gather_stage">[docs]</a>    <span class="k">def</span> <span class="nf">gather_stage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">harvest_job</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Gather the URLs to fetch from a URL which has a list of links to XML</span>
+<span class="sd">        documents containing the DDI documents.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_config</span><span class="p">(</span><span class="n">harvest_job</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">date_from_config</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_datetime_from_str</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">add_harvest_object</span><span class="p">(</span><span class="n">harvest_job</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+            <span class="n">harvest_obj</span> <span class="o">=</span> <span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestObject</span><span class="p">(</span><span class="n">job</span><span class="o">=</span><span class="n">harvest_job</span><span class="p">)</span>
+            <span class="n">harvest_obj</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">url</span>
+            <span class="n">harvest_obj</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">harvest_obj</span>
+
+        <span class="n">from_</span> <span class="o">=</span> <span class="n">date_from_config</span><span class="p">(</span><span class="s">&#39;ckanext.harvest.test.from&#39;</span><span class="p">)</span>
+        <span class="n">until</span> <span class="o">=</span> <span class="n">date_from_config</span><span class="p">(</span><span class="s">&#39;ckanext.harvest.test.until&#39;</span><span class="p">)</span>
+        <span class="n">previous_job</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestJob</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestJob</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span> <span class="n">harvest_job</span><span class="o">.</span><span class="n">source</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestJob</span><span class="o">.</span><span class="n">gather_finished</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestJob</span><span class="o">.</span><span class="n">id</span> <span class="o">!=</span> <span class="n">harvest_job</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">hmodel</span><span class="o">.</span><span class="n">HarvestJob</span><span class="o">.</span><span class="n">gather_finished</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span> \
+            <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">previous_job</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">until</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">from_</span><span class="p">:</span>
+            <span class="n">from_</span> <span class="o">=</span> <span class="n">previous_job</span><span class="o">.</span><span class="n">gather_finished</span>
+            <span class="n">until</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="n">object_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c"># Add retries.</span>
+        <span class="c">#        for url in self._scan_retries(harvest_job):</span>
+        <span class="c">#            obj = add_harvest_object(harvest_job, url)</span>
+        <span class="c">#            object_ids.append(obj.id)</span>
+        <span class="c">#            log.debug(&#39;Retrying record: %s&#39; % url)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">urls</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">harvest_job</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">urls</span><span class="o">.</span><span class="n">readlines</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;limit&#39;</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">from_</span> <span class="ow">or</span> <span class="n">until</span><span class="p">:</span>
+                    <span class="c"># This should not fail the whole gather.</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                        <span class="n">request</span><span class="o">.</span><span class="n">get_method</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&#39;HEAD&#39;</span>
+                        <span class="n">doc_url</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+                        <span class="n">lastmod</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">doc_url</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;last-modified&#39;</span><span class="p">],</span>
+                                               <span class="n">ignoretz</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">URLError</span><span class="p">,</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,):</span>
+                    <span class="c"># Actually we do not know if it fits the time limits.</span>
+                    <span class="c"># Rather get it twice than lose it.</span>
+                    <span class="c"># self._add_retry(add_harvest_object(harvest_job, url))</span>
+                        <span class="k">continue</span>
+                    <span class="k">if</span> <span class="n">from_</span> <span class="ow">and</span> <span class="n">lastmod</span> <span class="o">&lt;</span> <span class="n">from_</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                    <span class="k">if</span> <span class="n">until</span> <span class="ow">and</span> <span class="n">until</span> <span class="o">&lt;</span> <span class="n">lastmod</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">add_harvest_object</span><span class="p">(</span><span class="n">harvest_job</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+                <span class="n">object_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_gather_error</span><span class="p">(</span>
+                <span class="s">&#39;HTTPError: Could not gather XML files from URL! &#39;</span> <span class="o">+</span>
+                <span class="s">&#39;Error: {er}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">er</span><span class="o">=</span><span class="n">err</span><span class="o">.</span><span class="n">code</span><span class="p">),</span> <span class="n">harvest_job</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">except</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">URLError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_gather_error</span><span class="p">(</span>
+                <span class="s">&#39;URLError: Could not gather XML files from URL! &#39;</span> <span class="o">+</span>
+                <span class="s">&#39;Error: {er}, urls: {ur}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">er</span><span class="o">=</span><span class="n">err</span><span class="o">.</span><span class="n">reason</span><span class="p">,</span> <span class="n">ur</span><span class="o">=</span><span class="n">harvest_job</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">url</span><span class="p">),</span>
+                <span class="n">harvest_job</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="c">#        self._clear_retries()</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Gathered </span><span class="si">%i</span><span class="s"> records from </span><span class="si">%s</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">object_ids</span><span class="p">),</span> <span class="n">harvest_job</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">url</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="n">object_ids</span>
+</div>
+<div class="viewcode-block" id="DDIHarvester.fetch_stage"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.fetch_stage">[docs]</a>    <span class="k">def</span> <span class="nf">fetch_stage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">harvest_object</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Fetch and parse the DDI XML document.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">harvest_object</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">URLError</span><span class="p">,</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,):</span>
+        <span class="c">#            self._add_retry(harvest_object)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_object_error</span><span class="p">(</span><span class="s">&#39;Could not fetch from url </span><span class="si">%s</span><span class="s">!&#39;</span> <span class="o">%</span> <span class="n">url</span><span class="p">,</span>
+                                    <span class="n">harvest_object</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">except</span> <span class="n">httplib</span><span class="o">.</span><span class="n">BadStatusLine</span><span class="p">:</span>
+        <span class="c">#            self._add_retry(harvest_object)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_object_error</span><span class="p">(</span><span class="s">&#39;Bad HTTP response status line.&#39;</span><span class="p">,</span>
+                                    <span class="n">harvest_object</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="s">&#39;Fetch&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="c"># Need to pickle the XML so that the data type remains the same.</span>
+        <span class="n">harvest_object</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s">&#39;xml&#39;</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="DDIHarvester.import_stage"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.import_stage">[docs]</a>    <span class="k">def</span> <span class="nf">import_stage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">harvest_object</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Import the metadata received in the fetch stage to a dataset.</span>
+
+<span class="sd">        DDI document is parsed to a BeautifulSoup object for metadata</span>
+<span class="sd">        extraction. Study (stdyDscr) and document (docDscr) descriptions are</span>
+<span class="sd">        used. File (fileDscr) and data (dataDscr) description parts of a ddi</span>
+<span class="sd">        file are saved as csv files (unfinished).</span>
+<span class="sd">        Also create groups if ones are defined (unfinished).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># TODO: cPickle might be faster</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">harvest_object</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Harvest object url: {ur}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ur</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ddi_xml</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;xml&#39;</span><span class="p">],</span> <span class="s">&#39;xml&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLSyntaxError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_object_error</span><span class="p">(</span><span class="s">&#39;Unable to parse XML! {er}&#39;</span>
+                                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">er</span><span class="o">=</span><span class="n">err</span><span class="o">.</span><span class="n">msg</span><span class="p">),</span> <span class="n">harvest_object</span><span class="p">,</span>
+                                    <span class="s">&#39;Import&#39;</span><span class="p">)</span>
+            <span class="c"># I presume source sent wrong data but it arrived correctly.</span>
+            <span class="c"># This could result in a case where incorrect source is tried</span>
+            <span class="c"># over and over again without success.</span>
+            <span class="k">del</span> <span class="n">info</span><span class="p">[</span><span class="s">&#39;xml&#39;</span><span class="p">]</span>
+            <span class="n">harvest_object</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">]</span>
+            <span class="c">#            self._add_retry(harvest_object)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="n">package_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_converter</span><span class="o">.</span><span class="n">ddi2ckan</span><span class="p">(</span><span class="n">ddi_xml</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">],</span>
+                                                   <span class="n">info</span><span class="p">[</span><span class="s">&#39;xml&#39;</span><span class="p">],</span> <span class="n">harvest_object</span><span class="p">)</span>
+
+        <span class="c"># Obsolete for now, as we only have one pid</span>
+        <span class="c"># pkg_id = ckanext.kata.utils.get_package_id_by_data_pids(package_dict)</span>
+        <span class="c"># pkg = model.Session.query(model.Package).filter(model.Package.id == pkg_id).first() if pkg_id else None</span>
+        <span class="c"># package_dict[&#39;id&#39;] = pkg.id if pkg else generate_pid()</span>
+
+        <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_converter</span><span class="o">.</span><span class="n">get_errors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="c"># FIXME: Using line number here hazardous. Old _read_value doesn&#39;t support</span>
+            <span class="k">for</span> <span class="n">er</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_save_object_error</span><span class="p">(</span><span class="s">&#39;Invalid or missing mandatory metadata in {ur}. &#39;</span>
+                                        <span class="s">&#39;{er}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ur</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">],</span> <span class="n">er</span><span class="o">=</span><span class="n">er</span><span class="p">),</span>
+                                        <span class="n">harvest_object</span><span class="p">,</span>
+                                        <span class="s">&#39;Import&#39;</span><span class="p">,</span>
+                                        <span class="n">line</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ddi_converter</span><span class="o">.</span><span class="n">empty_errors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">package_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">KataPlugin</span><span class="o">.</span><span class="n">create_package_schema_ddi</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_or_update_package</span><span class="p">(</span><span class="n">package_dict</span><span class="p">,</span> <span class="n">harvest_object</span><span class="p">,</span>
+                                                <span class="n">schema</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Exiting import_stage()&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>  <span class="c"># returns True</span>
+</div>
+<div class="viewcode-block" id="DDIHarvester.fetch_xml"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.fetch_xml">[docs]</a>    <span class="k">def</span> <span class="nf">fetch_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Get xml for import. Shortened from :meth:`fetch_stage`</span>
+
+<span class="sd">        :param url: the url for metadata file</span>
+<span class="sd">        :param type: string</span>
+
+<span class="sd">        :return: a xml file</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Requesting url {ur}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ur</span><span class="o">=</span><span class="n">url</span><span class="p">))</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_xml</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">URLError</span><span class="p">,</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;fetch_xml: Could not fetch from url {ur}!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ur</span><span class="o">=</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">httplib</span><span class="o">.</span><span class="n">BadStatusLine</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Bad HTTP response status line.&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DDIHarvester.parse_xml"><a class="viewcode-back" href="../../../ckanext.ddi.html#ckanext.ddi.harvester.DDIHarvester.parse_xml">[docs]</a>    <span class="k">def</span> <span class="nf">parse_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">orig_url</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Import single metadata file.</span>
+
+<span class="sd">        :param f: the metadata file</span>
+<span class="sd">        :param type: string</span>
+<span class="sd">        :param orig_url: the url for metadata file</span>
+<span class="sd">        :param type: string</span>
+<span class="sd">        :param strict: require mandatory metadata fields</span>
+<span class="sd">        :param type: boolean</span>
+
+<span class="sd">        :returns: package dictionary of parsed metadata</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ddi_xml</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">&#39;xml&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLSyntaxError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Unable to parse XML! {er}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">er</span><span class="o">=</span><span class="n">err</span><span class="o">.</span><span class="n">msg</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">package_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_converter</span><span class="o">.</span><span class="n">ddi2ckan</span><span class="p">(</span><span class="n">ddi_xml</span><span class="p">,</span> <span class="n">orig_url</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span>
+                                                   <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+                                                   <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_converter</span><span class="o">.</span><span class="n">get_errors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="c"># FIXME: Can&#39;t use line number here. Old _read_value doesn&#39;t provide</span>
+            <span class="k">for</span> <span class="n">er</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Invalid or missing mandatory metadata in {ur}. &#39;</span>
+                          <span class="s">&#39;{er}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ur</span><span class="o">=</span><span class="n">orig_url</span><span class="p">,</span> <span class="n">er</span><span class="o">=</span><span class="n">er</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ddi_converter</span><span class="o">.</span><span class="n">empty_errors</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">package_dict</span>
+
+<span class="c">#</span>
+<span class="c">#class DDI3Harvester(HarvesterBase):</span>
+<span class="c">#    &#39;&#39;&#39;</span>
+<span class="c">#    DDI Harvester for ckanext-harvester.</span>
+<span class="c">#    &#39;&#39;&#39;</span>
+<span class="c">#    config = None</span>
+<span class="c">#</span>
+<span class="c">#    def _set_config(self, config_str):</span>
+<span class="c">#        &#39;&#39;&#39;Set the configuration string.</span>
+<span class="c">#        &#39;&#39;&#39;</span>
+<span class="c">#        if config_str:</span>
+<span class="c">#            self.config = json.loads(config_str)</span>
+<span class="c">#</span>
+<span class="c">#    def info(self):</span>
+<span class="c">#        &#39;&#39;&#39;Return information about this harvester.</span>
+<span class="c">#        &#39;&#39;&#39;</span>
+<span class="c">#        return {</span>
+<span class="c">#            &#39;name&#39;: &#39;DDI3&#39;,</span>
+<span class="c">#            &#39;title&#39;: &#39;DDI3 import (EXPERIMENTAL)&#39;,</span>
+<span class="c">#            &#39;description&#39;: &#39;Mass importing harvester for DDI3&#39;,</span>
+<span class="c">#        }</span>
+<span class="c">#</span>
+<span class="c">#    def validate_config(self, config):</span>
+<span class="c">#        &#39;&#39;&#39;Validate the config, returns it since we don&#39;t have any configuration</span>
+<span class="c">#        parameters</span>
+<span class="c">#        &#39;&#39;&#39;</span>
+<span class="c">#        return config</span>
+<span class="c">#</span>
+<span class="c">#    # These have been copy-pasted all around now so a common base class would</span>
+<span class="c">#    # have been a good idea. _scan_retries seems to be the only one that</span>
+<span class="c">#    # changes.</span>
+<span class="c">#</span>
+<span class="c">#    def _datetime_from_str(self, s):</span>
+<span class="c">#        # Used to get date from settings file when testing harvesting with</span>
+<span class="c">#        # (semi-open) date interval.</span>
+<span class="c">#        if s == None:</span>
+<span class="c">#            return s</span>
+<span class="c">#        try:</span>
+<span class="c">#            t = datetime.datetime.strptime(s, &#39;%Y-%m-%dT%H:%M:%S&#39;)</span>
+<span class="c">#            return t</span>
+<span class="c">#        except ValueError:</span>
+<span class="c">#            pass</span>
+<span class="c">#        try:</span>
+<span class="c">#            t = datetime.datetime.strptime(s, &#39;%Y-%m-%d&#39;)</span>
+<span class="c">#            return t</span>
+<span class="c">#        except ValueError:</span>
+<span class="c">#            log.debug(&#39;Bad date for %s: %s&#39; % (key, s,))</span>
+<span class="c">#        return None</span>
+<span class="c">#</span>
+<span class="c">#    def _str_from_datetime(self, dt):</span>
+<span class="c">#        return dt.strftime(&#39;%Y-%m-%dT%H:%M:%S&#39;)</span>
+<span class="c">#</span>
+<span class="c">#    def _add_retry(self, harvest_object):</span>
+<span class="c">#        HarvesterRetry.mark_for_retry(harvest_object)</span>
+<span class="c">#</span>
+<span class="c">#    def _scan_retries(self, harvest_job):</span>
+<span class="c">#        self._retry = HarvesterRetry()</span>
+<span class="c">#        urls = []</span>
+<span class="c">#        for harvest_object in self._retry.find_all_retries(harvest_job):</span>
+<span class="c">#            data = json.loads(harvest_object.content)</span>
+<span class="c">#            urls.append(data[&#39;url&#39;])</span>
+<span class="c">#        return urls</span>
+<span class="c">#</span>
+<span class="c">#    def _clear_retries(self):</span>
+<span class="c">#        self._retry.clear_retry_marks()</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#    def gather_stage(self, harvest_job):</span>
+<span class="c">#        &#39;&#39;&#39;Gather the URLs to fetch from a URL which has a list of links to XML</span>
+<span class="c">#        documents containing the DDI documents.</span>
+<span class="c">#        &#39;&#39;&#39;</span>
+<span class="c">#        self._set_config(harvest_job.source.config)</span>
+<span class="c">#</span>
+<span class="c">#        def date_from_config(key):</span>
+<span class="c">#            return self._datetime_from_str(config.get(key, None))</span>
+<span class="c">#</span>
+<span class="c">#        from_ = date_from_config(&#39;ckanext.harvest.test.from&#39;)</span>
+<span class="c">#        until = date_from_config(&#39;ckanext.harvest.test.until&#39;)</span>
+<span class="c">#        previous_job = model.Session.query(HarvestJob) \</span>
+<span class="c">#            .filter(HarvestJob.source == harvest_job.source) \</span>
+<span class="c">#            .filter(HarvestJob.gather_finished != None) \</span>
+<span class="c">#            .filter(HarvestJob.id != harvest_job.id) \</span>
+<span class="c">#            .order_by(HarvestJob.gather_finished.desc()) \</span>
+<span class="c">#            .limit(1).first()</span>
+<span class="c">#        if previous_job and not until and not from_:</span>
+<span class="c">#            from_ = previous_job.gather_finished</span>
+<span class="c">#            until = None</span>
+<span class="c">#</span>
+<span class="c">#        def add_harvest_object(harvest_job, url):</span>
+<span class="c">#            harvest_obj = HarvestObject(job=harvest_job)</span>
+<span class="c">#            harvest_obj.content = url</span>
+<span class="c">#            harvest_obj.save()</span>
+<span class="c">#            return harvest_obj</span>
+<span class="c">#</span>
+<span class="c">#        harvest_objs = []</span>
+<span class="c">#        # Add retries.</span>
+<span class="c">#        for url in self._scan_retries(harvest_job):</span>
+<span class="c">#            obj = add_harvest_object(harvest_job, url)</span>
+<span class="c">#            harvest_objs.append(obj.id)</span>
+<span class="c">#            log.debug(&#39;Retrying record: %s&#39; % url)</span>
+<span class="c">#        try:</span>
+<span class="c">#            urls = urllib2.urlopen(harvest_job.source.url)</span>
+<span class="c">#            for url in urls.readlines():</span>
+<span class="c">#                if from_ or until:</span>
+<span class="c">#                    # This should not fail the whole gather.</span>
+<span class="c">#                    try:</span>
+<span class="c">#                        request = urllib2.Request(url)</span>
+<span class="c">#                        request.get_method = lambda: &#39;HEAD&#39;</span>
+<span class="c">#                        doc_url = urllib2.urlopen(request)</span>
+<span class="c">#                        lastmod = parser.parse(doc_url.headers[&#39;last-modified&#39;],</span>
+<span class="c">#                                               ignoretz=True)</span>
+<span class="c">#                    except (urllib2.URLError, urllib2.HTTPError,):</span>
+<span class="c">#                        # Actually we do not know if it fits the time limits.</span>
+<span class="c">#                        # Rather get it twice than lose it.</span>
+<span class="c">#                        self._add_retry(add_harvest_object(harvest_job, url))</span>
+<span class="c">#                        continue</span>
+<span class="c">#                    if from_ and lastmod &lt; from_:</span>
+<span class="c">#                        continue</span>
+<span class="c">#                    if until and until &lt; lastmod:</span>
+<span class="c">#                        continue</span>
+<span class="c">#                obj = add_harvest_object(harvest_job, url)</span>
+<span class="c">#                harvest_objs.append(obj.id)</span>
+<span class="c">#        except (urllib2.URLError, urllib2.HTTPError,):</span>
+<span class="c">#            self._save_gather_error(</span>
+<span class="c">#                &#39;DDI3: Could not gather XML files from URL!&#39;,</span>
+<span class="c">#                harvest_job)</span>
+<span class="c">#            return None</span>
+<span class="c">#        except Exception as e:</span>
+<span class="c">#            log.debug(traceback.format_exc(e))</span>
+<span class="c">#            return None</span>
+<span class="c">#        self._clear_retries()</span>
+<span class="c">#        log.info(&#39;Gathered %i records from %s.&#39; % (</span>
+<span class="c">#            len(harvest_objs), harvest_job.source.url,))</span>
+<span class="c">#        return harvest_objs</span>
+<span class="c">#</span>
+<span class="c">#    def fetch_stage(self, harvest_object):</span>
+<span class="c">#        &#39;&#39;&#39;Fetch and parse the DDI XML document.</span>
+<span class="c">#        &#39;&#39;&#39;</span>
+<span class="c">#        url = harvest_object.content</span>
+<span class="c">#        try:</span>
+<span class="c">#            f = urllib2.urlopen(url).read()</span>
+<span class="c">#        except (urllib2.URLErrori, urllib2.HTTPError,):</span>
+<span class="c">#            self._add_retry(harvest_object)</span>
+<span class="c">#            self._save_object_error(&#39;Could not fetch from url %s!&#39; % url,</span>
+<span class="c">#                                    harvest_object)</span>
+<span class="c">#            return False</span>
+<span class="c">#        except httplib.BadStatusLine:</span>
+<span class="c">#            self._add_retry(harvest_object)</span>
+<span class="c">#            self._save_object_error(&#39;Bad HTTP response status line.&#39;,</span>
+<span class="c">#                                    harvest_object, stage=&#39;Fetch&#39;)</span>
+<span class="c">#            return False</span>
+<span class="c">#        except Exception as e:</span>
+<span class="c">#            # Guard against miscellaneous stuff. Probably plain bugs.</span>
+<span class="c">#            # Also very rare exceptions we haven&#39;t seen yet.</span>
+<span class="c">#            self._add_retry(harvest_object)</span>
+<span class="c">#            log.debug(traceback.format_exc(e))</span>
+<span class="c">#            return False</span>
+<span class="c">#            # Need to pickle the XML so that the data type remains the same.</span>
+<span class="c">#        harvest_object.content = pickle.dumps({&#39;url&#39;: url, &#39;xml&#39;: f})</span>
+<span class="c">#        return True</span>
+<span class="c">#</span>
+<span class="c">#    def import_stage(self, harvest_object):</span>
+<span class="c">#        &#39;&#39;&#39;Import the metadata received in the fetch stage to a dataset and</span>
+<span class="c">#        create groups if ones are defined. Fill in metadata from study and</span>
+<span class="c">#        document description.</span>
+<span class="c">#        &#39;&#39;&#39;</span>
+<span class="c">#        info = pickle.loads(harvest_object.content)</span>
+<span class="c">#        try:</span>
+<span class="c">#            ddi_xml = BeautifulSoup(info[&#39;xml&#39;], &#39;xml&#39;)</span>
+<span class="c">#        except etree.XMLSyntaxError:</span>
+<span class="c">#            self._save_object_error(&#39;Unable to parse XML!&#39;, harvest_object)</span>
+<span class="c">#            # I presume source sent wrong data but it arrived correctly.</span>
+<span class="c">#            # This could result in a case where incorrect source is tried</span>
+<span class="c">#            # over and over again without success.</span>
+<span class="c">#            del info[&#39;xml&#39;]</span>
+<span class="c">#            harvest_object.content = info[&#39;url&#39;]</span>
+<span class="c">#            self._add_retry(harvest_object)</span>
+<span class="c">#            return False</span>
+<span class="c">#        return ddi32ckan(ddi_xml, info[&#39;xml&#39;], info[&#39;url&#39;], harvest_object)</span>
+<span class="c">#</span>
+<span class="c">#    def import_xml(self, source, xml):</span>
+<span class="c">#        try:</span>
+<span class="c">#            ddi_xml = BeautifulSoup(xml, &#39;xml&#39;)</span>
+<span class="c">#        except etree.XMLSyntaxError:</span>
+<span class="c">#            log.debug(&#39;Unable to parse XML!&#39;)</span>
+<span class="c">#            return False</span>
+<span class="c">#        return ddi32ckan(ddi_xml, xml)</span>
+<span class="c">#</span>
+
+<span class="c">#if __name__ == &#39;__main__&#39;:</span>
+<span class="c">#    import sys</span>
+<span class="c">#</span>
+<span class="c">#    if len(sys.argv) &gt; 3:</span>
+<span class="c">#        header, metadata, about = test_fetch(sys.argv[1],</span>
+<span class="c">#                                             sys.argv[2], sys.argv[3])</span>
+<span class="c">#        #for item in metadata.getMap().items():</span>
+<span class="c">#        #    print item</span>
+<span class="c">#        print header</span>
+<span class="c">#        print metadata.dc.subject</span>
+<span class="c">#    else:</span>
+<span class="c">#        for item in test_list(sys.argv[1]):</span>
+<span class="c">#            print item</span>
+<span class="c">#</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <ul class="simple">
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="../../../search.html" method="get">
+            <input type="text" name="q" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="../../../genindex.html" title="General Index"
+             >index</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2014, CSC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>
