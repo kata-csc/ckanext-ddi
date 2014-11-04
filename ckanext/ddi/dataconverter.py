@@ -411,18 +411,19 @@ class DataConverter:
         return self.search_tag_content(start_bs4tag, 'topcClas', vocab='FSD')
 
     def search_tag_content(self, start_bs4tag, *args, **kwargs):
-        '''Search BeautifulSoup object for keywords or alike and return comma
+        '''
+        Search BeautifulSoup object for keywords or alike and return comma
         separated string of results.
 
-        Search beginning from start_bs4tag with *args and **kwargs. Remove found
+        Search beginning from start_bs4tag with `args` and `kwargs`. Remove found
         tags from ddi xml with extract(). Assure that no empty tags fail.
 
         :param start_bs4tag: bs4 tag to start search
         :type start_bs4tag: bs4.element.Tag instance
-        :param *args: searched tag (only one supported) or none
-        :type *args: one string or None
-        :param **kwargs: searched attributes of a ddi tag
-        :type **kwargs: zero or more key-value pairs
+        :param args: searched tag (only one supported) or none
+        :type args: one string or None
+        :param kwargs: searched attributes of a ddi tag
+        :type kwargs: zero or more key-value pairs
         :returns: a string of comma separated keywords
         :rtype: a string
         '''
