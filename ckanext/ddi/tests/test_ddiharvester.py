@@ -80,6 +80,10 @@ class TestDataConverter(unittest.TestCase):
                            u'poliittiset asenteet,puolueiden kannatus,' \
                            u'poliittinen käyttäytyminen, asenteet ja mielipiteet'
 
+    def test_convert_language(self):
+        self.assertEquals(self.ddi_converter.convert_language('fi'), 'fin')
+        self.assertEquals(self.ddi_converter.convert_language('en'), 'eng')
+
     @classmethod
     def teardown_class(self):
         #Session.remove()

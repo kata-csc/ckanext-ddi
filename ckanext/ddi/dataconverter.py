@@ -504,7 +504,7 @@ class DataConverter:
         Convert alpha2 language (eg. 'en') to terminology language (eg. 'eng')
         '''
         try:
-            lang_object = languages.get(alpha2=lang)
+            lang_object = languages.get(part1=lang)
             return lang_object.terminology
         except KeyError as ke:
             # TODO: Parse ISO 639-2 B/T ?

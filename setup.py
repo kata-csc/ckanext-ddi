@@ -27,10 +27,10 @@ setup(
         'ckanclient',
         'unicodecsv>=0.9.0',
         'python-dateutil',
-        'iso639',
+        'iso639 == 0.4.0',
     ],
     dependency_links=[
-        "git+https://github.com/noumar/iso639.git#egg=iso639"
+        "git+https://github.com/noumar/iso639.git#egg=iso639-0.4.0"
     ],
     tests_require=[
         'nose',
