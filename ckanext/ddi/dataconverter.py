@@ -396,7 +396,7 @@ class DataConverter:
         result_set = start_bs4tag(search_tag)
         contributors = []
         for tag in result_set:
-            contributors.append({'role': 'author',
+            contributors.append({'role': 'contributor',
                             # TODO: use extract() to remove tag
                             'name': tag.text.strip(),
                             'organisation': tag.get('affiliation', '')})
