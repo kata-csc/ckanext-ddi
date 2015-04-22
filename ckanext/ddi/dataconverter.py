@@ -654,8 +654,13 @@ class DataConverter:
         # convert the titles to a JSON string of type {"fin":"otsikko", "eng","title"}
         transl_json = {}
         first_title = ""
+
+        # default to finnish, since first title has no lang value, which causes the validator to whine
+        # we might want to update the DDI harvester to accept a language configuration parameter, if
+        # we decide to harvest DDI resources from other sources.
+        default_lang = "fin"
         for title in titles:
-            transl_json[self.convert_language(title.get('xml:lang', ''))] = title.text
+            transl_json[self.convert_language(title.get('xml:lang', default_lang))] = title.text
 
             # we want to get save the first title for use lateron
             if not first_title:
