@@ -11,6 +11,7 @@ import socket
 import StringIO
 import traceback
 import warnings
+import json
 
 
 import lxml.etree as etree
@@ -257,7 +258,8 @@ def _last_statements_to_rewrite():
         pkg.extras['publisher'] = stdy_dscr.citation.distStmt.distrbtr.string
 
     # JuhoL: This was old language for first title
-    pkg.extras['lang_title_0'] = pkg.language  # Guess. Good, I hope.
+    # Peter: Disabled, since not needed for JSON translations
+    # pkg.extras['lang_title_0'] = pkg.language  # Guess. Good, I hope.
 
 
 class DataConverter:
@@ -645,8 +647,21 @@ class DataConverter:
         # Titles
         titles = self._read_value(stdy_dscr + ".citation.titlStmt(['titl', 'parTitl'])") or \
             self._read_value(doc_citation + ".titlStmt(['titl', 'parTitl'])", mandatory_field=True)
-        langtitle=[dict(lang=self.convert_language(a.get('xml:lang', '')), value=a.text) for a in titles]
-        #langtitle=[dict(lang='fin', value=a.text) for a in titles]
+
+        # langtitle=[dict(lang=self.convert_language(a.get('xml:lang', '')), value=a.text) for a in titles]
+        # [{"lang":"fin", "value":"otsikko"}, {"lang:"en", "value":"title"}]
+
+        # convert the titles to a JSON string of type {"fin":"otsikko", "eng","title"}
+        transl_json = {}
+        first_title = ""
+        for title in titles:
+            transl_json[self.convert_language(title.get('xml:lang', ''))] = title.text
+
+            # we want to get save the first title for use lateron
+            if not first_title:
+                first_title = title.text
+
+        title = json.dumps(transl_json)
 
         # License
         # TODO: Extract prettier output. Should we check that element contains something?
@@ -699,7 +714,7 @@ class DataConverter:
         # For FSD 'URI' leads to summary web page of data, hence format='html'
         orig_web_page = self._read_value(doc_citation + ".holdings.get('URI', '')")
         if orig_web_page:
-            orig_web_page_resource = {'description': langtitle[0].get('value'),
+            orig_web_page_resource = {'description': first_title,
                                       'format': u'html',
                                       'resource_type': 'documentation',
                                       'url': orig_web_page}
@@ -791,7 +806,7 @@ class DataConverter:
             geographic_coverage=geo_cover,
             groups=[],
             id=generate_pid(),
-            langtitle=langtitle,
+            # langtitle=langtitle,
             langdis=u'True',  # HUOMAA!
             language=language,
             license_URL=license_url,
@@ -812,7 +827,8 @@ class DataConverter:
             tag_string=keywords,
             temporal_coverage_begin=temp_start,
             temporal_coverage_end=temp_end,
-            title=langtitle[0].get('value'),   # Must exist in package dict
+            # title=langtitle[0].get('value'),   # Must exist in package dict
+            title=title,
             type='dataset',
             version=version,
             version_PID='',
