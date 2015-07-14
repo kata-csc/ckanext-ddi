@@ -764,13 +764,18 @@ class DataConverter:
                       self._read_value( stdy_dscr + ".citation.distStmt.distrbtr.get('URI')") or \
                       CONTACT_URL_FSD if _is_fsd(original_url) else None
 
-        # Description
-        description_array = self._read_value(stdy_dscr + ".stdyInfo.abstract('p')")
-        if not description_array:
-            description_array = self._read_value(stdy_dscr + ".citation.serStmt.serInfo('p')")
+        # convert the descriptions to a JSON string of type {"fin":"aineiston kuvaus", "eng","dataset description"}
+        descriptions = self._read_value(stdy_dscr + ".stdyInfo.abstract('p')")
+        translated_notes = {}
 
-        notes = '\r\n\r\n'.join([description.string for
-                                 description in description_array])
+        for des in descriptions:
+            lang = self.convert_language(des.get('xml:lang', 'fi'))
+            if lang in translated_notes:
+                translated_notes[lang] += '\r\n\r\n' + des.text
+            else:
+                translated_notes[lang] = des.text
+
+        notes = json.dumps(translated_notes)
 
         # Discipline
         discipline = self.get_discipline(self.ddi_xml.stdyDscr.stdyInfo.subject)
