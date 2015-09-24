@@ -766,6 +766,8 @@ class DataConverter:
 
         # convert the descriptions to a JSON string of type {"fin":"aineiston kuvaus", "eng","dataset description"}
         descriptions = self._read_value(stdy_dscr + ".stdyInfo.abstract('p')")
+        if not descriptions:
+            descriptions = self._read_value(stdy_dscr + ".citation.serStmt.serInfo('p')")
         translated_notes = {}
 
         for des in descriptions:
