@@ -23,7 +23,7 @@ setup(
     zip_safe=False,
     install_requires=[
         # -*- Extra requirements: -*-
-        'beautifulsoup4',
+        'beautifulsoup4>=4.4.1',
         'ckanclient',
         'unicodecsv>=0.9.0',
         'python-dateutil',
