@@ -3,7 +3,6 @@
 Harvester for DDI2 formats
 '''
 
-#pylint: disable-msg=E1101,E0611,F0401
 import inspect
 import logging
 import re
@@ -18,7 +17,6 @@ import lxml.etree as etree
 from iso639 import languages
 from pylons import config
 import unicodecsv as csv
-from ckanext.kata.utils import generate_pid
 
 import ckan.controllers.storage as storage
 from ckan.lib.base import h
@@ -429,9 +427,13 @@ class DataConverter:
         :returns: a string of comma separated keywords
         :rtype: a string
         '''
+        print('----------')
         result_set = start_bs4tag(args, kwargs)
-        strings = [ tag.extract().string for tag in result_set ]
-        kw_string = ','.join([ s for s in strings if s ])
+        print('++++++++')
+        strings = [tag.extract().string for tag in result_set]
+        print(len(strings))
+        print('----------')
+        kw_string = ','.join([s for s in strings if s])
         return kw_string
 
     def _get_events(self, stdy_dscr, authors):

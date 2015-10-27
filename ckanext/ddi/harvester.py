@@ -3,7 +3,6 @@
 Harvester for DDI2 formats
 '''
 
-#pylint: disable-msg=E1101,E0611,F0401
 import datetime
 import httplib
 import itertools
