@@ -45,6 +45,7 @@ class TestDataConverter(unittest.TestCase):
         '''
         Setup database and variables
         '''
+        ckan.model.repo.rebuild_db()
         harvest_model.setup()
         kata_model.setup()
 
@@ -97,6 +98,7 @@ class TestDDIHarvester(unittest.TestCase):
         '''
         Setup database and variables
         '''
+        ckan.model.repo.rebuild_db()
         harvest_model.setup()
         kata_model.setup()
 
