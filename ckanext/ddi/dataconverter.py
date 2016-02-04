@@ -267,6 +267,12 @@ class DataConverter:
         self.context = None
         self.strict = True
         self.errors = []
+        self.fsd_temp_ref = open('/kata/sources/ckanext-ddi/1040-fix-update-datasets/fsd_names_filtered.csv')
+        fsd_lines = self.fsd_temp_ref.readlines()
+        self.fsd_items = {}
+        for l in fsd_lines:
+            idd, name = l.strip().split(',')
+            self.fsd_items[name] = idd
 
     def ddi2ckan(self, data, original_url=None, original_xml=None,
                  harvest_object=None, context=None, strict=True):
@@ -314,6 +320,28 @@ class DataConverter:
         Return errors found in instance's data parsing.
         '''
         return self.errors
+
+    def _get_id_by_name(self, name):
+        '''
+        Return id of existing dataset or None.
+
+        Fetch ids from an external file. Clear the id from the file when fetched.
+        '''
+        id_upper = self.fsd_items.get(name.upper(), None)
+        id_lower = self.fsd_items.get(name.lower(), None)
+        eid = None
+        msg_found = 'Found existing FSD id: {fid} corresponding Etsin id: {eid}'
+        log.info('Checking the imported dataset with name: {na} against FSD id table.'.format(na=name))
+        if id_upper:
+            eid = id_upper
+            log.info(msg_found.format(fid=name.upper(), eid=eid))
+        #TODO: remove found name: id pair from dict & update file
+        elif id_lower:
+            eid = id_lower
+            log.info(msg_found.format(fid=name.upper(), eid=eid))
+        else:
+            log.info('No existing FSD id found. Generating a new id.')
+        return eid
 
     @ExceptReturn(AttributeError)
     def get_clean_date(self, bs4_element):
@@ -819,7 +847,7 @@ class DataConverter:
             event=events,
             geographic_coverage=geo_cover,
             groups=[],
-            id=generate_pid(),
+            id=self._get_id_by_name(name) or generate_pid(),
             # langtitle=langtitle,
             langdis=u'True',  # HUOMAA!
             language=language,
