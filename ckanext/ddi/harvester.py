@@ -274,6 +274,7 @@ class DDIHarvester(HarvesterBase):
         schema = KataPlugin.create_package_schema_ddi()
         result = self._create_or_update_package(package_dict, harvest_object,
                                                 schema)
+        self.ddi_converter.write_fsd_ref()
         log.debug("Exiting import_stage()")
         return result  # returns True
 

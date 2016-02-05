@@ -267,12 +267,27 @@ class DataConverter:
         self.context = None
         self.strict = True
         self.errors = []
-        self.fsd_temp_ref = open('/kata/sources/ckanext-ddi/1040-fix-update-datasets/fsd_names_filtered.csv')
-        fsd_lines = self.fsd_temp_ref.readlines()
-        self.fsd_items = {}
+        self.fsd_items = self.read_fsd_ref()
+
+    def read_fsd_ref(self):
+        with open('/opt/data/ckan/pyenv/src/1040-fix-update-datasets/fsd_names_filtered.csv') as fsd_temp_f:
+            fsd_lines = fsd_temp_f.readlines()
+        fsd_items = {}
         for l in fsd_lines:
             idd, name = l.strip().split(',')
-            self.fsd_items[name] = idd
+            fsd_items[name] = idd
+        if len(fsd_items) == 0:
+            fsd_items['Note to self'] = 'NOTE: All FSD ids have been assigned in \
+            reharvesting. Related ckanext-ddi code & directory should be removed.'
+            log.debug(fsd_items['Note to self'])
+        return fsd_items
+
+    def write_fsd_ref(self):
+        with open('/opt/data/ckan/pyenv/src/1040-fix-update-datasets/fsd_names_filtered.csv', 'w') as fsd_temp_f:
+            for name, idd in self.fsd_items.iteritems():
+                fsd_temp_f.write(','.join([idd, name]) + '\n')
+                fsd_temp_f.flush()
+            log.debug('Updated FSD id table.')
 
     def ddi2ckan(self, data, original_url=None, original_xml=None,
                  harvest_object=None, context=None, strict=True):
@@ -335,10 +350,13 @@ class DataConverter:
         if id_upper:
             eid = id_upper
             log.info(msg_found.format(fid=name.upper(), eid=eid))
-        #TODO: remove found name: id pair from dict & update file
+            del self.fsd_items[name.upper()]
+            if id_lower:
+                del self.fsd_items[name.lower()]
         elif id_lower:
             eid = id_lower
             log.info(msg_found.format(fid=name.upper(), eid=eid))
+            del self.fsd_items[name.lower()]
         else:
             log.info('No existing FSD id found. Generating a new id.')
         return eid
