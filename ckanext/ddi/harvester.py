@@ -236,6 +236,15 @@ class DDIHarvester(HarvesterBase):
         file are saved as csv files (unfinished).
         Also create groups if ones are defined (unfinished).
         '''
+        if not harvest_object:
+            log.error('No harvest object received')
+            return False
+
+        if not harvest_object.content:
+            self._save_object_error('Import: Empty content for object {id}'.format(
+                id=harvest_object.id), harvest_object)
+            return False
+
         # TODO: cPickle might be faster
         info = pickle.loads(harvest_object.content)
         log.info("Harvest object url: {ur}".format(ur=info['url'].strip()))
