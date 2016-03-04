@@ -21,14 +21,6 @@ setup(
     namespace_packages=['ckanext', 'ckanext.ddi'],
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-        # -*- Extra requirements: -*-
-        'beautifulsoup4>=4.4.1',
-        'ckanclient',
-        'unicodecsv>=0.9.0',
-        'python-dateutil',
-        'iso-639 >= 0.4.0',
-    ],
     tests_require=[
         'nose',
         'mock'
