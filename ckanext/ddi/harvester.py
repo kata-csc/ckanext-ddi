@@ -21,6 +21,7 @@ import ckan.model as model
 from ckanext.harvest.harvesters.base import HarvesterBase
 import ckanext.harvest.model as hmodel
 from ckanext.kata.plugin import KataPlugin
+import ckanext.kata.utils as utils
 import dataconverter as dconverter
 
 
@@ -179,6 +180,7 @@ class DDIHarvester(HarvesterBase):
                     # Actually we do not know if it fits the time limits.
                     # Rather get it twice than lose it.
                     # self._add_retry(add_harvest_object(harvest_job, url))
+                        log.info('Connection error, url: {ur}. Probably just try again.'.format(ur=url))
                         continue
                     if from_ and lastmod < from_:
                         continue
@@ -251,13 +253,16 @@ class DDIHarvester(HarvesterBase):
             #            self._add_retry(harvest_object)
             return False
 
+        self.ddi_converter.read_fsd_ref()
         package_dict = self.ddi_converter.ddi2ckan(ddi_xml, info['url'],
                                                    info['xml'], harvest_object)
 
-        # Obsolete for now, as we only have one pid
-        # pkg_id = ckanext.kata.utils.get_package_id_by_data_pids(package_dict)
-        # pkg = model.Session.query(model.Package).filter(model.Package.id == pkg_id).first() if pkg_id else None
-        # package_dict['id'] = pkg.id if pkg else generate_pid()
+        # Check if dataset already exists and use its id.
+        pkg_id = utils.get_package_id_by_data_pids(package_dict)
+        pkg = model.Session.query(model.Package).filter(model.Package.id == pkg_id).first() if pkg_id else None
+        if pkg:
+            package_dict['id'] = pkg.id
+            log.debug('Found existing package with PIDs: {pid}'.format(pid=package_dict['pids']))
 
         errors = self.ddi_converter.get_errors()
         if errors:

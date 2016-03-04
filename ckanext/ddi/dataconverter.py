@@ -3,8 +3,10 @@
 Harvester for DDI2 formats
 '''
 
+import copy
 import inspect
 import logging
+import os
 import re
 import socket
 import StringIO
@@ -267,23 +269,23 @@ class DataConverter:
         self.context = None
         self.strict = True
         self.errors = []
-        self.fsd_items = self.read_fsd_ref()
+        self.fsd_path = os.path.join(os.path.dirname(__file__), "../../../..", "/opt/data/ckan/pyenv/src/1040-fix-update-datasets", 'fsd_names_filtered.csv')
 
     def read_fsd_ref(self):
-        with open('/opt/data/ckan/pyenv/src/1040-fix-update-datasets/fsd_names_filtered.csv') as fsd_temp_f:
+        with open(self.fsd_path) as fsd_temp_f:
             fsd_lines = fsd_temp_f.readlines()
         fsd_items = {}
         for l in fsd_lines:
             idd, name = l.strip().split(',')
             fsd_items[name] = idd
         if len(fsd_items) == 0:
-            fsd_items['Note to self'] = 'NOTE: All FSD ids have been assigned in \
-            reharvesting. Related ckanext-ddi code & directory should be removed.'
-            log.debug(fsd_items['Note to self'])
-        return fsd_items
+            fsd_items['Note to self'] = u'NOTE: All FSD ids have been assigned'\
+                + u' in reharvesting. Related ckanext-ddi code & directory'\
+                + u'should be removed.'
+        self.fsd_items = fsd_items
 
     def write_fsd_ref(self):
-        with open('/opt/data/ckan/pyenv/src/1040-fix-update-datasets/fsd_names_filtered.csv', 'w') as fsd_temp_f:
+        with open(self.fsd_path, 'w') as fsd_temp_f:
             for name, idd in self.fsd_items.iteritems():
                 fsd_temp_f.write(','.join([idd, name]) + '\n')
                 fsd_temp_f.flush()
