@@ -1,5 +1,5 @@
-beautifulsoup4>=4.4.1
-ckanclient
-unicodecsv>=0.9.0
-python-dateutil
-iso-639>=0.4.0
+beautifulsoup4==4.4.1
+ckanclient==0.10
+unicodecsv==0.14.1
+python-dateutil==1.5.0
+iso-639==0.4.4
