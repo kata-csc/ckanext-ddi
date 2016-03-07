@@ -272,24 +272,30 @@ class DataConverter:
         self.fsd_path = os.path.join(os.path.dirname(__file__), "../..", "1040-fix-update-datasets", 'fsd_names_filtered.csv')
 
     def read_fsd_ref(self):
-        with open(self.fsd_path) as fsd_temp_f:
-            fsd_lines = fsd_temp_f.readlines()
         fsd_items = {}
-        for l in fsd_lines:
-            idd, name = l.strip().split(',')
-            fsd_items[name] = idd
-        if len(fsd_items) == 0:
-            fsd_items['Note to self'] = u'NOTE: All FSD ids have been assigned'\
-                + u' in reharvesting. Related ckanext-ddi code & directory'\
-                + u'should be removed.'
+        try:
+            with open(self.fsd_path) as fsd_temp_f:
+                fsd_lines = fsd_temp_f.readlines()
+            for l in fsd_lines:
+                idd, name = l.strip().split(',')
+                fsd_items[name] = idd
+            if len(fsd_items) == 0:
+                fsd_items['Note to self'] = u'NOTE: All FSD ids have been assigned'\
+                    + u' in reharvesting. Related ckanext-ddi code & directory'\
+                    + u'should be removed.'
+        except Exception:
+            log.debug("Couldn't open FSD id table for reading.")
         self.fsd_items = fsd_items
 
     def write_fsd_ref(self):
-        with open(self.fsd_path, 'w') as fsd_temp_f:
-            for name, idd in self.fsd_items.iteritems():
-                fsd_temp_f.write(','.join([idd, name]) + '\n')
-                fsd_temp_f.flush()
-            log.debug('Updated FSD id table.')
+        try:
+            with open(self.fsd_path, 'w') as fsd_temp_f:
+                for name, idd in self.fsd_items.iteritems():
+                    fsd_temp_f.write(','.join([idd, name]) + '\n')
+                    fsd_temp_f.flush()
+                log.debug('Updated FSD id table.')
+        except Exception:
+            log.debug("Couldn't write to FSD id table.")
 
     def ddi2ckan(self, data, original_url=None, original_xml=None,
                  harvest_object=None, context=None, strict=True):
