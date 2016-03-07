@@ -269,7 +269,7 @@ class DataConverter:
         self.context = None
         self.strict = True
         self.errors = []
-        self.fsd_path = os.path.join(os.path.dirname(__file__), "../../../..", "/opt/data/ckan/pyenv/src/1040-fix-update-datasets", 'fsd_names_filtered.csv')
+        self.fsd_path = os.path.join(os.path.dirname(__file__), "../../../..", "/opt/data/ckan/pyenv/src/ckanext-ddi/1040-fix-update-datasets", 'fsd_names_filtered.csv')
 
     def read_fsd_ref(self):
         with open(self.fsd_path) as fsd_temp_f:
