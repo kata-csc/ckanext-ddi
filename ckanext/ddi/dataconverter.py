@@ -270,6 +270,7 @@ class DataConverter:
         self.strict = True
         self.errors = []
         self.fsd_path = os.path.join(os.path.dirname(__file__), "../..", "1040-fix-update-datasets", 'fsd_names_filtered.csv')
+        self.fsd_items = {}
 
     def read_fsd_ref(self):
         fsd_items = {}
