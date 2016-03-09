@@ -285,7 +285,8 @@ class DataConverter:
                     + u' in reharvesting. Related ckanext-ddi code & directory'\
                     + u'should be removed.'
         except Exception:
-            log.debug("Couldn't open FSD id table for reading.")
+            log.info("Couldn't open FSD id table for reading in {path}.".format(
+                path=self.fsd_path))
         self.fsd_items = fsd_items
 
     def write_fsd_ref(self):
@@ -294,9 +295,9 @@ class DataConverter:
                 for name, idd in self.fsd_items.iteritems():
                     fsd_temp_f.write(','.join([idd, name]) + '\n')
                     fsd_temp_f.flush()
-                log.debug('Updated FSD id table.')
+                log.info('Updated FSD id table.')
         except Exception:
-            log.debug("Couldn't write to FSD id table.")
+            log.info("Couldn't write to FSD id table.")
 
     def ddi2ckan(self, data, original_url=None, original_xml=None,
                  harvest_object=None, context=None, strict=True):
