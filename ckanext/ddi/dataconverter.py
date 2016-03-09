@@ -570,39 +570,6 @@ class DataConverter:
             log.debug('Invalid language: {ke}'.format(ke=ke))
             return ''
 
-    @ExceptReturn(UnicodeEncodeError, mandatory_field=True)
-    def _save_original_xml(self, original_xml, name, harvest_object=None):
-        ''' Here is created a ofs storage ie. local pairtree storage for
-        objects/blobs. The original xml is saved to this storage in
-        <harvest_source_id> (or <c.user>) named folder. NOTE: The content of
-        this folder is overwritten at reharvest. We assume that if metadata is
-        re-parsed also xml is changed. So old xml can be overwritten.
-
-        Example::
-
-        pairtree storage: /opt/data/ckan/data_tree
-        xml: <pairtree storage>/pairtree_root//de/fa/ul/t/obj/<harvest_source_id>/FSD1049.xml
-        url:<ckan_url>/storage/f/<harvest_source_id>/FSD1049.xml
-        '''
-        if harvest_object:
-            dir = harvest_object.harvest_source_id
-        else:
-            dir = self.context['user']
-        label = '{directory}/{filename}.xml'.format(directory=dir,
-                                                    filename=name)
-        try:
-            ofs = storage.get_ofs()
-            ofs.put_stream(storage.BUCKET, label, original_xml, {})
-            fileurl = config.get('ckan.site_url') + h.url_for('storage_file',
-                                                              label=label)
-        except IOError, ioe:
-            log.debug('Unable to save original xml to: {sto}, {io}'.format(
-                sto=storage.BUCKET, io=ioe))
-            self.errors.append('Unable to save original xml: {io}'.format(
-                io=ioe))
-            return u''
-        return fileurl
-
     def _save_ddi_variables_to_csv(self, name, pkg, harvest_object):
         # JuhoL: Handle codeBook.dataDscr parts, extract data (eg. questionnaire)
         # variables etc.
@@ -771,8 +738,7 @@ class DataConverter:
         # vpid = utils.generate_pid()
         # pids.append({'id': vpid, 'type': 'version', 'provider': 'kata'})
 
-        # Original xml and web page as resource
-        orig_xml_storage_url = self._save_original_xml(original_xml, name, harvest_object)
+        # Original web page as resource
         # For FSD 'URI' leads to summary web page of data, hence format='html'
         orig_web_page = self._read_value(doc_citation + ".holdings.get('URI', '')")
         if orig_web_page:
@@ -885,14 +851,7 @@ class DataConverter:
             notes=notes or u'',
             pids=pids,
             owner_org=owner_org,
-            resources=[{'algorithm': u'',
-                        'description': u'Original metadata record',
-                        'format': u'xml',
-                        'hash': u'',
-                        'resource_type': 'file.harvest',
-                        'size': len(original_xml),
-                        'url': orig_xml_storage_url},
-                       orig_web_page_resource],
+            resources=[orig_web_page_resource],
             tag_string=keywords,
             temporal_coverage_begin=temp_start,
             temporal_coverage_end=temp_end,
