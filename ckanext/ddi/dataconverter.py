@@ -723,17 +723,22 @@ class DataConverter:
                   self.get_attr_mandatory(self.ddi_xml.stdyDscr.citation,
                                           'version', 'date')
 
-        # Name
-        name_prefix = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.get('agency')", mandatory_field=False)
-        name_id = self._read_value(stdy_dscr + ".citation.titlStmt.IDNo.text", mandatory_field=False)
-        if not name_prefix:
-            name_prefix = self._read_value(doc_citation + ".titlStmt.IDNo['agency']", mandatory_field=True)
-        if not name_id:
-            name_id = self._read_value(doc_citation + ".titlStmt.IDNo.text", mandatory_field=True)
-        name = utils.datapid_to_name(name_prefix + name_id)
+        # This idNos is an FSD specific solution
+        idNos = self._read_value(stdy_dscr + ".citation.titlStmt.find_all('IDNo')", mandatory_field=False)
+        if not idNos:
+            idNos = self._read_value(doc_citation + ".titlStmt.find_all('IDNo')", mandatory_field=True)
 
         pids = list()
-        pids.append({'id': name, 'type': 'data', 'primary': 'True', 'provider': name_prefix})
+
+        idNoValues = [bsIdNo.text for bsIdNo in idNos]
+        agencies = [bsIdNo.get('agency') for bsIdNo in idNos]
+        if len(idNoValues) == len(agencies):
+            for idNoVal, agency in zip(idNoValues, agencies):
+                if agency == 'Kansalli' \
+                             'skirjasto':
+                    pids.append({'id': idNoVal, 'type': 'metadata', 'primary': 'True', 'provider': agency})
+                else:
+                    pids.append({'id': agency + idNoVal, 'type': 'metadata', 'primary': 'False', 'provider': agency})
 
         # Should we generate a version PID?
         # vpid = utils.generate_pid()
@@ -825,6 +830,8 @@ class DataConverter:
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
         xpath_dict.update(flattened_ddi.getMap())
 
+        package_id = generate_pid()
+        package_name = utils.datapid_to_name(package_id)
 
         package_dict = dict(
             access_application_URL=u'',
@@ -841,14 +848,14 @@ class DataConverter:
             event=events,
             geographic_coverage=geo_cover,
             groups=[],
-            id=self._get_id_by_name(name) or generate_pid(),
+            id=package_id,
             # langtitle=langtitle,
             langdis=u'True',  # HUOMAA!
             language=language,
             license_URL=license_url,
             license_id=license_id,
             mimetype=u'',  # To be implemented straight in 'resources
-            name=name,
+            name=package_name,
             notes=notes or u'',
             pids=pids,
             owner_org=owner_org,
