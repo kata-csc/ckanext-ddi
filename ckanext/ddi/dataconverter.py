@@ -815,6 +815,9 @@ class DataConverter:
         # Temporal coverage
         temp_start, temp_end = self.get_temporal_coverage(self.ddi_xml)
 
+        # Citation
+        citation = self._read_value(stdy_dscr + ".citation.biblCit.text", mandatory_field=False)
+
 
         ####################################################################
         #      Flatten rest to 'XPath/path/to/element': 'value' pairs      #
@@ -861,6 +864,7 @@ class DataConverter:
             type='dataset',
             version=version,
             version_PID='',
+            citation=citation
         )
         package_dict['xpaths'] = xpath_dict
         # Above line creates:
