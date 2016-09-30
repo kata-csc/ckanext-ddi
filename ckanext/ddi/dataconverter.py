@@ -35,8 +35,7 @@ socket.setdefaulttimeout(30)
 AVAILABILITY_ENUM = [u'direct_download',
                      u'access_application',
                      u'access_request',
-                     u'contact_owner',
-                     u'through_provider']
+                     u'contact_owner']
 AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[3]
 LICENCE_ID_DEFAULT = 'notspecified'
 AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
