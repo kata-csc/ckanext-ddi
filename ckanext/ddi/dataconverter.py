@@ -735,9 +735,10 @@ class DataConverter:
             for idNoVal, agency in zip(idNoValues, agencies):
                 if agency == 'Kansalli' \
                              'skirjasto':
-                    pids.append({'id': idNoVal, 'type': 'metadata', 'primary': 'True', 'provider': agency})
+                    pids.append({'id': idNoVal, 'type': 'primary', 'provider': agency})
                 else:
-                    pids.append({'id': agency + idNoVal, 'type': 'metadata', 'primary': 'False', 'provider': agency})
+                    # The below still needs work since relation type needs to have relation key also defined
+                    pids.append({'id': agency + idNoVal, 'type': 'relation', 'provider': agency})
 
         # Should we generate a version PID?
         # vpid = utils.generate_pid()
@@ -830,7 +831,7 @@ class DataConverter:
         xpath_dict.update(flattened_ddi.getMap())
 
         package_id = generate_pid()
-        package_name = utils.datapid_to_name(package_id)
+        package_name = utils.pid_to_name(package_id)
 
         package_dict = dict(
             access_application_URL=u'',
