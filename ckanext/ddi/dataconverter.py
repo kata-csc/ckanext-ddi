@@ -737,8 +737,7 @@ class DataConverter:
                              'skirjasto':
                     pids.append({'id': idNoVal, 'type': 'primary', 'provider': agency})
                 else:
-                    # The below still needs work since relation type needs to have relation key also defined
-                    pids.append({'id': agency + idNoVal, 'type': 'relation', 'provider': agency})
+                    pids.append({'id': agency + idNoVal, 'type': 'relation', 'provider': agency, 'relation': 'generalRelation'})
 
         # Should we generate a version PID?
         # vpid = utils.generate_pid()
