@@ -147,8 +147,8 @@ class DDIHarvester(HarvesterBase):
             harvest_obj.save()
             return harvest_obj
 
-        from_ = date_from_config('ckanext.harvest.test.from')
-        until = date_from_config('ckanext.harvest.test.until')
+        from_ = date_from_config('from')
+        until = date_from_config('until')
         previous_job = model.Session.query(hmodel.HarvestJob) \
             .filter(hmodel.HarvestJob.source == harvest_job.source) \
             .filter(hmodel.HarvestJob.gather_finished != None) \
