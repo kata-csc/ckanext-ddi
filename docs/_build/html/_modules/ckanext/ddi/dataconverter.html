@@ -88,10 +88,10 @@
                      <span class="s">u&#39;contact_owner&#39;</span><span class="p">,</span>
                      <span class="s">u&#39;through_provider&#39;</span><span class="p">]</span>
 <span class="n">AVAILABILITY_DEFAULT</span> <span class="o">=</span> <span class="n">AVAILABILITY_ENUM</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">LICENCE_ID_DEFAULT</span> <span class="o">=</span> <span class="s">&#39;notspecified&#39;</span>
+<span class="n">LICENSE_ID_DEFAULT</span> <span class="o">=</span> <span class="s">&#39;notspecified&#39;</span>
 <span class="n">AVAILABILITY_FSD</span> <span class="o">=</span> <span class="n">AVAILABILITY_ENUM</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">ACCESS_REQUEST_URL_FSD</span> <span class="o">=</span> <span class="s">&#39;https://services.fsd.uta.fi/&#39;</span>
-<span class="n">LICENCE_ID_FSD</span> <span class="o">=</span> <span class="s">&#39;other_closed&#39;</span>
+<span class="n">LICENSE_ID_FSD</span> <span class="o">=</span> <span class="s">&#39;other_closed&#39;</span>
 <span class="n">CONTACT_EMAIL_FSD</span> <span class="o">=</span> <span class="s">&#39;fsd@uta.fi&#39;</span>
 <span class="n">CONTACT_URL_FSD</span> <span class="o">=</span> <span class="s">&#39;http://www.fsd.uta.fi&#39;</span>
 <span class="n">KW_VOCAB_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;^(?!FSD$)&#39;</span><span class="p">)</span>
@@ -704,9 +704,9 @@
         <span class="c"># Should this be in optional section if not mandatory_field?</span>
         <span class="n">license_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.dataAccs.useStmt.get_text(separator=u&#39; &#39;)&quot;</span><span class="p">,</span> <span class="n">mandatory_field</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">_is_fsd</span><span class="p">(</span><span class="n">original_url</span><span class="p">):</span>
-            <span class="n">license_id</span> <span class="o">=</span> <span class="n">LICENCE_ID_FSD</span>
+            <span class="n">license_id</span> <span class="o">=</span> <span class="n">LICENSE_ID_FSD</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">license_id</span> <span class="o">=</span> <span class="n">LICENCE_ID_DEFAULT</span>
+            <span class="n">license_id</span> <span class="o">=</span> <span class="n">LICENSE_ID_DEFAULT</span>
 
         <span class="c"># Contact (package_extra.key: contact_[k]_name in database, contact in WUI)</span>
         <span class="n">contact_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_value</span><span class="p">(</span><span class="n">stdy_dscr</span> <span class="o">+</span> <span class="s">&quot;.citation.distStmt(&#39;contact&#39;)&quot;</span><span class="p">)</span> <span class="ow">or</span> \

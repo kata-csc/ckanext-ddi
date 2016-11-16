@@ -37,10 +37,10 @@ AVAILABILITY_ENUM = [u'direct_download',
                      u'access_request',
                      u'contact_owner']
 AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[3]
-LICENCE_ID_DEFAULT = 'notspecified'
+LICENSE_ID_DEFAULT = 'notspecified'
 AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
 ACCESS_REQUEST_URL_FSD = 'https://services.fsd.uta.fi/'
-LICENCE_ID_FSD = 'other-closed'
+LICENSE_ID_FSD = 'other-closed'
 CONTACT_EMAIL_FSD = 'fsd@uta.fi'
 CONTACT_URL_FSD = 'http://www.fsd.uta.fi'
 KW_VOCAB_REGEX = re.compile(r'^(?!FSD$)')
@@ -697,9 +697,9 @@ class DataConverter:
         # Should this be in optional section if not mandatory_field?
         license_url = self._read_value(stdy_dscr + ".dataAccs.useStmt.get_text(separator=u' ')", mandatory_field=False)
         if _is_fsd(original_url):
-            license_id = LICENCE_ID_FSD
+            license_id = LICENSE_ID_FSD
         else:
-            license_id = LICENCE_ID_DEFAULT
+            license_id = LICENSE_ID_DEFAULT
 
         # Contact (package_extra.key: contact_[k]_name in database, contact in WUI)
         contact_name = self._read_value(stdy_dscr + ".citation.distStmt('contact')") or \
@@ -819,6 +819,9 @@ class DataConverter:
         # Temporal coverage
         temp_start, temp_end = self.get_temporal_coverage(self.ddi_xml)
 
+        # Citation
+        citation = self._read_value(stdy_dscr + ".citation.biblCit.text", mandatory_field=False)
+
 
         ####################################################################
         #      Flatten rest to 'XPath/path/to/element': 'value' pairs      #
@@ -867,6 +870,7 @@ class DataConverter:
             type='dataset',
             version=version,
             version_PID='',
+            citation=citation
         )
         package_dict['xpaths'] = xpath_dict
         # Above line creates:
