@@ -777,7 +777,6 @@ class DataConverter:
             geographic_coverage=geo_cover,
             groups=[],
             id=package_id,
-            # langtitle=langtitle,
             langdis=u'True',  # HUOMAA!
             language=language,
             license_URL=license_url,
@@ -791,7 +790,6 @@ class DataConverter:
             tag_string=keywords,
             temporal_coverage_begin=temp_start,
             temporal_coverage_end=temp_end,
-            # title=langtitle[0].get('value'),   # Must exist in package dict
             title=title,
             type='dataset',
             version=version,
