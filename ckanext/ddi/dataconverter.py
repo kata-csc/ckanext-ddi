@@ -23,12 +23,11 @@ import unicodecsv as csv
 import ckan.controllers.storage as storage
 from ckan.lib.base import h
 import ckan.model as model
-import ckan.model.authz as authz
-import ckanext.kata.utils as utils
 import ckanext.oaipmh.importcore as importcore
 
 from ckanext.kata.utils import generate_pid
 from ckanext.kata.utils import get_package_id_by_pid
+from ckanext.kata.utils import pid_to_name
 
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
@@ -183,83 +182,6 @@ def _is_fsd(url):
 
 def _access_request_URL_is_found():
     return False
-
-
-def _future_keywords_to_labels_urls_implementation():
-    ''' This old code is kept here for now if needed in future
-    '''
-    # JuhoL: extract, process and save keywords
-    # JuhoL: keywords, match elements <keyword> <topClass>
-    keywords = stdy_dscr.stdyInfo.subject(re.compile('keyword|topcClas'))
-    keywords = list(set(keywords))  # JuhoL: For what? Transforming, filtering?
-    idx = 0
-    for kw in keywords:
-        if not kw:
-            continue
-        #vocab = None
-        #if 'vocab' in kw.attrs:
-        #    vocab = kw.attrs.get("vocab", None)
-        if not kw.string:
-            continue
-        tag = kw.string.strip()
-        if tag.startswith('http://www.yso.fi'):
-            tags = utils.label_list_yso(tag)
-            pkg.extras['tag_source_%i' % idx] = tag
-            idx += 1
-        elif tag.startswith('http://') or tag.startswith('https://'):
-            pkg.extras['tag_source_%i' % idx] = tag
-            idx += 1
-            tags = [] # URL tags break links in UI.
-        else:
-            tags = [tag]
-        for tagi in tags:
-            #pkg.add_tag_by_name(t[:100])
-            tagi = tagi[:100]  # 100 char limit in DB.
-            tag_obj = model.Tag.by_name(tagi)
-            if not tag_obj:
-                tag_obj = model.Tag(name=tagi)
-                tag_obj.save()
-            pkgtag = model.Session.query(model.PackageTag).filter(
-                model.PackageTag.package_id==pkg.id).filter(
-                model.PackageTag.tag_id==tag_obj.id).limit(1).first()
-            if not pkgtag:
-                pkgtag = model.PackageTag(tag=tag_obj, package=pkg)
-                pkgtag.save()  # Avoids duplicates if tags has duplicates.
-
-
-def _create_group_based_on_organizations():
-    # JuhoL: Create groups
-    # for organizations extracted. Is this wanted? Check
-    # how groups should be used currently. For group
-    # stdyDscr.citation.distStmt.distrbtr or
-    # docDscr.citation.prodStmt.producer or
-    # stdyDscr.citation.prodStmt.producer.get('affiliation') could be more
-    # appropriate.
-    producers = stdy_dscr.citation.prodStmt('producer')  # this is .find_all()
-    for producer in producers:
-        producer = producer.string
-        if producer:
-            group = model.Group.by_name(producer)
-            if not group:
-                # JuhoL: Gives UnicodeEncodeError if contains scandics, see
-                # ckanext-shibboleth plugin.py for similar fix
-                group = model.Group(name=producer, description=producer,
-                                    title=producer)
-                group.save()
-            group.add_package_by_name(pkg.name)
-            authz.setup_default_user_roles(group)
-
-
-def _last_statements_to_rewrite():
-    # JuhoL: Add also some basic fields to pkg.extras. Why?
-    # MikkoK: Parsing to extras not needed with _create_or_update_package().
-
-    if stdy_dscr.citation.distStmt.distrbtr:
-        pkg.extras['publisher'] = stdy_dscr.citation.distStmt.distrbtr.string
-
-    # JuhoL: This was old language for first title
-    # Peter: Disabled, since not needed for JSON translations
-    # pkg.extras['lang_title_0'] = pkg.language  # Guess. Good, I hope.
 
 
 class DataConverter:
@@ -837,7 +759,7 @@ class DataConverter:
 
         existing_package_id = get_package_id_by_pid(primary_pid, u'primary')
         package_id = existing_package_id if existing_package_id else generate_pid()
-        package_name = utils.pid_to_name(package_id)
+        package_name = pid_to_name(package_id)
 
         package_dict = dict(
             access_application_URL=u'',
