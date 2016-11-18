@@ -28,6 +28,7 @@ import ckanext.kata.utils as utils
 import ckanext.oaipmh.importcore as importcore
 
 from ckanext.kata.utils import generate_pid
+from ckanext.kata.utils import get_package_id_by_pid
 
 log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
@@ -731,11 +732,13 @@ class DataConverter:
 
         idNoValues = [bsIdNo.text for bsIdNo in idNos]
         agencies = [bsIdNo.get('agency') for bsIdNo in idNos]
+        primary_pid = None
         if len(idNoValues) == len(agencies):
             for idNoVal, agency in zip(idNoValues, agencies):
                 if agency == 'Kansalli' \
                              'skirjasto':
                     pids.append({'id': idNoVal, 'type': 'primary', 'provider': agency})
+                    primary_pid = idNoVal
                 else:
                     pids.append({'id': agency + idNoVal, 'type': 'relation', 'provider': agency, 'relation': 'generalRelation'})
 
@@ -832,7 +835,8 @@ class DataConverter:
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
         xpath_dict.update(flattened_ddi.getMap())
 
-        package_id = generate_pid()
+        existing_package_id = get_package_id_by_pid(primary_pid, u'primary')
+        package_id = existing_package_id if existing_package_id else generate_pid()
         package_name = utils.pid_to_name(package_id)
 
         package_dict = dict(

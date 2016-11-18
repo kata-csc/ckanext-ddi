@@ -267,7 +267,7 @@ class DDIHarvester(HarvesterBase):
                                                    info['xml'], harvest_object)
 
         # Check if dataset already exists and use its id.
-        pkg_id = utils.get_package_id_by_access_or_primary_pid(package_dict)
+        pkg_id = utils.get_package_id_by_primary_pid(package_dict)
         pkg = model.Session.query(model.Package).filter(model.Package.id == pkg_id).first() if pkg_id else None
         if pkg:
             package_dict['id'] = pkg.id
