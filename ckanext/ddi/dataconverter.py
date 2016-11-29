@@ -23,7 +23,6 @@ import unicodecsv as csv
 import ckan.controllers.storage as storage
 from ckan.lib.base import h
 import ckan.model as model
-import ckan.model.authz as authz
 import ckanext.kata.utils as utils
 import ckanext.oaipmh.importcore as importcore
 
@@ -247,7 +246,6 @@ def _create_group_based_on_organizations():
                                     title=producer)
                 group.save()
             group.add_package_by_name(pkg.name)
-            authz.setup_default_user_roles(group)
 
 
 def _last_statements_to_rewrite():
