@@ -33,7 +33,9 @@ log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
 
 AVAILABILITY_ENUM = [u'direct_download',
-                     u'access_application',
+                     u'access_application_rems_ida',
+                     u'access_application_rems_other',
+                     u'access_application_other',
                      u'access_request',
                      u'contact_owner']
 AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[3]
