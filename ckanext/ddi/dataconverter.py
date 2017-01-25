@@ -25,7 +25,7 @@ from ckan.lib.base import h
 import ckan.model as model
 import ckanext.oaipmh.importcore as importcore
 
-from ckanext.kata.utils import generate_pid
+from ckanext.kata.utils import get_unique_package_id
 from ckanext.kata.utils import get_package_id_by_pid
 from ckanext.kata.utils import pid_to_name
 
@@ -760,7 +760,7 @@ class DataConverter:
         xpath_dict.update(flattened_ddi.getMap())
 
         existing_package_id = get_package_id_by_pid(primary_pid, u'primary')
-        package_id = existing_package_id if existing_package_id else generate_pid()
+        package_id = existing_package_id if existing_package_id else get_unique_package_id()
         package_name = pid_to_name(package_id)
 
         package_dict = dict(
