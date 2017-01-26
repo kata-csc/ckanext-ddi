@@ -38,9 +38,9 @@ AVAILABILITY_ENUM = [u'direct_download',
                      u'access_application_other',
                      u'access_request',
                      u'contact_owner']
-AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[3]
+AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[5]
 LICENSE_ID_DEFAULT = 'notspecified'
-AVAILABILITY_FSD = AVAILABILITY_ENUM[2]
+AVAILABILITY_FSD = AVAILABILITY_ENUM[4]
 ACCESS_REQUEST_URL_FSD = 'https://services.fsd.uta.fi/'
 LICENSE_ID_FSD = 'other-closed'
 CONTACT_EMAIL_FSD = 'fsd@uta.fi'
@@ -193,35 +193,6 @@ class DataConverter:
         self.context = None
         self.strict = True
         self.errors = []
-        self.fsd_path = os.path.join(os.path.dirname(__file__), "../..", "1040-fix-update-datasets", 'fsd_names_filtered.csv')
-        self.fsd_items = {}
-
-    def read_fsd_ref(self):
-        fsd_items = {}
-        try:
-            with open(self.fsd_path) as fsd_temp_f:
-                fsd_lines = fsd_temp_f.readlines()
-            for l in fsd_lines:
-                idd, name = l.strip().split(',')
-                fsd_items[name] = idd
-            if len(fsd_items) == 0:
-                fsd_items['Note to self'] = u'NOTE: All FSD ids have been assigned'\
-                    + u' in reharvesting. Related ckanext-ddi code & directory'\
-                    + u'should be removed.'
-        except Exception:
-            log.info("Couldn't open FSD id table for reading in {path}.".format(
-                path=self.fsd_path))
-        self.fsd_items = fsd_items
-
-    def write_fsd_ref(self):
-        try:
-            with open(self.fsd_path, 'w') as fsd_temp_f:
-                for name, idd in self.fsd_items.iteritems():
-                    fsd_temp_f.write(','.join([idd, name]) + '\n')
-                    fsd_temp_f.flush()
-                log.info('Updated FSD id table.')
-        except Exception:
-            log.info("Couldn't write to FSD id table.")
 
     def ddi2ckan(self, data, original_url=None, original_xml=None,
                  harvest_object=None, context=None, strict=True):
@@ -269,31 +240,6 @@ class DataConverter:
         Return errors found in instance's data parsing.
         '''
         return self.errors
-
-    def _get_id_by_name(self, name):
-        '''
-        Return id of existing dataset or None.
-
-        Fetch ids from an external file. Clear the id from the file when fetched.
-        '''
-        id_upper = self.fsd_items.get(name.upper(), None)
-        id_lower = self.fsd_items.get(name.lower(), None)
-        eid = None
-        msg_found = 'Found existing FSD id: {fid} corresponding Etsin id: {eid}'
-        log.info('Checking the imported dataset with name: {na} against FSD id table.'.format(na=name))
-        if id_upper:
-            eid = id_upper
-            log.info(msg_found.format(fid=name.upper(), eid=eid))
-            del self.fsd_items[name.upper()]
-            if id_lower:
-                del self.fsd_items[name.lower()]
-        elif id_lower:
-            eid = id_lower
-            log.info(msg_found.format(fid=name.upper(), eid=eid))
-            del self.fsd_items[name.lower()]
-        else:
-            log.info('No existing FSD id found. Generating a new id.')
-        return eid
 
     @ExceptReturn(AttributeError)
     def get_clean_date(self, bs4_element):
@@ -759,7 +705,17 @@ class DataConverter:
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
         xpath_dict.update(flattened_ddi.getMap())
 
-        existing_package_id = get_package_id_by_pid(primary_pid, u'primary')
+        ########### MIGRATION CODE. REMOVE WHEN DONE. PRESERVE THE ELSE BRANCH.
+        migration = True
+        if migration:
+            pid_for_searching_package_id = primary_pid.split("-")[1]
+            pid_type = u'data'
+        else:
+            pid_for_searching_package_id = primary_pid
+            pid_type = u'primary'
+        ###########
+
+        existing_package_id = get_package_id_by_pid(pid_for_searching_package_id, pid_type)
         package_id = existing_package_id if existing_package_id else get_unique_package_id()
         package_name = pid_to_name(package_id)
 
