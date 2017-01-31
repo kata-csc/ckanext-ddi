@@ -33,14 +33,13 @@ log = logging.getLogger(__name__)
 socket.setdefaulttimeout(30)
 
 AVAILABILITY_ENUM = [u'direct_download',
-                     u'access_application_rems_ida',
-                     u'access_application_rems_other',
+                     u'access_application_rems',
                      u'access_application_other',
                      u'access_request',
                      u'contact_owner']
-AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[5]
+AVAILABILITY_DEFAULT = AVAILABILITY_ENUM[4]
 LICENSE_ID_DEFAULT = 'notspecified'
-AVAILABILITY_FSD = AVAILABILITY_ENUM[4]
+AVAILABILITY_FSD = AVAILABILITY_ENUM[3]
 ACCESS_REQUEST_URL_FSD = 'https://services.fsd.uta.fi/'
 LICENSE_ID_FSD = 'other-closed'
 CONTACT_EMAIL_FSD = 'fsd@uta.fi'
