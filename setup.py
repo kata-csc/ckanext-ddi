@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.6.0'
+version = '0.7.0'
 
 setup(
     name='ckanext-ddi',
