@@ -704,17 +704,7 @@ class DataConverter:
         flattened_ddi = importcore.generic_xml_metadata_reader(etree_xml.find('.//{*}stdyDscr'))
         xpath_dict.update(flattened_ddi.getMap())
 
-        ########### MIGRATION CODE. REMOVE WHEN DONE. PRESERVE THE ELSE BRANCH.
-        migration = True
-        if migration:
-            pid_for_searching_package_id = primary_pid.split("-")[1]
-            pid_type = u'data'
-        else:
-            pid_for_searching_package_id = primary_pid
-            pid_type = u'primary'
-        ###########
-
-        existing_package_id = get_package_id_by_pid(pid_for_searching_package_id, pid_type)
+        existing_package_id = get_package_id_by_pid(primary_pid, u'primary')
         package_id = existing_package_id if existing_package_id else get_unique_package_id()
         package_name = pid_to_name(package_id)
 
